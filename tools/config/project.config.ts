@@ -44,6 +44,12 @@ export class ProjectConfig extends SeedConfig {
     this.ROLLUP_NAMED_EXPORTS = [
       ...this.ROLLUP_NAMED_EXPORTS,
       //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
+      {'node_modules/videogular2/core.js': [ 'VgCoreModule' ]},
+      {'node_modules/videogular2/controls.js': [ 'VgControlsModule' ]},
+      {'node_modules/videogular2/overlay-play.js': [ 'VgOverlayPlayModule' ]},
+      {'node_modules/videogular2/buffering.js': [ 'VgBufferingModule' ]},
+      {'node_modules/videogular2/streaming.js': [ 'VgStreamingModule' ]},
+      {'node_modules/highcharts/highcharts.js': [ 'setOptions', 'chart', 'Color' ]},
     ];
 
     // rxjs
