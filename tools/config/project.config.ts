@@ -1,7 +1,7 @@
 import { join } from 'path';
 
 import { SeedConfig } from './seed.config';
-// import { ExtendPackages } from './seed.config.interfaces';
+import { ExtendPackages } from './seed.config.interfaces';
 
 /**
  * This class extends the basic seed configuration, allowing for project specific overrides. A few examples can be found
@@ -24,6 +24,10 @@ export class ProjectConfig extends SeedConfig {
       ...this.NPM_DEPENDENCIES,
       // {src: 'jquery/dist/jquery.min.js', inject: 'libs'},
       // {src: 'lodash/lodash.min.js', inject: 'libs'},
+
+      // Video 库依赖，如果项目不需要可以移除 - 样式库，解码库
+      { src: 'hls.js/dist/hls.js', inject: 'libs' },
+      { src: 'videogular2/fonts/videogular.css', inject: true }
     ];
 
     // Add `local` third-party libraries to be injected/bundled.
@@ -42,7 +46,21 @@ export class ProjectConfig extends SeedConfig {
       //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
     ];
 
+    // rxjs
     this.SYSTEM_BUILDER_CONFIG.paths['rxjs/operators'] = 'node_modules/rxjs/operators/index.js';
+
+    // Video 库配置
+    const videoAngular2Packages: ExtendPackages[] = [{
+      name: 'videogular2',
+      // Path to the package's bundle
+      path: 'node_modules/videogular2',
+      packageMeta: {
+        defaultExtension: 'js',
+        // main: 'dist/lib/index', possibly required for your package, see description below
+      }
+    }];
+    const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages];
+    this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)
     // const additionalPackages: ExtendPackages[] = [{
