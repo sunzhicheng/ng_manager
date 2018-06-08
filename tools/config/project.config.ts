@@ -42,6 +42,8 @@ export class ProjectConfig extends SeedConfig {
       //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
     ];
 
+    this.SYSTEM_BUILDER_CONFIG.paths['rxjs/operators'] = 'node_modules/rxjs/operators/index.js';
+
     // Add packages (e.g. ng2-translate)
     // const additionalPackages: ExtendPackages[] = [{
     //   name: 'ng2-translate',
