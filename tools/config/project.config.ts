@@ -59,7 +59,17 @@ export class ProjectConfig extends SeedConfig {
         // main: 'dist/lib/index', possibly required for your package, see description below
       }
     }];
-    const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages];
+    // Highcharts 库配置
+    const highchartsPackages: ExtendPackages[] = [{
+      name: 'highcharts',
+      // Path to the package's bundle
+      path: 'node_modules/highcharts',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'highcharts'
+      }
+    }];
+    const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)

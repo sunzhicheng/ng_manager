@@ -7,6 +7,7 @@ export interface IMediaStream {
 
 /**
  * This class represents the lazy loaded HomeComponent.
+ * https://videogular.github.io/videogular2/docs/getting-started/
  */
 @Component({
   moduleId: module.id,

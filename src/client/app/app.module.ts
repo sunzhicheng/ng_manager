@@ -13,13 +13,15 @@ import { CoreModule } from './core/core.module';
 // 演示模块，不需要可以移除
 // 流媒体
 import { VideoModule } from './examples/video/video.module';
-
+// 图形报表
+import { HighchartsModule } from './examples/highcharts/highcharts.module';
 
 @NgModule({
   imports: [BrowserModule, CoreModule,
     HttpClientModule, AppRoutingModule,
     AboutModule, HomeModule,
     VideoModule,
+    HighchartsModule,
     SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
