@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
+import { VgAPI } from 'videogular2/core';
 
 export interface IMediaStream {
     source: string;
@@ -14,7 +15,15 @@ export interface IMediaStream {
   selector: 'sd-exam-video',
   templateUrl: 'video.component.html',
 })
-export class VideoComponent implements OnInit {
+export class VideoComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('vgplay')
+  public vgPaly: any;
+  @ViewChild('media')
+  public vgPalyVideo: any;
+
+  preload: String = 'auto';
+  api: VgAPI;
 
   currentStream: string;
   streams: IMediaStream[] = [
@@ -32,8 +41,37 @@ export class VideoComponent implements OnInit {
    * Get the names OnInit
    */
   ngOnInit() {
-    // 测试 HLS 流播放
+    console.log('VideoComponent ngOnInit . ');
+    // console.log('VideoComponent ngOnInit . ' , this.vgPaly, this.vgPalyVideo);
     this.currentStream = this.streams[3].source;
+  }
+
+  ngAfterViewInit(): void {
+    // 测试 HLS 流播放
+    // this.currentStream = this.streams[3].source;
+    // console.log('VideoComponent ngAfterViewInit . ' , this.vgPaly, this.vgPalyVideo);
+    console.log('VideoComponent ngAfterViewInit . ');
+  }
+
+  onPlayerReady(api: VgAPI) {
+    console.log('VideoComponent onPlayerReady ', api);
+    this.api = api;
+
+    this.api.getDefaultMedia().subscriptions.ended.subscribe(
+      () => {
+          // Set the video to the beginning
+          // this.api.getDefaultMedia().currentTime = 0;
+          console.log('VideoComponent ended ');
+      }
+    );
+    this.api.getDefaultMedia().subscriptions.error.subscribe( (error: any) => {
+      console.log('VideoComponent error ', error);
+      if (this.api && this.api.getDefaultMedia()) {
+        const vgState = this.api.getDefaultMedia().state;
+        console.log('VideoComponent vg player  state : ', vgState);
+        this.currentStream = this.currentStream + '#';
+      }
+    });
   }
 
 }

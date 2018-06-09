@@ -15,6 +15,8 @@ import { CoreModule } from './core/core.module';
 import { VideoModule } from './examples/video/video.module';
 // 图形报表
 import { HighchartsModule } from './examples/highcharts/highcharts.module';
+// MQTT WS 模块
+import { MqttModule } from './examples/mqtt/mqtt.module';
 
 @NgModule({
   imports: [BrowserModule, CoreModule,
@@ -22,6 +24,7 @@ import { HighchartsModule } from './examples/highcharts/highcharts.module';
     AboutModule, HomeModule,
     VideoModule,
     HighchartsModule,
+    MqttModule,
     SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{

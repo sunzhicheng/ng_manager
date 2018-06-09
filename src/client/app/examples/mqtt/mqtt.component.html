@@ -1,0 +1,10 @@
+<p>MQTT Demo</p>
+
+<form>
+    <input [(ngModel)]="newName" name="newName" placeholder="测试消息推送">
+    <button type="button" (click)="sendToMqtt()">Send</button>
+</form>
+
+<ul>
+    <li *ngFor="let name of names">{{ name }}</li>
+</ul>

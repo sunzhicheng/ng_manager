@@ -1,6 +1,6 @@
 <p>Video demo.</p>
 
-<vg-player>
+<vg-player #vgplay (onPlayerReady)="onPlayerReady($event)">
     <vg-overlay-play></vg-overlay-play>
     <vg-buffering></vg-buffering>
 

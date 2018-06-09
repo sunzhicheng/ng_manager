@@ -158,6 +158,7 @@
     "highcharts": "^6.1.0",
     "hls.js": "^0.9.1",
     "intl": "^1.2.5",
+    "ng2-mqtt": "^0.1.2",
     "rxjs": "^6.1.0",
     "systemjs": "0.21.3",
     "videogular2": "^6.2.0",

@@ -44,11 +44,13 @@ export class ProjectConfig extends SeedConfig {
     this.ROLLUP_NAMED_EXPORTS = [
       ...this.ROLLUP_NAMED_EXPORTS,
       //{'node_modules/immutable/dist/immutable.js': [ 'Map' ]},
+      // Video
       {'node_modules/videogular2/core.js': [ 'VgCoreModule' ]},
       {'node_modules/videogular2/controls.js': [ 'VgControlsModule' ]},
       {'node_modules/videogular2/overlay-play.js': [ 'VgOverlayPlayModule' ]},
       {'node_modules/videogular2/buffering.js': [ 'VgBufferingModule' ]},
       {'node_modules/videogular2/streaming.js': [ 'VgStreamingModule' ]},
+      // Highcharts
       {'node_modules/highcharts/highcharts.js': [ 'setOptions', 'chart', 'Color' ]},
     ];
 
@@ -75,7 +77,18 @@ export class ProjectConfig extends SeedConfig {
         main: 'highcharts'
       }
     }];
-    const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages];
+    // MQTT 库配置, 使用此依赖不能使用rollup
+    const mqttPackages: ExtendPackages[] = [{
+      name: 'ng2-mqtt/mqttws31',
+      // Path to the package's bundle
+      path: 'node_modules/ng2-mqtt',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'mqttws31'
+      }
+    }];
+    const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages,
+      ...mqttPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)
