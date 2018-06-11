@@ -88,8 +88,109 @@ export class ProjectConfig extends SeedConfig {
         main: 'mqttws31'
       }
     }];
+    // Google Protobuf
+    const protobufjsPackages: ExtendPackages[] = [
+      {
+        name: 'protobufjs',
+        // Path to the package's bundle
+        path: 'node_modules/protobufjs',
+        packageMeta: {
+          defaultExtension: 'js',
+          main: 'index'
+        }
+      },
+      {
+      name: '@protobufjs/aspromise',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/aspromise',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/base64',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/base64',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/codegen',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/codegen',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/eventemitter',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/eventemitter',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/fetch',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/fetch',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/float',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/float',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/inquire',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/inquire',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/path',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/path',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/pool',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/pool',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    },
+    {
+      name: '@protobufjs/utf8',
+      // Path to the package's bundle
+      path: 'node_modules/@protobufjs/utf8',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'index'
+      }
+    }];
     const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages,
-      ...mqttPackages];
+      ...mqttPackages, ...protobufjsPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)

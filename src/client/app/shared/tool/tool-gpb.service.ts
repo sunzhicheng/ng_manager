@@ -76,7 +76,7 @@ export class ToolGpbService {
     if (this.PROTO_ROOT === undefined) {
       const me = this;
       //error('ngOnInit 201');
-      protobuf.load('/js/protobufjs/Ibms.json')
+      protobuf.load('assets/protobuf/Ibms.json')
         .then(function (root: any) {
           //error('ngOnInit 202');
           me.PROTO_ROOT = root;
