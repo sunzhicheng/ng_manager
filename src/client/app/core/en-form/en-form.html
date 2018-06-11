@@ -1,0 +1,9 @@
+<section class="panel panel-default">
+  <header class="panel-heading font-bold">
+    {{ formData.nav_list[formData.nav_list.length-1].label }}
+    <!--<a href="#" class="btn btn-default btn-xs btn-danger right">新增</a>-->
+  </header>
+  <df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"
+           (selectchangeout)="selectchange($event)"></df-form>
+
+</section>

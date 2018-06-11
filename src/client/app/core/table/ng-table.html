@@ -1,0 +1,96 @@
+<table class="table table-striped b-t b-light text-sm"
+       role="grid">
+  <thead>
+  <tr role="row">
+    <th *ngIf="cmpSelect===1" width="20">
+      <input type="checkbox" (click)="all($event)">
+    </th>
+    <th *ngFor="let column of columns" [ngTableSorting]="config" [column]="column" (sortChanged)="initPage($event)"  >
+      {{ column.title }}
+      <!--<i *ngIf="column.sort" class="pull-right fa"-->
+         <!--[ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>-->
+
+    </th>
+    <th *ngIf="opt_config.isopt" >操作</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let row of rows ; let i = index" >
+    <td *ngIf="cmpSelect===1" >
+      <input type="checkbox" id='row_{{ i }}'  value="{{ getData(row,'col_1') }}" (click)="oneCheck($event)" >
+    </td>
+    <td *ngFor="let column of columns"  >{{ getData(row, column.name) }}</td>
+    <td *ngIf="opt_config.isopt"  >
+      <a  *ngIf="isShowOperation(row,'view')" title="{{ opt_config.view.desc||'查看' }}"  (click)="viewOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe7b0;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'rebut')" title="{{ opt_config.rebut.desc||'驳回' }}"  (click)="rebutOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe63c;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'pass')" title="{{ opt_config.pass.desc||'通过' }}"  (click)="passOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe63c;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'home')" title="{{ opt_config.home.desc||'首页显示' }}"  (click)="homeOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe63c;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'top')" title="{{ opt_config.top.desc||'置顶' }}"  (click)="topOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe63c;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'enable')" title="{{ opt_config.enable.desc||'启用' }}"  (click)="enableOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe621;</span>
+      </a>
+      <a  *ngIf="isShowOperation(row,'stop')" title="{{ opt_config.stop.desc||'停用' }}"  (click)="stopOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe62e;</span>
+      </a>
+      <a *ngIf="isShowOperation(row,'del')" title="{{ opt_config.del.desc||'删除' }}" (click)="delOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe635;</span>
+      </a>
+      <a *ngIf="isShowOperation(row,'unbind')" title="{{ opt_config.unbind.desc||'解绑' }}" (click)="unbindOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe63c;</span>
+      </a>
+      <a *ngIf="isShowOperation(row,'update')" title="{{ opt_config.update.desc||'修改' }}" (click)="updateOpt(getData(row,'col_1'))">
+        <span class="iconfont green">&#xe63b;</span>
+      </a>
+      <a *ngIf="isShowOperation(row,'bind')" title="{{ opt_config.bind.desc||'绑定' }}" (click)="bindOpt(getData(row,'col_1'))">
+        <span class="iconfont red">&#xe635;</span>
+      </a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<footer *ngIf="!opt_config.notShowPage" class="panel-footer">
+  <div class="row">
+    <div class="col-sm-8 hidden-xs">
+      <small class="text-muted inline m-t-sm m-b-sm">
+        每页{{ itemsPerPage }}条记录 / 共{{ length }}条记录 当前页 {{ page }} / {{ numPages }} 页
+      </small>
+    </div>
+    <!--<span>每页{{itemsPerPage}}条记录 / 共{{length}}条记录 当前页 {{page}} / {{numPages}} 页</span>-->
+    <!--<div class="paging-btn">-->
+      <!--<a (click)="toPage(1)">首页</a><a (click)="toPage(page-1)">上一页</a>-->
+      <!--<a (click)="toPage(page+1)">下一页</a><a (click)="toPage(numPages)">尾页</a>-->
+                    <!--<span> 转到-->
+                        <!--<select #pageselect>-->
+                          <!--<option *ngFor="let p of pagenum " value="{{p}}">{{p}}</option>-->
+                        <!--</select>-->
+                        <!--页 <a (click)="toPage(pageselect.value)">确定</a> </span>-->
+    <!--</div>-->
+    <!--平铺式-->
+    <div class="col-sm-4 text-right text-center-xs">
+      <ul class="pagination pagination-sm m-t-none m-b-none">
+        <li>
+          <a (click)="prev()"><i class="fa fa-chevron-left"></i></a>
+        </li>
+        <li *ngFor="let item of numberIndex">
+          <a [class.active]="item.index===selectPage"
+             (click)="goPointNum(item.index)"
+          >{{ item.index }}</a>
+        </li>
+        <li><a (click)="next()"><i class="fa fa-chevron-right"></i></a>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+</footer>

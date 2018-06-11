@@ -1,0 +1,48 @@
+<section class="hbox stretch">
+  <aside class="aside-xl bg-white b-r" id="subNav">
+    <ng-tree [config]="config" [tree_setting]="tree_setting" [treeFormData_add]="treeFormData_add"
+             [treeFormData_edit]="treeFormData_edit"
+             [treeData]="tree_data"
+             (formSubmited)="formSubmit_add($event)"
+             (treeDetailed)="treeDetail($event)"
+             (treeDeleted)="treeDelete($event)"
+             (itemClicked)="itemClick($event)"
+    ></ng-tree>
+  </aside>
+
+  <aside id="subContent">
+    <section class="vbox">
+      <div class="vbox">
+        <header class="header bg-white b-b clearfix">
+          <div class="row m-t-sm">
+            <div class="col-sm-11 m-b-xs"> <a href="#subNav" data-toggle="class:hide" class="btn btn-sm btn-default active"><i class="fa fa-caret-right text fa-lg"></i><i class="fa fa-caret-left text-active fa-lg"></i></a>
+            </div>
+
+            <!--<div class="col-sm-1 m-b-xs">-->
+              <!--<div class="input-group">-->
+                <!--<a  class="btn btn-default btn-sm btn-primary btn-block" (click)="bind()">-->
+                  <!--<i class="fa fa-plus"></i>绑定-->
+                <!--</a>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--<div class="col-sm-4 m-b-xs">-->
+              <!--<div class="input-group">-->
+                <!--<input type="text" class="input-sm form-control" placeholder="搜索">-->
+                                                    <!--<span class="input-group-btn">-->
+                                                  <!--<button class="btn btn-sm btn-default" type="button"><i class="fa fa-fw fa-search"></i></button>-->
+                                                  <!--</span>-->
+              <!--</div>-->
+            <!--</div>-->
+          </div>
+        </header>
+
+        <f-table-cmp [formData]="formData" (formSubmited)="formSubmit($event)" [breadcrumb]="breadcrumb"
+                     (loadDataOut)="loadData($event)"
+                     (delOut)="del($event)"
+                     (unbindOut)="unbind($event)"
+                     [opt_config]="opt_config" class="vbox">
+        </f-table-cmp>
+      </div>
+    </section>
+  </aside>
+</section>

@@ -1,0 +1,37 @@
+<form *ngIf="formData.f_type===1" (ngSubmit)="onSubmit()" [formGroup]="form" >
+  <div >
+    <div *ngFor="let row of formData.row_list" class="row text-sm wrapper">
+      <df-item *ngFor="let item of row.item_list" [item]="item" [form]="form"
+               (btnclickout)="btnclick($event)"></df-item>
+    </div>
+  </div>
+
+
+</form>
+
+<div class="panel-body" *ngIf="formData.f_type===2">
+  <form  class="form-horizontal" (ngSubmit)="onSubmit()" [formGroup]="form" >
+    <div *ngFor="let row of formData.row_list ; let i = index" >
+      <div *ngIf="i===formData.row_list.length-1" >
+        <div class="form-group ">
+          <div class="col-sm-4 col-sm-offset-2">
+            <df-item *ngFor="let item of row.item_list" [item]="item" [form]="form" [f_type]="formData.f_type"
+                     (selectchangeout)="selectchange($event)"
+            ></df-item>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="i<formData.row_list.length-1">
+        <df-item *ngFor="let item of row.item_list" [item]="item" [form]="form" [f_type]="formData.f_type"
+                 (selectchangeout)="selectchange($event)"
+                 (btnclickout)="btnclick($event)"
+        ></df-item>
+      </div>
+    </div>
+  </form>
+</div>
+<!--<div *ngIf="payLoad" class="form-row">
+  <strong>Saved the following values</strong><br>{{payLoad}}
+</div>-->
+
+

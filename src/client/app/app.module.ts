@@ -17,6 +17,14 @@ import { VideoModule } from './examples/video/video.module';
 import { HighchartsModule } from './examples/highcharts/highcharts.module';
 // MQTT WS 模块
 import { MqttModule } from './examples/mqtt/mqtt.module';
+// 页面路由数据缓存策略
+import { RouteReuseStrategy } from '@angular/router';
+import { CustomReuseStrategy } from './shared/tool/CustomReuseStrategy';
+// 网页Title控制
+import { Title } from '@angular/platform-browser';
+// IDPRP 核心组件库演示使用
+import { CoreDemoModule } from './examples/core/core-demo.module';
+
 
 @NgModule({
   imports: [BrowserModule, CoreModule,
@@ -25,13 +33,15 @@ import { MqttModule } from './examples/mqtt/mqtt.module';
     VideoModule,
     HighchartsModule,
     MqttModule,
+    CoreDemoModule,
     SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: ''
-  }],
+  },
+  Title,
+  { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
   bootstrap: [AppComponent]
-
 })
 export class AppModule { }

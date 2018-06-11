@@ -1,0 +1,63 @@
+
+/*分页*/
+
+.paging {
+  padding-bottom: 15px;
+  line-height: 28px;
+  font-size: 12px;
+}
+
+.paging > span {
+  color: #999;
+}
+
+.paging-btn {
+  float: right;
+}
+.paging-btn ul li{
+  float: left;
+  display: block;
+  width: 48px;
+  height: 22px;
+  background-color: #FFFFFF;
+  text-align: center;
+  line-height: 22px;
+  margin: 0 3px 0 0;
+  border-radius: 4px !important;
+  border: 1px solid #e0e0e0
+
+}
+.paging-btn ul li a{
+  color:#000000;
+}
+
+
+.pagination{
+  margin:5px 0;
+}
+.paging-btn > a,
+.paging-btn > span > a {
+  color: #999;
+  padding: 5px 8px;
+  border: 1px solid #e0e0e0;
+  margin-left: 5px;
+}
+
+.paging-btn a:hover,
+.paging-btn a:focus,
+.paging-btn a:active {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.paging-btn > span {
+  color: #999;
+}
+
+.paging-btn > span > select {
+  color: #999;
+  border: 1px solid #e0e0e0;
+  height: 24px;
+  width: auto;
+  margin: 0px;
+}

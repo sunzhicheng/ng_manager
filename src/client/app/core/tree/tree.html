@@ -1,0 +1,24 @@
+<div class="wrapper b-b header" >
+  {{ _config.title }}
+  <span class="pull-right m-t-m">
+    <button *ngIf="_config.rootCreate" class="btn btn-dark btn-sm btn-icon" 
+        data-original-title="新增" (click)="addClick(null)">
+        <i class="fa fa-plus"></i>
+    </button>
+</span>
+
+</div>
+
+<section class="middle-content scrollable">
+  <ul id="treeDemo" class="ztree"></ul>
+</section>
+
+<div class="modal fade" id="tree_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <df-form #form [formData]="_treeFormData" (formSubmit)="formSubmit($event)"></df-form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
