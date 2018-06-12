@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
 import { ProCityCountyComponent } from '../procitycounty/procitycounty';
 import { CascadingComponent } from '../cascading/cascading';
-import { ToolHttpService } from '../../shared/tool';
+import { ToolHttpService } from '../../shared/tool/index';
 
 declare let $: any;
 
@@ -66,7 +66,7 @@ export class DFItemComponent implements OnChanges {
           format: format,
           minView: minView,
           autoclose: true
-        }).on('changeDate', function(ev: any) {
+        }).on('changeDate', (ev: any) => {
           this.date_str = ev.currentTarget.value;
         });
         // (<any>$)('.form_ymd').datetimepicker({
@@ -90,6 +90,20 @@ export class DFItemComponent implements OnChanges {
           (<any>$(this)).combodate();
           this.combodate =  (<any>$(this)).data('combodate');
           (<any>$(this)).next('.combodate').find('select').addClass('form-control');
+        });
+      }, 200);
+    }
+
+    //整数限制
+    if (this.item && this.item.fi_type === 21) {
+      setTimeout(() => {
+        const id: any = this.item.key;
+        (<any>$('#' + id)).keypress((event: any) => {
+          const keyCode = event.which;
+          if (keyCode === 8 || (keyCode >= 48 && keyCode <= 57)) {
+            return true;
+          }
+          return false;
         });
       }, 200);
     }

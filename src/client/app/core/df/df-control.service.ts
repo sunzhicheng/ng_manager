@@ -25,7 +25,10 @@ export class DFControlService {
               || item.fi_type === 14
               || item.fi_type === 16
               || item.fi_type === 17
-              || item.fi_type === 18) {
+              || item.fi_type === 18
+              || item.fi_type === 19
+              || item.fi_type === 20
+              || item.fi_type === 21) {
               const v = { value: item.d_value || '', disabled: item.disabled };
               let fg = new FormControl(v);
               if (item.is_require) {

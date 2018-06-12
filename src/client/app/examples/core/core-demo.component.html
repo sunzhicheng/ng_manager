@@ -31,3 +31,16 @@
         </div>
     </section>
 </form>
+
+<p>组合组件演示</p>
+<sd-tree-table *ngIf="formData" [config]="config" [tree_data]="tree_data" [treeFormData_add]="treeFormData_add"
+               [treeFormData_edit]="treeFormData_edit"
+               [formData]="formData" (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)"
+               [opt_config]="opt_config" (unbindOut)="unbind($event)"
+               (formSubmit_added)="formSubmit_add_edit($event)"
+               (treeDetailed)="treeDetail($event)"
+               (treeDeleted)="treeDelete($event)"
+               (itemClicked)="itemClick($event)"
+               [tree_setting]="tree_setting">
+
+</sd-tree-table>

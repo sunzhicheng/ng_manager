@@ -9,6 +9,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" href="<%= APP_BASE %>assets/favicon/favicon-<%= ENV_CONFIG.ENV %>.ico" type="image/x-icon">
 
+  <!-- local js -->
+  <script type="text/javascript" src="<%= APP_BASE %>js/i18n/i18n-cn/language.js"></script>
+  <script type="text/javascript" src="<%= APP_BASE %>js/i18n/i18n-en/language.js"></script>
+
   <!-- inject:css -->
   <!-- endinject -->
 </head>
@@ -24,9 +28,6 @@
     ga('create', '<%= GOOGLE_ANALYTICS_ID %>', 'auto');
     ga('send', 'pageview');
   </script> -->
-
-  <script src="<%= APP_BASE %>js/long/dist/long.js?1518415114637"></script>
-  <script src="<%= APP_BASE %>js/protobufjs/dist/protobuf.min.js?1518415114637"></script>
 
   <script>
   // Fixes undefined module function in SystemJS bundle

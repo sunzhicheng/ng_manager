@@ -44,6 +44,7 @@
       <!--<a href="#" class="btn btn-default btn-xs btn-danger right">新增</a>-->
     </header>
     <df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"
+              (btnclickout)="btnclick($event)"
              (selectchangeout)="selectchange($event)"></df-form>
 
   </section>

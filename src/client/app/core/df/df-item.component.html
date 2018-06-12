@@ -13,7 +13,7 @@
     <!--输入框-->
     <div  *ngSwitchCase="1" class="col-sm-2 m-b-xs"  >
       <input type="text" class="input-sm form-control" [step]="'0.01'"
-             [formControlName]="item.key" [id]="item.key" [type]="item.type" [value]="item.d_value||''"
+             [formControlName]="item.key" [id]="item.key" [type]="item.type ||'text'" [value]="item.d_value||''"
              [attr.placeholder]="item.label">
     </div>
     <!--下拉框-->
@@ -59,7 +59,7 @@
     <div  *ngSwitchCase="13" class="col-sm-2 m-b-xs" >
       <input  *ngIf="item" type="text" class="form-control form_datetime"
               [placeholder]="item.label"
-              [formControlName]="item.key" [id]="item.key" [type]="item.type" [(ngModel)]="date_str" >
+              [formControlName]="item.key" [id]="item.key"  [(ngModel)]="date_str" >
     </div>
 
     <!--查询按钮-->
@@ -81,16 +81,55 @@
   <div [ngSwitch]="item.fi_type">
     <!--输入框-->
     <div class="form-group" *ngSwitchCase="1" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
                <input  class="form-control"
        [step]="'0.01'"
        [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
       </div>
+      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
     </div>
+
+    <!--输入框 整数类型-->
+    <div class="form-group" *ngSwitchCase="21" >
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <input  class="form-control"
+                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+      </div>
+      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+    </div>
+
+    <!--输入框(带动态数据的)-->
+    <div class="form-group" *ngSwitchCase="19" >
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
+      <label class="col-sm-1 control-label">{{ item.before_label }}</label>
+      <div class="col-sm-3">
+        <input  class="form-control"
+                [step]="'1'"
+                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+      </div>
+      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+    </div>
+
+    <!--item右侧按钮功能-->
+    <div class="form-group" *ngSwitchCase="20" >
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
+      <div class="col-sm-4">
+        <input  class="form-control"
+                [step]="'0.01'"
+                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+      </div>
+      <div class="col-sm-2">
+        <a  class="btn btn-default btn-primary btn-block"
+            (click)="btnclick()"
+            >{{ item.btn_txt }}</a>
+      </div>
+    </div>
+
     <!--下拉框-->
     <div  class="form-group" *ngSwitchCase="2" >
-      <label class="col-sm-2 control-label">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-4">
         <select [id]="item.key" class="form-control"
                 [formControlName]="item.key"
@@ -104,15 +143,15 @@
 
     <!--多选按钮 1行-->
     <div *ngSwitchCase="4" class="form-group">
-      <label class="col-sm-2 control-label">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-10">
         <div class="row">
 
           <div class="col-sm-10">
-            <label class="checkbox-inline"  *ngFor="let opt of item.opt_list ; let i = index">
+            <label class="checkbox-inline"  *ngFor="let opt of item.opt_list; let i = index">
               <input type="checkbox" value="{{opt.key.l_id.low}}"
                      [disabled]="item.disabled"
-                     [formControlName]="item.key+'_'+opt.key.l_id" id="{{ item.key }}_{{ opt.key.l_id }}" [(ngModel)]="opt.selected">
+                     [formControlName]="item.key+'_'+opt.key.l_id" id="{{item.key}}_{{opt.key.l_id}}" [(ngModel)]="opt.selected">
               {{ opt.value.open_id }}
             </label>
           </div>
@@ -123,7 +162,7 @@
 
     <!--多选按钮 多行-->
     <div *ngSwitchCase="14" class="form-group">
-      <label class="col-sm-2 control-label">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-10">
         <div class="checkbox" *ngFor="let opt of item.opt_list ; let i = index">
           <label>
@@ -144,32 +183,32 @@
 
     <!--图片上传-->
     <div  class="form-group" *ngSwitchCase="12" >
-      <label class="col-sm-2 control-label">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
         <upload-app   (getId)="setIConImg($event)"
                        [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></upload-app>
       </div>
       <input  type="text" class="form-control" style="display: none;"
-             [formControlName]="item.key" [id]="item.key" [type]="item.type"  [(ngModel)]="img_id">
+             [formControlName]="item.key" [id]="item.key"  [(ngModel)]="img_id">
     </div>
 
     <!--视频上传-->
     <div  class="form-group" *ngSwitchCase="17" >
-      <label class="col-sm-2 control-label">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
         <uploadvideo-app   (getId)="setIConImg($event)"
                       [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></uploadvideo-app>
       </div>
       <input  type="text" class="form-control" style="display: none;"
-              [formControlName]="item.key" [id]="item.key" [type]="item.type"  [(ngModel)]="img_id">
+              [formControlName]="item.key" [id]="item.key"  [(ngModel)]="img_id">
     </div>
 
     <!--时间控件-->
     <div class="form-group" *ngSwitchCase="13" >
-      <label class="col-sm-2 control-label" >{{ item.label }}：</label>
+      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
         <input  *ngIf="item" type="text" class="form-control form_datetime"
-                [formControlName]="item.key" [id]="item.key" [type]="item.type" [(ngModel)]="date_str" >
+                [formControlName]="item.key" [id]="item.key"  [(ngModel)]="date_str" >
       </div>
     </div>
 
@@ -180,7 +219,7 @@
 
     <!--多行文本-->
     <div class="form-group" *ngSwitchCase="16" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}：</label>
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
         <textarea  class="form-control"
                    style="width: 608px;height: 150px;resize: none;"
@@ -191,7 +230,7 @@
 
     <!--时分秒选择控件-->
     <div class="form-group" *ngSwitchCase="18" >
-      <label class="col-sm-2 control-label" >{{ item.label }}：</label>
+      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
       <div class="col-sm-6">
         <!--<input  *ngIf="item" type="time" class="form-control form_datetime"-->
                 <!--[formControlName]="item.key" [id]="item.key" [value]="item.d_value||''" >-->

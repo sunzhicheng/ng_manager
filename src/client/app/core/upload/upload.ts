@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolHttpService } from '../../shared/tool';
+import { ToolHttpService } from '../../shared/tool/index';
 
 // 不建议使用
 declare function $(filter: string): void;

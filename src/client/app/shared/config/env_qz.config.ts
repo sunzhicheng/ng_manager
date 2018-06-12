@@ -10,8 +10,8 @@ export const WYQ_NAV_ID = 'WYQ_NAV_ID';
 export const DZQK_NAV_ID = 'DZQK_NAV_ID';
 export const XDZJ_NAV_ID = 'XDZJ_NAV_ID';
 
-//export const BASE_URL = 'http://ibmsresty.idorp.org:5551/ibms/api/v1/idorp';
-export const BASE_URL = 'http://resty.ibms.com/ibms/api/v1/idorp';
+export const BASE_URL = 'http://qtresty.self-service-cabinet.com/zkfresty/api/v1/idorp';
+// export const BASE_URL = 'http://resty.ibms.com/ibms/api/v1/idorp';
 // export const BASE_URL =
 // 'http://zsfresty.idorp.org:5551/zsfresty/api/v1/idorp'; export const BASE_URL
 // = 'http://127.0.0.1:8080/ibmsresty/api/v1/idorp';
@@ -69,6 +69,7 @@ export const DEPT_ADD = '/add';
 export const DEPT_UPDATE = '/update';
 export const DEPT_DELETE = '/del';
 export const DEPT_DETAIL = '/detail';
+export const DEPT_ALL_BYCID = '/allListByCid'; //查询该公司所有的部门
 export const DEPT_ATTENDANCE = '/conf/att';
 export const DEPT_ATTENDANCE_AREA = '/conf/area';
 export const DEPT_ATTENDANCE_TIME = '/conf/time';

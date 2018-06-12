@@ -31,6 +31,9 @@ export class DatePickerComponent implements OnInit {
 
   id: any;
 
+  @Input()
+  placeholder = '';
+
   @Output()
   public changeDateOut: EventEmitter<any> = new EventEmitter();
 
@@ -79,6 +82,13 @@ export class DatePickerComponent implements OnInit {
         // this._date_str = this.dateFormat2(this.oringe,_mat1);
       }
       this.changed();
+
+      //中英文
+      const locale: string = localStorage.getItem('lang') || 'cn';
+      if (locale === 'en') {
+        delete $.fn.datetimepicker.dates['zh-CN'];
+      }
+
       setTimeout(() => {
         const $date: any = (<any>$)('#' + this.id);
         // var $date:any = (<any>$)('.form_datetime');
@@ -106,6 +116,7 @@ export class DatePickerComponent implements OnInit {
   changed() {
     this.changeDateOut.emit(this._date_str);
   }
+
   //ts数字类型转化
   // dateFormat2(longDate:any, formatStr:any) {
   //   formatStr = formatStr || 'yyyy-mm-dd';

@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { isDebug } from '../config/env_qz.config';
-// import * as protobuf from 'protobufjs';
+import * as protobuf from 'protobufjs';
 
-declare let protobuf: any;
+declare let window: any;
+// declare let protobuf: any;
 declare function error(content: string): void;
 
 /**
@@ -26,6 +27,33 @@ export class ToolGpbService {
   SysRoleEntry: any;
 
   RoutLink = {};
+
+  constructor() {
+    const i18n = this.getUrlParmV('i18n');
+    let locale = localStorage.getItem('lang');
+    if (!locale) {
+      // 默认语言中文
+      localStorage.setItem('lang', i18n || 'cn');
+    }
+    locale = localStorage.getItem('lang');
+
+    //js
+    if (locale === 'en') {
+      window.i18n = window.i18n_en;
+    } else if (locale === 'cn') {
+      window.i18n = window.i18n_cn;
+    }
+  }
+
+
+  public getUrlParmV(name: string) {
+    const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)');
+    const r = window.location.search.substr(1).match(reg);
+    if (r !== null) {
+      return r[2];
+    }
+    return null;
+  }
 
   handleError(errorstr: any): Observable<any> {
     // In a real world app, we might use a remote logging infrastructure
@@ -244,7 +272,7 @@ export class ToolGpbService {
    * 异步回调方法，返回 SysCompanyEntry 协议对像
    * @param callback SysCompanyEntry
    */
-  public getQzCompanyEntry(callback: any) {
+  public getSysCompanyEntry(callback: any) {
     if (this.SysCompanyEntry === undefined) {
       const me = this;
       this.initProtoRoot('sys.SysCompanyEntry', function (message: any) {
@@ -295,5 +323,30 @@ export class ToolGpbService {
     return '/home';
 
   }
+
+  public  geti18n(key: string, default_str: string) {
+    if ( window.i18n && window.i18n[key] ) {
+      return window.i18n[key];
+    }
+    return default_str;
+  }
+
+  public geti18nFile = (): Promise<any> => {
+    //获取商家配置的语言
+    const locale: string = localStorage.getItem('lang') || 'cn';
+
+    const file: string = '/assets/i18n/i18n-' + locale + '/language.json';
+
+    return new Promise(function (resolve, reject) {
+      const xhr = new XMLHttpRequest;
+      xhr.open('GET', file);
+      xhr.onload = (data: any) => resolve(
+        data
+      );
+      xhr.onerror = () => console.log('init i18n file error...');
+      xhr.send();
+    });
+  }
+
 
 }

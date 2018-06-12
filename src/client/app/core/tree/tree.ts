@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
-import { ToolHttpService } from '../../shared/tool';
+import { ToolHttpService, ToolGpbService } from '../../shared/tool/index';
 import { DfFromComponent } from '../df/df.component';
 
 // 不建议使用
@@ -31,6 +31,7 @@ export class TreeComponent implements OnInit, OnChanges {
 
   public ztree: any;
 
+  public style_top: any = '0px';
 
   public base_setting: any = {
     view: {
@@ -64,7 +65,9 @@ export class TreeComponent implements OnInit, OnChanges {
   public _config: any = {
     title: '树结构标题',
     rootCreate: true,
-    maxLevel: 5
+    maxLevel: 5,
+    showhead: true,
+    useform: false//是否使用表单
   };
 
   public _treeData: any;
@@ -89,6 +92,11 @@ export class TreeComponent implements OnInit, OnChanges {
 
 
   ngOnInit() {
+    const index_cmp: any = $('sd-tree-table ng-tree');
+    if (index_cmp.length > 0) {
+      this.style_top = '55px';
+    }
+    index_cmp.addClass('vbox');
     (<any>window).tree_ts = this;
   }
 
@@ -135,7 +143,8 @@ export class TreeComponent implements OnInit, OnChanges {
     this._treeConfig = values;
   }
 
-  constructor(private toolHttp: ToolHttpService) {
+  constructor(private toolHttp: ToolHttpService,
+              public toolGpb: ToolGpbService) {
   }
 
   public initTree() {
@@ -302,6 +311,34 @@ export class TreeComponent implements OnInit, OnChanges {
 
   public getTreeItemClick() {
     return this.current_click_item;
+  }
+
+
+  getAllSelect() {
+    const zTree: any = (<any>$).fn.zTree.getZTreeObj('treeDemo');
+    // var nodes = zTree.getChangeCheckedNodes();
+    const checkNodes = zTree.getCheckedNodes(true);
+    const ns: any = [];
+    for (let i = 0; i < checkNodes.length; i++) {
+      if (checkNodes[i].isParent === false) {
+        ns.push({pt_id: {l_id: checkNodes[i].id}});
+      }
+    }
+   return ns;
+  }
+
+
+  getSelectParent() {
+    const zTree: any = (<any>$).fn.zTree.getZTreeObj('treeDemo');
+    // var nodes = zTree.getChangeCheckedNodes();
+    const checkNodes = zTree.getCheckedNodes(true);
+    const ns: any = [];
+    for (let i = 0; i < checkNodes.length; i++) {
+      if (checkNodes[i].isParent === true) {
+        ns.push({pt_id: {l_id: checkNodes[i].id}});
+      }
+    }
+    return ns;
   }
 
 }

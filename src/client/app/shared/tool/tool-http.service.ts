@@ -81,7 +81,9 @@ export class ToolHttpService {
   isEx(token: any) {
     if (token.ex) {
       const error_type = token.ex.ex_type;
-      error(token.ex.ex_tips);
+      // error(token.ex.ex_tips);
+      console.log('isEx : ', token.ex.ex_tips);
+
       if (error_type === 1 || error_type === 2) {
         this._router.navigateByUrl('/');
       }

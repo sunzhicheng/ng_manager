@@ -20,6 +20,9 @@ export class EnFormComponent {
     @Output()
     public selectchangeout: EventEmitter<any> = new EventEmitter();
 
+    @Output()
+    public btnclickout: EventEmitter<any> = new EventEmitter();
+
     @ViewChild('dy_form')
     dy_form: DfFromComponent;
 
@@ -38,6 +41,10 @@ export class EnFormComponent {
 
     selectchange(item: any) {
       this.selectchangeout.emit(item);
+    }
+
+    btnclick(item: any) {
+      this.btnclickout.emit(item);
     }
 
 }
