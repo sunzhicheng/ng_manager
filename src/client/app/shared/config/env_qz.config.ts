@@ -10,8 +10,8 @@ export const WYQ_NAV_ID = 'WYQ_NAV_ID';
 export const DZQK_NAV_ID = 'DZQK_NAV_ID';
 export const XDZJ_NAV_ID = 'XDZJ_NAV_ID';
 
-export const BASE_URL = 'http://qtresty.self-service-cabinet.com/zkfresty/api/v1/idorp';
-// export const BASE_URL = 'http://resty.ibms.com/ibms/api/v1/idorp';
+// export const BASE_URL = 'http://qtresty.self-service-cabinet.com/zkfresty/api/v1/idorp';
+export const BASE_URL = 'http://resty.ibms.com/ibms/api/v1/idorp';
 // export const BASE_URL =
 // 'http://zsfresty.idorp.org:5551/zsfresty/api/v1/idorp'; export const BASE_URL
 // = 'http://127.0.0.1:8080/ibmsresty/api/v1/idorp';
