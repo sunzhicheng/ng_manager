@@ -184,7 +184,7 @@ export class CoreDemoComponent implements OnInit {
     }
 
     sessionCallback(user: any) {
-        // console.log('sessionCallback message : ', user);
+        console.log('sessionCallback message : ', user);
         if (this.toolHttp.isEx(user.token)) {
           console.log('sessionCallback session : ', user.token.ext.pt_session_id);
           this.toolHttp.session = user.token.ext.pt_session_id;
@@ -243,6 +243,9 @@ export class CoreDemoComponent implements OnInit {
             // this._router.navigateByUrl('/home');
             this.errorMessage = '登陆成功';
             this.isLogin = true;
+
+            // 演示 tree table 相关组件
+            this.initTreeTableSource();
         }
     }
 }
