@@ -1,0 +1,57 @@
+@charset "UTF-8";
+$item-nomargin: ( gutter: 0, );
+.float-layout {
+    @include grid-container;
+    @for $i from 1 to 13 {
+        .item-#{$i} {
+            min-height: 1px;
+            @include grid-column($i);
+            &.no-margin {
+                @include grid-column($i, $item-nomargin);
+            }
+            @for $i from 1 to 13 {
+                &.push-#{$i} {
+                    @include grid-push($i);
+                }
+                &.shift-#{$i} {
+                    @include grid-shift($i);
+                }
+            }
+        }
+    }
+    &.justify {
+        @include grid-collapse;
+    }
+    &.no-margin {
+        @for $i from 1 to 13 {
+            min-height: 1px;
+            .item-#{$i} {
+                @include grid-column($i, $item-nomargin);
+            }
+        }
+    }
+}
+
+.flex-layout {
+    display: flex;
+    &.column {
+        flex-direction: column;
+    }
+    &.spance-between{
+        justify-content: space-between;
+    }
+    &.align-center{
+        align-items: center;
+    }
+    &.abs {
+        @include position(absolute, 0);
+        margin: auto;
+    }
+    .item {
+        flex: 1;
+    }
+    .scrollable {
+        overflow-y: auto;
+        position: relative;
+    }
+}

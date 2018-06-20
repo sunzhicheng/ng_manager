@@ -1,0 +1,128 @@
+@charset "UTF-8";
+//整体默认布局
+@mixin container-default($min-width:1000px) {
+  position: relative;
+  max-width: 100%;
+  min-width: $min-width;
+  width: $min-width;
+  margin: 0 auto;
+}
+
+//整体绝对布局
+@mixin container-abs($max-width:auto) {
+  @include position(absolute, 0);
+  margin: auto;
+  max-width: $max-width;
+  min-width: $max-width;
+  overflow: hidden;
+}
+
+//宽度媒介查询
+@mixin min-screen($res) {
+  @media only screen and (min-width: $res) {
+    @content;
+  }
+}
+
+//大小
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+//多行省略
+@mixin multiline-ellipsis($multiline:3) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $multiline;
+  overflow: hidden;
+}
+
+//移动一像素线
+@mixin mobile-bottom-line($direction,$border-color:#c7c7c7) {
+  position: absolute;
+  height: 1px;
+  border-top: 1px solid $border-color;
+  color: $border-color;
+  transform-origin: 0 0;
+  transform: scaleY(0.5);
+  z-index: 2;
+  @if $direction == "top" {
+    left: 0;
+    top: 0;
+    right: 0;
+  } @else if $direction == "bottom" {
+    left: 0;
+    bottom: 0;
+    right: 0;
+  } @else if $direction == "left" {
+    left: 0;
+    top: 0;
+    bottom: 0;
+  } @else if $direction == "right" {
+    bottom: 0;
+    top: 0;
+    right: 0;
+  }
+}
+
+//三角形
+@mixin triangle($direction,$height:20px,$width:10px,$color:red) {
+  width: 0;
+  height: 0;
+  @if $direction=="top" {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-bottom: $height solid $color;
+  } @else if $direction=="bottom" {
+    border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-top: $height solid $color;
+  } @else if $direction=="left" {
+    border-top: $width solid transparent;
+    border-right: $height solid $color;
+    border-bottom: $width solid transparent;
+  } @else if $direction=="right" {
+    border-top: $width solid transparent;
+    border-left: $height solid $color;
+    border-bottom: $width solid transparent;
+  } @else if $direction=="top-left" {
+    border-top: $height solid $color;
+    border-right: $height solid transparent;
+  } @else if $direction=="top-right" {
+    border-top: $height solid $color;
+    border-left: $height solid transparent;
+  } @else if $direction=="bottom-left" {
+    border-bottom: $height solid $color;
+    border-right: $height solid transparent;
+  } @else if $direction=="bottom-right" {
+    border-bottom: $height solid $color;
+    border-left: $height solid transparent;
+  }
+}
+
+//文字渐变
+/*
+  @include text-gradient(bottom,red green);
+*/
+@mixin text-gradient($direction,$color:#f00 #ff0) {
+  background: -webkit-linear-gradient($direction, nth($color, 1), nth($color, 2));
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+//透明色
+/*
+  @include transparent-colors(background-color,rgba(#333,.2),#fff);
+*/
+@mixin transparent-colors($attribute,$color,$background) {
+  $percent: alpha($color) * 100%; //获取颜色透明度值，并转换成百分比
+  $opaque: opacify($color, 1); //使颜色不透明
+  $solid-color: mix($opaque, $background, $percent);
+  @if ($percent < 100%) {
+    #{$attribute}: $solid-color; //设置不透明的颜色，为不支持rgba颜色的浏览器服务
+  }
+  #{$attribute}: $color; //设置透明颜色，为支持rgba颜色的浏览器服务
+}
+
+
