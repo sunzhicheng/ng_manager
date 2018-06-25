@@ -19,6 +19,9 @@ export class ProjectConfig extends SeedConfig {
     /* Enable typeless compiler runs (faster) between typed compiler runs. */
     // this.TYPED_COMPILE_INTERVAL = 5;
 
+    // 启用 scss 支持
+    this.ENABLE_SCSS = true;
+
     // Add `NPM` third-party libraries to be injected/bundled.
     this.NPM_DEPENDENCIES = [
       ...this.NPM_DEPENDENCIES,
@@ -35,6 +38,7 @@ export class ProjectConfig extends SeedConfig {
     this.APP_ASSETS = [
       // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
       // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
+      // {src: `${this.SCSS_SRC}/main.scss`, inject: true, vendor: false}
     ];
 
     this.ROLLUP_INCLUDE_DIR = [
