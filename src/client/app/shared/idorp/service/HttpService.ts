@@ -53,6 +53,7 @@ export class HttpService {
         if (proto) {
             // IDORP 协议请求方式
             if (options.headers.has('id-proto')) {
+                // TODO: 这边正式开发替换为登陆Token
                 options.headers = options.headers.append('id-token', 'CgbCPgMxMjM=');
             }
             // else {
@@ -64,8 +65,9 @@ export class HttpService {
             // 以普通方式提交
             options.headers = options.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
         }
-
-        console.log('httpRequest : ', options);
+        if (API_DEBUG) {
+            console.log('httpRequest : ', options);
+        }
 
         return Observable.create((observer: any) => {
             let reqBody = {};
