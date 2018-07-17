@@ -109,8 +109,18 @@ export class ProjectConfig extends SeedConfig {
         defaultExtension: 'js'
       }
     }];
+    // lodash
+    const lodashPackages: ExtendPackages[] = [{
+      name: 'lodash',
+      // Path to the package's bundle
+      path: 'node_modules/lodash',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'lodash'
+      }
+    }];
     const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages,
-      ...mqttPackages, ...googleProtobufPackages];
+      ...mqttPackages, ...googleProtobufPackages, ...lodashPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)
