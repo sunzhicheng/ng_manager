@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { IdorpGenComponent } from './idorp.gen.component';
+import { IdexampleGenComponent } from './idexample.gen.component';
 
 @NgModule({
   imports: [
     RouterModule.forChild([
-      { path: 'codegen', component: IdorpGenComponent }
+      { path: 'idexample', component: IdexampleGenComponent }
     ])
   ],
   exports: [RouterModule]
 })
-export class IdorpGenRoutingModule { }
+export class IdexampleGenRoutingModule { }

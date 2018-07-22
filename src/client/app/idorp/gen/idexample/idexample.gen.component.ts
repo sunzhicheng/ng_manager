@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { IdRestyExamplesComponent } from './idexample/idrestyexamples.component';
+import { IdRestyExamplesComponent } from './idrestyexamples/idrestyexamples.component';
 
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-idorpgen',
-    templateUrl: 'idorp.gen.component.html'
+    selector: 'sd-idexamplegen',
+    templateUrl: 'idexample.gen.component.html'
 })
 
 /**
- *  自动生成组件演示
+ *  自动生成组件演示I
  */
-export class IdorpGenComponent implements OnInit {
+export class IdexampleGenComponent implements OnInit {
 
     items = [
         {

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DyBaseService } from './../../../shared/idorp/service/IdBaseService';
-import { BASE_URL_GEN } from './../../../shared/idorp/config/env.config';
-import { HttpService } from '../../../shared/idorp/service/HttpService';
-import { GpbService } from '../../../shared/idorp/service/gpb.service';
+import { DyBaseService } from './../../../../shared/idorp/service/IdBaseService';
+import { BASE_URL_GEN } from './../../../../shared/idorp/config/env.config';
+import { HttpService } from './../../../../shared/idorp/service/HttpService';
+import { GpbService } from './../../../../shared/idorp/service/gpb.service';
 
 /**
  * 演示模块 接口演示示例 服务

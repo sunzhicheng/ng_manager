@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { IdRestyExamplesService } from './idrestyexamples.service';
-import { IdorpBaseComponent } from '../../../shared/idorp/component/IdorpBaseComponent';
-import { PAGER_INIT } from '../../../shared/idorp/config/app.config';
+import { IdorpBaseComponent } from './../../../../shared/idorp/component/IdorpBaseComponent';
+import { PAGER_INIT } from './../../../../shared/idorp/config/app.config';
 
 @Component({
     moduleId: module.id,
