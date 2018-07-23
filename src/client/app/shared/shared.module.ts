@@ -7,12 +7,13 @@ import { ToolGpbService, ToolHttpService } from './tool/index';
 import { GpbService } from './idorp/service/gpb.service';
 import { HttpService } from './idorp/service/HttpService';
 import { IdexampleGenModule } from '../idorp/gen/idexample/idexample.gen.module';
+import { IdSysModule } from './../idorp/gen/idsys/idsys.gen.module';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
  */
 @NgModule({
-  imports: [CommonModule, IdexampleGenModule],
+  imports: [CommonModule, IdexampleGenModule, IdSysModule],
   exports: [CommonModule, FormsModule]
 })
 export class SharedModule {

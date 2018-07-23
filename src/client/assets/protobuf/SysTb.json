@@ -4629,6 +4629,1232 @@
               }
             }
           }
+        },
+        "DBTableCom": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1
+            },
+            "version": {
+              "type": "int64",
+              "id": 3
+            },
+            "create_uuid": {
+              "type": "string",
+              "id": 4
+            },
+            "update_uuid": {
+              "type": "string",
+              "id": 5
+            },
+            "disable_uuid": {
+              "type": "string",
+              "id": 6
+            },
+            "del_uuid": {
+              "type": "string",
+              "id": 7
+            },
+            "create_at": {
+              "type": "int64",
+              "id": 8
+            },
+            "update_at": {
+              "type": "int64",
+              "id": 9
+            },
+            "disable_at": {
+              "type": "int64",
+              "id": 10
+            },
+            "del_at": {
+              "type": "int64",
+              "id": 11
+            },
+            "sql_status": {
+              "type": "SQLStatus",
+              "id": 12
+            },
+            "state": {
+              "type": "int32",
+              "id": 13
+            },
+            "channel_id": {
+              "type": "string",
+              "id": 14
+            }
+          }
+        }
+      }
+    },
+    "idexample": {
+      "nested": {
+        "IdRestyExamples": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 14
+            },
+            "description": {
+              "type": "string",
+              "id": 15
+            }
+          }
+        },
+        "IdRestyExamplesQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdRestyExamplesEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdRestyExamplesQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdRestyExamples",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdRestyExamples",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
+    "idsys": {
+      "nested": {
+        "IdSysArea": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "parent_id": {
+              "type": "string",
+              "id": 15
+            },
+            "parent_ids": {
+              "type": "string",
+              "id": 16
+            },
+            "name": {
+              "type": "string",
+              "id": 17
+            },
+            "sort": {
+              "type": "int32",
+              "id": 18
+            },
+            "code": {
+              "type": "string",
+              "id": 19
+            },
+            "type": {
+              "type": "int32",
+              "id": 20
+            }
+          }
+        },
+        "IdSysAreaQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysAreaEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysAreaQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysArea",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysArea",
+              "id": 5
+            }
+          }
+        },
+        "IdSysCollection": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "evaluate_type": {
+              "type": "int32",
+              "id": 16
+            },
+            "product_id": {
+              "type": "string",
+              "id": 17
+            }
+          }
+        },
+        "IdSysCollectionQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysCollectionEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysCollectionQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysCollection",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysCollection",
+              "id": 5
+            }
+          }
+        },
+        "IdSysEnterpriseMsg": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 3
+            },
+            "address": {
+              "type": "string",
+              "id": 4
+            },
+            "tel": {
+              "type": "string",
+              "id": 5
+            },
+            "email": {
+              "type": "string",
+              "id": 6
+            },
+            "official_website": {
+              "type": "string",
+              "id": 7
+            },
+            "brief_text": {
+              "type": "string",
+              "id": 8
+            },
+            "registered_capital": {
+              "type": "string",
+              "id": 9
+            },
+            "paid_capital": {
+              "type": "string",
+              "id": 10
+            },
+            "establishment_date": {
+              "type": "int64",
+              "id": 11
+            },
+            "business_license": {
+              "type": "string",
+              "id": 12
+            },
+            "license_id": {
+              "type": "string",
+              "id": 13
+            },
+            "business_scope": {
+              "type": "string",
+              "id": 14
+            },
+            "mobile": {
+              "type": "string",
+              "id": 15
+            },
+            "is_auth": {
+              "type": "int32",
+              "id": 28
+            },
+            "link_man": {
+              "type": "string",
+              "id": 29
+            },
+            "legal_man": {
+              "type": "string",
+              "id": 30
+            },
+            "link_man_card": {
+              "type": "string",
+              "id": 31
+            },
+            "link_man_other_card": {
+              "type": "string",
+              "id": 32
+            },
+            "link_man_hold_id": {
+              "type": "string",
+              "id": 33
+            }
+          }
+        },
+        "IdSysEnterpriseMsgQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysEnterpriseMsgEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysEnterpriseMsgQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysEnterpriseMsg",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysEnterpriseMsg",
+              "id": 5
+            }
+          }
+        },
+        "IdSysEvaluate": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "evaluate_type": {
+              "type": "int32",
+              "id": 16
+            },
+            "product_id": {
+              "type": "string",
+              "id": 17
+            },
+            "parent_id": {
+              "type": "string",
+              "id": 18
+            },
+            "buy_type": {
+              "type": "int32",
+              "id": 19
+            },
+            "to_user_id": {
+              "type": "string",
+              "id": 20
+            },
+            "star_num": {
+              "type": "int32",
+              "id": 21
+            },
+            "comment": {
+              "type": "string",
+              "id": 22
+            }
+          }
+        },
+        "IdSysEvaluateQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysEvaluateEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysEvaluateQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysEvaluate",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysEvaluate",
+              "id": 5
+            }
+          }
+        },
+        "IdSysMenu": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "parent_id": {
+              "type": "string",
+              "id": 3
+            },
+            "parent_ids": {
+              "type": "string",
+              "id": 4
+            },
+            "name": {
+              "type": "string",
+              "id": 5
+            },
+            "sort": {
+              "type": "int64",
+              "id": 6
+            },
+            "href": {
+              "type": "string",
+              "id": 7
+            },
+            "target": {
+              "type": "string",
+              "id": 8
+            },
+            "icon": {
+              "type": "string",
+              "id": 9
+            },
+            "is_show": {
+              "type": "int32",
+              "id": 10
+            },
+            "permission": {
+              "type": "string",
+              "id": 11
+            },
+            "remarks": {
+              "type": "string",
+              "id": 12
+            },
+            "menu_type": {
+              "type": "int32",
+              "id": 13
+            },
+            "api_url": {
+              "type": "string",
+              "id": 14
+            }
+          }
+        },
+        "IdSysMenuQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysMenuEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysMenuQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysMenu",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysMenu",
+              "id": 5
+            }
+          }
+        },
+        "IdSysTrConfigure": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "tr_num": {
+              "type": "int32",
+              "id": 15
+            },
+            "tr_type": {
+              "type": "int32",
+              "id": 16
+            },
+            "name": {
+              "type": "string",
+              "id": 17
+            },
+            "gain_type": {
+              "type": "int32",
+              "id": 18
+            }
+          }
+        },
+        "IdSysTrConfigureQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysTrConfigureEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysTrConfigureQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysTrConfigure",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysTrConfigure",
+              "id": 5
+            }
+          }
+        },
+        "IdSysTrHistory": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "change_num": {
+              "type": "string",
+              "id": 3
+            },
+            "remarks": {
+              "type": "string",
+              "id": 4
+            },
+            "record_type": {
+              "type": "int32",
+              "id": 5
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 6
+            },
+            "tr_type": {
+              "type": "int32",
+              "id": 7
+            },
+            "detail_type": {
+              "type": "int32",
+              "id": 8
+            }
+          }
+        },
+        "IdSysTrHistoryQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysTrHistoryEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysTrHistoryQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysTrHistory",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysTrHistory",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUser": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 3
+            },
+            "id_user_type_id": {
+              "type": "string",
+              "id": 4
+            },
+            "mobile": {
+              "type": "string",
+              "id": 5
+            },
+            "password": {
+              "type": "string",
+              "id": 6
+            },
+            "enter_id": {
+              "type": "string",
+              "id": 7
+            },
+            "invite_id": {
+              "type": "string",
+              "id": 8
+            },
+            "account_type": {
+              "type": "int32",
+              "id": 9
+            },
+            "invite_code": {
+              "type": "string",
+              "id": 10
+            },
+            "super_end_id": {
+              "type": "string",
+              "id": 11
+            },
+            "profile_id": {
+              "type": "string",
+              "id": 12
+            }
+          }
+        },
+        "IdSysUserQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUser",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUser",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserExt": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "union_id": {
+              "type": "string",
+              "id": 3
+            },
+            "last_login": {
+              "type": "int64",
+              "id": 4
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 5
+            },
+            "user_type": {
+              "type": "int32",
+              "id": 6
+            },
+            "open_id": {
+              "type": "string",
+              "id": 7
+            },
+            "nickname": {
+              "type": "string",
+              "id": 8
+            },
+            "user_pic": {
+              "type": "string",
+              "id": 9
+            },
+            "invite_id": {
+              "type": "string",
+              "id": 10
+            },
+            "invite_score": {
+              "type": "int64",
+              "id": 11
+            }
+          }
+        },
+        "IdSysUserExtQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserExtEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserExtQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserExt",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserExt",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserProfile": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "card_number": {
+              "type": "string",
+              "id": 15
+            },
+            "cool_coin": {
+              "type": "int32",
+              "id": 16
+            },
+            "balances": {
+              "type": "int32",
+              "id": 17
+            },
+            "deposit": {
+              "type": "int32",
+              "id": 18
+            },
+            "score_num": {
+              "type": "int32",
+              "id": 19
+            },
+            "score_total": {
+              "type": "int32",
+              "id": 20
+            },
+            "nickname": {
+              "type": "string",
+              "id": 21
+            },
+            "user_pic": {
+              "type": "string",
+              "id": 22
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 23
+            },
+            "sex": {
+              "type": "int32",
+              "id": 24
+            },
+            "is_auth": {
+              "type": "int32",
+              "id": 25
+            },
+            "pay_password": {
+              "type": "string",
+              "id": 26
+            },
+            "card_id": {
+              "type": "string",
+              "id": 27
+            },
+            "card_other_id": {
+              "type": "string",
+              "id": 28
+            },
+            "card_hold_id": {
+              "type": "string",
+              "id": 29
+            }
+          }
+        },
+        "IdSysUserProfileQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserProfileEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserProfileQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserProfile",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserProfile",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserType": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 3
+            },
+            "sort": {
+              "type": "int32",
+              "id": 4
+            },
+            "is_up": {
+              "type": "int32",
+              "id": 5
+            },
+            "is_enroll": {
+              "type": "int32",
+              "id": 6
+            },
+            "is_default": {
+              "type": "int32",
+              "id": 7
+            },
+            "score_min": {
+              "type": "int64",
+              "id": 8
+            },
+            "is_end_login": {
+              "type": "int32",
+              "id": 9
+            },
+            "is_sys": {
+              "type": "int32",
+              "id": 10
+            },
+            "parent_id": {
+              "type": "string",
+              "id": 11
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 12
+            },
+            "is_person_auth": {
+              "type": "int32",
+              "id": 25
+            },
+            "is_enter_auth": {
+              "type": "int32",
+              "id": 26
+            },
+            "is_open": {
+              "type": "int32",
+              "id": 27
+            }
+          }
+        },
+        "IdSysUserTypeQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserTypeEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserTypeQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserType",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserType",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserTypeMenu": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "user_type_id": {
+              "type": "string",
+              "id": 3
+            },
+            "menu_id": {
+              "type": "string",
+              "id": 4
+            }
+          }
+        },
+        "IdSysUserTypeMenuQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserTypeMenuEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserTypeMenuQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserTypeMenu",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserTypeMenu",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserUp": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "from_type_id": {
+              "type": "string",
+              "id": 16
+            },
+            "to_type_id": {
+              "type": "string",
+              "id": 17
+            },
+            "up_status": {
+              "type": "int32",
+              "id": 18
+            },
+            "user_remarks": {
+              "type": "string",
+              "id": 19
+            },
+            "reviewed_remarks": {
+              "type": "string",
+              "id": 20
+            }
+          }
+        },
+        "IdSysUserUpQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserUpEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserUpQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserUp",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserUp",
+              "id": 5
+            }
+          }
+        },
+        "IdSysWxOauth": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "wx_token": {
+              "type": "string",
+              "id": 15
+            },
+            "wx_oauth": {
+              "type": "string",
+              "id": 16
+            },
+            "user_ext_uuid": {
+              "type": "string",
+              "id": 17
+            }
+          }
+        },
+        "IdSysWxOauthQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysWxOauthEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysWxOauthQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysWxOauth",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysWxOauth",
+              "id": 5
+            }
+          }
         }
       }
     }
