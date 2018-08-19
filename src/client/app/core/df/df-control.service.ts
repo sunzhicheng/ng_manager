@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CustomValidators } from 'ng2-validation';
+
 @Injectable()
 export class DFControlService {
   // constructor() { }
@@ -169,6 +171,70 @@ export class DFControlService {
         }
       });
     }
+  }
+
+  //添加规则
+  addValidators(item: any, v: any) {
+    let fg = new FormControl(v);
+    if (item.rules) {
+      const gz: any = [];
+      item.rules.forEach((rule: any) => {
+        if (rule.name === 'required') {
+          gz.push(Validators.required);
+        }
+        if (rule.name === 'min') {
+          gz.push(CustomValidators.min(rule.value));
+        }
+        if (rule.name === 'max') {
+          gz.push(CustomValidators.max(rule.value));
+        }
+        if (rule.name === 'rangeLength') {
+          gz.push(CustomValidators.rangeLength(rule.value));
+        }
+        if (rule.name === 'range') {
+          gz.push(CustomValidators.range(rule.value));
+        }
+        if (rule.name === 'digits') {
+          gz.push(CustomValidators.digits);
+        }
+        if (rule.name === 'number') {
+          gz.push(CustomValidators.number);
+        }
+        if (rule.name === 'url') {
+          gz.push(CustomValidators.url);
+        }
+        if (rule.name === 'email') {
+          gz.push(CustomValidators.email);
+        }
+        if (rule.name === 'date') {
+          gz.push(CustomValidators.date);
+        }
+        if (rule.name === 'minDate') {
+          gz.push(CustomValidators.minDate(rule.value));
+        }
+        if (rule.name === 'maxDate') {
+          gz.push(CustomValidators.maxDate(rule.value));
+        }
+        if (rule.name === 'equal') {
+          gz.push(CustomValidators.equal(rule.value));
+        }
+        if (rule.name === 'notEqual') {
+          gz.push(CustomValidators.notEqual(rule.value));
+        }
+        if (rule.name === 'equalTo') {
+          gz.push(CustomValidators.equalTo(rule.value));
+        }
+        if (rule.name === 'customer') {
+          gz.push(rule.fun);
+        }
+      });
+      if (gz.lenght === 0) {
+        fg = new FormControl(v);
+      } else {
+        fg = new FormControl(v, gz);
+      }
+    }
+    return fg;
   }
 
 }

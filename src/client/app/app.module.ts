@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+// 表单验证
+import { ReactiveFormsModule } from '@angular/forms';
 import { APP_BASE_HREF } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -27,7 +29,7 @@ import { CoreDemoModule } from './examples/core/core-demo.module';
 
 
 @NgModule({
-  imports: [BrowserModule, CoreModule,
+  imports: [BrowserModule, ReactiveFormsModule, CoreModule,
     HttpClientModule, AppRoutingModule,
     AboutModule, HomeModule,
     VideoModule,

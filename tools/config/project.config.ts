@@ -119,8 +119,27 @@ export class ProjectConfig extends SeedConfig {
         main: 'lodash'
       }
     }];
+    // 表单验证
+    const ng2ValidationPackages: ExtendPackages[] = [{
+      name: 'ng2-validation',
+      // Path to the package's bundle
+      path: 'node_modules/ng2-validation',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'bundles/ng2-validation.umd'
+      }
+    },
+    {
+      name: 'libphonenumber-js',
+      // Path to the package's bundle
+      path: 'node_modules/libphonenumber-js',
+      packageMeta: {
+        defaultExtension: 'js',
+        main: 'bundle/libphonenumber-js.min'
+      }
+    }];
     const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages,
-      ...mqttPackages, ...googleProtobufPackages, ...lodashPackages];
+      ...mqttPackages, ...googleProtobufPackages, ...lodashPackages, ...ng2ValidationPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)

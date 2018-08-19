@@ -1,5 +1,8 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { RouterModule } from '@angular/router';
+// 表单验证
+import { FormsModule } from '@angular/forms';
+import { CustomFormsModule } from 'ng2-validation';
 
 import { NavbarComponent } from './navbar/navbar.component';
 import { throwIfAlreadyLoaded } from './module-import-guard';
@@ -10,7 +13,7 @@ import { ColumComponent } from './hightcharts/colum';
 import { HighChartsService } from './hightcharts/hightcharts.service';
 
 @NgModule({
-  imports: [RouterModule],
+  imports: [RouterModule, FormsModule, CustomFormsModule],
   declarations: [NavbarComponent, ToolbarComponent,
     ChartspieComponent,
     ChartslineComponent,
