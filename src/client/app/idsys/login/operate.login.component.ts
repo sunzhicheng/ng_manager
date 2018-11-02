@@ -2,7 +2,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { LoginService } from './login.service';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { PAGER_INIT, TOKEN_INIT } from '../../shared/idorp/config/app.config';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { Title } from '@angular/platform-browser';
@@ -20,7 +20,7 @@ declare let $: any;
   viewProviders: [LoginService],
 })
 
-export class OperateLoginComponent extends IdorpBaseComponent implements OnInit, AfterViewInit {
+export class OperateLoginComponent extends BaseComponent implements OnInit, AfterViewInit {
   newName: string;
   errorMessage = '';
   names: any[];
@@ -44,7 +44,7 @@ export class OperateLoginComponent extends IdorpBaseComponent implements OnInit,
 
   ngOnInit() {
     this.initSession();
-    this.title.setTitle(this.platform_name + this.platform_operate_name);
+    // this.title.setTitle(this.platform_name + this.platform_operate_name);
     // document.title = '2222';
   }
 

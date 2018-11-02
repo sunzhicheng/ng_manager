@@ -1,6 +1,6 @@
   <section class="padder scrollable">
   <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
-    <li *ngFor="let nav of formData.nav_list" [class.active]="nav.is_last" >
+    <li *ngFor="let nav of fd.nav_list" [class.active]="nav.is_last" >
       <a *ngIf="nav.router_link"  [routerLink]="nav.router_link"><i class="fa fa-home"></i>{{ nav.label }}</a>
       <a *ngIf="nav.is_last" >{{ nav.label }}</a>
     </li>
@@ -8,10 +8,10 @@
 
   <section class="panel panel-default">
     <header class="panel-heading font-bold">
-      {{ formData.nav_list[formData.nav_list.length-1].label }}
+      {{ fd.nav_list[fd.nav_list.length-1].label }}
       <!--<a href="#" class="btn btn-default btn-xs btn-danger right">新增</a>-->
     </header>
-    <df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"
+    <df-form #dy_form [formData]="fd" (formSubmit)="formSubmit($event)"
               (btnclickout)="btnclick($event)"
               (customSubmitOut)="customSubmit($event)"
              (selectchangeout)="selectchange($event)"></df-form>

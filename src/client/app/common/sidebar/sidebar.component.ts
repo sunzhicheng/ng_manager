@@ -3,9 +3,8 @@ import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
-import { TOKEN_INIT } from '../../shared/idorp/config/app.config';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import * as _ from 'lodash';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 import { SessionStorageCacheService } from '../../shared/idorp/cache/sessionStorage.service';
@@ -18,7 +17,7 @@ declare const $: any;
   viewProviders: [SidebarService]
 })
 
-export class SidebarComponent extends IdorpBaseComponent implements OnInit {
+export class SidebarComponent extends BaseComponent implements OnInit {
   projects: any = [];
   activeMenuList: any;
 
@@ -26,6 +25,7 @@ export class SidebarComponent extends IdorpBaseComponent implements OnInit {
 
   activeMenu: any;
 
+  protoEntry: any;
   constructor(private sidebarService: SidebarService,
     private localCache: LocalStorageCacheService,
     private sessionCache: SessionStorageCacheService,

@@ -19,10 +19,9 @@ export class IdSysAppAcountService extends DyBaseService {
    * 数据接口定义
    */
   public api: any = {
-    base: IDCONF().api_base,
     query: '/idsys/idsysappacount/query',
     add: '/idsys/idsysappacount/add',
-    loadByUUID: '/idsys/idsysappacount/',
+    detail: '/idsys/idsysappacount/',
     update: '/idsys/idsysappacount/update',
     del: '/idsys/idsysappacount/del',
     personInfo: '/idsys/idsysappacount/personInfo',

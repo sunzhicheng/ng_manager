@@ -36,9 +36,50 @@ export class ProjectConfig extends SeedConfig {
 
     // Add `local` third-party libraries to be injected/bundled.
     this.APP_ASSETS = [
-      // {src: `${this.APP_SRC}/your-path-to-lib/libs/jquery-ui.js`, inject: true, vendor: false}
-      // {src: `${this.CSS_SRC}/path-to-lib/test-lib.css`, inject: true, vendor: false},
-      {src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false}
+      {src: `${this.CSS_SRC}/main.css`, inject: true, vendor: false},
+
+      { src: `${this.APP_SRC}/js/sweetalert/sweetalert.min.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/sweetalert/sweetalert.css`, inject: true, vendor: true },
+
+      { src: `${this.APP_SRC}/js/app.v2.js`, inject: true, vendor: true },
+
+      { src: `${this.APP_SRC}/js/charts/easypiechart/jquery.easy-pie-chart.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/sparkline/jquery.sparkline.min.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/flot/jquery.flot.min.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/flot/jquery.flot.tooltip.min.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/flot/jquery.flot.resize.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/flot/jquery.flot.grow.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/charts/flot/demo.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/calendar/bootstrap_calendar.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/calendar/demo.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/sortable/jquery.sortable.js`, inject: true, vendor: true },
+
+      { src: `${this.APP_SRC}/js/ztree/jquery.ztree.core.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/ztree/jquery.ztree.excheck.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/ztree/jquery.ztree.exedit.js`, inject: true, vendor: true },
+
+      // 副文本框 插件
+      { src: `${this.APP_SRC}/js/kindeditor/kindeditor-all.js`, inject: true, vendor: true},
+      { src: `${this.APP_SRC}/js/kindeditor/themes/default/default.css`, inject: true, vendor: true},
+      { src: `${this.APP_SRC}/js/kindeditor/lang/zh_CN.js`, inject: true, vendor: true},
+      //时间插件
+      { src: `${this.APP_SRC}/js/datepicker/bootstrap-datepicker.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/datepicker/bootstrap-datetimepicker.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/datepicker/bootstrap-datetimepicker.zh-CN.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/datepicker/bootstrap-datetimepicker.css`, inject: true, vendor: true},
+
+      //时分秒
+      { src: `${this.APP_SRC}/js/combodate/combodate.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/libs/moment.min.js`, inject: true, vendor: true },
+
+      //下拉框搜索
+      { src: `${this.APP_SRC}/js/bootstrap-select/bootstrap-select.min.js`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/bootstrap-select/bootstrap-select.css`, inject: true, vendor: true },
+      { src: `${this.APP_SRC}/js/bootstrap-select/theme.css`, inject: true, vendor: true },
+      //省市区三级联动
+      // { src: `${this.APP_SRC}/js/pro_city_county.js`, inject: true, vendor: true},
+      //图片裁剪
+      { src: `${this.APP_SRC}/js/cropper/cropper.min.js`, inject: true, vendor: true },
     ];
 
     this.ROLLUP_INCLUDE_DIR = [

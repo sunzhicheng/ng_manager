@@ -363,7 +363,7 @@ export class FormUtils {
         });
     }
     /**
-     * 更新item中filterJson 的forData
+     * 更新item中filterJson 的formData
      * @param formData
      * @param key
      * @param filterJson

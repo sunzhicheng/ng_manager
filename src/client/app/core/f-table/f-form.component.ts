@@ -10,8 +10,13 @@ declare const $: any;
 
 export class FormFormComponent implements OnInit {
     // 表单数据
+    fd: any;
     @Input()
-    public formData: any;
+    set formData(fd: any) {
+        if(fd && fd.complete) {
+            this.fd = fd;
+        }
+    }
 
     @Output()
     public formSubmited: EventEmitter<any> = new EventEmitter();

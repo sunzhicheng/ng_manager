@@ -5,9 +5,6 @@ import { SidebarComponent } from './sidebar.component';
 import { SysEvent } from '../../shared/idorp/event/sys.event';
 import { SidebarService } from './sidebar.service';
 
-
-
-
 @NgModule({
   imports: [CommonModule, RouterModule],
   declarations: [SidebarComponent],

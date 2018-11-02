@@ -18,18 +18,14 @@ declare let $: any;
 export class HttpService {
     [x: string]: any;
 
-    public newApiHead = new HttpHeaders();
-    public oldApiHead = new HttpHeaders();
+    public apiHead = new HttpHeaders();
 
     constructor(private http: HttpClient,
         private localCache: LocalStorageCacheService,
         private toolGpbService: GpbService,
         private _router: Router) {
-        this.oldApiHead = this.oldApiHead.append('Content-Type', 'application/json; charset=utf-8');
-        this.oldApiHead = this.oldApiHead.append('idorp-agent', 'idorp-agent-web');
-
-        this.newApiHead = this.newApiHead.append('Content-Type', 'application/json; charset=utf-8');
-        this.newApiHead = this.newApiHead.append('id-proto', 'base64');
+        this.apiHead = this.apiHead.append('Content-Type', 'application/json; charset=utf-8');
+        this.apiHead = this.apiHead.append('id-proto', 'base64');
     }
 
 
@@ -43,7 +39,7 @@ export class HttpService {
      * @param options http 请求参数
      */
     public httpRequest(url: string, body: any = null, proto: any = null,
-        httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers: this.newApiHead }): Observable<any> {
+        httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers: this.apiHead }): Observable<any> {
         if (API_DEBUG) {
             console.log('httpRequest url : ' + url);
         }

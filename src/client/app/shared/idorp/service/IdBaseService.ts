@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';
-import { HTTPREQ, API_DEBUG, PAGER_INIT } from '../config/app.config';
+import { HTTPREQ, API_DEBUG, PAGER_INIT, IDCONF, APISOURCE } from '../config/app.config';
 import * as _ from 'lodash';
 
 export class DyBaseService {
@@ -11,22 +11,54 @@ export class DyBaseService {
         query: { q_item_list: [] },
         pager: PAGER_INIT
     };
+    //控制列表刷新
+    isReLoad = false;
     /**
-     * 数据接口定义
+     * 列表接口定义
      */
-    public api: any = {
-        base: '',
+    protected api: any = {
         add: '',
         update: '',
         query: '',
         del: '',
-        loadByUUID: '',
-        tree: '',
+        detail: '',
         enable: '',
         proto: ''
     };
-    //控制列表刷新
-    isReLoad = false;
+    /**
+     * 列表接口定义
+     */
+    protected list_api: any = {
+        add: '',
+        update: '',
+        query: '',
+        del: '',
+        detail: '',
+        enable: '',
+        proto: ''
+    };
+    /**
+     * 树接口定义
+     */
+    protected tree_api: any = {
+        add: '',
+        update: '',
+        del: '',
+        detail: '',
+        tree: '',
+        proto: ''
+    };
+    /**
+     * 校验诸如 add query 等 api  是否存在
+     * @param opt
+     */
+    getUrl(api: any, opt: any) {
+        if (!api[opt] || api[opt] === '') {
+            console.error('api.' + opt + '链接错误: ' + this.api[opt]);
+            return '';
+        }
+        return api[opt];
+    }
     constructor(public toolGpb: GpbService,
         public httpService: HttpService) {
     }
@@ -34,38 +66,23 @@ export class DyBaseService {
      * 打印log
      * @param msg
      */
-    log(msg: any) {
+    log(msg: any, obj: any = '') {
         if (API_DEBUG) {
-            console.log(msg);
+            if (obj !== '') {
+                console.log(msg, obj);
+            } else {
+                console.log(msg);
+            }
         }
-    }
-    /**
-     * 校验诸如 add query 等 api  是否存在
-     * @param opt
-     */
-    checkApi(opt: any) {
-        if (!this.api.base || this.api.base === '') {
-            console.error('api.base链接错误: ' + this.api.base);
-            return false;
-        }
-        if (!this.api[opt] || this.api[opt] === '') {
-            console.error('api.' + opt + '链接错误: ' + this.api[opt]);
-            return false;
-        }
-        return true;
     }
     /**
      * 公共删除方法
      * @param protoEntry
      * @param protoMessage
      */
-    del(entry: any, protoMessage: any): Observable<any> {
-        return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.del, entry, protoMessage).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
-            );
-        });
+    del(entry: any, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        return this.requestApi(this.getUrl(api, 'del'), api.proto, entry, source);
     }
 
     /**
@@ -73,13 +90,9 @@ export class DyBaseService {
      * @param entry
      * @param protoMessage
      */
-    enable(entry: any, protoMessage: any): Observable<any> {
-        return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.enable, entry, protoMessage).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
-            );
-        });
+    enable(entry: any, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        return this.requestApi(this.getUrl(api, 'enable'), api.proto, entry, source);
     }
 
     /**
@@ -87,26 +100,18 @@ export class DyBaseService {
      * @param entry 协议实例对像
      * @param protoMessage 协议对像
      */
-    query(entry: any, protoMessage: any): Observable<any> {
-        return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.query, entry, protoMessage).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
-            );
-        });
+    query(entry: any, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        return this.requestApi(this.getUrl(api, 'query'), api.proto, entry, source);
     }
     /**
      * 查询数结构
      * @param entry 协议实例对像
      * @param protoMessage 协议对像
      */
-    tree(entry: any, protoMessage: any): Observable<any> {
-        return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.tree, entry, protoMessage).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
-            );
-        });
+    tree(entry: any, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        return this.requestApi(this.getUrl(api, 'tree'), api.proto, entry, source);
     }
     /**
      * 公共保存方法
@@ -114,24 +119,41 @@ export class DyBaseService {
      * @param protoMessage
      * @param isAdd
      */
-    save(entry: any, protoMessage: any, isAdd: boolean): Observable<any> {
-        return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + (isAdd ? this.api.add : this.api.update), entry, protoMessage).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
-            );
-        });
+    save(entry: any, isAdd: boolean, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        return this.requestApi(this.getUrl(api, 'save'), api.proto, entry, source);
     }
     /**
      * 公共 根据uuid  查找详情方法
      * @param entry
      * @param protoMessage
      */
-    loadByUUID(entry: any, uuid: any, protoMessage: any): Observable<any> {
+    detail(entry: any, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
+        const uuid = this._.get(entry, 'query.uuid', '');
+        if (uuid === '') {
+           return  Observable.create((observer: any) => {
+                observer.error('DyBaseService.detail错误: ', uuid);
+           });
+        }
+        return this.requestApi(this.getUrl(api, 'detail') + '/' + uuid, api.proto, entry, source, HTTPREQ.GET);
+    }
+
+    requestApi(url: string, proto: string, entry: any, source: APISOURCE, method: HTTPREQ = HTTPREQ.POST) {
         return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.loadByUUID + uuid, entry, protoMessage, HTTPREQ.GET).subscribe(
-                (message: any) => observer.next(message),
-                (error: any) => observer.error(error)
+            this.getProtoEntry(source).subscribe(
+                (protoMessage: any) => {
+                    if (url === '') {
+                        observer.error('requestApi错误:  url没有配置');
+                        return;
+                    }
+                    const protoEntry = protoMessage.create(entry);
+                    this.log('requestApi query params : ' + JSON.stringify(protoEntry));
+                    this.httpService.httpRequest(IDCONF().api_base + url, entry, protoMessage, method).subscribe(
+                        (message: any) => observer.next(message),
+                        (error: any) => observer.error(error)
+                    );
+                }
             );
         });
     }
@@ -139,9 +161,10 @@ export class DyBaseService {
     /**
      * 获取接口协议类
      */
-    getProtoEntry(): Observable<any> {
+    getProtoEntry(source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
+        const api = this.getApi(source);
         return Observable.create((observer: any) => {
-            this.toolGpb.getProto(this.api.proto).subscribe(
+            this.toolGpb.getProto(api.proto).subscribe(
                 (message: any) => observer.next(message),
                 (error: any) => observer.error(error)
             );
@@ -157,5 +180,15 @@ export class DyBaseService {
         return this.httpService.isNotEx(token);
     }
 
+    private getApi(source: APISOURCE) {
+        switch (source) {
+            case APISOURCE.LIST:
+                return this.list_api;
+            case APISOURCE.TREE:
+                return this.tree_api;
+            default:
+                return this.api;
+        }
+    }
 
 }

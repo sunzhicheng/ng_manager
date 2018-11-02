@@ -2,7 +2,7 @@ import { Component, ViewEncapsulation, OnInit, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { TopnavService } from './topnav.service';
 import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 
 @Component({
@@ -14,7 +14,7 @@ import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.
   // directives: [DROPDOWN_DIRECTIVES, CORE_DIRECTIVES, ROUTER_DIRECTIVES]
 })
 
-export class TopNavComponent extends IdorpBaseComponent implements OnInit {
+export class TopNavComponent extends BaseComponent implements OnInit {
   app_base = '/';
   username: any;
   headpic: any;

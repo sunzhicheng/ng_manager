@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges, ViewChild } from '@angular/core';
 import { DfFromComponent } from '../df/df.component';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { PromptUtil } from './../../shared/idorp/providers/PromptUtil';
 import * as _ from 'lodash';
 import { FormUtils } from '../../shared/idorp/providers/FormUtils';
@@ -16,7 +16,7 @@ declare const $: any;
   templateUrl: 'tree.in.html'
   // directives: [NgTableSortingDirective, NgClass, CORE_DIRECTIVES, PAGINATION_DIRECTIVES, PaginationComponent]
 })
-export class TreeInComponent extends IdorpBaseComponent implements OnInit, OnChanges {
+export class TreeInComponent extends BaseComponent implements OnInit, OnChanges {
 
   @ViewChild('form')
   public form: DfFromComponent;
@@ -439,7 +439,7 @@ export class TreeInComponent extends IdorpBaseComponent implements OnInit, OnCha
 
   public toEdit(fromValue: any) {
     if (this.pp(fromValue, 'dtc.pt_id.open_id', '') === '') {
-      alert('未传修改ID!!!');
+      console.error('未传修改ID!!!');
       return;
     }
     this.edit_id = this.pp(fromValue, 'dtc.pt_id.open_id', '');

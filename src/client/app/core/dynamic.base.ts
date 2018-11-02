@@ -1,4 +1,4 @@
-import { IdorpBaseComponent } from '../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../shared/idorp/component/BaseComponent';
 import { ControlValueAccessor, DefaultValueAccessor } from '@angular/forms';
 import { IUtils } from '../shared/idorp/providers/IUtils';
 import { GpbService } from '../shared/idorp/service/gpb.service';
@@ -6,7 +6,7 @@ import { HttpService } from '../shared/idorp/service/HttpService';
 import { IDCONF } from '../shared/idorp/config/app.config';
 import { Input, Output, EventEmitter } from '@angular/core';
 
-export class DynamicBase extends IdorpBaseComponent implements ControlValueAccessor  {
+export class DynamicBase extends BaseComponent implements ControlValueAccessor  {
 
   propagateChange: any;
   propagateTouched: any;

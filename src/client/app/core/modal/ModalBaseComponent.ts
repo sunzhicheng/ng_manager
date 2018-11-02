@@ -1,12 +1,12 @@
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { Input } from '@angular/core';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import { Output, EventEmitter } from '@angular/core';
 import { DoCheck } from '@angular/core';
 
-export class ModalBaseComponent extends IdorpBaseComponent implements DoCheck {
+export class ModalBaseComponent extends BaseComponent implements DoCheck {
     name_key = IUtils.uuid();
     protoEntry: any;
     pager: any;

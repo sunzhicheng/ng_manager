@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { IdorpListComponent } from '../../shared/idorp/component/IdorpListComponent';
+import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
 import { PAGER_INIT } from '../../shared/idorp/config/app.config';
 import { IdSysMenuService } from './idsysmenu.service';
-import { IdorpTreeComponent } from '../../shared/idorp/component/IdorpTreeComponent';
+import { TreeBaseComponent } from '../../shared/idorp/component/TreeBaseComponent';
 import { TreeService } from '../../shared/idorp/service/TreeService';
 declare const $: any;
 
@@ -16,7 +16,7 @@ declare const $: any;
 /**
  * 系统模块 菜单配置 组件
  */
-export class IdSysMenuComponent extends IdorpTreeComponent implements OnInit {
+export class IdSysMenuComponent extends TreeBaseComponent implements OnInit {
     tree_config: any = {
         title: '菜单列表',
         rootCreate: true,

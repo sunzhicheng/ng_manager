@@ -1,4 +1,4 @@
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
@@ -14,7 +14,7 @@ declare const $: any;
 /**
  * 系统模块 绑定菜单 组件
  */
-export class ModalTreeComponent extends IdorpBaseComponent implements OnInit {
+export class ModalTreeComponent extends BaseComponent implements OnInit {
     _tree_config: any = {
         title: '选择菜单',
         rootCreate: false,

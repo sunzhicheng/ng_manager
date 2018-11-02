@@ -24,6 +24,11 @@ export enum HTTPREQ {
     GET,
     POST
 }
+export enum APISOURCE {
+    DEFAULT,        //api 
+    TREE,           //tree_api
+    LIST            //list_api
+}
 
 
 // 分页请求初始化数据

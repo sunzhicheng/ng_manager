@@ -1,8 +1,8 @@
 import { IdSysAppAcountService } from './idsysappacount.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IdorpFormComponent } from '../../shared/idorp/component/IdorpFormComponent';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
 
 
 
@@ -19,7 +19,7 @@ declare let $: any;
   viewProviders: []
 })
 
-export class IdSysAccountFormComponent extends IdorpFormComponent implements OnInit {
+export class IdSysAccountFormComponent extends FormBaseComponent {
   public constructor(
     public idAccountUser: IdSysAppAcountService,
     private route: ActivatedRoute,
@@ -27,50 +27,40 @@ export class IdSysAccountFormComponent extends IdorpFormComponent implements OnI
       super(idAccountUser);
   }
 
-  beforeSave() {
-    this.log('IdSysAccountFormComponent . beforeSave  实现类');
-    if (this.protoEntry.proto.user_type) {
-      this.protoEntry.proto.user_type = parseInt(this.protoEntry.proto.user_type, 10);
+  beforeSave(data: any) {
+    if (data.user_type) {
+      data.user_type = parseInt(data.user_type, 10);
     }
+    return data;
   }
   /**
   * 给子类实现
   * @param protoEntry
   */
-  afterSave() {
-      this.log('IdSysAccountFormComponent . afterSave  实现类');
+  afterSave(formEntry: any) {
       const link = ['home/idsysappacount'];
       this._router.navigate(link);
   }
   afterLoad(jsonFormData: any) {
-    this.log('IdSysAccountFormComponent . afterLoad  实现类');
     //清空密码
     jsonFormData.password = '';
+    return jsonFormData;
   }
 
-  ngOnInit() {
+  initFD(): void {
     $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
-      const fd = this.idAccountUser.initFormData();
-      let filterData = {};
-      if (!this.isBusiness()) {
-        filterData = {is_sys: '2'};
-      }
+      this.formData = this.idAccountUser.initFormData();
       if (params['uuid']) {
         this.uuid = params['uuid'];
         this.isAdd = false;
         //如果是修改  更新某些属性不可写
-        this.addDisabled(fd, 'username');
-        this.loadFormData();
-        this.formData = fd;
+        this.addDisabledList(['username']);
+        this.loadDetail();
         this.log(' update form component  uuid :' + this.uuid);
       } else {
-        this.formData = fd;
         this.log(' add form component ');
       }
-      // this.idsysusertypeService.initOptList((optList: any) => {
-      //   this.bindFormDateOptList(optList, 'sys_user_uuid');
-      // }, filterData);
     });
   }
 

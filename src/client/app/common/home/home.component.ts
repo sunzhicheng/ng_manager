@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, AfterContentInit, OnInit, ViewChild } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { LoginService } from '../../idsys/login/login.service';
-import { IdorpBaseComponent } from '../../shared/idorp/component/IdorpBaseComponent';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
@@ -16,7 +16,7 @@ declare const $: any;
   // directives: [ROUTER_DIRECTIVES, TopNavComponent,FootNavComponent, SidebarComponent]
 })
 
-export class HomeComponent extends IdorpBaseComponent implements OnInit, AfterContentInit {
+export class HomeComponent extends BaseComponent implements OnInit, AfterContentInit {
   errorMessage: any;
   pt_account: any;
   @ViewChild(SidebarComponent)

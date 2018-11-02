@@ -21,21 +21,22 @@ import { CustomReuseStrategy } from './shared/tool/CustomReuseStrategy';
 // 网页Title控制
 import { Title } from '@angular/platform-browser';
 import { HomeModule } from './common/home/home.module';
+import { AuthService } from './shared/tool/AuthService';
 
 
 @NgModule({
   imports: [BrowserModule, ReactiveFormsModule,
     HttpClientModule, AppRoutingModule,
     HomeModule,
-    VideoModule,
-    HighchartsExampleModule,
-    MqttModule,
+    // VideoModule,
+    // HighchartsExampleModule,
+    // MqttModule,
     SharedModule.forRoot()],
   declarations: [AppComponent],
   providers: [{
     provide: APP_BASE_HREF,
     useValue: ''
-  },
+  }, AuthService,
   Title,
   { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
   bootstrap: [AppComponent]

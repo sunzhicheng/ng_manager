@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
-import { IdorpBaseComponent } from './IdorpBaseComponent';
-import { ViewChild } from '@angular/core';
+import { BaseComponent } from './BaseComponent';
+import { ViewChild, OnInit } from '@angular/core';
 import { FormFormComponent } from '../../../core/f-table/f-form.component';
 import { IUtils } from '../providers/IUtils';
 import { FormUtils } from '../providers/FormUtils';
@@ -9,7 +9,12 @@ declare const $: any;
 /**
  *  表单组件基类
  */
-export class FormBaseComponent extends IdorpBaseComponent {
+export abstract class FormBaseComponent extends BaseComponent implements OnInit {
+    //重新命名该属性的时候   必须保证相应的子service 有相应的方法
+    //默认加载方法名
+    method_form_detail: any = 'detail';
+    //默认保存方法名
+    method_form_save: any = 'save';
     /**
      * 修改的唯一主键
      */
@@ -18,25 +23,27 @@ export class FormBaseComponent extends IdorpBaseComponent {
      * 标识该主键是修改还是新增
      */
     protected isAdd = true;
-
     /**
      * 动态表单数据
      */
     formData: any;
-
-    proto: any;
+    /**
+     * 请求接口的协议对象
+     */
+    formEntry: any;
 
     @ViewChild(FormFormComponent)
     private fform: FormFormComponent;
-    //重新命名该属性的时候   必须保证相应的子service 有相应的方法
-    //默认加载方法名
-    private loadMethod: any = 'loadByUUID';
-    //默认保存方法名
-    private saveMethod: any = 'save';
+
+    private proto: any;
     constructor(public service: DyBaseService | any,
     ) {
         super();
     }
+    ngOnInit() {
+        this.initForm();
+    }
+    abstract initFD(): void;
     /**
      * 保存操作调用接口之前的处理方法
      * @param data 表单填写的JSON数据
@@ -46,10 +53,10 @@ export class FormBaseComponent extends IdorpBaseComponent {
     }
     /**
      * 保存操作完成之后的处理方法，用于处理保存之后 通过接口返回状态的一些操作
-     * @param protoEntry 接口返回的协议对象
+     * @param formEntry 接口返回的协议对象
      */
-    afterSave(protoEntry: any) {
-        return protoEntry;
+    afterSave(formEntry: any) {
+        return formEntry;
     }
     /**
      * 自定义表单验证，用于校验规则无法满足的，或者比较复杂的验证,
@@ -93,12 +100,12 @@ export class FormBaseComponent extends IdorpBaseComponent {
             console.error('beforeSave:处理之后返回的表单JSON对象为空');
             return;
         } else {
-            this.protoEntry.proto = afterData;
+            this.formEntry.proto = afterData;
         }
         this.save();
     }
     save() {
-        if (!this.hasMethod(this.service, this.saveMethod)) {
+        if (!this.hasMethod(this.service, this.method_form_save)) {
             return;
         }
         if (!this.service.checkApi(this.isAdd ? 'add' : 'update')) {
@@ -107,21 +114,21 @@ export class FormBaseComponent extends IdorpBaseComponent {
         this.service.getProtoEntry().subscribe(
             (protoMessage: any) => {
                 if (!this.isAdd) {
-                    this.protoEntry.query = { uuid: this.uuid };
+                    this.formEntry.query = { uuid: this.uuid };
                 }
-                // this.log('IdorpFormComponent save   protoEntry : ' + JSON.stringify(this.protoEntry));
-                this.service[this.saveMethod](this.protoEntry, protoMessage, this.isAdd).subscribe(
+                // this.log('IdorpFormComponent save   formEntry : ' + JSON.stringify(this.formEntry));
+                this.service[this.method_form_save](this.formEntry, protoMessage, this.isAdd).subscribe(
                     (protoMsg: any) => {
                         if (this.service.isNotEx(protoMsg.token)) {
-                            this.protoEntry = protoMsg;
+                            this.formEntry = protoMsg;
                             this.service.isReLoad = true;
-                            const afterEntry = this.afterSave(this.protoEntry);
+                            const afterEntry = this.afterSave(this.formEntry);
                             if (!afterEntry) {
-                                console.warn('返回的协议对象为空,将采用原来的接口返回对象');
+                                console.warn('save错误: afterSave返回的协议对象为空,将采用原来的接口返回对象');
                             } else {
-                                this.protoEntry = afterEntry;
+                                this.formEntry = afterEntry;
                             }
-                            this.log('save request api result : ' + JSON.stringify(this.protoEntry));
+                            this.log('save request api result : ' + JSON.stringify(this.formEntry));
                         }
                     },
                 );
@@ -131,87 +138,46 @@ export class FormBaseComponent extends IdorpBaseComponent {
     /**
      * 修改的时候  进入页面更加uuid  加载数据
      */
-    loadFormData(loadProto: any = null, protoMessage_in: any = null) {
+    loadDetail(loadProto: any = null) {
         if (this.isAdd) {
             console.error('表单数据加载失败.请确认是否设置isAdd=false');
             return;
         }
-        if (!this.hasMethod(this.service, this.loadMethod)) {
-            return;
-        }
-        if (!this.service.checkApi('loadByUUID')) {
+        if (!this.hasMethod(this.service, this.method_form_detail)) {
             return;
         }
         if (loadProto === null) {
-            if (protoMessage_in === null) {
-                this.service.getProtoEntry().subscribe(
-                    (protoMessage: any) => {
-                        const loadProto = protoMessage.create({ query: { uuid: this.uuid } });
-                        this.log('idAccountUser query params : ' + JSON.stringify(loadProto));
-                        this.service[this.loadMethod](loadProto, this.uuid, protoMessage).subscribe(
-                            (protoMsg: any) => {
-                                if (protoMsg && protoMsg.proto) {
-                                    this.protoEntry = protoMsg;
-                                    //表单数据变化  刷新表单
-                                    this.proto = this.protoEntry.proto;
-                                    this.resetFormData();
-                                }
-                                this.log('loadFormData query result : ' + JSON.stringify(this.protoEntry));
-                            },
-                        );
+            const loadProto = { query: { uuid: this.uuid } };
+            this.log('loadDetail brefore : ', loadProto);
+            this.service[this.method_form_detail](loadProto).subscribe(
+                (protoMsg: any) => {
+                    if (protoMsg && protoMsg.proto) {
+                        this.formEntry = protoMsg;
+                        //表单数据变化  刷新表单
+                        this.proto = this.formEntry.proto;
+                        this.resetFormData();
                     }
-                );
-            } else {
-                const loadProto = protoMessage_in.create({ query: { uuid: this.uuid } });
-                this.log('idAccountUser query params : ' + JSON.stringify(loadProto));
-                this.service[this.loadMethod](loadProto, this.uuid, protoMessage_in).subscribe(
-                    (protoMsg: any) => {
-                        if (protoMsg && protoMsg.proto) {
-                            this.protoEntry = protoMsg;
-                            //表单数据变化  刷新表单
-                            this.proto = this.protoEntry.proto;
-                            this.resetFormData();
-                        }
-                        this.log('loadFormData query result : ' + JSON.stringify(this.protoEntry));
-                    },
-                );
-            }
+                    this.log('loadDetail result : ', this.formEntry);
+                },
+            );
         } else {
             this.log('调用loadFormData  穿进来的参数 loadProto : ' + JSON.stringify(loadProto));
-            if (protoMessage_in === null) {
-                this.service.getProtoEntry().subscribe(
-                    (protoMessage: any) => {
-                        this.service[this.loadMethod](loadProto, protoMessage).subscribe(
-                            (protoMsg: any) => {
-                                if (protoMsg && protoMsg.proto) {
-                                    this.protoEntry = protoMsg;
-                                    //表单数据变化  刷新表单
-                                    this.proto = this.protoEntry.proto;
-                                    this.resetFormData();
-                                }
-                                this.log('loadFormData query result : ' + JSON.stringify(this.protoEntry));
-                            },
-                        );
+            this.service[this.method_form_detail](loadProto).subscribe(
+                (protoMsg: any) => {
+                    if (protoMsg && protoMsg.proto) {
+                        this.formEntry = protoMsg;
+                        //表单数据变化  刷新表单
+                        this.proto = this.formEntry.proto;
+                        this.resetFormData();
                     }
-                );
-            } else {
-                this.service[this.loadMethod](loadProto, protoMessage_in).subscribe(
-                    (protoMsg: any) => {
-                        if (protoMsg && protoMsg.proto) {
-                            this.protoEntry = protoMsg;
-                            //表单数据变化  刷新表单
-                            this.proto = this.protoEntry.proto;
-                            this.resetFormData();
-                        }
-                        this.log('loadFormData query result : ' + JSON.stringify(this.protoEntry));
-                    },
-                );
-            }
+                    this.log('loadDetail result : ' + JSON.stringify(this.formEntry));
+                },
+            );
         }
     }
     /**
      * 请求接口获取数据成功后处理的方法  只需要对jsonFormData的数据 进行处理 这个方法还没有对表单进行set 值
-     * @param protoEntry
+     * @param formEntry
      */
     afterLoad(jsonFormData: any) {
         return jsonFormData;
@@ -240,6 +206,13 @@ export class FormBaseComponent extends IdorpBaseComponent {
         }
     }
 
+    /*****************************************赋值给[formData]="formData"之前调用的方法 start*************************************/
+
+
+    /*****************************************赋值给[formData]="formData"之前调用的方法 end*************************************/
+
+
+    /** ****************************************需要手动刷新的方法 start************************************/
     /**
    * 绑定下拉列表,必须调用刷新方法注：
    * 1.下拉列表的label必须与传过来的key相同
@@ -257,7 +230,60 @@ export class FormBaseComponent extends IdorpBaseComponent {
             FormUtils.setItemValueByJson(this.fform.getDyFormComp(), this.formData, json);
         }
     }
+    /**
+     * 向表单对象动态添加tiem
+     * @param items  item的数组对象
+     * @param afterKey 在哪个item key后面开始添加
+     * @param isRefresh 是否自动刷新表单  默认不刷新
+     */
+    addItemList(items: any, afterKey: String) {
+        FormUtils.addItemList(this.formData, items, afterKey);
+    }
+    /**
+     * 向表单对象动态删除tiem
+     * @param keyArr 需要删除的item key  集合
+     * @param isRefresh 是否自动刷新表单 默认不刷新
+     */
+    delItemList(keyArr: any) {
+        FormUtils.delItemList(this.formData, keyArr);
+    }
+    updateRules(keyArr: any, rule: any, isAdd: boolean = true) {
+        FormUtils.updateRules(this.formData, keyArr, rule, isAdd);
+    }
+    clearRules(keyArr: any) {
+        FormUtils.clearRules(this.formData, keyArr);
+    }
+    /**
+    * 修改的时候  向动态表单中添加disabled属性
+    * @param formData
+    * @param key
+    */
+    addDisabledList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
+        FormUtils.addDisabledList(this.formData, keyArr, opt, dealOther);
+    }
+    /**
+     * 动态设置校验规则
+     * @param formData
+     * @param key
+     * @param isAdd
+     */
+    addRequiredRules(formData: any, key: any, isAdd: boolean = true) {
+        if (formData) {
+            FormUtils.updateRules(formData, [key], {
+                name: 'required',
+                errorMsg: '必填'
+            }, isAdd);
+        }
+    }
 
+    addHiddenList(keyArr: any, opt: boolean = true) {
+        FormUtils.addHiddenList(this.formData, keyArr, opt);
+    }
+
+    /** ****************************************需要手动刷新的方法 end************************************/
+
+
+    /** ****************************************不需要手动刷新的方法 startr************************************/
     /**
      * 设置某个属性为空
      * @param key
@@ -279,41 +305,12 @@ export class FormBaseComponent extends IdorpBaseComponent {
     getButtonKeyHiddenStatus(key: any) {
         return FormUtils.getButtonKeyStatus(this.formData, key, 'hidden');
     }
-
-
     addButtonList(items: any, afterKey: String) {
         FormUtils.addButtonList(this.formData, items, afterKey);
     }
+    /******************************************不需要手动刷新的方法 end************************************/
 
-    /**
-     * 向表单对象动态添加tiem
-     * @param items  item的数组对象
-     * @param afterKey 在哪个item key后面开始添加
-     * @param isRefresh 是否自动刷新表单  默认不刷新
-     */
-    addItemList(items: any, afterKey: String) {
-        FormUtils.addItemList(this.formData, items, afterKey);
-    }
-    /**
-     * 向表单对象动态删除tiem
-     * @param keyArr 需要删除的item key  集合
-     * @param isRefresh 是否自动刷新表单 默认不刷新
-     */
-    delItemList(keyArr: any) {
-        FormUtils.delItemList(this.formData, keyArr);
-    }
-    updateRules(keyArr: any, rule: any, isAdd: boolean = true, isRefresh = false) {
-        FormUtils.updateRules(this.formData, keyArr, rule, isAdd);
-        if (isRefresh) {
-            this.refreshRule();
-        }
-    }
-    clearRules(keyArr: any, isRefresh = false) {
-        FormUtils.clearRules(this.formData, keyArr);
-        if (isRefresh) {
-            this.refreshRule();
-        }
-    }
+
     /**
      * item 变动  手动刷新表单
      */
@@ -324,6 +321,29 @@ export class FormBaseComponent extends IdorpBaseComponent {
         if (this.fform && this.fform.dy_form) {
             FormUtils.refreshRule(this.fform.dy_form, this.formData);
         }
+    }
+
+    updateFilterJson(formData: any, key: any, filterJson: any) {
+        if (formData) {
+            FormUtils.updateFilterJson(formData, key, filterJson);
+        }
+    }
+
+    /**
+     * formData 初始化完成操作
+     */
+    private initComplete() {
+        if (!this.formData) {
+            console.error('initComplete错误: formData属性为null');
+            return;
+        }
+        this.formData.complete = true;
+    }
+    private initForm() {
+        //给子类加载 formData属性
+        this.initFD();
+        //通知组件formData已经初始化完成
+        this.initComplete();
     }
 }
 
