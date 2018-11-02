@@ -1,0 +1,6908 @@
+{
+  "nested": {
+    "com2": {
+      "nested": {
+        "ICity": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "cityName": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "cityName"
+              }
+            },
+            "cityValue": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "cityValue"
+              }
+            },
+            "areas": {
+              "rule": "repeated",
+              "type": "IArea",
+              "id": 4,
+              "options": {
+                "json_name": "areas"
+              }
+            }
+          }
+        },
+        "IProvince": {
+          "fields": {
+            "cities": {
+              "rule": "repeated",
+              "type": "ICity",
+              "id": 1,
+              "options": {
+                "json_name": "cities"
+              }
+            },
+            "pt_id": {
+              "type": "IID",
+              "id": 2,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "provinceName": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "provinceName"
+              }
+            },
+            "provinceValue": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "provinceValue"
+              }
+            }
+          }
+        },
+        "IArea": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "areaName": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "areaName"
+              }
+            },
+            "areaValue": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "areaValue"
+              }
+            }
+          }
+        },
+        "IProvinceList": {
+          "fields": {
+            "provinces": {
+              "rule": "repeated",
+              "type": "IProvince",
+              "id": 1,
+              "options": {
+                "json_name": "provinces"
+              }
+            }
+          }
+        },
+        "IAddress": {
+          "fields": {
+            "phoneNumber": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "phoneNumber"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "province": {
+              "type": "IProvince",
+              "id": 3,
+              "options": {
+                "json_name": "province"
+              }
+            },
+            "city": {
+              "type": "ICity",
+              "id": 4,
+              "options": {
+                "json_name": "city"
+              }
+            },
+            "address": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "address"
+              }
+            },
+            "zip": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "zip"
+              }
+            },
+            "area": {
+              "type": "IArea",
+              "id": 7,
+              "options": {
+                "json_name": "area"
+              }
+            }
+          }
+        },
+        "IID": {
+          "fields": {
+            "l_id": {
+              "type": "int64",
+              "id": 1,
+              "options": {
+                "json_name": "l_id"
+              }
+            },
+            "open_id": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "open_id"
+              }
+            },
+            "idType": {
+              "type": "IIDType",
+              "id": 3,
+              "options": {
+                "json_name": "idType"
+              }
+            }
+          },
+          "nested": {
+            "IIDType": {
+              "values": {
+                "AID_NO_USE": 0,
+                "AID_S": 1,
+                "AID_L": 2,
+                "AID_A": 3
+              }
+            }
+          }
+        },
+        "IData": {
+          "fields": {
+            "l": {
+              "type": "int64",
+              "id": 1,
+              "options": {
+                "json_name": "l"
+              }
+            },
+            "s": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "s"
+              }
+            },
+            "dt": {
+              "type": "IDT",
+              "id": 3,
+              "options": {
+                "json_name": "dt"
+              }
+            },
+            "d_class": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "d_class"
+              }
+            }
+          },
+          "nested": {
+            "IDT": {
+              "values": {
+                "DT_NO_USE": 0,
+                "DT_S": 1,
+                "DT_L": 2
+              }
+            }
+          }
+        },
+        "IException": {
+          "fields": {
+            "ex_short_msg": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "ex_short_msg"
+              }
+            },
+            "ex_stack": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "ex_stack"
+              }
+            },
+            "ex_tips": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "ex_tips"
+              }
+            },
+            "ex_value": {
+              "type": "int32",
+              "id": 4,
+              "options": {
+                "json_name": "ex_value"
+              }
+            },
+            "ex_type": {
+              "type": "EXType",
+              "id": 5,
+              "options": {
+                "json_name": "ex_type"
+              }
+            }
+          },
+          "nested": {
+            "EXType": {
+              "values": {
+                "EX_UN_USE": 0,
+                "EX_SIGN_EXPIRE": 1,
+                "EX_SIGN_UN_SUCCESS": 2,
+                "EX_SERVER_INNER": 3,
+                "EX_SERVER_CUSTOM": 4,
+                "EX_DO_DIRECT": 5,
+                "EX_UNKNOWN": 6,
+                "EX_AMQP_IGNORE": 7
+              }
+            }
+          }
+        },
+        "IPagerHead": {
+          "fields": {
+            "title": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "title"
+              }
+            },
+            "h_identity": {
+              "type": "int32",
+              "id": 2,
+              "options": {
+                "json_name": "h_identity"
+              }
+            }
+          }
+        },
+        "IPagerRowData": {
+          "fields": {
+            "data": {
+              "rule": "repeated",
+              "type": "IData",
+              "id": 5,
+              "options": {
+                "json_name": "data"
+              }
+            },
+            "st": {
+              "type": "SQLStatus",
+              "id": 6,
+              "options": {
+                "json_name": "st"
+              }
+            },
+            "pt_id": {
+              "type": "IID",
+              "id": 7,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "r_class": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "r_class"
+              }
+            }
+          }
+        },
+        "IPagerExt": {
+          "fields": {
+            "sort": {
+              "type": "ISort",
+              "id": 1,
+              "options": {
+                "json_name": "sort"
+              }
+            },
+            "sortCol": {
+              "type": "ISortCol",
+              "id": 3,
+              "options": {
+                "json_name": "sortCol"
+              }
+            },
+            "heads": {
+              "rule": "repeated",
+              "type": "IPagerHead",
+              "id": 4,
+              "options": {
+                "json_name": "heads"
+              }
+            },
+            "row": {
+              "rule": "repeated",
+              "type": "IPagerRowData",
+              "id": 5,
+              "options": {
+                "json_name": "row"
+              }
+            },
+            "sort_head": {
+              "type": "IPagerHead",
+              "id": 6,
+              "options": {
+                "json_name": "sort_head"
+              }
+            },
+            "id_head": {
+              "type": "IPagerHead",
+              "id": 7,
+              "options": {
+                "json_name": "id_head"
+              }
+            }
+          },
+          "nested": {
+            "ISort": {
+              "values": {
+                "SORT_UN_USE": 0,
+                "SORT_ASC": 1,
+                "SORT_DESC": 2
+              }
+            },
+            "ISortCol": {
+              "values": {
+                "SC_UN_USE": 0,
+                "SC_CREATE_TIME": 1,
+                "SC_UPDATE_TIME": 2,
+                "SC_ID": 3,
+                "SC_CUSTOM": 4
+              }
+            }
+          }
+        },
+        "IDPConfCol": {
+          "fields": {
+            "head_title": {
+              "type": "string",
+              "id": 1
+            },
+            "col_name": {
+              "type": "string",
+              "id": 2
+            },
+            "ict": {
+              "type": "IColType",
+              "id": 3
+            },
+            "col_map": {
+              "keyType": "string",
+              "type": "string",
+              "id": 4
+            }
+          },
+          "nested": {
+            "IColType": {
+              "values": {
+                "ICT_UN_USE": 0,
+                "ICT_NULL": 1,
+                "ICT_MAP": 2,
+                "ICT_LONG": 3,
+                "ICT_STRING": 4,
+                "ICT_DOUBLE": 5,
+                "ICT_INT": 6,
+                "ICT_DATE": 7,
+                "ICT_DATE_YMD": 8
+              }
+            }
+          }
+        },
+        "IDPConf": {
+          "fields": {
+            "col_list": {
+              "rule": "repeated",
+              "type": "IDPConfCol",
+              "id": 1
+            }
+          }
+        },
+        "IPager": {
+          "fields": {
+            "pageNo": {
+              "type": "int32",
+              "id": 1,
+              "options": {
+                "json_name": "pageNo"
+              }
+            },
+            "pagePerCount": {
+              "type": "int32",
+              "id": 2,
+              "options": {
+                "json_name": "pagePerCount"
+              }
+            },
+            "totalCount": {
+              "type": "int64",
+              "id": 3,
+              "options": {
+                "json_name": "totalCount"
+              }
+            },
+            "pm": {
+              "type": "IPagerModel",
+              "id": 4,
+              "options": {
+                "json_name": "pm"
+              }
+            },
+            "ext": {
+              "type": "IPagerExt",
+              "id": 5,
+              "options": {
+                "json_name": "ext"
+              }
+            },
+            "hg": {
+              "type": "IPagerHeadGet",
+              "id": 6,
+              "options": {
+                "json_name": "hg"
+              }
+            },
+            "last_sync_time": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "last_sync_time"
+              }
+            }
+          },
+          "nested": {
+            "IPagerModel": {
+              "values": {
+                "PM_UN_USE": 0,
+                "PM_FIX": 1,
+                "PM_DYNAMIC": 2
+              }
+            },
+            "IPagerHeadGet": {
+              "values": {
+                "PHG_UN_USE": 0,
+                "PHG_GET": 1,
+                "PHG_NO": 2
+              }
+            }
+          }
+        },
+        "IMPType": {
+          "values": {
+            "MP_UN_USE": 0,
+            "MP_L": 1,
+            "MP_Y": 2,
+            "MP_A": 3,
+            "MP_D": 4,
+            "MP_ZJ": 5,
+            "MP_ZJL": 6,
+            "MP_ZJD": 7,
+            "MP_ZJY": 8
+          }
+        },
+        "SQLStatus": {
+          "values": {
+            "SS_DEL": 0,
+            "SS_NORMAL": 1,
+            "SS_DISABLE": 2
+          }
+        },
+        "IDbOp": {
+          "values": {
+            "DB_OP_NO_USE": 0,
+            "DB_OP_ADD": 1,
+            "DB_OP_DELETE": 2,
+            "DB_OP_UPDATE": 3
+          }
+        },
+        "ALAttSecu": {
+          "values": {
+            "ATT_SECU_UN_USE": 0,
+            "ATT_SECU_NORMAL": 1,
+            "ATT_SECU_ID": 2,
+            "ATT_SECU_BL": 3,
+            "ATT_SECU_OTHER": 4,
+            "ATT_WX_MEDIA": 5
+          }
+        },
+        "ImgType": {
+          "values": {
+            "IT_NO_USE": 0,
+            "IT_NORMAL": 1,
+            "IT_ORIGIN": 2,
+            "IT_COMPRESS": 3
+          }
+        },
+        "IImgExt": {
+          "fields": {
+            "w": {
+              "type": "int32",
+              "id": 1,
+              "options": {
+                "json_name": "w"
+              }
+            },
+            "h": {
+              "type": "int32",
+              "id": 2,
+              "options": {
+                "json_name": "h"
+              }
+            },
+            "s": {
+              "type": "int64",
+              "id": 3,
+              "options": {
+                "json_name": "s"
+              }
+            },
+            "u": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "u"
+              }
+            },
+            "ow": {
+              "type": "int32",
+              "id": 5,
+              "options": {
+                "json_name": "ow"
+              }
+            },
+            "oh": {
+              "type": "int32",
+              "id": 6,
+              "options": {
+                "json_name": "oh"
+              }
+            },
+            "os": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "os"
+              }
+            },
+            "ou": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "ou"
+              }
+            },
+            "tw": {
+              "type": "int32",
+              "id": 9,
+              "options": {
+                "json_name": "tw"
+              }
+            },
+            "th": {
+              "type": "int32",
+              "id": 10,
+              "options": {
+                "json_name": "th"
+              }
+            },
+            "ts": {
+              "type": "int64",
+              "id": 11,
+              "options": {
+                "json_name": "ts"
+              }
+            },
+            "tu": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "json_name": "tu"
+              }
+            },
+            "n": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "json_name": "n"
+              }
+            },
+            "id": {
+              "type": "IID",
+              "id": 14,
+              "options": {
+                "json_name": "id"
+              }
+            },
+            "b": {
+              "type": "bytes",
+              "id": 15,
+              "options": {
+                "json_name": "b"
+              }
+            },
+            "secu": {
+              "type": "ALAttSecu",
+              "id": 16,
+              "options": {
+                "json_name": "secu"
+              }
+            },
+            "it": {
+              "type": "ImgType",
+              "id": 17,
+              "options": {
+                "json_name": "it"
+              }
+            }
+          }
+        },
+        "IVideoExt": {
+          "fields": {
+            "w": {
+              "type": "int32",
+              "id": 1,
+              "options": {
+                "json_name": "w"
+              }
+            },
+            "h": {
+              "type": "int32",
+              "id": 2,
+              "options": {
+                "json_name": "h"
+              }
+            },
+            "s": {
+              "type": "int64",
+              "id": 3,
+              "options": {
+                "json_name": "s"
+              }
+            },
+            "u": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "u"
+              }
+            },
+            "ow": {
+              "type": "int32",
+              "id": 5,
+              "options": {
+                "json_name": "ow"
+              }
+            },
+            "oh": {
+              "type": "int32",
+              "id": 6,
+              "options": {
+                "json_name": "oh"
+              }
+            },
+            "os": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "os"
+              }
+            },
+            "ou": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "ou"
+              }
+            },
+            "tw": {
+              "type": "int32",
+              "id": 9,
+              "options": {
+                "json_name": "tw"
+              }
+            },
+            "th": {
+              "type": "int32",
+              "id": 10,
+              "options": {
+                "json_name": "th"
+              }
+            },
+            "ts": {
+              "type": "int64",
+              "id": 11,
+              "options": {
+                "json_name": "ts"
+              }
+            },
+            "tu": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "json_name": "tu"
+              }
+            },
+            "n": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "json_name": "n"
+              }
+            },
+            "id": {
+              "type": "IID",
+              "id": 14,
+              "options": {
+                "json_name": "id"
+              }
+            },
+            "b": {
+              "type": "bytes",
+              "id": 15,
+              "options": {
+                "json_name": "b"
+              }
+            }
+          }
+        },
+        "LoginStyle": {
+          "values": {
+            "LS_NO_USE": 0,
+            "LS_ACCOUNT": 1,
+            "LS_ACCOUNT_PHONE": 2,
+            "LS_SMS": 3,
+            "LS_PHONE": 4,
+            "LS_VOICE": 5
+          }
+        },
+        "LoginLimit": {
+          "values": {
+            "LL_NO_USE": 0,
+            "LL_SINGLE": 1,
+            "LL_MULTI": 2
+          }
+        },
+        "ISex": {
+          "values": {
+            "S_NO_USES": 0,
+            "S_MALE": 1,
+            "S_FEMALE": 2,
+            "S_UNKNOWN": 3
+          }
+        },
+        "IAttach": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "downloadUrl": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "downloadUrl"
+              }
+            },
+            "size": {
+              "type": "int64",
+              "id": 4,
+              "options": {
+                "json_name": "size"
+              }
+            },
+            "unit": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "unit"
+              }
+            },
+            "duration": {
+              "type": "int64",
+              "id": 6,
+              "options": {
+                "json_name": "duration"
+              }
+            },
+            "pulish_time": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "pulish_time"
+              }
+            },
+            "version_name": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "version_name"
+              }
+            },
+            "version_code": {
+              "type": "int64",
+              "id": 9,
+              "options": {
+                "json_name": "version_code"
+              }
+            },
+            "type": {
+              "type": "ALAttType",
+              "id": 10,
+              "options": {
+                "json_name": "type"
+              }
+            },
+            "secu": {
+              "type": "ALAttSecu",
+              "id": 11,
+              "options": {
+                "json_name": "secu"
+              }
+            },
+            "w": {
+              "type": "int32",
+              "id": 12,
+              "options": {
+                "json_name": "w"
+              }
+            },
+            "h": {
+              "type": "int32",
+              "id": 13,
+              "options": {
+                "json_name": "h"
+              }
+            },
+            "content_type": {
+              "type": "string",
+              "id": 14,
+              "options": {
+                "json_name": "content_type"
+              }
+            },
+            "wx_media_id": {
+              "type": "string",
+              "id": 15,
+              "options": {
+                "json_name": "wx_media_id"
+              }
+            },
+            "local_full_path": {
+              "type": "string",
+              "id": 16,
+              "options": {
+                "json_name": "local_full_path"
+              }
+            },
+            "host_base": {
+              "type": "string",
+              "id": 17,
+              "options": {
+                "json_name": "host_base"
+              }
+            },
+            "http_suffix": {
+              "type": "string",
+              "id": 18,
+              "options": {
+                "json_name": "http_suffix"
+              }
+            },
+            "desc": {
+              "type": "string",
+              "id": 19,
+              "options": {
+                "json_name": "desc"
+              }
+            },
+            "v_ext": {
+              "type": "IVideoExt",
+              "id": 20,
+              "options": {
+                "json_name": "v_ext"
+              }
+            },
+            "i_ext": {
+              "type": "IImgExt",
+              "id": 21,
+              "options": {
+                "json_name": "i_ext"
+              }
+            }
+          },
+          "nested": {
+            "ALAttType": {
+              "values": {
+                "AL_ATT_NO_USE": 0,
+                "AL_ATT_APK": 1,
+                "AL_ATT_IPA": 2,
+                "AL_ATT_IMG": 3,
+                "AL_ATT_VEDIO": 4,
+                "AL_ATT_AUDIO": 5,
+                "AL_ATT_TXT": 6,
+                "AL_ATT_PDF": 7,
+                "AL_ATT_ZIP": 8,
+                "AL_ATT_RAR": 9,
+                "AL_ATT_WAR": 10,
+                "AL_ATT_EXE": 11,
+                "AL_ATT_BIN": 12,
+                "AL_ATT_SO": 13,
+                "AL_ATT_OTHER": 14
+              }
+            }
+          }
+        },
+        "IExtPhone": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "label": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "label"
+              }
+            },
+            "phone": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "phone"
+              }
+            }
+          }
+        },
+        "IDCard": {
+          "fields": {
+            "name": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "cardNo": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "cardNo"
+              }
+            },
+            "phone": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "phone"
+              }
+            },
+            "img1": {
+              "type": "IImgExt",
+              "id": 4,
+              "options": {
+                "json_name": "img1"
+              }
+            },
+            "img2": {
+              "type": "IImgExt",
+              "id": 5,
+              "options": {
+                "json_name": "img2"
+              }
+            },
+            "img3": {
+              "type": "IImgExt",
+              "id": 6,
+              "options": {
+                "json_name": "img3"
+              }
+            },
+            "id": {
+              "type": "IID",
+              "id": 7,
+              "options": {
+                "json_name": "id"
+              }
+            },
+            "img4": {
+              "type": "IImgExt",
+              "id": 8,
+              "options": {
+                "json_name": "img4"
+              }
+            },
+            "video1": {
+              "type": "IVideoExt",
+              "id": 9,
+              "options": {
+                "json_name": "video1"
+              }
+            }
+          }
+        },
+        "IOptional": {
+          "fields": {
+            "okt": {
+              "type": "IOpKeyType",
+              "id": 1,
+              "options": {
+                "json_name": "okt"
+              }
+            },
+            "l_map": {
+              "keyType": "int64",
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "l_map"
+              }
+            },
+            "s_map": {
+              "keyType": "string",
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "s_map"
+              }
+            },
+            "s_l_map": {
+              "keyType": "string",
+              "type": "int64",
+              "id": 4,
+              "options": {
+                "json_name": "s_l_map"
+              }
+            }
+          },
+          "nested": {
+            "IOpKeyType": {
+              "values": {
+                "IOK_NO_USE": 0,
+                "IOK_S": 1,
+                "IOK_L": 2
+              }
+            }
+          }
+        },
+        "ISQLQueryItem": {
+          "fields": {
+            "q_item_type": {
+              "type": "IQIType",
+              "id": 12,
+              "options": {
+                "json_name": "q_item_type"
+              }
+            },
+            "col": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "col"
+              }
+            },
+            "s_value": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "s_value"
+              }
+            },
+            "l_value": {
+              "type": "int64",
+              "id": 3,
+              "options": {
+                "json_name": "l_value"
+              }
+            },
+            "i_value": {
+              "type": "int32",
+              "id": 4,
+              "options": {
+                "json_name": "i_value"
+              }
+            },
+            "f_value": {
+              "type": "float",
+              "id": 5,
+              "options": {
+                "json_name": "f_value"
+              }
+            },
+            "d_value": {
+              "type": "double",
+              "id": 6,
+              "options": {
+                "json_name": "d_value"
+              }
+            },
+            "s_values": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "s_values"
+              }
+            },
+            "l_values": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 8,
+              "options": {
+                "json_name": "l_values"
+              }
+            },
+            "i_values": {
+              "rule": "repeated",
+              "type": "int32",
+              "id": 9,
+              "options": {
+                "json_name": "i_values"
+              }
+            },
+            "f_values": {
+              "rule": "repeated",
+              "type": "float",
+              "id": 10,
+              "options": {
+                "json_name": "f_values"
+              }
+            },
+            "d_values": {
+              "rule": "repeated",
+              "type": "double",
+              "id": 11,
+              "options": {
+                "json_name": "d_values"
+              }
+            },
+            "sub_qi_list": {
+              "rule": "repeated",
+              "type": "ISQLQueryItem",
+              "id": 15,
+              "options": {
+                "json_name": "d_values"
+              }
+            },
+            "q_type": {
+              "type": "IQType",
+              "id": 13,
+              "options": {
+                "json_name": "q_type"
+              }
+            },
+            "q_join_type": {
+              "type": "IQJoinType",
+              "id": 14,
+              "options": {
+                "json_name": "q_join_type"
+              }
+            }
+          },
+          "nested": {
+            "IQIType": {
+              "values": {
+                "IQIT_NO_USE": 0,
+                "IQIT_S": 1,
+                "IQIT_L": 2,
+                "IQIT_D": 3,
+                "IQIT_I": 4,
+                "IQIT_F": 5,
+                "IQIT_G": 6,
+                "IQIT_JION": 7
+              }
+            },
+            "IQType": {
+              "values": {
+                "IQT_NO_USE": 0,
+                "IQT_EQ": 1,
+                "IQT_NEQ": 2,
+                "IQT_LSS": 3,
+                "IQT_LEQ": 4,
+                "IQT_GTR": 5,
+                "IQT_GEQ": 6,
+                "IQT_IN": 7,
+                "IQT_NIN": 8,
+                "IQT_LIKE": 9,
+                "IQT_NLIKE": 20,
+                "IQT_LIKE_PRE": 10,
+                "IQT_NLIKE_PRE": 21,
+                "IQT_LIKE_SUF": 11,
+                "IQT_NLIKE_SUF": 22,
+                "IQT_BETWEEN": 12,
+                "IQT_NBETWEEN": 23
+              }
+            },
+            "IQJoinType": {
+              "values": {
+                "IQJT_NO_USE": 0,
+                "IQJT_AND": 1,
+                "IQJT_OR": 2,
+                "IQJT_P_LEFT": 3,
+                "IQJT_P_RIGHT": 4
+              }
+            }
+          }
+        },
+        "AIC": {
+          "values": {
+            "AIC_NO_USE": 0,
+            "AIC_COM_VERSION": 1,
+            "AIC_COM_FILE_GET": 200,
+            "AIC_COM_FILE_UPLOAD_N": 201,
+            "AIC_COM_FILE_UPLOAD_S": 202,
+            "AIC_COM_FILE_LOAD_N": 203,
+            "AIC_COM_FILE_LOAD_S": 204,
+            "AIC_COM_IMG_LOAD_S": 205,
+            "AIC_COM_IMG_LOAD_N": 206,
+            "AIC_COM_SMS_SEND": 300,
+            "AIC_COM_SU_ADD": 400,
+            "AIC_COM_SU_UPDATE": 401,
+            "AIC_COM_SU_DIRECT": 402
+          }
+        },
+        "ComAmqpEntry": {
+          "fields": {
+            "token": {
+              "type": "IToken",
+              "id": 1,
+              "options": {
+                "json_name": "token"
+              }
+            }
+          }
+        },
+        "IAccessSource": {
+          "values": {
+            "AAS_NO_USE": 0,
+            "AAS_APP": 1,
+            "AAS_WX": 2,
+            "AAS_WEB": 3,
+            "AAS_INNER_IF": 4,
+            "AAS_OPEN_IF": 5,
+            "AAS_MANAGER": 6,
+            "AAS_WX_OAUTH": 7,
+            "AAS_PT_OAUTH": 8,
+            "AAS_MIN_PRO": 9,
+            "AAS_ANDROID": 10,
+            "AAS_IOS": 11,
+            "AAS_WEBSITE": 12,
+            "AAS_PERSON": 13,
+            "AAS_ALIPAY": 14,
+            "AAS_PRI_MANAGER": 15,
+            "AAS_WEBSITE_MOB": 16,
+            "AAS_IOT_PAD": 17
+          }
+        },
+        "ISignType": {
+          "values": {
+            "AST_NO_USE": 0,
+            "AST_MD5": 1,
+            "AST_SHA1": 2
+          }
+        },
+        "ILang": {
+          "values": {
+            "IL_NO_USE": 0,
+            "IL_CN": 1,
+            "IL_EN": 2
+          }
+        },
+        "IAccessToken": {
+          "fields": {
+            "access_token": {
+              "type": "string",
+              "id": 1000,
+              "options": {
+                "json_name": "access_token"
+              }
+            },
+            "access_toke_expire": {
+              "type": "int64",
+              "id": 2000,
+              "options": {
+                "json_name": "access_toke_expire"
+              }
+            },
+            "refresh_token": {
+              "type": "string",
+              "id": 3000,
+              "options": {
+                "json_name": "refresh_token"
+              }
+            },
+            "refresh_token_expire": {
+              "type": "int64",
+              "id": 4000,
+              "options": {
+                "json_name": "refresh_token_expire"
+              }
+            },
+            "req_time": {
+              "type": "int64",
+              "id": 5000,
+              "options": {
+                "json_name": "req_time"
+              }
+            },
+            "sign_token": {
+              "type": "string",
+              "id": 6000,
+              "options": {
+                "json_name": "sign_token"
+              }
+            }
+          }
+        },
+        "ITokenExt": {
+          "fields": {
+            "pt_i_code": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "pt_i_code"
+              }
+            },
+            "pt_sms_code": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "pt_sms_code"
+              }
+            },
+            "pt_channel_id": {
+              "type": "IID",
+              "id": 3,
+              "options": {
+                "json_name": "pt_channel_id"
+              }
+            },
+            "pt_channel_support_info": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "pt_channel_support_info"
+              }
+            },
+            "pt_session_id": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "pt_session_id"
+              }
+            },
+            "pt_phone": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "pt_phone"
+              }
+            },
+            "pt_pwd": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "pt_pwd"
+              }
+            },
+            "pt_account": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "pt_account"
+              }
+            },
+            "user_id": {
+              "type": "IID",
+              "id": 9,
+              "options": {
+                "json_name": "user_id"
+              }
+            },
+            "admin_id": {
+              "type": "IID",
+              "id": 10,
+              "options": {
+                "json_name": "admin_id"
+              }
+            },
+            "ls": {
+              "type": "LoginStyle",
+              "id": 11,
+              "options": {
+                "json_name": "ls"
+              }
+            },
+            "ll": {
+              "type": "LoginLimit",
+              "id": 12,
+              "options": {
+                "json_name": "ll"
+              }
+            },
+            "device_id": {
+              "type": "IID",
+              "id": 13,
+              "options": {
+                "json_name": "device_id"
+              }
+            },
+            "req_ip": {
+              "type": "string",
+              "id": 14,
+              "options": {
+                "json_name": "req_ip"
+              }
+            },
+            "t_ext_1": {
+              "type": "string",
+              "id": 15,
+              "options": {
+                "json_name": "t_ext_1"
+              }
+            },
+            "t_ext_2": {
+              "type": "string",
+              "id": 16,
+              "options": {
+                "json_name": "t_ext_2"
+              }
+            },
+            "t_ext_3": {
+              "type": "string",
+              "id": 17,
+              "options": {
+                "json_name": "t_ext_3"
+              }
+            },
+            "t_ext_4": {
+              "type": "string",
+              "id": 18,
+              "options": {
+                "json_name": "t_ext_4"
+              }
+            },
+            "t_ext_5": {
+              "type": "string",
+              "id": 19,
+              "options": {
+                "json_name": "t_ext_5"
+              }
+            },
+            "t_ext_6": {
+              "type": "string",
+              "id": 30,
+              "options": {
+                "json_name": "t_ext_6"
+              }
+            },
+            "t_ext_7": {
+              "type": "string",
+              "id": 21,
+              "options": {
+                "json_name": "t_ext_7"
+              }
+            },
+            "t_ext_8": {
+              "type": "string",
+              "id": 22,
+              "options": {
+                "json_name": "t_ext_8"
+              }
+            },
+            "t_ext_9": {
+              "type": "string",
+              "id": 23,
+              "options": {
+                "json_name": "t_ext_9"
+              }
+            },
+            "t_ext_10": {
+              "type": "string",
+              "id": 24,
+              "options": {
+                "json_name": "t_ext_10"
+              }
+            },
+            "t_ext_11": {
+              "type": "string",
+              "id": 25,
+              "options": {
+                "json_name": "t_ext_11"
+              }
+            },
+            "t_ext_12": {
+              "type": "string",
+              "id": 26,
+              "options": {
+                "json_name": "t_ext_12"
+              }
+            },
+            "t_ext_13": {
+              "type": "string",
+              "id": 27,
+              "options": {
+                "json_name": "t_ext_13"
+              }
+            },
+            "t_ext_14": {
+              "type": "string",
+              "id": 28,
+              "options": {
+                "json_name": "t_ext_14"
+              }
+            },
+            "t_ext_15": {
+              "type": "string",
+              "id": 29,
+              "options": {
+                "json_name": "t_ext_15"
+              }
+            },
+            "lang": {
+              "type": "ILang",
+              "id": 20
+            }
+          }
+        },
+        "IToken": {
+          "fields": {
+            "acc_token": {
+              "type": "IAccessToken",
+              "id": 1,
+              "options": {
+                "json_name": "acc_token"
+              }
+            },
+            "sign": {
+              "type": "string",
+              "id": 2
+            },
+            "acc_source": {
+              "type": "IAccessSource",
+              "id": 3,
+              "options": {
+                "json_name": "acc_source"
+              }
+            },
+            "itt": {
+              "type": "ITokenType",
+              "id": 4,
+              "options": {
+                "json_name": "itt"
+              }
+            },
+            "ist": {
+              "type": "ISignType",
+              "id": 5,
+              "options": {
+                "json_name": "ist"
+              }
+            },
+            "ext": {
+              "type": "ITokenExt",
+              "id": 6,
+              "options": {
+                "json_name": "ext"
+              }
+            },
+            "ex": {
+              "type": "IException",
+              "id": 7,
+              "options": {
+                "json_name": "ex"
+              }
+            },
+            "api": {
+              "type": "string",
+              "id": 8
+            },
+            "api_list": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 9
+            },
+            "acc_list": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 10
+            }
+          },
+          "nested": {
+            "ITokenType": {
+              "values": {
+                "ATT_NO_USE": 0,
+                "ATT_ONCE": 1,
+                "ATT_ONCE_IP": 2,
+                "ATT_TIME": 3,
+                "ATT_FOREVER": 4
+              }
+            }
+          }
+        },
+        "ApiAccess": {
+          "fields": {
+            "aic": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "aic"
+              }
+            },
+            "user_id": {
+              "type": "IID",
+              "id": 2,
+              "options": {
+                "json_name": "user_id"
+              }
+            },
+            "admin_id": {
+              "type": "IID",
+              "id": 3,
+              "options": {
+                "json_name": "admin_id"
+              }
+            },
+            "company_id": {
+              "type": "IID",
+              "id": 4,
+              "options": {
+                "json_name": "company_id"
+              }
+            },
+            "channel_id": {
+              "type": "IID",
+              "id": 5,
+              "options": {
+                "json_name": "channel_id"
+              }
+            },
+            "wx_user_id": {
+              "type": "IID",
+              "id": 6,
+              "options": {
+                "json_name": "wx_user_id"
+              }
+            },
+            "acc_ip": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "acc_ip"
+              }
+            },
+            "acc_country": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "acc_country"
+              }
+            },
+            "acc_provnice": {
+              "type": "string",
+              "id": 9,
+              "options": {
+                "json_name": "acc_provnice"
+              }
+            },
+            "acc_city": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "acc_city"
+              }
+            },
+            "acc_isp": {
+              "type": "string",
+              "id": 31,
+              "options": {
+                "json_name": "acc_isp"
+              }
+            },
+            "acc_revert_ip_source": {
+              "type": "string",
+              "id": 33,
+              "options": {
+                "json_name": "acc_revert_ip_source"
+              }
+            },
+            "access_token": {
+              "type": "string",
+              "id": 11,
+              "options": {
+                "json_name": "access_token"
+              }
+            },
+            "request_time": {
+              "type": "int64",
+              "id": 12,
+              "options": {
+                "json_name": "request_time"
+              }
+            },
+            "request_obj": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "json_name": "request_obj"
+              }
+            },
+            "response_obj": {
+              "type": "string",
+              "id": 14,
+              "options": {
+                "json_name": "response_obj"
+              }
+            },
+            "response_time": {
+              "type": "int64",
+              "id": 15,
+              "options": {
+                "json_name": "response_time"
+              }
+            },
+            "response_end_time": {
+              "type": "int64",
+              "id": 16,
+              "options": {
+                "json_name": "response_end_time"
+              }
+            },
+            "if_class": {
+              "type": "string",
+              "id": 17,
+              "options": {
+                "json_name": "if_class"
+              }
+            },
+            "if_method": {
+              "type": "string",
+              "id": 18,
+              "options": {
+                "json_name": "if_method"
+              }
+            },
+            "if_version": {
+              "type": "string",
+              "id": 30,
+              "options": {
+                "json_name": "if_version"
+              }
+            },
+            "if_project": {
+              "type": "string",
+              "id": 32,
+              "options": {
+                "json_name": "if_project"
+              }
+            },
+            "ads": {
+              "type": "ADS",
+              "id": 19,
+              "options": {
+                "json_name": "ads"
+              }
+            },
+            "ext_1": {
+              "type": "string",
+              "id": 20,
+              "options": {
+                "json_name": "ext_1"
+              }
+            },
+            "ext_2": {
+              "type": "string",
+              "id": 21,
+              "options": {
+                "json_name": "ext_2"
+              }
+            },
+            "ext_3": {
+              "type": "string",
+              "id": 22,
+              "options": {
+                "json_name": "ext_3"
+              }
+            },
+            "ext_4": {
+              "type": "string",
+              "id": 23,
+              "options": {
+                "json_name": "ext_4"
+              }
+            },
+            "ext_5": {
+              "type": "string",
+              "id": 24,
+              "options": {
+                "json_name": "ext_5"
+              }
+            },
+            "ext_6": {
+              "type": "string",
+              "id": 25,
+              "options": {
+                "json_name": "ext_6"
+              }
+            },
+            "ext_7": {
+              "type": "string",
+              "id": 26,
+              "options": {
+                "json_name": "ext_7"
+              }
+            },
+            "ext_8": {
+              "type": "string",
+              "id": 27,
+              "options": {
+                "json_name": "ext_8"
+              }
+            },
+            "ext_9": {
+              "type": "string",
+              "id": 28,
+              "options": {
+                "json_name": "ext_9"
+              }
+            },
+            "ext_10": {
+              "type": "string",
+              "id": 29,
+              "options": {
+                "json_name": "ext_110"
+              }
+            }
+          },
+          "nested": {
+            "ADS": {
+              "values": {
+                "ADS_NO_USE": 0,
+                "ADS_BASE64": 1,
+                "ADS_JSON": 2
+              }
+            }
+          }
+        },
+        "ComAppEntry": {
+          "fields": {
+            "token": {
+              "type": "IToken",
+              "id": 1,
+              "options": {
+                "json_name": "token"
+              }
+            },
+            "attach_list": {
+              "rule": "repeated",
+              "type": "IAttach",
+              "id": 2,
+              "options": {
+                "json_name": "attach_list"
+              }
+            },
+            "attach": {
+              "type": "IAttach",
+              "id": 3,
+              "options": {
+                "json_name": "attach"
+              }
+            },
+            "pager": {
+              "type": "IPager",
+              "id": 4,
+              "options": {
+                "json_name": "pager"
+              }
+            }
+          }
+        },
+        "IBeaconBase": {
+          "fields": {
+            "device_id": {
+              "type": "int64",
+              "id": 1,
+              "options": {
+                "json_name": "device_id"
+              }
+            },
+            "uuid": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "uuid"
+              }
+            },
+            "major": {
+              "type": "int32",
+              "id": 3,
+              "options": {
+                "json_name": "major"
+              }
+            },
+            "minor": {
+              "type": "int32",
+              "id": 4,
+              "options": {
+                "json_name": "minor"
+              }
+            },
+            "comment": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "comment"
+              }
+            },
+            "status": {
+              "type": "int32",
+              "id": 6,
+              "options": {
+                "json_name": "status"
+              }
+            },
+            "last_active_time": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "last_active_time"
+              }
+            },
+            "poi_id": {
+              "type": "int64",
+              "id": 8,
+              "options": {
+                "json_name": "poi_id"
+              }
+            },
+            "page_id": {
+              "type": "int64",
+              "id": 9,
+              "options": {
+                "json_name": "page_id"
+              }
+            },
+            "rssi": {
+              "type": "int32",
+              "id": 10,
+              "options": {
+                "json_name": "rssi"
+              }
+            },
+            "measurePower": {
+              "type": "int32",
+              "id": 11,
+              "options": {
+                "json_name": "measurePower"
+              }
+            },
+            "distance": {
+              "type": "double",
+              "id": 12,
+              "options": {
+                "json_name": "distance"
+              }
+            },
+            "pt_id": {
+              "type": "IID",
+              "id": 13,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "prox": {
+              "type": "Proximity",
+              "id": 14,
+              "options": {
+                "json_name": "prox"
+              }
+            }
+          },
+          "nested": {
+            "Proximity": {
+              "values": {
+                "PRO_UNKNOWN": 0,
+                "PRO_IMMEDIATE": 1,
+                "PRO_NEAR": 2,
+                "PRO_FAR": 3
+              }
+            }
+          }
+        },
+        "DBTableCom": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1
+            },
+            "version": {
+              "type": "int64",
+              "id": 3
+            },
+            "create_uuid": {
+              "type": "string",
+              "id": 4
+            },
+            "update_uuid": {
+              "type": "string",
+              "id": 5
+            },
+            "disable_uuid": {
+              "type": "string",
+              "id": 6
+            },
+            "del_uuid": {
+              "type": "string",
+              "id": 7
+            },
+            "create_at": {
+              "type": "int64",
+              "id": 8
+            },
+            "update_at": {
+              "type": "int64",
+              "id": 9
+            },
+            "disable_at": {
+              "type": "int64",
+              "id": 10
+            },
+            "del_at": {
+              "type": "int64",
+              "id": 11
+            },
+            "sql_status": {
+              "type": "SQLStatus",
+              "id": 12
+            },
+            "state": {
+              "type": "int32",
+              "id": 13
+            },
+            "channel_id": {
+              "type": "string",
+              "id": 14
+            }
+          }
+        },
+        "ComFileEntry": {
+          "fields": {
+            "token": {
+              "type": "IToken",
+              "id": 1,
+              "options": {
+                "json_name": "token"
+              }
+            },
+            "attList": {
+              "rule": "repeated",
+              "type": "IAttach",
+              "id": 2,
+              "options": {
+                "json_name": "attList"
+              }
+            },
+            "attach": {
+              "type": "IAttach",
+              "id": 3,
+              "options": {
+                "json_name": "attach"
+              }
+            }
+          }
+        },
+        "IFormNav": {
+          "fields": {
+            "label": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "label"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "router_link": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "router_link"
+              }
+            },
+            "is_last": {
+              "type": "bool",
+              "id": 11,
+              "options": {
+                "json_name": "is_last"
+              }
+            }
+          }
+        },
+        "IFormOpt": {
+          "fields": {
+            "key": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "key"
+              }
+            },
+            "value": {
+              "type": "IID",
+              "id": 2,
+              "options": {
+                "json_name": "value"
+              }
+            },
+            "selected": {
+              "type": "bool",
+              "id": 3,
+              "options": {
+                "json_name": "selected"
+              }
+            },
+            "disabled": {
+              "type": "bool",
+              "id": 5,
+              "options": {
+                "json_name": "disabled"
+              }
+            },
+            "sub_opt": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 4,
+              "options": {
+                "json_name": "sub_opt"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "id": {
+              "type": "int64",
+              "id": 11,
+              "options": {
+                "json_name": "id"
+              }
+            },
+            "name": {
+              "type": "int64",
+              "id": 12,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "pid": {
+              "type": "int64",
+              "id": 13,
+              "options": {
+                "json_name": "pid"
+              }
+            }
+          }
+        },
+        "IFormOptExt": {
+          "fields": {
+            "parent_opt": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 1,
+              "options": {
+                "json_name": "parent_opt"
+              }
+            },
+            "sub_opt": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 2,
+              "options": {
+                "json_name": "sub_opt"
+              }
+            },
+            "sub_sub_opt": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 3,
+              "options": {
+                "json_name": "sub_sub_opt"
+              }
+            }
+          }
+        },
+        "IFormItem": {
+          "fields": {
+            "fi_type": {
+              "type": "IFItemType",
+              "id": 4,
+              "options": {
+                "json_name": "key"
+              }
+            },
+            "key": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "key"
+              }
+            },
+            "d_value": {
+              "type": "string",
+              "id": 14,
+              "options": {
+                "json_name": "d_value"
+              }
+            },
+            "type": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "type"
+              }
+            },
+            "label": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "label"
+              }
+            },
+            "hints": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "hints"
+              }
+            },
+            "order": {
+              "type": "int32",
+              "id": 5,
+              "options": {
+                "json_name": "order"
+              }
+            },
+            "disabled": {
+              "type": "bool",
+              "id": 8,
+              "options": {
+                "json_name": "disabled"
+              }
+            },
+            "opt_list": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 7,
+              "options": {
+                "json_name": "opt_list"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "label_class_name": {
+              "type": "string",
+              "id": 11,
+              "options": {
+                "json_name": "label_class_name"
+              }
+            },
+            "router_link": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "json_name": "router_link"
+              }
+            },
+            "is_require": {
+              "type": "bool",
+              "id": 13,
+              "options": {
+                "json_name": "is_require"
+              }
+            },
+            "group_class_name": {
+              "type": "string",
+              "id": 15,
+              "options": {
+                "json_name": "group_class_name"
+              }
+            },
+            "select_ids": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 16,
+              "options": {
+                "json_name": "select_ids"
+              }
+            },
+            "select_id": {
+              "type": "IID",
+              "id": 17,
+              "options": {
+                "json_name": "select_id"
+              }
+            },
+            "data": {
+              "type": "IFormOptExt",
+              "id": 18,
+              "options": {
+                "json_name": "data"
+              }
+            }
+          },
+          "nested": {
+            "IFItemType": {
+              "values": {
+                "IFI_NO_USE": 0,
+                "IFI_INPUT": 1,
+                "IFI_DROPDOWN": 2,
+                "IFI_RADIO": 3,
+                "IFI_CHECKBOX": 4,
+                "IFI_TREE": 5,
+                "IFI_BTN_SUBMIT": 6,
+                "IFI_BTN_CACEL": 7,
+                "IFI_BTN_FUN": 8,
+                "IFI_BTN_CLICK": 9,
+                "IFI_REF_SELECT": 11,
+                "IFI_PIC_UPLOAD": 12,
+                "IFI_DATE_SELECT": 13,
+                "IFI_CHECKBOX_MUTI": 14,
+                "IFI_CITY": 15,
+                "IFI_TEXTAREA": 16,
+                "IFI_VIDEO_UPLOAD": 17,
+                "IFI_TIME_FUN": 18
+              }
+            }
+          }
+        },
+        "IFormRow": {
+          "fields": {
+            "item_list": {
+              "rule": "repeated",
+              "type": "IFormItem",
+              "id": 1,
+              "options": {
+                "json_name": "item_list"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "class_name"
+              }
+            }
+          }
+        },
+        "IFormTableOptConf": {
+          "fields": {
+            "isopt": {
+              "type": "bool",
+              "id": 1,
+              "options": {
+                "json_name": "isopt"
+              }
+            },
+            "view": {
+              "type": "bool",
+              "id": 2,
+              "options": {
+                "json_name": "view"
+              }
+            },
+            "rebut": {
+              "type": "bool",
+              "id": 3,
+              "options": {
+                "json_name": "rebut"
+              }
+            },
+            "pass": {
+              "type": "bool",
+              "id": 4,
+              "options": {
+                "json_name": "pass"
+              }
+            },
+            "home": {
+              "type": "bool",
+              "id": 5,
+              "options": {
+                "json_name": "home"
+              }
+            },
+            "top": {
+              "type": "bool",
+              "id": 6,
+              "options": {
+                "json_name": "top"
+              }
+            },
+            "update": {
+              "type": "bool",
+              "id": 7,
+              "options": {
+                "json_name": "isopt"
+              }
+            },
+            "del": {
+              "type": "bool",
+              "id": 8,
+              "options": {
+                "json_name": "del"
+              }
+            }
+          }
+        },
+        "IFormTable": {
+          "fields": {
+            "t_select": {
+              "type": "IFTableSelect",
+              "id": 1,
+              "options": {
+                "json_name": "t_select"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "pager": {
+              "type": "IPager",
+              "id": 3,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "opt_conf": {
+              "type": "IFormTableOptConf",
+              "id": 4,
+              "options": {
+                "json_name": "conf"
+              }
+            }
+          },
+          "nested": {
+            "IFTableSelect": {
+              "values": {
+                "IFS_NO_USE": 0,
+                "IFS_CHECK_BOX": 1,
+                "IFS_RADIO": 2
+              }
+            }
+          }
+        },
+        "IForm": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 100
+            },
+            "f_type": {
+              "type": "IFormType",
+              "id": 1,
+              "options": {
+                "json_name": "f_type"
+              }
+            },
+            "id_item": {
+              "type": "IFormItem",
+              "id": 2,
+              "options": {
+                "json_name": "id_item"
+              }
+            },
+            "row_list": {
+              "rule": "repeated",
+              "type": "IFormRow",
+              "id": 3,
+              "options": {
+                "json_name": "row_list"
+              }
+            },
+            "class_name": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "class_name"
+              }
+            },
+            "fun_list": {
+              "rule": "repeated",
+              "type": "IFormRow",
+              "id": 11,
+              "options": {
+                "json_name": "fun_list"
+              }
+            },
+            "nav_list": {
+              "rule": "repeated",
+              "type": "IFormNav",
+              "id": 12,
+              "options": {
+                "json_name": "nav_list"
+              }
+            },
+            "table": {
+              "type": "IFormTable",
+              "id": 13,
+              "options": {
+                "json_name": "table"
+              }
+            },
+            "opt_list": {
+              "rule": "repeated",
+              "type": "IFormOpt",
+              "id": 14,
+              "options": {
+                "json_name": "opt_list"
+              }
+            }
+          },
+          "nested": {
+            "IFormType": {
+              "values": {
+                "IFT_NO_USE": 0,
+                "IFT_LIST": 1,
+                "IFT_FORM": 2
+              }
+            }
+          }
+        },
+        "ILocBase": {
+          "fields": {
+            "longitude": {
+              "type": "double",
+              "id": 1,
+              "options": {
+                "json_name": "longitude"
+              }
+            },
+            "latitude": {
+              "type": "double",
+              "id": 2,
+              "options": {
+                "json_name": "latitude"
+              }
+            },
+            "locationName": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "locationName"
+              }
+            },
+            "locCategory": {
+              "type": "ILocCategory",
+              "id": 4,
+              "options": {
+                "json_name": "locCategory"
+              }
+            },
+            "radius": {
+              "type": "double",
+              "id": 5,
+              "options": {
+                "json_name": "radius"
+              }
+            },
+            "accuracy": {
+              "type": "double",
+              "id": 6,
+              "options": {
+                "json_name": "accuracy"
+              }
+            },
+            "timeStamp": {
+              "type": "int64",
+              "id": 7,
+              "options": {
+                "json_name": "timeStamp"
+              }
+            },
+            "pt_id": {
+              "type": "IID",
+              "id": 8,
+              "options": {
+                "json_name": "pt_id"
+              }
+            }
+          },
+          "nested": {
+            "ILocCategory": {
+              "values": {
+                "LOC_NO_USE": 0,
+                "LOC_NETWORK": 1,
+                "LOC_BAIDU_GPS": 2,
+                "LOC_BAIDU_NETWORK": 3,
+                "LOC_IOS_BEST": 4,
+                "LOC_GPS": 5,
+                "LOC_MANUAL": 6
+              }
+            }
+          }
+        },
+        "IFuncPower": {
+          "values": {
+            "FP_NO_USE": 0,
+            "FP_QUERY": 1,
+            "FP_Q_A": 2,
+            "FP_Q_U": 3,
+            "FP_Q_D": 4,
+            "FP_Q_A_U": 5,
+            "FP_Q_A_D": 6,
+            "FP_Q_U_D": 7,
+            "FP_Q_A_U_D": 8
+          }
+        },
+        "IRoleSource": {
+          "values": {
+            "RS_NO_USE": 0,
+            "RS_APP": 1,
+            "RS_WEB": 2,
+            "RS_THIRD": 3
+          }
+        },
+        "IRoleCategory": {
+          "values": {
+            "RC_NO_USE": 0,
+            "RC_NO_DEF": 1,
+            "RC_DEF": 2
+          }
+        },
+        "IRoleType": {
+          "values": {
+            "RT_NO_USE": 0,
+            "RT_FP": 1,
+            "RT_AIC": 2
+          }
+        },
+        "IFunAction": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "rt": {
+              "type": "IRoleType",
+              "id": 2,
+              "options": {
+                "json_name": "rt"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "aic": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "aic"
+              }
+            },
+            "fp": {
+              "type": "IFuncPower",
+              "id": 5,
+              "options": {
+                "json_name": "fp"
+              }
+            },
+            "icon": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "icon"
+              }
+            }
+          }
+        },
+        "IFunBase": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "aic_root": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "aic_root"
+              }
+            },
+            "fp": {
+              "type": "IFuncPower",
+              "id": 4,
+              "options": {
+                "json_name": "fp"
+              }
+            },
+            "aic": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "aic"
+              }
+            },
+            "fa": {
+              "rule": "repeated",
+              "type": "IFunAction",
+              "id": 6,
+              "options": {
+                "json_name": "fa"
+              }
+            },
+            "icon": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "icon"
+              }
+            }
+          }
+        },
+        "IFunGroupBase": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "fp": {
+              "type": "IFuncPower",
+              "id": 3,
+              "options": {
+                "json_name": "fp"
+              }
+            },
+            "fun": {
+              "rule": "repeated",
+              "type": "IFunBase",
+              "id": 4,
+              "options": {
+                "json_name": "fun"
+              }
+            },
+            "rs": {
+              "type": "IRoleSource",
+              "id": 5,
+              "options": {
+                "json_name": "rs"
+              }
+            },
+            "aic": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "aic"
+              }
+            },
+            "icon": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "icon"
+              }
+            }
+          }
+        },
+        "IRoleBase": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "name": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "name"
+              }
+            },
+            "rs": {
+              "type": "IRoleSource",
+              "id": 4,
+              "options": {
+                "json_name": "rs"
+              }
+            },
+            "funGrp": {
+              "rule": "repeated",
+              "type": "IFunGroupBase",
+              "id": 5,
+              "options": {
+                "json_name": "funGrp"
+              }
+            },
+            "rt": {
+              "type": "IRoleType",
+              "id": 6,
+              "options": {
+                "json_name": "rt"
+              }
+            },
+            "icon": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "icon"
+              }
+            },
+            "category": {
+              "type": "IRoleCategory",
+              "id": 8,
+              "options": {
+                "json_name": "category"
+              }
+            }
+          }
+        },
+        "IPermissoinEntry": {
+          "fields": {
+            "token": {
+              "type": "IToken",
+              "id": 1,
+              "options": {
+                "json_name": "token"
+              }
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 3,
+              "options": {
+                "json_name": "pager"
+              }
+            },
+            "roles": {
+              "rule": "repeated",
+              "type": "IRoleBase",
+              "id": 2,
+              "options": {
+                "json_name": "roles"
+              }
+            },
+            "funGrp": {
+              "rule": "repeated",
+              "type": "IFunGroupBase",
+              "id": 5,
+              "options": {
+                "json_name": "funGrp"
+              }
+            },
+            "role": {
+              "type": "IRoleBase",
+              "id": 4,
+              "options": {
+                "json_name": "role"
+              }
+            },
+            "i_fun_group": {
+              "type": "IFunGroupBase",
+              "id": 11,
+              "options": {
+                "json_name": "i_fun_group"
+              }
+            },
+            "i_fun_base": {
+              "type": "IFunBase",
+              "id": 6,
+              "options": {
+                "json_name": "i_fun_base"
+              }
+            },
+            "i_fun_action": {
+              "type": "IFunAction",
+              "id": 7,
+              "options": {
+                "json_name": "i_fun_action"
+              }
+            },
+            "i_func_group_list": {
+              "rule": "repeated",
+              "type": "IFunGroupBase",
+              "id": 8,
+              "options": {
+                "json_name": "i_func_group_list"
+              }
+            },
+            "i_fun_list": {
+              "rule": "repeated",
+              "type": "IFunBase",
+              "id": 9,
+              "options": {
+                "json_name": "i_fun_list"
+              }
+            },
+            "i_fun_action_list": {
+              "rule": "repeated",
+              "type": "IFunAction",
+              "id": 10,
+              "options": {
+                "json_name": "i_fun_action_list"
+              }
+            }
+          }
+        },
+        "ALShortUrl": {
+          "fields": {
+            "origin_url": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "origin_url"
+              }
+            },
+            "try_short_url": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "try_short_url"
+              }
+            },
+            "short_url": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "short_url"
+              }
+            },
+            "token": {
+              "type": "IToken",
+              "id": 4,
+              "options": {
+                "json_name": "token"
+              }
+            },
+            "valid_code": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "valid_code"
+              }
+            }
+          }
+        },
+        "ALIPRevert": {
+          "fields": {
+            "ip": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "ip"
+              }
+            },
+            "code": {
+              "type": "int64",
+              "id": 2,
+              "options": {
+                "json_name": "code"
+              }
+            },
+            "data": {
+              "type": "ALIPRevertDataTB",
+              "id": 3,
+              "options": {
+                "json_name": "data"
+              }
+            },
+            "ret": {
+              "type": "int64",
+              "id": 4,
+              "options": {
+                "json_name": "ret"
+              }
+            },
+            "country": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "country"
+              }
+            },
+            "province": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "province"
+              }
+            },
+            "city": {
+              "type": "string",
+              "id": 9,
+              "options": {
+                "json_name": "city"
+              }
+            },
+            "district": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "district"
+              }
+            },
+            "isp": {
+              "type": "string",
+              "id": 11,
+              "options": {
+                "json_name": "isp"
+              }
+            },
+            "type": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "json_name": "type"
+              }
+            },
+            "desc": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "json_name": "desc"
+              }
+            },
+            "revertSource": {
+              "type": "IPRevertSource",
+              "id": 14,
+              "options": {
+                "json_name": "revertSource"
+              }
+            }
+          },
+          "nested": {
+            "IPRevertSource": {
+              "values": {
+                "IP_REVERT_UN_USE": 0,
+                "IP_REVERT_TAOBAO": 1,
+                "IP_REVERT_SINA": 2
+              }
+            }
+          }
+        },
+        "ALIPRevertDataTB": {
+          "fields": {
+            "country": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "country"
+              }
+            },
+            "country_id": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "country_id"
+              }
+            },
+            "area": {
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "area"
+              }
+            },
+            "area_id": {
+              "type": "string",
+              "id": 4,
+              "options": {
+                "json_name": "area_id"
+              }
+            },
+            "region": {
+              "type": "string",
+              "id": 5,
+              "options": {
+                "json_name": "region"
+              }
+            },
+            "region_id": {
+              "type": "string",
+              "id": 6,
+              "options": {
+                "json_name": "region_id"
+              }
+            },
+            "city": {
+              "type": "string",
+              "id": 7,
+              "options": {
+                "json_name": "city"
+              }
+            },
+            "city_id": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "city_id"
+              }
+            },
+            "county": {
+              "type": "string",
+              "id": 9,
+              "options": {
+                "json_name": "county"
+              }
+            },
+            "county_id": {
+              "type": "string",
+              "id": 10,
+              "options": {
+                "json_name": "county_id"
+              }
+            },
+            "isp": {
+              "type": "string",
+              "id": 11,
+              "options": {
+                "json_name": "isp"
+              }
+            },
+            "isp_id": {
+              "type": "string",
+              "id": 12,
+              "options": {
+                "json_name": "isp_id"
+              }
+            },
+            "ip": {
+              "type": "string",
+              "id": 13,
+              "options": {
+                "json_name": "ip"
+              }
+            }
+          }
+        },
+        "ALShortUrlParams": {
+          "fields": {
+            "valid_code": {
+              "type": "string",
+              "id": 1,
+              "options": {
+                "json_name": "valid_code"
+              }
+            },
+            "actID": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "actID"
+              }
+            },
+            "joinCount": {
+              "type": "int64",
+              "id": 3,
+              "options": {
+                "json_name": "joinCount"
+              }
+            },
+            "token": {
+              "type": "IToken",
+              "id": 4,
+              "options": {
+                "json_name": "token"
+              }
+            }
+          }
+        },
+        "SmsType": {
+          "values": {
+            "ST_UN_USE": 0,
+            "ST_CAPTCHA": 1,
+            "ST_CUSTOM": 2
+          }
+        },
+        "SmsSendStatus": {
+          "values": {
+            "SST_UN_USE": 0,
+            "SST_NEW": 1,
+            "SST_SEND": 2,
+            "SST_FAIL": 3
+          }
+        },
+        "ComSmsBase": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1,
+              "options": {
+                "json_name": "pt_id"
+              }
+            },
+            "content": {
+              "type": "string",
+              "id": 2,
+              "options": {
+                "json_name": "content"
+              }
+            },
+            "phone_list": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 3,
+              "options": {
+                "json_name": "phone_list"
+              }
+            },
+            "source_id": {
+              "type": "IID",
+              "id": 4,
+              "options": {
+                "json_name": "source_id"
+              }
+            },
+            "st": {
+              "type": "SmsType",
+              "id": 5,
+              "options": {
+                "json_name": "st"
+              }
+            },
+            "custom_st": {
+              "type": "IID",
+              "id": 6,
+              "options": {
+                "json_name": "custom_st"
+              }
+            },
+            "send_status": {
+              "type": "SmsSendStatus",
+              "id": 7,
+              "options": {
+                "json_name": "send_status"
+              }
+            },
+            "send_result_code": {
+              "type": "string",
+              "id": 8,
+              "options": {
+                "json_name": "send_result_code"
+              }
+            },
+            "send_result_desc": {
+              "type": "string",
+              "id": 9,
+              "options": {
+                "json_name": "send_result_desc"
+              }
+            }
+          }
+        },
+        "ComSmsEntry": {
+          "fields": {
+            "token": {
+              "type": "IToken",
+              "id": 1,
+              "options": {
+                "json_name": "token"
+              }
+            },
+            "sms_list": {
+              "rule": "repeated",
+              "type": "ComSmsBase",
+              "id": 2,
+              "options": {
+                "json_name": "sms_list"
+              }
+            },
+            "sms": {
+              "type": "ComSmsBase",
+              "id": 3,
+              "options": {
+                "json_name": "sms"
+              }
+            }
+          }
+        }
+      }
+    },
+    "idwx": {
+      "nested": {
+        "IdWxBlackList": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "appid": {
+              "type": "string",
+              "id": 2
+            },
+            "openid": {
+              "type": "string",
+              "id": 3
+            },
+            "commen": {
+              "type": "string",
+              "id": 4
+            },
+            "id_wx_user_uuid": {
+              "type": "string",
+              "id": 18
+            }
+          }
+        },
+        "IdWxBlackListQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxBlackListEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxBlackListQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxBlackList",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxBlackList",
+              "id": 5
+            }
+          }
+        },
+        "IdWxIndustry": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "code": {
+              "type": "string",
+              "id": 15
+            },
+            "main_type": {
+              "type": "string",
+              "id": 16
+            },
+            "sub_type": {
+              "type": "string",
+              "id": 17
+            },
+            "comment": {
+              "type": "string",
+              "id": 18
+            },
+            "is_need": {
+              "type": "int32",
+              "id": 19
+            }
+          }
+        },
+        "IdWxIndustryQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxIndustryEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxIndustryQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxIndustry",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxIndustry",
+              "id": 5
+            }
+          }
+        },
+        "IdWxMessageLogBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "log_type": {
+              "type": "int32",
+              "id": 15
+            },
+            "message": {
+              "type": "string",
+              "id": 16
+            },
+            "from_openid": {
+              "type": "string",
+              "id": 17
+            },
+            "to_openid": {
+              "type": "string",
+              "id": 18
+            },
+            "from_uuid": {
+              "type": "string",
+              "id": 19
+            },
+            "to_uuid": {
+              "type": "string",
+              "id": 20
+            },
+            "template_id": {
+              "type": "string",
+              "id": 21
+            },
+            "order_uuid": {
+              "type": "string",
+              "id": 22
+            },
+            "goods_uuid": {
+              "type": "string",
+              "id": 23
+            },
+            "task_uuid": {
+              "type": "string",
+              "id": 24
+            }
+          }
+        },
+        "IdWxMessageLogQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMessageLogEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMessageLogQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMessageLogBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMessageLogBase",
+              "id": 5
+            }
+          }
+        },
+        "IdWxMessage": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "title": {
+              "type": "string",
+              "id": 15
+            },
+            "description": {
+              "type": "string",
+              "id": 16
+            },
+            "url": {
+              "type": "string",
+              "id": 17
+            },
+            "send_type": {
+              "type": "int32",
+              "id": 18
+            },
+            "msg_type": {
+              "type": "int32",
+              "id": 19
+            },
+            "even_type": {
+              "type": "int32",
+              "id": 20
+            },
+            "event_key": {
+              "type": "string",
+              "id": 21
+            },
+            "origin_id": {
+              "type": "string",
+              "id": 22
+            },
+            "openid": {
+              "type": "string",
+              "id": 23
+            },
+            "content": {
+              "type": "string",
+              "id": 24
+            },
+            "wxmsgid": {
+              "type": "int64",
+              "id": 25
+            },
+            "mediaid": {
+              "type": "string",
+              "id": 26
+            },
+            "pic_url": {
+              "type": "string",
+              "id": 27
+            },
+            "format": {
+              "type": "string",
+              "id": 28
+            },
+            "recognition": {
+              "type": "string",
+              "id": 29
+            },
+            "thumbmediaid": {
+              "type": "string",
+              "id": 30
+            },
+            "location_x": {
+              "type": "double",
+              "id": 31
+            },
+            "location_y": {
+              "type": "double",
+              "id": 32
+            },
+            "latitude": {
+              "type": "double",
+              "id": 33
+            },
+            "longitude": {
+              "type": "double",
+              "id": 34
+            },
+            "precisions": {
+              "type": "string",
+              "id": 35
+            },
+            "scale": {
+              "type": "string",
+              "id": 36
+            },
+            "label": {
+              "type": "string",
+              "id": 37
+            },
+            "ticket": {
+              "type": "string",
+              "id": 38
+            },
+            "image": {
+              "type": "int64",
+              "id": 39
+            },
+            "voice": {
+              "type": "int64",
+              "id": 40
+            },
+            "video": {
+              "type": "int64",
+              "id": 41
+            },
+            "music": {
+              "type": "int64",
+              "id": 42
+            },
+            "article_count": {
+              "type": "int32",
+              "id": 43
+            },
+            "ag_id": {
+              "type": "int64",
+              "id": 44
+            },
+            "uniqid": {
+              "type": "string",
+              "id": 45
+            },
+            "poiid": {
+              "type": "string",
+              "id": 46
+            },
+            "result": {
+              "type": "string",
+              "id": 47
+            },
+            "result_msg": {
+              "type": "string",
+              "id": 48
+            },
+            "kf_accout": {
+              "type": "string",
+              "id": 49
+            },
+            "to_kf_account": {
+              "type": "string",
+              "id": 50
+            },
+            "group_msg_status": {
+              "type": "string",
+              "id": 51
+            },
+            "group_msg_count": {
+              "type": "string",
+              "id": 52
+            },
+            "group_filter_count": {
+              "type": "string",
+              "id": 53
+            },
+            "group_send_count": {
+              "type": "string",
+              "id": 54
+            },
+            "group_error_count": {
+              "type": "string",
+              "id": 55
+            },
+            "wx_createtime": {
+              "type": "int64",
+              "id": 56
+            },
+            "appid": {
+              "type": "string",
+              "id": 57
+            },
+            "auth_code": {
+              "type": "string",
+              "id": 58
+            },
+            "auth_code_expire": {
+              "type": "int64",
+              "id": 59
+            },
+            "auth_appid": {
+              "type": "string",
+              "id": 60
+            },
+            "id_wx_public_account_uuid": {
+              "type": "string",
+              "id": 61
+            },
+            "id_wx_user_uuid": {
+              "type": "string",
+              "id": 62
+            }
+          }
+        },
+        "IdWxMessageQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMessageEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMessageQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMessage",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMessage",
+              "id": 5
+            }
+          }
+        },
+        "IdWxMessageShake": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id_wx_message_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "yz_uuid": {
+              "type": "string",
+              "id": 16
+            },
+            "major": {
+              "type": "int64",
+              "id": 17
+            },
+            "minor": {
+              "type": "int64",
+              "id": 18
+            },
+            "distance": {
+              "type": "string",
+              "id": 19
+            },
+            "isselect": {
+              "type": "int32",
+              "id": 20
+            },
+            "page_id": {
+              "type": "int64",
+              "id": 21
+            },
+            "rssi": {
+              "type": "int64",
+              "id": 22
+            },
+            "measure_power": {
+              "type": "int64",
+              "id": 23
+            }
+          }
+        },
+        "IdWxMessageShakeQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMessageShakeEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMessageShakeQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMessageShake",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMessageShake",
+              "id": 5
+            }
+          }
+        },
+        "IdWxMessageTempHistoryBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "openid": {
+              "type": "string",
+              "id": 15
+            },
+            "content": {
+              "type": "string",
+              "id": 16
+            },
+            "scene_val": {
+              "type": "int32",
+              "id": 17
+            }
+          }
+        },
+        "IdWxMessageTempHistoryQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMessageTempHistoryEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMessageTempHistoryQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMessageTempHistoryBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMessageTempHistoryBase",
+              "id": 5
+            }
+          }
+        },
+        "MsgScene": {
+          "values": {
+            "QMSC_NO_USE": 0,
+            "QMSC_ORDER_CREATE": 1,
+            "QMSC_ORDER_RECIVE": 2,
+            "QMSC_ORDER_PROCESSED": 3,
+            "QMSC_ORDER_PACKAGED": 4,
+            "QMSC_ORDER_TAKED": 5,
+            "QMSC_ORDER_TAKE_TIMEOUT": 6,
+            "QMSC_ORDER_LOCKER_OPEN_TIMEOUT": 7,
+            "QMSC_ORDER_CANCEL_CHECKED": 8,
+            "QMSC_ORDER_CANCEL_REJECTED": 9,
+            "QMSC_ORDER_RECIVER_ADDED": 10,
+            "QMSC_ORDER_RECIVER_CANCEL": 11,
+            "QMSC_USER_PWD_RESET": 12,
+            "QMSC_MCH_ADD_SUCCESS": 13,
+            "QMSC_MCH_ENTER_EXPIRED": 14,
+            "QMSC_STATION_RENT_EXPIRE": 15,
+            "QMSC_LOCKER_PWD_FAIL": 16,
+            "QMSC_RECIVER_CLOSE_ORDER": 17,
+            "QMSC_V_CODE": 18
+          }
+        },
+        "MsgVars": {
+          "fields": {
+            "contact": {
+              "type": "string",
+              "id": 1
+            },
+            "est_time": {
+              "type": "string",
+              "id": 2
+            },
+            "user_name": {
+              "type": "string",
+              "id": 3
+            },
+            "order_num": {
+              "type": "string",
+              "id": 4
+            },
+            "recive_time": {
+              "type": "string",
+              "id": 5
+            },
+            "mch_name": {
+              "type": "string",
+              "id": 6
+            },
+            "locker_name": {
+              "type": "string",
+              "id": 7
+            },
+            "locker_pwd": {
+              "type": "string",
+              "id": 8
+            },
+            "timeout": {
+              "type": "string",
+              "id": 9
+            },
+            "locker_close_time": {
+              "type": "string",
+              "id": 10
+            },
+            "mch_contact": {
+              "type": "string",
+              "id": 11
+            },
+            "mch_account": {
+              "type": "string",
+              "id": 12
+            },
+            "mch_pwd": {
+              "type": "string",
+              "id": 13
+            },
+            "mch_enter_expire": {
+              "type": "string",
+              "id": 14
+            },
+            "station_rent_expire": {
+              "type": "string",
+              "id": 15
+            },
+            "orderTime": {
+              "type": "string",
+              "id": 16
+            },
+            "proName": {
+              "type": "string",
+              "id": 17
+            },
+            "proNum": {
+              "type": "string",
+              "id": 18
+            },
+            "orderPrice": {
+              "type": "string",
+              "id": 19
+            },
+            "orderType": {
+              "type": "string",
+              "id": 20
+            },
+            "orderState": {
+              "type": "string",
+              "id": 21
+            },
+            "serialNum": {
+              "type": "string",
+              "id": 22
+            },
+            "verificattion_code": {
+              "type": "string",
+              "id": 23
+            },
+            "link_url": {
+              "type": "string",
+              "id": 24
+            },
+            "orderOriginPrice": {
+              "type": "string",
+              "id": 25
+            },
+            "first": {
+              "type": "string",
+              "id": 26
+            },
+            "keyword1": {
+              "type": "string",
+              "id": 27
+            },
+            "keyword2": {
+              "type": "string",
+              "id": 28
+            },
+            "keyword3": {
+              "type": "string",
+              "id": 29
+            },
+            "keyword4": {
+              "type": "string",
+              "id": 31
+            },
+            "keyword5": {
+              "type": "string",
+              "id": 32
+            },
+            "keyword6": {
+              "type": "string",
+              "id": 33
+            },
+            "keyword7": {
+              "type": "string",
+              "id": 34
+            },
+            "keyword8": {
+              "type": "string",
+              "id": 35
+            },
+            "keyword9": {
+              "type": "string",
+              "id": 36
+            },
+            "keyword10": {
+              "type": "string",
+              "id": 37
+            },
+            "remark": {
+              "type": "string",
+              "id": 38
+            }
+          }
+        },
+        "MsgItem": {
+          "fields": {
+            "to": {
+              "type": "string",
+              "id": 1
+            },
+            "vars": {
+              "type": "MsgVars",
+              "id": 3,
+              "options": {
+                "json_name": "vars"
+              }
+            }
+          }
+        },
+        "IdWxMessageTempPublicConfigBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "wx_message_temp_id": {
+              "type": "string",
+              "id": 15
+            },
+            "wx_appid": {
+              "type": "string",
+              "id": 16
+            },
+            "scene_val": {
+              "type": "int32",
+              "id": 17
+            },
+            "wx_message_history": {
+              "type": "IdWxMessageTempHistoryBase",
+              "id": 1000
+            },
+            "msg_list": {
+              "rule": "repeated",
+              "type": "MsgItem",
+              "id": 10
+            },
+            "vars": {
+              "type": "MsgVars",
+              "id": 11,
+              "options": {
+                "json_name": "vars"
+              }
+            }
+          }
+        },
+        "IdWxMessageTempPublicConfigQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMessageTempPublicConfigEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMessageTempPublicConfigQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMessageTempPublicConfigBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMessageTempPublicConfigBase",
+              "id": 5
+            }
+          }
+        },
+        "IdWxMp": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "mp_account": {
+              "type": "IdWxPublicAccount",
+              "id": 2000
+            },
+            "mp_api": {
+              "type": "IdWxMpApi",
+              "id": 2001
+            },
+            "wx_user": {
+              "type": "IdWxUser",
+              "id": 2002
+            }
+          }
+        },
+        "IdWxMpApi": {
+          "fields": {
+            "code": {
+              "type": "string",
+              "id": 1
+            },
+            "access_token": {
+              "type": "string",
+              "id": 2
+            },
+            "expires_in": {
+              "type": "int32",
+              "id": 3
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 4
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 5
+            },
+            "openid": {
+              "type": "string",
+              "id": 6
+            },
+            "session_key": {
+              "type": "string",
+              "id": 7
+            },
+            "unionid": {
+              "type": "string",
+              "id": 8
+            }
+          }
+        },
+        "IdWxMpQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxMpEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxMpQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxMp",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxMp",
+              "id": 5
+            }
+          }
+        },
+        "IdWxPublicAccount": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 15
+            },
+            "app_id": {
+              "type": "string",
+              "id": 16
+            },
+            "secret_id": {
+              "type": "string",
+              "id": 17
+            },
+            "origin_id": {
+              "type": "string",
+              "id": 18
+            },
+            "token": {
+              "type": "string",
+              "id": 19
+            },
+            "encoding_aeskey": {
+              "type": "string",
+              "id": 20
+            },
+            "qrcode_upload_id": {
+              "type": "string",
+              "id": 21
+            },
+            "qrcode_url": {
+              "type": "string",
+              "id": 22
+            },
+            "account_type": {
+              "type": "int32",
+              "id": 23
+            },
+            "little_program_app_id": {
+              "type": "string",
+              "id": 24
+            },
+            "little_program_app_secret": {
+              "type": "string",
+              "id": 25
+            },
+            "payAccount": {
+              "type": "IdWxPayAccount",
+              "id": 2000
+            }
+          }
+        },
+        "IdWxPublicAccountQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxPublicAccountEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxPublicAccountQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxPublicAccount",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxPublicAccount",
+              "id": 5
+            }
+          }
+        },
+        "IdWxPayAccount": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id_wx_public_account_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "pay_key": {
+              "type": "string",
+              "id": 16
+            },
+            "pay_certificate": {
+              "type": "string",
+              "id": 17
+            },
+            "mch_id": {
+              "type": "string",
+              "id": 18
+            },
+            "account_type": {
+              "type": "int32",
+              "id": 19
+            },
+            "parent_mch": {
+              "type": "int64",
+              "id": 20
+            },
+            "admin_id": {
+              "type": "int64",
+              "id": 21
+            },
+            "wechat_apiclient_cert": {
+              "type": "string",
+              "id": 22
+            },
+            "wechat_apiclient_key": {
+              "type": "string",
+              "id": 23
+            },
+            "wx_public_account_name": {
+              "type": "string",
+              "id": 24
+            },
+            "sys_user_id": {
+              "type": "string",
+              "id": 25
+            },
+            "id_wx_public_account_mobile_uuid": {
+              "type": "string",
+              "id": 27
+            },
+            "id_wx_public_account_mini_uuid": {
+              "type": "string",
+              "id": 28
+            },
+            "name": {
+              "type": "string",
+              "id": 29
+            }
+          }
+        },
+        "IdWxPayAccountQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxPayAccountEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxPayAccountQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxPayAccount",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxPayAccount",
+              "id": 5
+            }
+          }
+        },
+        "IdWxUser": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "appid": {
+              "type": "string",
+              "id": 15
+            },
+            "openid": {
+              "type": "string",
+              "id": 16
+            },
+            "unionid": {
+              "type": "string",
+              "id": 17
+            },
+            "id_wx_public_account_uuid": {
+              "type": "string",
+              "id": 18
+            },
+            "nickname": {
+              "type": "string",
+              "id": 19
+            },
+            "headimgurl": {
+              "type": "string",
+              "id": 20
+            },
+            "sex": {
+              "type": "int32",
+              "id": 21
+            },
+            "province": {
+              "type": "string",
+              "id": 22
+            },
+            "city": {
+              "type": "string",
+              "id": 23
+            },
+            "country": {
+              "type": "string",
+              "id": 24
+            },
+            "subscribe": {
+              "type": "int32",
+              "id": 25
+            },
+            "subscribe_time": {
+              "type": "int64",
+              "id": 26
+            },
+            "remark": {
+              "type": "string",
+              "id": 27
+            },
+            "groupid": {
+              "type": "int64",
+              "id": 28
+            }
+          }
+        },
+        "IdWxUserQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxUserEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxUserQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxUser",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxUser",
+              "id": 5
+            }
+          }
+        },
+        "IdWxOauth2Request": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "appid": {
+              "type": "string",
+              "id": 15
+            },
+            "auth_appid": {
+              "type": "string",
+              "id": 16
+            },
+            "req_id": {
+              "type": "int64",
+              "id": 17
+            },
+            "redirect_url": {
+              "type": "string",
+              "id": 18
+            },
+            "response_type": {
+              "type": "string",
+              "id": 19
+            },
+            "scope": {
+              "type": "string",
+              "id": 20
+            },
+            "id_wx_public_account_uuid": {
+              "type": "string",
+              "id": 21
+            }
+          }
+        },
+        "IdWxOauth2RequestQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxOauth2RequestEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxOauth2RequestQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxOauth2Request",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxOauth2Request",
+              "id": 5
+            }
+          }
+        },
+        "IdWxOpenGrant": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "appid": {
+              "type": "string",
+              "id": 15
+            },
+            "auth_appid": {
+              "type": "string",
+              "id": 16
+            },
+            "wx_createtime": {
+              "type": "int64",
+              "id": 17
+            },
+            "auth_code": {
+              "type": "string",
+              "id": 18
+            },
+            "auth_code_expire": {
+              "type": "int64",
+              "id": 19
+            },
+            "last_authorizer_access_token": {
+              "type": "string",
+              "id": 20
+            },
+            "last_authorizer_refresh_token": {
+              "type": "string",
+              "id": 21
+            },
+            "last_authorizer_access_token_expires_in": {
+              "type": "int64",
+              "id": 22
+            },
+            "func_info": {
+              "type": "string",
+              "id": 23
+            },
+            "id_wx_public_account_uuid": {
+              "type": "string",
+              "id": 24
+            }
+          }
+        },
+        "IdWxOpenGrantQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxOpenGrantEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxOpenGrantQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxOpenGrant",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxOpenGrant",
+              "id": 5
+            }
+          }
+        },
+        "IdWxPayOrder": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "out_trade_no": {
+              "type": "string",
+              "id": 15
+            },
+            "prepay_id": {
+              "type": "string",
+              "id": 16
+            },
+            "appid": {
+              "type": "string",
+              "id": 17
+            },
+            "sub_appid": {
+              "type": "string",
+              "id": 18
+            },
+            "attach": {
+              "type": "string",
+              "id": 19
+            },
+            "body": {
+              "type": "string",
+              "id": 20
+            },
+            "bank_type": {
+              "type": "string",
+              "id": 21
+            },
+            "cash_fee": {
+              "type": "string",
+              "id": 22
+            },
+            "cash_fee_type": {
+              "type": "string",
+              "id": 23
+            },
+            "detail": {
+              "type": "string",
+              "id": 24
+            },
+            "code_url": {
+              "type": "string",
+              "id": 25
+            },
+            "device_info": {
+              "type": "string",
+              "id": 26
+            },
+            "err_code": {
+              "type": "string",
+              "id": 27
+            },
+            "err_code_des": {
+              "type": "string",
+              "id": 28
+            },
+            "fee_type": {
+              "type": "string",
+              "id": 29
+            },
+            "goods_tag": {
+              "type": "string",
+              "id": 30
+            },
+            "limit_pay": {
+              "type": "string",
+              "id": 31
+            },
+            "mch_id": {
+              "type": "string",
+              "id": 32
+            },
+            "sub_mch_id": {
+              "type": "string",
+              "id": 33
+            },
+            "nonce_str": {
+              "type": "string",
+              "id": 34
+            },
+            "notify_url": {
+              "type": "string",
+              "id": 35
+            },
+            "openid": {
+              "type": "string",
+              "id": 36
+            },
+            "sub_openid": {
+              "type": "string",
+              "id": 37
+            },
+            "pay_sign": {
+              "type": "string",
+              "id": 38
+            },
+            "product_id": {
+              "type": "string",
+              "id": 39
+            },
+            "result_code": {
+              "type": "string",
+              "id": 40
+            },
+            "return_code": {
+              "type": "string",
+              "id": 41
+            },
+            "return_msg": {
+              "type": "string",
+              "id": 42
+            },
+            "sign": {
+              "type": "string",
+              "id": 43
+            },
+            "spbill_create_ip": {
+              "type": "string",
+              "id": 44
+            },
+            "time_expire": {
+              "type": "string",
+              "id": 45
+            },
+            "time_start": {
+              "type": "string",
+              "id": 46
+            },
+            "total_fee": {
+              "type": "string",
+              "id": 47
+            },
+            "trade_type": {
+              "type": "string",
+              "id": 48
+            },
+            "trade_state": {
+              "type": "string",
+              "id": 49
+            },
+            "trade_state_desc": {
+              "type": "string",
+              "id": 50
+            },
+            "wxsign": {
+              "type": "string",
+              "id": 51
+            },
+            "coupon_count": {
+              "type": "int32",
+              "id": 52
+            },
+            "coupon_fee": {
+              "type": "int32",
+              "id": 53
+            },
+            "coupon_fee_nos": {
+              "type": "string",
+              "id": 54
+            },
+            "coupon_ids": {
+              "type": "string",
+              "id": 55
+            },
+            "time_end": {
+              "type": "string",
+              "id": 56
+            },
+            "transaction_id": {
+              "type": "string",
+              "id": 57
+            },
+            "status": {
+              "type": "int32",
+              "id": 58
+            },
+            "act_name": {
+              "type": "string",
+              "id": 59
+            },
+            "bill_date": {
+              "type": "string",
+              "id": 60
+            },
+            "bill_type": {
+              "type": "string",
+              "id": 61
+            },
+            "client_ip": {
+              "type": "string",
+              "id": 62
+            },
+            "coupon_fees": {
+              "type": "string",
+              "id": 63
+            },
+            "is_subscribe": {
+              "type": "string",
+              "id": 64
+            },
+            "sub_is_subscribe": {
+              "type": "string",
+              "id": 65
+            },
+            "mch_billno": {
+              "type": "string",
+              "id": 66
+            },
+            "re_openid": {
+              "type": "string",
+              "id": 67
+            },
+            "remark": {
+              "type": "string",
+              "id": 68
+            },
+            "send_listid": {
+              "type": "string",
+              "id": 69
+            },
+            "send_name": {
+              "type": "string",
+              "id": 70
+            },
+            "send_time": {
+              "type": "string",
+              "id": 71
+            },
+            "total_amount": {
+              "type": "string",
+              "id": 72
+            },
+            "total_num": {
+              "type": "string",
+              "id": 73
+            },
+            "wishing": {
+              "type": "string",
+              "id": 74
+            },
+            "wxappid": {
+              "type": "string",
+              "id": 75
+            },
+            "pay_type": {
+              "type": "int32",
+              "id": 76
+            },
+            "remark_channel": {
+              "type": "string",
+              "id": 77
+            },
+            "admin_id": {
+              "type": "int64",
+              "id": 78
+            },
+            "id_wx_user_uuid": {
+              "type": "string",
+              "id": 79
+            },
+            "id_wx_pay_account_uuid": {
+              "type": "string",
+              "id": 80
+            }
+          }
+        },
+        "IdWxPayOrderQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdWxPayOrderEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdWxPayOrderQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdWxPayOrder",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdWxPayOrder",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
+    "wx": {
+      "nested": {
+        "WxPubAccountType": {
+          "values": {
+            "PAT_UN_USE": 0,
+            "PAT_PUB": 1,
+            "PAT_OPEN_PUB": 2,
+            "PAT_MACH": 3,
+            "PAT_MACH_SERVICE": 4,
+            "PAT_MP": 5
+          }
+        },
+        "WxPubAccount": {
+          "fields": {
+            "app_id": {
+              "type": "string",
+              "id": 1
+            },
+            "app_secret": {
+              "type": "string",
+              "id": 2
+            },
+            "app_name": {
+              "type": "string",
+              "id": 3
+            },
+            "app_icon": {
+              "type": "string",
+              "id": 4
+            },
+            "app_desc": {
+              "type": "string",
+              "id": 5
+            },
+            "origin_id": {
+              "type": "string",
+              "id": 6
+            },
+            "token": {
+              "type": "string",
+              "id": 7
+            },
+            "encoding_key": {
+              "type": "string",
+              "id": 8
+            },
+            "at": {
+              "type": "WxPubAccountType",
+              "id": 9
+            },
+            "component_app_id": {
+              "type": "string",
+              "id": 10
+            },
+            "mach_id": {
+              "type": "string",
+              "id": 11
+            },
+            "mach_pay_key": {
+              "type": "string",
+              "id": 12
+            },
+            "mach_pay_cert_path": {
+              "type": "string",
+              "id": 13
+            },
+            "parent_mch": {
+              "type": "WxPubAccount",
+              "id": 14
+            },
+            "sub_mach_list": {
+              "rule": "repeated",
+              "type": "WxPubAccount",
+              "id": 15
+            },
+            "pt_id": {
+              "type": "com2.IID",
+              "id": 1000
+            },
+            "status": {
+              "type": "com2.SQLStatus",
+              "id": 1001
+            }
+          }
+        },
+        "AIC": {
+          "values": {
+            "AIC_NO_USE": 0,
+            "AIC_WX_OPEN_WX_AUTH_MSG": 1,
+            "AIC_WX_OPEN_WX_MSG": 2,
+            "AIC_WX_OPEN_WX_GRANT": 3,
+            "AIC_WX_OPEN_WX_GRANT_AUTH": 4,
+            "AIC_WX_OPEN_WX_JS_API": 5,
+            "AIC_WX_OPEN_WX_OAUTH2": 6,
+            "AIC_WX_OPEN_WX_OAUTH2_REDIRECT": 7,
+            "AIC_WX_OPEN_WX_PRE_PAY": 8,
+            "AIC_WX_PRE_PAY": 201,
+            "AIC_WX_PAY_CALL_BACK": 202,
+            "AIC_WX_CUSTOMER_SERVICE_QUERY": 301,
+            "AIC_WX_CUSTOMER_SERVICE_QUERY_DOING": 302,
+            "AIC_WX_CUSTOMER_SERVICE_ADD": 303,
+            "AIC_WX_CUSTOMER_SERVICE_UPDATE": 304,
+            "AIC_WX_CUSTOMER_SERVICE_UPLOAD_AVATAR": 305,
+            "AIC_WX_CUSTOMER_SERVICE_DEL": 306
+          }
+        },
+        "WxAmqpEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "at": {
+              "type": "AmqpType",
+              "id": 2
+            },
+            "wx_msg": {
+              "type": "WxMsgBase",
+              "id": 3
+            },
+            "wx_user": {
+              "type": "WxOauthUser",
+              "id": 4
+            }
+          },
+          "nested": {
+            "AmqpType": {
+              "values": {
+                "AT_NO_USE": 0,
+                "AT_WX_MSG": 1,
+                "AT_WX_USER": 2,
+                "AT_WX_OPEN_USER": 3
+              }
+            }
+          }
+        },
+        "VP": {
+          "fields": {
+            "echostr": {
+              "type": "string",
+              "id": 100
+            },
+            "nonce": {
+              "type": "string",
+              "id": 200
+            },
+            "timestamp": {
+              "type": "string",
+              "id": 300
+            },
+            "token": {
+              "type": "string",
+              "id": 400
+            },
+            "signature": {
+              "type": "string",
+              "id": 1000
+            }
+          }
+        },
+        "MediaMsg": {
+          "fields": {
+            "mediaId": {
+              "type": "string",
+              "id": 1
+            },
+            "title": {
+              "type": "string",
+              "id": 2
+            },
+            "description": {
+              "type": "string",
+              "id": 3
+            },
+            "url": {
+              "type": "string",
+              "id": 4
+            },
+            "picUrl": {
+              "type": "string",
+              "id": 5
+            },
+            "musicUrl": {
+              "type": "string",
+              "id": 6
+            },
+            "hqMusicUrl": {
+              "type": "string",
+              "id": 7
+            },
+            "thumbMediaId": {
+              "type": "string",
+              "id": 8
+            }
+          }
+        },
+        "ShakeAroundMsgBeacon": {
+          "fields": {
+            "device": {
+              "type": "WXBDIdentifier",
+              "id": 1
+            },
+            "ot": {
+              "type": "OpType",
+              "id": 2
+            }
+          },
+          "nested": {
+            "OpType": {
+              "values": {
+                "OT_UN_USE": 0,
+                "OT_CHOOSE": 1,
+                "OT_AROUND": 2,
+                "OT_CHOOSE_PAGE": 3,
+                "OT_AROUND_PAGE": 4
+              }
+            }
+          }
+        },
+        "WxMsgBase": {
+          "fields": {
+            "vp": {
+              "type": "VP",
+              "id": 1
+            },
+            "mt": {
+              "type": "MsgType",
+              "id": 2
+            },
+            "et": {
+              "type": "EventType",
+              "id": 3
+            },
+            "toUserName": {
+              "type": "string",
+              "id": 4
+            },
+            "fromUserName": {
+              "type": "string",
+              "id": 5
+            },
+            "createTime": {
+              "type": "int32",
+              "id": 6
+            },
+            "content": {
+              "type": "string",
+              "id": 7
+            },
+            "msgId": {
+              "type": "int64",
+              "id": 8
+            },
+            "picUrl": {
+              "type": "string",
+              "id": 9
+            },
+            "mediaId": {
+              "type": "string",
+              "id": 10
+            },
+            "format": {
+              "type": "string",
+              "id": 11
+            },
+            "recognition": {
+              "type": "string",
+              "id": 12
+            },
+            "thumbMediaId": {
+              "type": "string",
+              "id": 13
+            },
+            "location_X": {
+              "type": "double",
+              "id": 14
+            },
+            "location_Y": {
+              "type": "double",
+              "id": 15
+            },
+            "scale": {
+              "type": "string",
+              "id": 16
+            },
+            "label": {
+              "type": "string",
+              "id": 17
+            },
+            "title": {
+              "type": "string",
+              "id": 18
+            },
+            "description": {
+              "type": "string",
+              "id": 19
+            },
+            "url": {
+              "type": "string",
+              "id": 20
+            },
+            "eventKey": {
+              "type": "string",
+              "id": 21
+            },
+            "ticket": {
+              "type": "string",
+              "id": 22
+            },
+            "latitude": {
+              "type": "double",
+              "id": 23
+            },
+            "longitude": {
+              "type": "double",
+              "id": 24
+            },
+            "precision": {
+              "type": "string",
+              "id": 25
+            },
+            "st": {
+              "type": "SendType",
+              "id": 26
+            },
+            "image": {
+              "type": "MediaMsg",
+              "id": 27
+            },
+            "voice": {
+              "type": "MediaMsg",
+              "id": 28
+            },
+            "video": {
+              "type": "MediaMsg",
+              "id": 29
+            },
+            "music": {
+              "type": "MediaMsg",
+              "id": 30
+            },
+            "articleCount": {
+              "type": "int32",
+              "id": 31
+            },
+            "news": {
+              "rule": "repeated",
+              "type": "MediaMsg",
+              "id": 32
+            },
+            "uniqId": {
+              "type": "string",
+              "id": 33
+            },
+            "poiId": {
+              "type": "string",
+              "id": 34
+            },
+            "result": {
+              "type": "string",
+              "id": 35
+            },
+            "msg": {
+              "type": "string",
+              "id": 36
+            },
+            "KfAccount": {
+              "type": "string",
+              "id": 37
+            },
+            "ToKfAccount": {
+              "type": "string",
+              "id": 38
+            },
+            "status": {
+              "type": "string",
+              "id": 39
+            },
+            "totalCount": {
+              "type": "string",
+              "id": 40
+            },
+            "filterCount": {
+              "type": "string",
+              "id": 41
+            },
+            "sentCount": {
+              "type": "string",
+              "id": 42
+            },
+            "errorCount": {
+              "type": "string",
+              "id": 43
+            },
+            "token": {
+              "type": "com2.IToken",
+              "id": 44
+            },
+            "att": {
+              "rule": "repeated",
+              "type": "com2.IAttach",
+              "id": 45
+            },
+            "sid": {
+              "type": "int64",
+              "id": 46
+            },
+            "saUserBeacon": {
+              "rule": "repeated",
+              "type": "ShakeAroundMsgBeacon",
+              "id": 47
+            },
+            "from_app_id": {
+              "type": "string",
+              "id": 48
+            },
+            "component_app_id": {
+              "type": "string",
+              "id": 49
+            }
+          },
+          "nested": {
+            "MsgType": {
+              "values": {
+                "MT_UN_USE": 0,
+                "MT_TEXT": 1,
+                "MT_PIC": 2,
+                "MT_VOICE": 3,
+                "MT_VIDEO": 4,
+                "MT_S_VIDEO": 5,
+                "MT_LOCATION": 6,
+                "MT_LINK": 7,
+                "MT_EVENT": 8,
+                "MT_SPEECH_RECON": 9,
+                "MT_COMPONENT_GRANT": 10
+              }
+            },
+            "EventType": {
+              "values": {
+                "ET_UN_USE": 0,
+                "ET_SUB": 1,
+                "ET_UN_SUB": 2,
+                "ET_SCAN_SUB": 3,
+                "ET_SCAN": 4,
+                "ET_LOCATION": 5,
+                "ET_CLICK": 6,
+                "ET_VIEW": 7,
+                "ET_POI_CHECK_NOTIFY": 8,
+                "ET_TEMPLATESENDJOBFINISH": 9,
+                "ET_MASSSENDJOBFINISH": 10,
+                "ET_KF_CREATE_SESSION": 11,
+                "ET_KF_CLOSE_SESSION": 12,
+                "ET_KF_SWITCH_SESSION": 13,
+                "ET_SHAKE_AROUND_USER_SHAKE": 14,
+                "ET_COMPONENT_GRANT_TICKET": 15,
+                "ET_COMPONENT_GRANT_SUCCESS": 16,
+                "ET_COMPONENT_GRANT_UPDATE": 17,
+                "ET_COMPONENT_GRANT_CANCEL": 18
+              }
+            },
+            "SendType": {
+              "values": {
+                "ST_UN_USE": 0,
+                "ST_FROM": 1,
+                "ST_TO": 2,
+                "ST_FROM_COMPONENT": 3,
+                "ST_TO_COMPONENT": 4,
+                "ST_TEMP": 5
+              }
+            }
+          }
+        },
+        "WXBDIdentifier": {
+          "fields": {
+            "device_id": {
+              "type": "int64",
+              "id": 1
+            },
+            "uuid": {
+              "type": "string",
+              "id": 2
+            },
+            "major": {
+              "type": "int32",
+              "id": 3
+            },
+            "minor": {
+              "type": "int32",
+              "id": 4
+            },
+            "comment": {
+              "type": "string",
+              "id": 5
+            },
+            "status": {
+              "type": "int32",
+              "id": 6
+            },
+            "last_active_time": {
+              "type": "int64",
+              "id": 7
+            },
+            "poi_id": {
+              "type": "int64",
+              "id": 8
+            },
+            "page_id": {
+              "type": "int64",
+              "id": 9
+            },
+            "rssi": {
+              "type": "int32",
+              "id": 10
+            },
+            "measurePower": {
+              "type": "int32",
+              "id": 11
+            },
+            "distance": {
+              "type": "double",
+              "id": 12
+            }
+          }
+        },
+        "WXBeaData": {
+          "fields": {
+            "apply_id": {
+              "type": "int64",
+              "id": 1
+            },
+            "apply_time": {
+              "type": "int32",
+              "id": 2
+            },
+            "audit_comment": {
+              "type": "string",
+              "id": 3
+            },
+            "audit_status": {
+              "type": "int32",
+              "id": 4
+            },
+            "audit_time": {
+              "type": "int32",
+              "id": 5
+            },
+            "page_id": {
+              "type": "int64",
+              "id": 8
+            },
+            "pic_url": {
+              "type": "string",
+              "id": 9
+            },
+            "total_count": {
+              "type": "int32",
+              "id": 10
+            },
+            "devices": {
+              "rule": "repeated",
+              "type": "WXBDIdentifier",
+              "id": 11
+            }
+          }
+        },
+        "WXBeaconApply": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "name": {
+              "type": "string",
+              "id": 2
+            },
+            "phone_number": {
+              "type": "string",
+              "id": 3
+            },
+            "email": {
+              "type": "string",
+              "id": 4
+            },
+            "industry_id": {
+              "type": "string",
+              "id": 5
+            },
+            "qualification_cert_urls": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 6
+            },
+            "apply_reason": {
+              "type": "string",
+              "id": 7
+            },
+            "data": {
+              "type": "WXBeaData",
+              "id": 8
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 9
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 10
+            }
+          }
+        },
+        "WXBeaconDeviceApply": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "quantity": {
+              "type": "int32",
+              "id": 2
+            },
+            "apply_reason": {
+              "type": "string",
+              "id": 3
+            },
+            "comment": {
+              "type": "string",
+              "id": 4
+            },
+            "poi_id": {
+              "type": "int64",
+              "id": 5
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 6
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 7
+            },
+            "data": {
+              "type": "WXBeaData",
+              "id": 8
+            },
+            "apply_id": {
+              "type": "int64",
+              "id": 9
+            }
+          }
+        },
+        "WXBDQueryType": {
+          "values": {
+            "WX_QT_UN_USE": 0,
+            "WX_QT_UMM": 1,
+            "WX_QT_PAGE": 2,
+            "WX_QT_APPLY": 3
+          }
+        },
+        "WXBeaconDevice": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "device_identifier": {
+              "type": "WXBDIdentifier",
+              "id": 2
+            },
+            "comment": {
+              "type": "string",
+              "id": 3
+            },
+            "poi_id": {
+              "type": "int64",
+              "id": 4
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 5
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 6
+            },
+            "data": {
+              "type": "WXBeaData",
+              "id": 7
+            },
+            "type": {
+              "type": "int32",
+              "id": 8
+            },
+            "device_identifiers": {
+              "rule": "repeated",
+              "type": "WXBDIdentifier",
+              "id": 9
+            },
+            "apply_id": {
+              "type": "int64",
+              "id": 10
+            },
+            "begin": {
+              "type": "int32",
+              "id": 11
+            },
+            "count": {
+              "type": "int32",
+              "id": 12
+            },
+            "page_ids": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 13
+            }
+          }
+        },
+        "WXBeaconPage": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "title": {
+              "type": "string",
+              "id": 2
+            },
+            "description": {
+              "type": "string",
+              "id": 3
+            },
+            "icon_url": {
+              "type": "string",
+              "id": 4
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 5
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 6
+            },
+            "comment": {
+              "type": "string",
+              "id": 7
+            },
+            "page_id": {
+              "type": "int64",
+              "id": 8
+            },
+            "iconUploadId": {
+              "type": "int64",
+              "id": 9
+            },
+            "page_url": {
+              "type": "string",
+              "id": 10
+            },
+            "data": {
+              "type": "WXBeaData",
+              "id": 11
+            },
+            "pt": {
+              "type": "WXPageType",
+              "id": 12
+            }
+          },
+          "nested": {
+            "WXPageType": {
+              "values": {
+                "WX_PT_UN_USE": 0,
+                "WX_PT_NORMAL": 1,
+                "WX_PT_ATTENTION": 2
+              }
+            }
+          }
+        },
+        "Oauth2DirectStyle": {
+          "values": {
+            "ODS_NO_USE": 0,
+            "ODS_DEF": 1,
+            "ODS_JUMP_ORG": 2
+          }
+        },
+        "WXOauth2StateBase": {
+          "fields": {
+            "api_id": {
+              "type": "com2.IID",
+              "id": 1
+            },
+            "open_id": {
+              "type": "com2.IID",
+              "id": 1000
+            },
+            "req_id": {
+              "type": "com2.IID",
+              "id": 2000
+            },
+            "req_time": {
+              "type": "int64",
+              "id": 3000
+            },
+            "sign": {
+              "type": "string",
+              "id": 5000
+            },
+            "style": {
+              "type": "Oauth2DirectStyle",
+              "id": 6000
+            },
+            "ext_id_1": {
+              "type": "com2.IID",
+              "id": 8000
+            },
+            "ext_id_2": {
+              "type": "com2.IID",
+              "id": 8001
+            },
+            "ext_id_3": {
+              "type": "com2.IID",
+              "id": 8002
+            },
+            "ext_id_4": {
+              "type": "com2.IID",
+              "id": 8003
+            },
+            "ext_id_5": {
+              "type": "com2.IID",
+              "id": 8004
+            }
+          }
+        },
+        "WxOauthUserTag": {
+          "fields": {}
+        },
+        "WxOauthUser": {
+          "fields": {
+            "pt_id": {
+              "type": "com2.IID",
+              "id": 1
+            },
+            "appid": {
+              "type": "string",
+              "id": 2
+            },
+            "openid": {
+              "type": "string",
+              "id": 3
+            },
+            "unionid": {
+              "type": "string",
+              "id": 4
+            },
+            "nickname": {
+              "type": "string",
+              "id": 5
+            },
+            "sex": {
+              "type": "int32",
+              "id": 6
+            },
+            "province": {
+              "type": "string",
+              "id": 7
+            },
+            "city": {
+              "type": "string",
+              "id": 8
+            },
+            "country": {
+              "type": "string",
+              "id": 9
+            },
+            "headimgurl": {
+              "type": "string",
+              "id": 10
+            },
+            "access_token": {
+              "type": "string",
+              "id": 11
+            },
+            "expires_in": {
+              "type": "int32",
+              "id": 12
+            },
+            "refresh_token": {
+              "type": "string",
+              "id": 13
+            },
+            "scope": {
+              "type": "string",
+              "id": 14
+            },
+            "privilege": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 15
+            },
+            "subscribe": {
+              "type": "int32",
+              "id": 16
+            },
+            "subscribe_time": {
+              "type": "int64",
+              "id": 17
+            },
+            "remark": {
+              "type": "string",
+              "id": 18
+            },
+            "groupid": {
+              "type": "int64",
+              "id": 19
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 20
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 21
+            },
+            "component_app_id": {
+              "type": "string",
+              "id": 22
+            },
+            "tagid_list": {
+              "rule": "repeated",
+              "type": "int64",
+              "id": 23
+            }
+          }
+        },
+        "WXOauth2Base": {
+          "fields": {
+            "pt_id": {
+              "type": "com2.IID",
+              "id": 1
+            },
+            "redirect_uri": {
+              "type": "string",
+              "id": 2
+            },
+            "response_type": {
+              "type": "string",
+              "id": 3
+            },
+            "scope": {
+              "type": "string",
+              "id": 4
+            },
+            "state": {
+              "type": "WXOauth2StateBase",
+              "id": 5
+            },
+            "appid": {
+              "type": "string",
+              "id": 6
+            },
+            "component_appid": {
+              "type": "string",
+              "id": 7
+            },
+            "code": {
+              "type": "string",
+              "id": 8
+            }
+          }
+        },
+        "WxOauth2Entry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "state": {
+              "type": "WXOauth2StateBase",
+              "id": 7
+            },
+            "oauth_user": {
+              "type": "WxOauthUser",
+              "id": 8
+            },
+            "component_account": {
+              "type": "WxComponentBase",
+              "id": 9
+            },
+            "oauth2_base": {
+              "type": "WXOauth2Base",
+              "id": 10
+            }
+          }
+        },
+        "MsgType": {
+          "values": {
+            "MT_NO_USE": 0,
+            "MT_C_VERIFY_TICKET": 1,
+            "MT_C_AUTHORIZED": 2,
+            "MT_C_UN_AUTHORIZED": 3,
+            "MT_C_UPDATE_AUTHORIZED": 4
+          }
+        },
+        "WxAuthorizationFunc": {
+          "fields": {
+            "id": {
+              "type": "int64",
+              "id": 1
+            }
+          }
+        },
+        "WxAuthorizationFuncInfo": {
+          "fields": {
+            "funcscope_category": {
+              "type": "WxAuthorizationFunc",
+              "id": 1
+            }
+          }
+        },
+        "WxAuthorizationInfo": {
+          "fields": {
+            "authorizer_appid": {
+              "type": "string",
+              "id": 1
+            },
+            "authorizer_access_token": {
+              "type": "string",
+              "id": 2
+            },
+            "expires_in": {
+              "type": "int32",
+              "id": 5
+            },
+            "authorizer_refresh_token": {
+              "type": "string",
+              "id": 6
+            },
+            "func_info": {
+              "rule": "repeated",
+              "type": "WxAuthorizationFuncInfo",
+              "id": 7
+            },
+            "create_time": {
+              "type": "int64",
+              "id": 8
+            },
+            "component_appid": {
+              "type": "string",
+              "id": 9
+            },
+            "errcode": {
+              "type": "int32",
+              "id": 10
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 11
+            }
+          }
+        },
+        "WxComponentMsg": {
+          "fields": {
+            "app_id": {
+              "type": "string",
+              "id": 1
+            },
+            "info_type": {
+              "type": "MsgType",
+              "id": 2
+            },
+            "create_time": {
+              "type": "int64",
+              "id": 3
+            },
+            "component_verify_ticket": {
+              "type": "string",
+              "id": 4
+            },
+            "authorizer_app_id": {
+              "type": "string",
+              "id": 5
+            },
+            "authorization_code": {
+              "type": "string",
+              "id": 6
+            },
+            "authorization_code_expired_time": {
+              "type": "int64",
+              "id": 7
+            }
+          }
+        },
+        "WxComponentBase": {
+          "fields": {
+            "component_appid": {
+              "type": "string",
+              "id": 1
+            },
+            "component_appsecret": {
+              "type": "string",
+              "id": 2
+            },
+            "component_verify_ticket": {
+              "type": "string",
+              "id": 3
+            },
+            "component_access_token": {
+              "type": "string",
+              "id": 4
+            },
+            "expires_in": {
+              "type": "int32",
+              "id": 5
+            },
+            "create_time": {
+              "type": "int64",
+              "id": 6
+            },
+            "pre_auth_code": {
+              "type": "string",
+              "id": 7
+            },
+            "authorization_code": {
+              "type": "string",
+              "id": 8
+            },
+            "authorization_info": {
+              "type": "WxAuthorizationInfo",
+              "id": 9
+            },
+            "authorizer_appid": {
+              "type": "string",
+              "id": 10
+            }
+          }
+        },
+        "WxComponentEntry": {
+          "fields": {
+            "component_msg": {
+              "type": "WxComponentMsg",
+              "id": 1
+            },
+            "sign": {
+              "type": "WxSign",
+              "id": 2
+            },
+            "token": {
+              "type": "com2.IToken",
+              "id": 3
+            },
+            "component_base": {
+              "type": "WxComponentBase",
+              "id": 4
+            },
+            "msg_base": {
+              "type": "WxMsgBase",
+              "id": 5
+            },
+            "js_api": {
+              "type": "WXJSAPIBase",
+              "id": 6
+            },
+            "wx_back_encrypt_xml": {
+              "type": "string",
+              "id": 7
+            }
+          }
+        },
+        "WxSign": {
+          "fields": {
+            "timestamp": {
+              "type": "int64",
+              "id": 1
+            },
+            "encrypt_type": {
+              "type": "string",
+              "id": 2
+            },
+            "nonce": {
+              "type": "string",
+              "id": 3
+            },
+            "msg_signature": {
+              "type": "string",
+              "id": 4
+            },
+            "signature": {
+              "type": "string",
+              "id": 5
+            }
+          }
+        },
+        "WxSqlCompact": {
+          "fields": {
+            "value": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "WXAPIStatus": {
+          "values": {
+            "WX_API_OK": 0,
+            "WX_API_FAIL": 1
+          }
+        },
+        "WXJSAPITicket": {
+          "fields": {
+            "errcode": {
+              "type": "int32",
+              "id": 1
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 2
+            },
+            "ticket": {
+              "type": "string",
+              "id": 3
+            },
+            "expires_in": {
+              "type": "int32",
+              "id": 4
+            },
+            "create_time": {
+              "type": "int64",
+              "id": 5
+            }
+          }
+        },
+        "WXJSAPIBase": {
+          "fields": {
+            "app": {
+              "type": "WxPubAccount",
+              "id": 1
+            },
+            "request_url": {
+              "type": "string",
+              "id": 2
+            },
+            "wx_api_st": {
+              "type": "WXAPIStatus",
+              "id": 3
+            },
+            "timestamp": {
+              "type": "string",
+              "id": 4
+            },
+            "nonce_str": {
+              "type": "string",
+              "id": 5
+            },
+            "signature": {
+              "type": "string",
+              "id": 6
+            },
+            "create_time": {
+              "type": "int64",
+              "id": 7
+            },
+            "ticket": {
+              "type": "WXJSAPITicket",
+              "id": 8
+            },
+            "app_id": {
+              "type": "string",
+              "id": 9
+            },
+            "debug": {
+              "type": "bool",
+              "id": 10
+            }
+          }
+        },
+        "WXJSAPIEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "js_api": {
+              "type": "WXJSAPIBase",
+              "id": 2
+            }
+          }
+        },
+        "KF_ON_STATUS": {
+          "values": {
+            "KF_UN_USE": 0,
+            "KF_ON_PC": 1,
+            "KF_ON_TEL": 2,
+            "KF_ON_PC_TEL": 3
+          }
+        },
+        "Kf": {
+          "fields": {
+            "kf_id": {
+              "type": "int64",
+              "id": 1
+            },
+            "kf_nick": {
+              "type": "string",
+              "id": 2
+            },
+            "kf_headimgurl": {
+              "type": "string",
+              "id": 3
+            },
+            "kf_account": {
+              "type": "string",
+              "id": 4
+            },
+            "password": {
+              "type": "string",
+              "id": 5
+            },
+            "status": {
+              "type": "int32",
+              "id": 6
+            },
+            "auto_accept": {
+              "type": "int32",
+              "id": 7
+            },
+            "accepted_case": {
+              "type": "int32",
+              "id": 8
+            },
+            "media": {
+              "type": "string",
+              "id": 9
+            },
+            "kf_wx": {
+              "type": "string",
+              "id": 10
+            },
+            "nickname": {
+              "type": "string",
+              "id": 11
+            }
+          }
+        },
+        "KfBase": {
+          "fields": {
+            "kf": {
+              "type": "Kf",
+              "id": 1
+            },
+            "kf_list": {
+              "rule": "repeated",
+              "type": "Kf",
+              "id": 8
+            },
+            "errcode": {
+              "type": "int64",
+              "id": 2
+            },
+            "errmsg": {
+              "type": "string",
+              "id": 3
+            },
+            "kf_online_list": {
+              "rule": "repeated",
+              "type": "Kf",
+              "id": 4
+            }
+          }
+        },
+        "WxKFEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "kf": {
+              "type": "KfBase",
+              "id": 3
+            },
+            "wx_account": {
+              "type": "WxPubAccount",
+              "id": 4
+            }
+          }
+        },
+        "xml": {
+          "fields": {
+            "appid": {
+              "type": "string",
+              "id": 1
+            },
+            "act_name": {
+              "type": "string",
+              "id": 100
+            },
+            "attach": {
+              "type": "string",
+              "id": 200
+            },
+            "bank_type": {
+              "type": "string",
+              "id": 250
+            },
+            "bill_date": {
+              "type": "string",
+              "id": 270
+            },
+            "bill_type": {
+              "type": "string",
+              "id": 280
+            },
+            "body": {
+              "type": "string",
+              "id": 300
+            },
+            "cash_fee": {
+              "type": "int32",
+              "id": 350
+            },
+            "cash_fee_type": {
+              "type": "string",
+              "id": 370
+            },
+            "client_ip": {
+              "type": "string",
+              "id": 390
+            },
+            "code_url": {
+              "type": "string",
+              "id": 400
+            },
+            "coupon_count": {
+              "type": "int32",
+              "id": 430
+            },
+            "coupon_fee": {
+              "type": "int32",
+              "id": 450
+            },
+            "coupon_fees": {
+              "rule": "repeated",
+              "type": "CouponFee",
+              "id": 470
+            },
+            "coupon_ids": {
+              "rule": "repeated",
+              "type": "CouponId",
+              "id": 480
+            },
+            "detail": {
+              "type": "string",
+              "id": 500
+            },
+            "device_info": {
+              "type": "string",
+              "id": 600
+            },
+            "err_code": {
+              "type": "string",
+              "id": 700
+            },
+            "err_code_des": {
+              "type": "string",
+              "id": 800
+            },
+            "fee_type": {
+              "type": "string",
+              "id": 900
+            },
+            "goods_tag": {
+              "type": "string",
+              "id": 1000
+            },
+            "is_subscribe": {
+              "type": "string",
+              "id": 1050
+            },
+            "limit_pay": {
+              "type": "string",
+              "id": 1100
+            },
+            "mch_billno": {
+              "type": "string",
+              "id": 1150
+            },
+            "mch_id": {
+              "type": "string",
+              "id": 1200
+            },
+            "nonce_str": {
+              "type": "string",
+              "id": 1300
+            },
+            "notify_url": {
+              "type": "string",
+              "id": 1400
+            },
+            "openid": {
+              "type": "string",
+              "id": 1500
+            },
+            "out_trade_no": {
+              "type": "string",
+              "id": 1600
+            },
+            "pay_sign": {
+              "type": "string",
+              "id": 1700
+            },
+            "prepay_id": {
+              "type": "string",
+              "id": 1800
+            },
+            "product_id": {
+              "type": "string",
+              "id": 1900
+            },
+            "re_openid": {
+              "type": "string",
+              "id": 1950
+            },
+            "remark": {
+              "type": "string",
+              "id": 1970
+            },
+            "result_code": {
+              "type": "string",
+              "id": 2000
+            },
+            "return_code": {
+              "type": "string",
+              "id": 2100
+            },
+            "return_msg": {
+              "type": "string",
+              "id": 2200
+            },
+            "send_listid": {
+              "type": "string",
+              "id": 2230
+            },
+            "send_name": {
+              "type": "string",
+              "id": 2250
+            },
+            "send_time": {
+              "type": "string",
+              "id": 2270
+            },
+            "sign": {
+              "type": "string",
+              "id": 2300
+            },
+            "spbill_create_ip": {
+              "type": "string",
+              "id": 2400
+            },
+            "sub_appid": {
+              "type": "string",
+              "id": 2420
+            },
+            "sub_is_subscribe": {
+              "type": "string",
+              "id": 2421
+            },
+            "sub_mch_id": {
+              "type": "string",
+              "id": 2422
+            },
+            "sub_openid": {
+              "type": "string",
+              "id": 2423
+            },
+            "time_expire": {
+              "type": "string",
+              "id": 2500
+            },
+            "time_end": {
+              "type": "string",
+              "id": 2550
+            },
+            "time_start": {
+              "type": "string",
+              "id": 2600
+            },
+            "total_amount": {
+              "type": "int32",
+              "id": 2650
+            },
+            "total_fee": {
+              "type": "int32",
+              "id": 2700
+            },
+            "total_num": {
+              "type": "int32",
+              "id": 2720
+            },
+            "trade_state": {
+              "type": "string",
+              "id": 2750
+            },
+            "trade_state_desc": {
+              "type": "string",
+              "id": 2770
+            },
+            "trade_type": {
+              "type": "string",
+              "id": 2800
+            },
+            "transaction_id": {
+              "type": "string",
+              "id": 2850
+            },
+            "wishing": {
+              "type": "string",
+              "id": 2860
+            },
+            "wxappid": {
+              "type": "string",
+              "id": 2870
+            },
+            "wxsign": {
+              "type": "string",
+              "id": 2900
+            },
+            "jspay": {
+              "type": "JsPay",
+              "id": 3000
+            },
+            "billDeatils": {
+              "type": "string",
+              "id": 4000
+            },
+            "pt_id": {
+              "type": "com2.IID",
+              "id": 5000
+            }
+          }
+        },
+        "JsPay": {
+          "fields": {
+            "appId": {
+              "type": "string",
+              "id": 1
+            },
+            "nonceStr": {
+              "type": "string",
+              "id": 10
+            },
+            "package": {
+              "type": "string",
+              "id": 20
+            },
+            "paySign": {
+              "type": "string",
+              "id": 30
+            },
+            "signType": {
+              "type": "string",
+              "id": 40
+            },
+            "timeStamp": {
+              "type": "string",
+              "id": 50
+            }
+          }
+        },
+        "AppPay": {
+          "fields": {
+            "appid": {
+              "type": "string",
+              "id": 1
+            },
+            "noncestr": {
+              "type": "string",
+              "id": 10
+            },
+            "package": {
+              "type": "string",
+              "id": 20
+            },
+            "partnerid": {
+              "type": "string",
+              "id": 30
+            },
+            "prepayid": {
+              "type": "string",
+              "id": 40
+            },
+            "timestamp": {
+              "type": "string",
+              "id": 50
+            },
+            "sign": {
+              "type": "string",
+              "id": 60
+            }
+          }
+        },
+        "CouponId": {
+          "fields": {
+            "coupon_id_no": {
+              "type": "string",
+              "id": 1
+            },
+            "coupon_id": {
+              "type": "string",
+              "id": 10
+            }
+          }
+        },
+        "CouponFee": {
+          "fields": {
+            "coupon_fee_no": {
+              "type": "string",
+              "id": 1
+            },
+            "coupon_fee": {
+              "type": "int32",
+              "id": 10
+            }
+          }
+        },
+        "WxPayQueryExt": {
+          "fields": {
+            "pay_account_id": {
+              "type": "com2.IID",
+              "id": 1
+            }
+          }
+        },
+        "WxPayEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "q_ext": {
+              "type": "WxPayQueryExt",
+              "id": 2
+            },
+            "xml": {
+              "type": "xml",
+              "id": 3
+            },
+            "js_pay": {
+              "type": "JsPay",
+              "id": 4
+            },
+            "pub_account": {
+              "type": "WxPubAccount",
+              "id": 5
+            },
+            "pay_user": {
+              "type": "WxOauthUser",
+              "id": 6
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 7
+            },
+            "pub_account_list": {
+              "rule": "repeated",
+              "type": "WxPubAccount",
+              "id": 8
+            },
+            "app_pay": {
+              "type": "AppPay",
+              "id": 9
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,36 @@
+<div class="wrapper b-b header" *ngIf="_config.showhead" style="position:relative;">{{_config.title}}
+    <a *ngIf="_config.rootCreate" class="btn btn-sm btn-default" style="position: absolute; top: 0; right:10px;z-index: 500;" (click)="addClick(null)">
+      <i class="fa fa-plus"></i> 新建</a>
+  </div>
+  <section class="vbox">
+    <section class="middle-content scrollable tree-content">
+        <ul id="{{treeId}}" class="ztree"></ul>
+    </section>
+  </section>
+
+<div class="modal fade" id="tree_modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <df-form *ngIf="_config.useform" #form [formData]="_treeFormData" (selectchangeout)="selectChange($event)" (formSubmit)="formSubmit($event)"></df-form>
+    </div>
+    <!-- /.modal-content -->
+  </div>
+  <!-- /.modal-dialog -->
+</div>
+
+
+<style>
+  @media (min-width: 768px) {
+    .tree-content {
+        height: calc(100% - 50px);
+        width: 100%;
+        position: absolute;
+        top: 50px;
+        bottom: 50px;
+        display: block;
+    }
+}
+</style>
+
+
+

@@ -1,0 +1,42 @@
+<html>
+  <head>
+  <title>
+  </title>
+  	<meta http-equiv="Content-Type" content="text/html;" charset="UTF-8">
+
+	<script charset="utf-8" src="kindeditor-min.js"></script>
+<script charset="utf-8" src="lang/zh_CN.js"></script>
+  <script language="language">
+  Ext.onReady(function() {
+    var content = new Ext.form.TextArea( {
+			fieldLabel:'信息内容',
+			maxLength:'1000',
+			height:150,
+			maxLengthText:'文章提示信息长度不能超过2000字',
+			name:'content',
+			id:'content',
+			emptyText:'无',
+			anchor : '80%',
+			listeners:{
+			  "render": function (f) {
+                   K = KindEditor;
+                   htmlEditor = K.create('#content', {
+                        uploadJson: 'upload_json.jsp',//路径自己改一下
+                        fileManagerJson : 'file_manager_json.jsp',//路径自己改一下
+                        height: 200,
+                        width: '90%',
+                         // fontSizeTable:['21px','20px','17px','18px','16px','14px','12px'],
+                        resizeType : 1,
+						allowPreviewEmoticons : true,
+						allowImageUpload : true
+                    });
+                }
+			}
+		});
+});
+
+  </script>
+  <body>
+  
+  </body>
+</html>

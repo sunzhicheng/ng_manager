@@ -1,0 +1,134 @@
+<div class="table-responsive">
+    <table class="table table-striped b-t b-light text-sm" style="margin: 0" id="{{ table_id }}">
+        <thead>
+            <tr>
+                <th *ngIf="cmpSelect===1" width="20">
+                    <input type="checkbox" (click)="all($event)">
+                </th>
+                <th class="th-sortable" data-toggle="class" 
+                *ngFor="let column of columns"  [ngTableSorting]="configTable" 
+                [column]="column" (sortChanged)="initPage($event)">{{ column.title }}
+
+                <!--<i *ngIf="column.sort" class="pull-right fa"-->
+         <!--[ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>-->
+
+                    <span class="th-sort"  >
+                        <i  *ngIf="column.sort === 'desc'"  class="fa fa-sort-down text"></i>
+                        <i *ngIf="column.sort === 'asc'" class="fa fa-sort-up text-active"></i>
+                        <i class="fa fa-sort"></i>
+                    </span>
+                </th>
+                <th width="30" *ngIf="optConfig.isopt"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let row of rows ; let i = index">
+                <td *ngIf="cmpSelect===1" >
+                    <input type="checkbox" id='row_{{ i }}' [checked]="isChecked(getData(row,'col_0'))"  value="{{ getData(row,'col_0') }}" (click)="oneCheck($event)" >
+                </td>
+                <td *ngFor="let column of columns"  >{{ getData(row, column.name) }}</td>
+                <td *ngIf="optConfig.isopt"  >
+
+                    <a  *ngIf="isShowOperation(row,'view')" title="{{ optConfig.view.desc||'查看' }}"  (click)="viewOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-chakan"></span>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'rebut')" title="{{ optConfig.rebut.desc||'驳回' }}"  (click)="rebutOpt(getData(row,'col_0'))">
+                      <i class="iconfont red">&#xe63c;</i>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'pass')" title="{{ optConfig.pass.desc||'通过' }}"  (click)="passOpt(getData(row,'col_0'))">
+                      <span class="iconfont red">&#xe63c;</span>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'home')" title="{{ optConfig.home.desc||'首页显示' }}"  (click)="homeOpt(getData(row,'col_0'))">
+                      <span class="iconfont red">&#xe63c;</span>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'top')" title="{{ optConfig.top.desc||'置顶' }}"  (click)="topOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-zhiding"></span>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'enable')" title="{{ optConfig.enable.desc||'启用' }}"  (click)="enableOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-qiyong"></span>
+                    </a>
+                    <a  *ngIf="isShowOperation(row,'stop')" title="{{ optConfig.stop.desc||'停用' }}"  (click)="stopOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-tingyong"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'del')" title="{{ optConfig.del.desc||'删除' }}" (click)="delOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-shanchu"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'unbind')" title="{{ optConfig.unbind.desc||'解绑' }}" (click)="unbindOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-jiechubangding"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'update')" title="{{ optConfig.update.desc||'修改' }}" (click)="updateOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-edit-1-copy"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'bind')" title="{{ optConfig.bind.desc||'绑定' }}" (click)="bindOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-bangding"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'outGood')" title="{{ optConfig.outGood.desc||'出货' }}" (click)="outGoodOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-chuku"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'inGood')" title="{{ optConfig.inGood.desc||'入库' }}" (click)="inGoodOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-ruku"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'subAudit')" title="{{ optConfig.subAudit.desc||'提交审核' }}" (click)="subAuditOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-shenhebaobiao"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'delivery')" title="{{ optConfig.delivery.desc||'发货' }}" (click)="deliveryOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-dingdanfahuo_huaban"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'cancel')" title="{{ optConfig.cancel.desc||'取消' }}" (click)="cancelOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-dingdanquxiao"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'refund')" title="{{ optConfig.refund.desc||'退款' }}" (click)="refundOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-tuikuan"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'changeLevel')" title="{{ optConfig.changeLevel.desc||'等级变动' }}" (click)="changeLevelOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-dengji"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'changeNum')" title="{{ optConfig.changeNum.desc||'数量变动' }}" (click)="changeNumOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-shujuzhanshi"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'bindZfb')" title="{{ optConfig.bindZfb.desc||'绑定支付宝应用' }}" (click)="bindZfbOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-umidd17"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'bindWX')" title="{{ optConfig.bindWX.desc||'绑定微信商户' }}" (click)="bindWXOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-wechat"></span>
+                    </a>
+                    <a *ngIf="isShowOperation(row,'paimai')" title="{{ optConfig.paimai.desc||'拍卖信息' }}" (click)="paimaiOpt(getData(row,'col_0'))">
+                        <span class="iconfont icon-paimai"></span>
+                    </a>
+                  </td>
+            </tr>
+            
+        </tbody>
+    </table>
+</div>
+<footer class="panel-footer" *ngIf="!optConfig.notShowPage">
+    <div class="row">
+        <div class="col-sm-4 hidden-xs">
+            <select class="input-sm form-control input-s-sm inline" (change)="goSelectNum($event)">
+                <option *ngFor="let item of numberIndex_all" value="item.index"   [selected]="item.index===selectPage">{{ item.index }}</option>
+            </select>
+            <!-- <button class="btn btn-sm btn-default">go</button> -->
+        </div>
+        <div class="col-sm-4 text-center">
+            <small class="text-muted inline m-t-sm m-b-sm">每页{{ pagePerCount }}条记录 / 共{{ totalCount }}条记录 当前页 {{ pager&&pager.pageNo }} / {{ totalPage }} 页</small>
+        </div>
+        <div class="col-sm-4 text-right text-center-xs">
+            <ul class="pagination pagination-sm m-t-none m-b-none">
+                <li>
+                    <a (click)="prev()">
+                        <i class="fa fa-chevron-left"></i>
+                    </a>
+                </li>
+                <li *ngFor="let item of numberIndex">
+                    <a  [class.active]="item.index===selectPage"
+                    (click)="goPointNum(item.index)">{{ item.index }}</a>
+                </li>
+                <li>
+                    <a  (click)="next()">
+                        <i class="fa fa-chevron-right"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</footer>

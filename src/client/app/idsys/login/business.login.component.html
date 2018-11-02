@@ -1,0 +1,62 @@
+<section id="content" class="wrapper-md animated fadeInUp b-t-blue">
+        <div class="container aside-xxl m-t-lg">
+            <div class="text-center m-t-lg">
+                <img src="assets/images/logo-login-1.png" alt="">
+            </div>
+              <section class="panel panel-default bg-white m-t-lg">
+                  <header class="panel-heading text-center">
+                      <strong>登录</strong>
+                  </header>
+                  <form action="#" #f="ngForm"  class="panel-body wrapper-lg">
+                      <div class="form-group">
+                          <label class="control-label">手机号</label>
+                          <input type="text" class="form-control input-lg"
+                          placeholder="请输入手机号" [ngModel]="pp(token, 'ext.pt_account', '')" (ngModelChange)="token.ext.pt_account=$event"  name="pt_account" >
+                      </div>
+                      <div class="form-group">
+                          <label class="control-label">Password</label>
+                          <input type="password" id="inputPassword"  class="form-control input-lg"
+                          placeholder="请输入密码" [ngModel]="pp(token, 'ext.pt_pwd', '')" (ngModelChange)="token.ext.pt_pwd=$event"  name="pt_pwd">
+                      </div>
+                      <div class="form-group">
+                        <label class="control-label" >验证码</label>
+                        <input type="text" placeholder="请输入验证码" [ngModel]="pp(token, 'ext.pt_i_code', '')" (ngModelChange)="token.ext.pt_i_code=$event"  name="pt_i_code"
+                           class="form-control input-lg" required />
+                        <a class="v-code">
+                          <img src="{{captcha}}"  name="captcha" (click)="refreshCaptcha()">
+                        </a>
+                      </div>
+                      <!-- <div class="checkbox">
+                          <label>
+                              <input type="checkbox"> Keep me logged in </label>
+                      </div>
+                      <a href="#" class="pull-right m-t-xs">
+                          <small>Forgot password?</small>
+                      </a> -->
+                      <button type="submit" class="btn btn-primary" (click)="login()">登录</button>
+                      <div class="form-group">
+                        <p><i class="icon-minus-sign" *ngIf="errorMessage"></i> {{errorMessage}}</p>
+                      </div>
+                      <!-- <div class="line line-dashed"></div>
+                      <a href="#" class="btn btn-facebook btn-block m-b-sm">
+                          <i class="fa fa-facebook pull-left"></i>Sign in with Facebook</a>
+                      <a href="#" class="btn btn-twitter btn-block">
+                          <i class="fa fa-twitter pull-left"></i>Sign in with Twitter</a>
+                      <div class="line line-dashed"></div>
+                      <p class="text-muted text-center">
+                          <small>Do not have an account?</small>
+                      </p>
+                      <a href="signup.html" class="btn btn-default btn-block">Create an account</a> -->
+                  </form>
+              </section>
+          </div>
+      </section>
+      <!-- footer -->
+      <footer id="footer">
+          <div class="text-center padder">
+              <p>
+                  <small>Copyright &copy; 2018 {{ platform_name }}
+                   </small>
+              </p>
+          </div>
+      </footer>

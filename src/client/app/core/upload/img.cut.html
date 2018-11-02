@@ -1,0 +1,34 @@
+<div  id="tailoring_container_{{namekey}}" class="tailoring-container" [hidden]="ishidden"
+>
+<div class="black-cloth" (click)="hideTailor()"></div>
+<div class="tailoring-content"  id="tailoring_content_{{namekey}}">
+    <div class="tailoring-content-one">
+        <label title="上传图片" for="chooseImg_{{namekey}}" class="l-btn choose-btn"  [ngClass]="{'disabled':isDisabled}">
+            <input type="file" [attr.accept]="accept" [disabled]="isDisabled"  id="chooseImg_{{namekey}}" name="file" class="hidden"
+                (change)="selectImg($event)">
+            选择图片
+        </label>
+        <div class="close-tailoring" (click)="hideTailor()">×</div>
+    </div>
+    <div class="tailoring-content-two">
+        <div class="tailoring-box-parcel">
+            <img id="tailoringImg_{{namekey}}">
+        </div>
+        <div class="preview-box-parcel">
+            <p>图片预览：</p>
+            <div class="square previewImg" id="previewImgDIV_{{namekey}}"></div>
+            <p *ngIf="cropRusult">宽X高： {{cropRusult.width.toFixed(2)}} X {{cropRusult.height.toFixed(2)}}</p>
+            <p *ngIf="cropRusult">大小： {{cutImgSize}}</p>
+            <!-- <div class="circular previewImg"></div> -->
+        </div>
+    </div>
+    <div class="tailoring-content-three">
+        <button type ="button" class="l-btn cropper-reset-btn"  (click)="resetBtn()">复位</button>
+        <button type ="button"  class="l-btn cropper-rotate-btn"  (click)="rotateBtn()">旋转</button>
+        <button type ="button" class="l-btn cropper-scaleX-btn"  (click)="scaleXBtn()">换向</button>
+        <button type ="button" class="l-btn cropper-scaleX-btn"  (click)="getSize()">计算</button>
+        <button type ="button" class="l-btn sureCut" (click)="originResult()" *ngIf="_config.isShowOriginBtn">原图上传</button>
+        <button type ="button" class="l-btn sureCut" (click)="cutResult()">裁剪上传</button>
+    </div>
+</div>
+</div>

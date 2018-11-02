@@ -1,0 +1,26 @@
+
+  <div class="col-xs-2" *ngIf="pro_list && pro_list.length>0">
+    <select id="pro_id" class="form-control" 
+            [disabled]="isDisabled"
+            (change)="changeProvince($event)"
+            >
+      <option *ngFor="let province of pro_list" value="{{ province.name }}" [selected]="province.name === values.province">{{ province.name }}</option>
+    </select>
+  </div>
+  <div class="col-xs-2" *ngIf="city_list && city_list.length>0">
+    <select id="city_id" class="form-control" 
+            [disabled]="isDisabled"
+            (change)="changeCity($event)"
+            >
+      <option *ngFor="let city of city_list" value="{{ city.name }}"   [selected]="city.name === values.city">{{ city.name }}</option>
+    </select>
+  </div>
+  <div class="col-xs-2"  *ngIf="area_list && area_list.length>0">
+    <select id="area_id" class="form-control" 
+            [disabled]="isDisabled"
+            (change)="changeArea($event)"
+            >
+      <option *ngFor="let area of area_list" value="{{ area.name }}"  [selected]="area.name === values.area">{{ area.name }}</option>
+    </select>
+  </div>
+

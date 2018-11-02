@@ -1,0 +1,218 @@
+.b-b {
+  border-bottom: 1px solid #e8e9ee;
+}
+
+.b-r {
+  border-right: 1px solid #e8e9ee;
+}
+
+.bg-dark.dk,
+.bg-dark .dk {
+  background-color: #529efb;
+}
+
+.bg-dark.dker,
+.bg-dark .dker {
+  background-color: #529efb;
+}
+
+.bg-dark.lter,
+.bg-dark .lter {
+  background-color: #ffffff;
+}
+
+.bg-dark.lt,
+.bg-dark .lt {
+  background-color: #529efb;
+}
+
+.bg-dark .nav > li > a:hover {
+  color: #fff;
+  background-color: #4186e8;
+}
+
+.bg-dark .nav > li > a:hover .iconfont,
+.bg-dark .nav > li > a.active .iconfont {
+  color: #fff;
+}
+
+.b-dark {
+  border-color: #529efb;
+}
+
+.nav-primary ul.nav > li > a {
+  border-top: 1px solid #e8e9ee;
+}
+
+#nav {
+  border-right: 1px solid #e8e9ee;
+}
+
+.bg-dark .nav .open > a {
+  background-color: #4186e8;
+}
+
+.navbar-nav .dropdown-toggle {
+  color: #fff !important;
+}
+
+.bg-dark .nav > li > a {
+  color: #8890a4;
+}
+
+.nav-primary ul.nav > li:hover > a,
+.nav-primary ul.nav > li:focus > a,
+.nav-primary ul.nav > li > a:hover,
+.nav-primary ul.nav > li > a:focus,
+.nav-primary ul.nav > li > a:active,
+.nav-primary ul.nav > li.active > a {
+  color: #18223b;
+  background-color: inherit;
+  background-color: #f5f6fa !important;
+  text-shadow: none;
+}
+
+.nav-primary li:nth-child(1) > a > i > b,
+.nav-primary li:nth-child(5) > a > i > b,
+.nav-primary li:nth-child(9) > a > i > b {
+  background-color: #fa8e34;
+}
+
+.nav-primary li:nth-child(2) > a > i > b,
+.nav-primary li:nth-child(6) > a > i > b,
+.nav-primary li:nth-child(10) > a > i > b {
+  background-color: #3bcdab;
+}
+
+.nav-primary li:nth-child(3) > a > i > b,
+.nav-primary li:nth-child(7) > a > i > b,
+.nav-primary li:nth-child(11) > a > i > b {
+  background-color: #fd917b;
+}
+
+.nav-primary li:nth-child(4) > a > i > b,
+.nav-primary li:nth-child(8) > a > i > b,
+.nav-primary li:nth-child(12) > a > i > b {
+  background-color: #529efb;
+}
+
+.nav-primary ul.nav > li > ul {
+  background-color: #fff;
+}
+
+.btn-dark {
+  background-color: #4186e8;
+  border-color: #4186e8;
+}
+
+.btn-dark:hover,
+.btn-dark:focus,
+.btn-dark:active,
+.btn-dark.active,
+.open .dropdown-toggle.btn-dark {
+  color: #fff !important;
+  background-color: #4186e8;
+  border-color: #4186e8;
+}
+
+#content,
+#subContent {
+  background-color: #f5f6fa;
+}
+
+.btn-primary {
+  color: #fff !important;
+  background-color: #529efb;
+  border-color: #529efb;
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active,
+.btn-primary.active,
+.open .dropdown-toggle.btn-primary {
+  color: #fff !important;
+  background-color: #4186e8;
+  border-color: #4186e8;
+}
+
+.pagination-sm > li > a.active {
+  background-color: #529efb;
+  color: #fff;
+  border: 1px solid #529efb;
+  cursor: default;
+}
+
+.panel.panel-default {
+  border-color: #e8e9ee;
+}
+
+.form-control:focus {
+  border-color: #529efb;
+}
+
+.panel.panel-default > .panel-heading,
+.panel.panel-default > .panel-footer {
+  background-color: #f3f4f7;
+}
+
+.login-content {
+  background: #f5f6fa !important;
+  border-top: 6px solid #529efb;
+}
+
+.language.red::after {
+  border-bottom: 48px solid #529efb !important;
+}
+
+.panel .table-striped > tbody > tr:nth-child(odd) > td,
+.panel .table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #f9fafc;
+}
+
+.panel .table-striped > thead th {
+  background: #f3f4f7;
+}
+
+.btn-info {
+  color: #fff !important;
+  background-color: #35cb98;
+  border-color: #35cb98;
+}
+
+.btn-info:hover,
+.btn-info:focus,
+.btn-info:active,
+.btn-info.active,
+.open .dropdown-toggle.btn-info {
+  color: #fff !important;
+  background-color: #34bf90;
+  border-color: #34bf90;
+}
+.radio-custom > i.checked:before,
+.checkbox-custom > i.checked:before {
+  color: #529efb;
+}
+
+.switch input:checked + span {
+  background-color: #529efb;
+}
+
+.btn-primary.disabled,
+.btn-primary.disabled:hover,
+.btn-primary.disabled:focus,
+.btn-primary.disabled:active,
+.btn-primary.disabled.active,
+.btn-primary[disabled],
+.btn-primary[disabled]:hover,
+.btn-primary[disabled]:focus,
+.btn-primary[disabled]:active,
+.btn-primary[disabled].active,
+fieldset[disabled] .btn-primary,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary:active,
+fieldset[disabled] .btn-primary.active {
+  background-color: #7eb3f5;
+  border-color: #7eb3f5;
+}

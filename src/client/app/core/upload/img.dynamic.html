@@ -1,0 +1,43 @@
+<div class="img-upload-box">
+    <div class="img-list">
+        <ul>
+            <li *ngFor="let img of img_arr; let i = index;">
+                <div class="img-box" title="双击放大" (dblclick)="showEnlargeImg(img)">
+                    <img id="finalImg" src="{{showImg(img)}}" alt="">
+                    <a *ngIf="(img!=='notImg')&&(!isDisabled)" (click)="delImg(img)" class="times" title="删除">&times;</a>
+                    <a *ngIf="i>0 &&(!isDisabled)" (click)="toPrev(img)" class="left" title="排前"></a>
+                    <a *ngIf="i<img_arr.length-1 &&(!isDisabled)" (click)="toAfter(img)" class="right" title="排后"></a>
+                </div>
+            </li>
+            <li *ngIf="canUpload() && !isDisabled">
+                <div *ngIf="isUploading" class="img-box"><img src="{{showImg('loading')}}" alt=""></div>
+                <a class="add-img-box" *ngIf="!isUploading">
+                    <span class="plus">+</span>
+                    <span>新增图片</span>
+                    <input type="file" (change)='uploadImg($event)' [disabled]="isDisabled" [attr.accept]="accept">
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div class="modal fade" id="img_enlarge_{{namekey}}">
+    <div class="img-box-abs">
+        <img src="{{enlargeImg}}" alt="">
+    </div>
+</div>
+
+<style>
+    .img-box-abs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3000;
+    }
+
+    .img-box-abs img {
+        width: 100%;
+        height: auto;
+    }
+</style>
