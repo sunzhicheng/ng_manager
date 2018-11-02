@@ -1,0 +1,58 @@
+
+    <section class="vbox">
+       <header class="bg-dark dk header navbar navbar-fixed-top-xs">
+          <top-nav (keyword)="searchSidebar($event);"></top-nav>
+        </header>
+        <section>
+            <section class="hbox stretch">
+                <!-- .aside -->
+                <aside class="bg-dark lter aside-md hidden-print" id="nav">
+                    <section class="vbox">
+                        <sd-sidebar></sd-sidebar>
+                    </section>
+                </aside>
+                <!-- /.aside -->
+                <section id="content">
+                    <section class="vbox">
+                          <router-outlet></router-outlet>
+                    </section>
+                    <a  class="hide nav-off-screen-block" data-toggle="class:nav-off-screen" data-target="#nav"></a>
+                </section>
+                <aside class="bg-light lter b-l aside-md hide" id="notes">
+                    <div class="wrapper">Notification</div>
+                </aside>
+            </section>
+        </section>
+    </section>
+
+
+    <div class="modal fade" id="tokenInvaildDiv">
+        <div class="modal-dialog" style="width: 450px;">
+            <div class="modal-content" >
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3 class="m-t-none m-b">登陆信息失效,请重新登陆!</h3>
+                            <p>{{ errorMessage }}</p>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label>用户名</label>
+                                    <input type="text" class="form-control" placeholder="请输入用户名"  #account  [value]="pt_account" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label>密码</label>
+                                    <input type="password" class="form-control" placeholder="请输入密码" #pwd >
+                                </div>
+                                <div class="checkbox m-t-lg">
+                                    <button type="submit" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs" (click)="login(account.value,pwd.value)"><strong>登陆</strong></button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+
+
+
+    
