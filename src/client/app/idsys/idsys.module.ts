@@ -9,6 +9,9 @@ import { IdSysAccountFormComponent } from './idsysappacount/idsysappacount.form'
 import { IdSysAppAcountService } from './idsysappacount/idsysappacount.service';
 import { LoginService } from './login/login.service';
 import { OperateLoginComponent } from './login/operate.login.component';
+import { IdSysMenuComponent } from './idsysmenu/idsysmenu.component';
+import { IdSysMenuFormComponent } from './idsysmenu/idsysmenu.form';
+import { ModalMenuComponent } from './idsysmenu/modal.menu.component';
 
 /**
  * 系统模块 模块
@@ -22,13 +25,16 @@ import { OperateLoginComponent } from './login/operate.login.component';
     FormTableModule
   ],
   exports: [
-    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
+    IdSysMenuComponent, IdSysMenuFormComponent, ModalMenuComponent
   ],
   declarations: [
-    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
+    IdSysMenuComponent, IdSysMenuFormComponent, ModalMenuComponent
   ],
   entryComponents: [
-    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
+    IdSysMenuComponent, IdSysMenuFormComponent, ModalMenuComponent
   ],
   providers: [
     LoginService,

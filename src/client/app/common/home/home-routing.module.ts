@@ -3,6 +3,8 @@ import { RouterModule } from '@angular/router';
 import { OperateLoginComponent } from '../../idsys/login/operate.login.component';
 import { HomeComponent } from './home.component';
 import { IndexComponent } from './index.component';
+import { IdSysMenuRoutes } from '../../idsys/idsysmenu/idsysmenu-routing';
+import { IdSysAcountRoutes } from '../../idsys/idsysappacount/idsysappacount-routing';
 
 @NgModule({
   imports: [
@@ -13,6 +15,8 @@ import { IndexComponent } from './index.component';
         children: [
           { path: 'index', component: IndexComponent },
           // ...DemoRoutes, // demo 演示模块
+          ...IdSysMenuRoutes,
+          ...IdSysAcountRoutes,
         ]
       },
     ])
