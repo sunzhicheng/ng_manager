@@ -12,6 +12,7 @@ import { OperateLoginComponent } from './login/operate.login.component';
 import { IdSysMenuComponent } from './idsysmenu/idsysmenu.component';
 import { IdSysMenuFormComponent } from './idsysmenu/idsysmenu.form';
 import { ModalMenuComponent } from './idsysmenu/modal.menu.component';
+import { IdSysMenuService } from './idsysmenu/idsysmenu.service';
 
 /**
  * 系统模块 模块
@@ -37,7 +38,7 @@ import { ModalMenuComponent } from './idsysmenu/modal.menu.component';
     IdSysMenuComponent, IdSysMenuFormComponent, ModalMenuComponent
   ],
   providers: [
-    LoginService,
+    LoginService, IdSysMenuService,
     IdSysAppAcountService,
   ],
 })
