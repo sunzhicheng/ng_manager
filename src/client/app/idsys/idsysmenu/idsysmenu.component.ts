@@ -1,7 +1,5 @@
-import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
-import { PAGER_INIT } from '../../shared/idorp/config/app.config';
 import { IdSysMenuService } from './idsysmenu.service';
 import { TreeBaseComponent } from '../../shared/idorp/component/TreeBaseComponent';
 import { TreeService } from '../../shared/idorp/service/TreeService';

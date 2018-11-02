@@ -2,7 +2,6 @@ import { IDCONF } from './../../shared/idorp/config/app.config';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { BASE_URL_GEN } from '../../shared/idorp/config/env.config';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 
@@ -16,10 +15,9 @@ export class IdSysMenuService extends DyBaseService  {
      * 数据接口定义
      */
     public api: any = {
-        base: IDCONF().api_base,
         query: '/idsys/idsysmenu/query',
         add: '/idsys/idsysmenu/add',
-        loadByUUID: '/idsys/idsysmenu/',
+        detail: '/idsys/idsysmenu/',
         update: '/idsys/idsysmenu/update',
         del: '/idsys/idsysmenu/del',
         tree: '/idsys/idsysmenu/tree',

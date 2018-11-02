@@ -10,7 +10,6 @@ import { IdSysAppAcountService } from './idsysappacount/idsysappacount.service';
 import { LoginService } from './login/login.service';
 import { OperateLoginComponent } from './login/operate.login.component';
 import { IdSysMenuComponent } from './idsysmenu/idsysmenu.component';
-import { IdSysMenuFormComponent } from './idsysmenu/idsysmenu.form';
 import { IdSysMenuService } from './idsysmenu/idsysmenu.service';
 
 /**
@@ -26,15 +25,15 @@ import { IdSysMenuService } from './idsysmenu/idsysmenu.service';
   ],
   exports: [
     OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent, IdSysMenuFormComponent,
+    IdSysMenuComponent,
   ],
   declarations: [
     OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent, IdSysMenuFormComponent,
+    IdSysMenuComponent,
   ],
   entryComponents: [
     OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent, IdSysMenuFormComponent,
+    IdSysMenuComponent,
   ],
   providers: [
     LoginService, IdSysMenuService,
