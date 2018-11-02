@@ -5,36 +5,52 @@ import { RouteReuseStrategy, DetachedRouteHandle, ActivatedRouteSnapshot } from 
  */
 export class CustomReuseStrategy implements RouteReuseStrategy {
 
-  handlers: { [key: string]: DetachedRouteHandle } = {};
+  static RouteArr: any = [
+      'idsysappacount',
+      'idsysenterprisemsg', 'idsysserviceconfig' , 'idsysuser', 'idsysusertype', 'idwxpayaccount', 'idmallgoods' ,
+      'idwxpublicaccount', 'idmallad' , 'idmallgoodscategory', 'nlksyscoolcoinconfigure', 'idsysblacklist', 'idmallgoods' ,
+      'idsystrconfigure', 'idsysuserup' , 'login', 'idsysbank', 'idsysblacklist', 'idsysinstruction' ,
+      'idmalllogistics', 'idsystrhistory' , 'idsysmenu', 'idsysarea', 'idsysappversion' ,
+      'idmallgoodsattribute', 'idmallgoods' , 'idsysevaluate', 'idmallshopcomment', 'nlktask', 'idsysappversion' ,
+      'idmallstockinout'
+  ];
 
-  shouldDetach(route: ActivatedRouteSnapshot): boolean {
-    // console.debug('CustomReuseStrategy:shouldDetach', route);
-    return true;
-  }
 
-  store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
-    // console.debug('CustomReuseStrategy:store:', route.routeConfig.path);
-    this.handlers[route.routeConfig.path] = handle;
-  }
+  static _cacheRouters: { [key: string]: DetachedRouteHandle } = {};
 
-  shouldAttach(route: ActivatedRouteSnapshot): boolean {
-    // console.debug('CustomReuseStrategy:shouldAttach', route);
-    return !!route.routeConfig && !!this.handlers[route.routeConfig.path];
-  }
-
-  retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
-    // console.debug('CustomReuseStrategy:retrieve', route);
-    return this.handlers[route.routeConfig.path]; //从暂存处取回
-  }
-
-  shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-    //在此处可以取得跳转前和跳转后的路由路径
-    // console.debug('CustomReuseStrategy:shouldReuseRoute', future, curr);
-    return future.routeConfig === curr.routeConfig;
-  }
-
-  removeCache(path: string) {
+  static removeCache(path: string) {
     console.log('CustomReuseStrategy removeCache : ', path);
-    this.handlers[path] = undefined;
+    CustomReuseStrategy._cacheRouters[path] = undefined;
+  }
+  static removeAll() {
+    for (const key in CustomReuseStrategy._cacheRouters) {
+      this.removeCache(key);
+    }
+  }
+    shouldDetach(route: ActivatedRouteSnapshot): boolean {
+        return this.isInclude(route);
+    }
+    store(route: ActivatedRouteSnapshot, handle: DetachedRouteHandle): void {
+      CustomReuseStrategy._cacheRouters[route.routeConfig.path] = handle;
+    }
+    shouldAttach(route: ActivatedRouteSnapshot): boolean {
+        return !!CustomReuseStrategy._cacheRouters[route.routeConfig.path];
+    }
+    retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle {
+        return CustomReuseStrategy._cacheRouters[route.routeConfig.path];
+    }
+    shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+        return future.routeConfig === curr.routeConfig;
+    }
+
+  isInclude(route: ActivatedRouteSnapshot) {
+    let retn = false;
+    console.log('route.url.path   : ', route.routeConfig.path);
+    CustomReuseStrategy.RouteArr.forEach((path: any) => {
+      if (route.routeConfig.path === path) {
+        retn = true;
+      }
+    });
+    return retn;
   }
 }

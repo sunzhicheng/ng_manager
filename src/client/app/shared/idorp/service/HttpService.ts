@@ -1,29 +1,35 @@
+import { PromptUtil } from './../providers/PromptUtil';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUtils } from '../providers/IUtils';
 import { API_DEBUG, HTTPREQ } from '../config/app.config';
 import { GpbService } from './gpb.service';
 import { BASE_URL_DEBUG, BASE_URL } from '../config/env.config';
-
+import { LocalStorageCacheService } from '../cache/localstorage.service';
+declare let $: any;
 /**
  * HTTP 请求交互类
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+ })
 export class HttpService {
+    [x: string]: any;
 
     public newApiHead = new HttpHeaders();
     public oldApiHead = new HttpHeaders();
 
     constructor(private http: HttpClient,
+        private localCache: LocalStorageCacheService,
         private toolGpbService: GpbService,
         private _router: Router) {
-            this.oldApiHead = this.oldApiHead.append('Content-Type', 'application/json; charset=utf-8');
-            this.oldApiHead = this.oldApiHead.append('idorp-agent', 'idorp-agent-web');
+        this.oldApiHead = this.oldApiHead.append('Content-Type', 'application/json; charset=utf-8');
+        this.oldApiHead = this.oldApiHead.append('idorp-agent', 'idorp-agent-web');
 
-            this.newApiHead = this.newApiHead.append('Content-Type', 'application/json; charset=utf-8');
-            this.newApiHead = this.newApiHead.append('id-proto', 'base64');
+        this.newApiHead = this.newApiHead.append('Content-Type', 'application/json; charset=utf-8');
+        this.newApiHead = this.newApiHead.append('id-proto', 'base64');
     }
 
 
@@ -37,7 +43,7 @@ export class HttpService {
      * @param options http 请求参数
      */
     public httpRequest(url: string, body: any = null, proto: any = null,
-        httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers : this.newApiHead}): Observable<any> {
+        httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers: this.newApiHead }): Observable<any> {
         if (API_DEBUG) {
             console.log('httpRequest url : ' + url);
         }
@@ -54,7 +60,7 @@ export class HttpService {
             // IDORP 协议请求方式
             if (options.headers.has('id-proto')) {
                 // TODO: 这边正式开发替换为登陆Token
-                options.headers = options.headers.append('id-token', 'CgbCPgMxMjM=');
+                options.headers = options.headers.append('id-token', this.getToken(url));
             }
             // else {
             //     options.headers = options.headers.append('Content-Type', 'application/json; charset=utf-8');
@@ -94,18 +100,112 @@ export class HttpService {
                 return;
             }
             req.subscribe((res: any) => {
-                console.log('httpRequest res : ', res);
+                // console.log('httpRequest res : ', res);
                 const resText = res || '';
                 if (proto) {
                     // IDORP 协议请求方式
                     const message = this.toolGpbService.bas64ToProto(resText, proto);
-                    observer.next(message);
+                    if (this.isNotEx(message.token)) {
+                        observer.next(message);
+                    }
                 } else {
                     observer.next(resText);
                 }
             }, (err: any) => {
+                if (err.status === 401) {
+                    (<any>$('#tokenInvaildDiv')).modal('show');
+                    // const ptType = localStorage.getItem('ptType');
+                    // if (ptType) {
+                    //     this._router.navigateByUrl(ptType + '/login');
+                    // } else {
+                    //     this._router.navigateByUrl('/');
+                    // }
+                }
                 observer.error(err);
             });
         });
     }
+    /**
+   * 上传文件
+   * @param files
+   */
+    filesAjax(files: any, url: any, callback: any, target: any, t: any) {
+        const me = this;
+        this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
+            (protoMessage: any) => {
+                // FormData 对象
+                const form = new FormData();
+                for (const i in files) {
+                    form.append('file' + i, files[i]); // 文件对象
+                }
+                // XMLHttpRequest 对象
+                const xhr = new XMLHttpRequest();
+                xhr.open('post', url, true);
+                xhr.setRequestHeader('id-proto', 'base64');
+                xhr.setRequestHeader('id-token', this.getToken(url));
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        if (callback) {
+                            // 过滤空字符,避免解析错误
+                            // const body = xhr.responseText.replace(/\s/g, '');
+                            const body = xhr.responseText;
+                            // console.log('ajaxJson2 response string : ', body);
+                            const result = me.toolGpbService.bas64ToProto(body, protoMessage);
+                            callback.call(target, result, t); //回调函数
+                        }
+                    }
+                };
+                xhr.send(form);
+            },
+            (error: any) => {
+                console.error(' 上传文件 错误 : ' + JSON.stringify(error));
+            }
+        );
+    }
+
+
+    /**
+     * 是否请求正常，正常返回 true, 异常返回 false
+     * @param token 请求标识
+     * @returns {boolean}
+     */
+    isNotEx(token: any) {
+        if (token && token.ex) {
+            const error_type = token.ex.ex_type;
+            let errorMsg = IUtils.getVFromJson(token, 'ex.ex_short_msg');
+            if (!errorMsg) {
+                errorMsg = IUtils.getVFromJson(token, 'ex.ex_tips');
+            }
+            if (error_type === 1 || error_type === 2) {
+                // const ptType = localStorage.getItem('ptType');
+                // if (ptType) {
+                //     this._router.navigateByUrl(ptType + '/login');
+                // } else {
+                //     this._router.navigateByUrl('/');
+                // }
+                (<any>$('#tokenInvaildDiv')).modal('show');
+            } else {
+                PromptUtil.error(errorMsg);
+            }
+            return false;
+        }
+        return true;
+    }
+    /**
+     * 获取token
+     * @param obj
+     */
+    getToken(url: any) {
+        if (url.indexOf('manager/login') === -1) {
+            const access_token = this.localCache.getToken();
+            if (!access_token) {
+                return '';
+            } else {
+                return access_token;
+            }
+        } else {
+            return '';
+        }
+    }
+
 }

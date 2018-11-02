@@ -8,8 +8,8 @@
 body {
     // @include container-default(1650px);//web
     // @include container-abs(425px); //phone
-    @include container-abs(auto);
-    min-width: 1200px;
+    // @include container-abs(auto);
+    min-width: 1140px;
     font-family: -apple-system, "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "WenQuanYi Micro Hei", "Microsoft Yahei", sans-serif;
     background-color: $color-bg;
     overflow: auto;
@@ -24,12 +24,13 @@ a {
     }
 }
 
-// .container {
-//     position: relative;
-//     margin-left: auto;
-//     margin-right: auto;
-//     width: 1200px;
-// }
+.container {
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0 15px;
+}
+
 // @include min-screen(576px) {
 //   .container {
 //     width: 540px;
@@ -43,14 +44,15 @@ a {
 //   }
 // }
 // @include min-screen(992px) {
-//   .container {
-//     width: 960px;
-//     max-width: 100%;
-//   }
+//     .container {
+//         width: 960px;
+//         max-width: 100%;
+//     }
 // }
-// @include min-screen(1200px) {
-//   .container {
-//     width: 1140px;
-//     max-width: 100%;
-//   }
-// }
+
+@include min-screen(1200px) {
+    .container {
+        width: 1140px;
+        max-width: 100%;
+    }
+}

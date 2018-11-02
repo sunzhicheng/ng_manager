@@ -1,6 +1,9 @@
+import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolHttpService } from '../../shared/tool/tool-http.service';
+import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { HttpService } from '../../shared/idorp/service/HttpService';
+import { IDCONF } from '../../shared/idorp/config/app.config';
 
 // 不建议使用
 declare  let $: any;
@@ -56,7 +59,7 @@ export class UploadAudioComponent {
 
   public duration: any;
 
-  public constructor(private toolHttp: ToolHttpService,
+  public constructor(private toolHttp: HttpService,
                      private _router: Router
         ) {
   }
@@ -72,22 +75,17 @@ export class UploadAudioComponent {
     const parmFile: any = [];
     const file = target.target.files[0];
     parmFile.push(file);
-    this.toolHttp.showLoad();
+    PromptUtil.showLoad();
     this.isInloading = true;
-    this.toolHttp.filesAjax(parmFile, (result: any, t: any) => {
+    const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
+    this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
       if (result) {
         const token = result.token;
         this.isInloading = false;
-        if (this.toolHttp.isEx(token)) {
-          // let error_type = token.ex.ex_type;
-          // me.toolHttp._error(token.ex.ex_tips);
-          // if (error_type === 1 || error_type === 2) {
-          //   me._router.navigateByUrl('/');
-          // }
-          // return;
+        if (this.toolHttp.isNotEx(token)) {
           console.log('上传成功!');
           const uploadId = result['attList'][0]['pt_id']['l_id'];
-          this.toolHttp.hideLoad();
+          PromptUtil.hideLoad();
           const f: any = $('#' + this.namekey);
           f.val(uploadId);
           this.getId.emit(uploadId);
@@ -103,7 +101,7 @@ export class UploadAudioComponent {
     }
     if (this.img_id) {
       //console.log('!!!!!src:',this.toolHttp.getImgUrl(this.img_id));
-      return this.toolHttp.getImgUrl(this.img_id);
+      return IUtils.getImgUrl(this.img_id);
     } else {
       return 'assets/images/upload-index-bg.png';
     }

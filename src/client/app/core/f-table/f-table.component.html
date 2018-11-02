@@ -1,35 +1,66 @@
-<section class="scrollable padder content-right">
-
-  <ul  *ngIf="breadcrumb"  class="breadcrumb no-border no-radius b-b b-light pull-in">
-    <li *ngFor="let nav of formData.nav_list" [class.active]="nav.is_last" >
-      <a *ngIf="nav.router_link"  [routerLink]="nav.router_link"><i class="fa fa-home"></i>{{ nav.label }}</a>
-      <a *ngIf="nav.is_last" >{{ nav.label }}</a>
-    </li>
-  </ul>
-
-  <section class="panel panel-default">
-    <header *ngIf="formData.nav_list && formData.nav_list.length>0" class="panel-heading">
-      {{ formData.nav_list[formData.nav_list.length-1].label }}
-      <!--<a href="#" class="btn btn-default btn-xs btn-danger right">新增</a>-->
-    </header>
-    <df-form [formData]="formData"
-             (formSubmit)="formSubmit($event)"
-             (btnclickout)="btnclick($event)"
-    ></df-form>
-    <div class="table-responsive">
-      <ng-table [pager]="formData.pager"  (tableChanged)="loadData($event)"  (allCheckedV)="getAllCheckedV($event)"
-                [opt_config]="opt_config"
-                (update)="update($event)"
-                (del)="del($event)"
-                (enable)="enable($event)"
-                (stop)="stop($event)"
-                (view)="view($event)"
-                (unbind)="unbind($event)"
-                (bind)="bind($event)"
-                (plan)="plan($event)"
-                [cmpSelect]="cmpSelect"></ng-table>
-    </div>
-  </section>
+<section class="scrollable padder">
+        <ul  class="breadcrumb no-border no-radius b-b b-light pull-in"  *ngIf="breadcrumb">
+            <li *ngFor="let nav of formData&&formData.nav_list" [class.active]="nav.is_last">
+                <a href="javascript:;"  [routerLink]="nav.router_link" *ngIf="!nav.is_last">
+                    <i class="fa fa-home"></i> {{ nav.label }}
+                </a>
+                <a *ngIf="nav.is_last" >{{ nav.label }}</a>
+            </li>
+        </ul>
+        <!-- <div class="m-b-md">
+            <h3 class="m-b-none">管理员列表</h3>
+        </div> -->
+        <section class="panel panel-default">
+            <header class="panel-heading" *ngIf="formData&& formData.nav_list && formData.nav_list.length>0"> {{ formData.nav_list[formData.nav_list.length-1].label }} </header>
+            <!-- <div class="row text-sm wrapper"> -->
 
 
+                <!-- <div class="col-sm-5 m-b-xs">
+                    <select class="input-sm form-control input-s-sm inline">
+                        <option value="0">Bulk action</option>
+                        <option value="1">Delete selected</option>
+                        <option value="2">Bulk edit</option>
+                        <option value="3">Export</option>
+                    </select>
+                    <button class="btn btn-sm btn-default">Apply</button>
+                </div>
+                <div class="col-sm-4 m-b-xs">
+                    <div class="btn-group" data-toggle="buttons">
+                        <label class="btn btn-sm btn-default active">
+                            <input type="radio" name="options" id="option1"> Day </label>
+                        <label class="btn btn-sm btn-default">
+                            <input type="radio" name="options" id="option2"> Week </label>
+                        <label class="btn btn-sm btn-default">
+                            <input type="radio" name="options" id="option2"> Month </label>
+                    </div>
+                </div> -->
+                <df-form [formData]="formData"
+                (formSubmit)="formSubmit($event)"
+                (btnclickout)="btnclick($event)"
+            ></df-form>
+
+            <!-- </div> -->
+            <ng-table *ngIf="formData" [pager]="formData.pager"  (tableChanged)="loadData($event)"  (allCheckedV)="getAllCheckedV($event)"
+            [opt_config]="opt_config"  [config]="config"
+            (update)="update($event)"
+            (del)="del($event)"
+            (enable)="enable($event)"
+            (stop)="stop($event)"
+            (view)="view($event)"
+            (unbind)="unbind($event)"
+            (bind)="bind($event)"
+            (plan)="plan($event)"
+            (outGood)="outGood($event)"
+            (subAudit)="subAudit($event)"
+            (inGood)="inGood($event)"
+            (delivery)="delivery($event)"
+            (cancel)="cancel($event)"
+            (refund)="refund($event)"
+            (changeLevel)="changeLevel($event)"
+            (changeNum)="changeNum($event)"
+            (bindZfb)="bindZfb($event)"
+            (bindWX)="bindWX($event)"
+            (paimai)="paimai($event)"
+            [cmpSelect]="cmpSelect"></ng-table>
+        </section>
 </section>

@@ -1,7 +1,8 @@
+import { APP_PROTO_PATH_NLK, APP_PROTO_PATH_WX, APP_PROTO_PATH_ALIPAY } from '../config/app.config';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as protobuf from 'protobufjs';
-import { APP_PROTO_PATH } from '../config/app.config';
+import { APP_PROTO_PATH_SYS, APP_PROTO_PATH_MALL } from '../config/app.config';
 
 // declare let protobuf: any;
 
@@ -11,7 +12,7 @@ import { APP_PROTO_PATH } from '../config/app.config';
  */
 @Injectable()
 export class GpbService {
-  PROTO_ROOT: any;
+  PROTO_ROOT: any = {};
 
   PROTOMAP: {[index: string]: any} = {};
 
@@ -72,18 +73,36 @@ export class GpbService {
   public initProtoRoot(cName: string, isEnum: boolean = false): Observable<any> {
     console.log('initProtoRoot cName ', cName);
     return Observable.create((observer: any) => {
-      if (this.PROTO_ROOT === undefined) {
-        protobuf.load(APP_PROTO_PATH)
+      let key = '';
+      let url: any = null;
+      if (cName.indexOf('idsys') !== -1 || cName.indexOf('com2') !== -1) {
+        url = APP_PROTO_PATH_SYS;
+        key = 'sys';
+      } else if (cName.indexOf('idmall') !== -1) {
+        url = APP_PROTO_PATH_MALL;
+        key = 'mall';
+      } else if (cName.indexOf('nlk') !== -1) {
+        url = APP_PROTO_PATH_NLK;
+        key = 'nlk';
+      } else if (cName.indexOf('idwx') !== -1) {
+        url = APP_PROTO_PATH_WX;
+        key = 'wx';
+      } else if (cName.indexOf('idalipay') !== -1) {
+        url = APP_PROTO_PATH_ALIPAY;
+        key = 'alipay';
+      }
+      if (this.PROTO_ROOT[key] === undefined) {
+        protobuf.load(url)
           .then((root: any) => {
-            this.PROTO_ROOT = root;
+            this.PROTO_ROOT[key] = root;
             console.log('initProtoRoot', root);
-            observer.next(isEnum ? this.PROTO_ROOT.lookupEnum(cName) : this.PROTO_ROOT.lookupType(cName));
+            observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
           }).catch((error: any) => {
             this.handleError(error);
             observer.error(error);
           } );
       } else {
-        observer.next(isEnum ? this.PROTO_ROOT.lookupEnum(cName) : this.PROTO_ROOT.lookupType(cName));
+        observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
       }
     });
   }
@@ -112,5 +131,4 @@ export class GpbService {
       }
     });
   }
-
 }

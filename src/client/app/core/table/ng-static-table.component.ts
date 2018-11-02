@@ -1,59 +1,26 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, DoCheck } from '@angular/core';
+import { IUtils } from '../../shared/idorp/providers/IUtils';
 
 const _ = require('lodash');
 
 declare function $(filter: string): void;
 
 @Component({
+  moduleId: module.id,
   selector: 'ng-static-table',
-  template: `
-    <table class="table"
-           role="grid" style="width: 100%;">
-      <thead>
-      <tr role="row">
-      <th *ngIf="cmpSelect===1" >
-          <div class="checkbox_default" >
-              <input type="checkbox" (click)="all($event)" id="all_checkbox">
-          </div>
-      </th>
-        <th *ngFor="let column of columns ; " [ngTableSorting]="config" [column]="column" (sortChanged)="initPage($event)"  >
-          {{ column.title }}
-          <i *ngIf="column.sort" class="pull-right fa"
-            [ngClass]="{'fa-chevron-down': column.sort === 'desc', 'fa-chevron-up': column.sort === 'asc'}"></i>
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let row of showrows ; let i = index" >
-        <td *ngIf="cmpSelect===1" >
-            <div class="checkbox_default">
-                <input type="checkbox" id='row_{{i}}'  value="{{getData(row,'col_1')}}" (click)="oneCheck($event)" >
-            </div>
-        </td>
-        <td *ngFor="let column of columns"  >{{ getData(row, column.name) }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="paging"> <span>每页{{ itemsPerPage }}条记录 / 共{{ length }}条记录 当前页 {{ page }} / {{ numPages }} 页</span>
-        <div class="paging-btn"> <a (click)="toPage(1)">首页</a><a (click)="toPage(page-1)">上一页</a>
-              <a (click)="toPage(page+1)">下一页</a><a (click)="toPage(numPages)">尾页</a>
-                    <span> 转到
-                        <select #pageselect>
-                          <option *ngFor="let p of pagenum " value="{{ p }}">{{ p }}</option>
-                        </select>
-                        页 <a (click)="toPage(pageselect.value)">确定</a> </span>
-        </div>
-    </div>
-  `,
-  // directives: [NgTableSortingDirective, NgClass, CORE_DIRECTIVES, PAGINATION_DIRECTIVES, PaginationComponent]
+  templateUrl: 'ng-static-table.html'
 })
-export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
+export class NgStaticTableComponent implements OnInit, OnChanges {
 
   // Table values
   public rows: Array<any> = [];
-  public showrows: Array<any> = [];
+  pagePerCount: any  = 10;
+  totalPage: any;
+  totalCount: any;
 
   public checkedV: any = [];
+
+  nameMap: any ;
 
   @Input()
   public config: any = {
@@ -69,18 +36,10 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
   public cmpSelect: number;
   @Input()
   public pager: any;
-  // Outputs (Events)
-  @Output()
-  public tableChanged: EventEmitter<any> = new EventEmitter();
 
   @Output()
   public allCheckedV: EventEmitter<any> = new EventEmitter();
 
-  public page = 1;
-  public itemsPerPage = 10;
-  public maxSize = 5;
-  public numPages = 1;
-  public length = 0;
   /**
    * 记录最新时间
    * @type {number}
@@ -92,6 +51,9 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
 
   public columns_temp: Array<any> = [];
 
+  numberIndex: any;
+  numberIndex_all: any;
+  table_id: any;
   @Input()
   public set columns(values: Array<any>) {
     values.forEach((value: any) => {
@@ -105,9 +67,167 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
     });
   }
 
+  optConfig: any = {
+    'isopt': true,
+    'view': false,
+    'rebut': false,
+    'pass': false,
+    'home': false,
+    'top': false,
+    'update': true,
+    'del': true,
+    'enable': false, //启用
+    'stop': false, //停用
+    'notShowPage': false,
+    'bind': false,
+    'unbind': false,
+    'outGood': false, //出库
+    'subAudit': false,  //提交审核
+    'inGood': false,   //进库
+    'delivery': false, //发货
+    'cancel': false,   //取消
+    'refund': false,   //退货
+    'changeLevel': false, //等级变动
+    'changeNum': false,    //数量变动
+    'bindZfb': false, //绑定支付宝应用
+    'bindWX': false, //绑定微信商户
+    'paimai': false, //绑定微信商户
+  };
+  @Input()
+  public set opt_config(values: any) {
+    IUtils.mergeAFromB(this.optConfig, values, {});
+  }
 
   ngOnInit() {
-    console.log('ng-table 初始化参数 ： cmpSelect： ' + this.cmpSelect);
+    // console.log('ng-table 初始化参数 ： cmpSelect： ' + this.cmpSelect);
+    const random = Math.floor(Math.random() * (999999 - 100000)) + 100000;
+    this.table_id = 'table_' + random;
+  }
+  /**
+   * 监控
+   */
+  public ngOnChanges(): void {
+    if (this.pager && this.pager.ext) {
+      if (this.pager.last_sync_time !== this.last_sync_time) {
+        this.initData();
+        this.last_sync_time = this.pager.last_sync_time;
+      }
+    }
+  }
+  outV() {
+    const allv = this.getAllCheckedV();
+    if (allv) {
+      let allname: any = '';
+      allv.split(',').forEach(uuid => {
+        if (allname !== '') {
+          allname += ',';
+        }
+        allname += this.nameMap[uuid];
+      });
+      return {name: allname, value: allv};
+    }
+    return {name: '', value: ''};
+  }
+
+
+  initName(rowlist: any) {
+    this.nameMap = {};
+    rowlist.forEach((row: any) => {
+      if (row.data && row.data.length >= 2) {
+        const uuid = row.data[0].s;
+        const name = row.data[2].s;
+        this.nameMap[uuid] = name;
+      }
+    });
+  }
+  /**
+   * 解析pager
+   */
+  public initData() {
+    if (!this.pager) {
+      return;
+    }
+    const ext = this.pager.ext;
+
+    if (ext) {
+      const pageNo = this.pager.pageNo;
+      this.totalCount = ext.row.length;
+      this.setTotalPage(this.pagePerCount, this.totalCount);
+      // 添加表头
+      const heads = ext.heads;
+      if (heads && heads.length > 0) {
+        const columnsArr: Array<any> = [];
+        for (const j in heads) {
+          const head = heads[j];
+          const col = 'col_' + head.h_identity;
+          const h = { title: head.title, name: col };
+          columnsArr.push(h);
+        }
+        if (columnsArr && columnsArr.length > 0) {
+          this.columns_temp.splice(0, this.columns_temp.length);
+          this.columns_temp = columnsArr;
+        }
+      }
+      //添加数据
+      const rowlist = ext.row;
+      if (!this.nameMap) {
+        this.initName(rowlist);
+      }
+      //清空原来的数据
+      this.rows.splice(0, this.rows.length);
+      const startNo = (pageNo - 1) * this.pagePerCount;
+      const endNo = (rowlist.length - 1) < (startNo + this.pagePerCount) ? rowlist.length : startNo + this.pagePerCount;
+      if (rowlist) {
+        for (let i: any = startNo; i < endNo; i++) {
+          const row = rowlist[i];
+          const rowObj: any = {};
+          const rowData = row.data;
+          rowObj.st = row.st;
+          let k = 0;
+          for (const jj in rowData) {
+            const rowTitle: string = this.columns_temp[k]['name'];
+            k++;
+            const cell = rowData[jj];
+            let cellData = '';
+            const dt = cell.dt;
+            if (dt === 1) {
+              cellData = cell.s;
+            } else if (dt === 2) {
+              cellData = cell.l;
+            }
+            rowObj[rowTitle] = cellData;
+          }
+          this.rows.push(rowObj);
+        }
+      }
+    }
+
+
+    if (!this.columns || this.columns.length === 0) {
+      //删除ID title
+      const _columnsArr: Array<any> = [];
+      for (const m in this.columns_temp) {
+        const head = this.columns_temp[m];
+        if (head.title === 'UUID') {
+          continue;
+        }
+        _columnsArr.push(head);
+      }
+      if (_columnsArr && _columnsArr.length !== 0) {
+        this.columns = _columnsArr;
+      }
+    }
+    this.numberIndex = this.pageIndex();
+    this.numberIndex_all = this.pageIndexAll();
+    this.setCheckBoxChecked();
+  }
+  /**
+   * 设置总页数
+   */
+  setTotalPage(pagePerCount: any, totalCount: any) {
+    totalCount = totalCount || 0;
+    this.totalPage = Math.ceil(totalCount / pagePerCount);
+    this.initPageNum();
   }
 
   public get columns(): Array<any> {
@@ -116,13 +236,13 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
 
 
   public getData(row: any, propertyName: string): string {
-    return propertyName.split('.').reduce((prev: any, curr: string) => prev[curr], row);
+    return _.get(row, propertyName);
   }
 
 
   public all(e: any) {
-    console.log('ng-table .. all  ');
-    const checkboxArr: any = $('.table input');
+    // console.log('ng-table .. all  ');
+    const checkboxArr: any = $('#' + this.table_id + ' input');
 
     const checkedV_temp: any = [];
     if (e.target.checked) {
@@ -152,9 +272,7 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
       }
       _.pullAll(this.checkedV, checkedV_temp);
     }
-
-    const allv = this.getAllCheckedV();
-    this.allCheckedV.emit(allv);
+    this.allCheckedV.emit(this.outV());
   }
 
   /**
@@ -162,167 +280,39 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
    * @returns {string}
    */
   public getAllCheckedV() {
-    const retn: any = [];
-    for (const i in this.checkedV) {
-      let id = this.checkedV[i];
-      for (const j in this.rows) {
-        const r = this.rows[j];
-        let id_rows: any = _.get(r, 'col_1');
-        id_rows = (Number)(id_rows);
-        id = (Number)(id);
-        if (id_rows === id) {
-          retn.push(r);
-          break;
+    const ids: string = this.checkedV.join();
+    const idArr = ids.split(',');
+    let retn = '';
+    for (const i in idArr) {
+      if (idArr[i]) {
+        if (retn !== '') {
+          //排重
+          if (retn.indexOf(idArr[i]) !== -1) {
+            continue;
+          }
+          retn += ',';
         }
+        retn += idArr[i];
       }
     }
     return retn;
-    // let ids:string = this.checkedV.join();
-    // let idArr = ids.split(',');
-    // let retn = [];
-    // for (let i in idArr) {
-    //   if (idArr[i]) {
-    //     if (retn !== '') {
-    //       retn += ',';
-    //     }
-    //     retn += idArr[i];
-    //   }
-    // }
-    // return retn;
   }
 
 
   public oneCheck(e: any) {
-    console.log('ng-table .. oneCheck  ');
+    // console.log('ng-table .. oneCheck  ');
     if (e.target.checked) {
-      this.checkedV.push(e.target.attributes.value.value);
+      const v = e.target.attributes.value.value;
+      if (_.indexOf(this.checkedV, v) === -1) {
+        this.checkedV.push(v);
+      }
     } else {
-      const v: number = e.target.attributes.value.value;
+      const v = e.target.attributes.value.value;
       const index = this.checkedV.indexOf(v);
-      this.checkedV[index] = undefined;
+      this.checkedV.splice(index, 1);
     }
-
-    const allv = this.getAllCheckedV();
-    this.allCheckedV.emit(allv);
-    // alert(this.checkedV.join());
+    this.allCheckedV.emit(this.outV());
   }
-
-  /**
-   * 设置总页数
-   */
-  setTotalPage(pagePerCount: any, totalCount: any) {
-    totalCount = totalCount || 0;
-    const totalPage = Math.ceil(totalCount / pagePerCount);
-    this.numPages = totalPage;
-    this.initPageNum();
-  }
-
-  /**
-   * 解析pager
-   */
-  public initData() {
-    if (!this.pager) {
-      return;
-    }
-
-    const totalCount = this.pager.ext.row.length;
-    this.length = totalCount;
-    this.setTotalPage(this.itemsPerPage, totalCount);
-
-    const pm = this.pager.pm;
-    if (pm === 2) {
-      const ext = this.pager.ext;
-      if (ext) {
-        //添加表头
-        const heads = ext.heads;
-        if (heads.length > 0) {
-          const columnsArr: Array<any> = [];
-          // if (this.cmpSelect) {
-          //   columnsArr.push({title: '', name: 'ck'});
-          // }
-          for (const j in heads) {
-            const head = heads[j];
-            // if(head.title === 'ID') {
-            //   continue;
-            // }
-            const col = 'col_' + head.h_identity;
-            const h = {title: head.title, name: col};
-            columnsArr.push(h);
-          }
-          if (columnsArr && columnsArr.length > 0) {
-            this.columns_temp.splice(0, this.columns_temp.length);
-            this.columns_temp = columnsArr;
-
-          }
-
-        }
-        //添加数据
-        const rowlist = ext.row;
-        this.rows = [];
-        for (const i in rowlist) {
-          const row = rowlist[i];
-          const rowObj: any = {};
-          const rowData = row.data;
-
-
-          let k = 0;
-          for (const j in rowData) {
-            const rowTitle: string = this.columns_temp[k]['name'];
-            k++;
-
-            const cell = rowData[j];
-            let cellData = '';
-            const dt = cell.dt;
-            if (dt === 1) {
-              cellData = cell.s;
-            } else if (dt === 2) {
-              cellData = cell.l;
-            }
-            rowObj[rowTitle] = cellData;
-          }
-          this.rows.push(rowObj);
-        }
-      }
-    }
-
-
-    if (!this.columns || this.columns.length === 0) {
-      //删除ID title
-      const _columnsArr: Array<any> = [];
-      for (const j in this.columns_temp) {
-        const head = this.columns_temp[j];
-        if (head.title === 'ID') {
-          continue;
-        }
-        _columnsArr.push(head);
-      }
-      if (_columnsArr && _columnsArr.length !== 0) {
-        this.columns = _columnsArr;
-      }
-    }
-
-
-    // //配置config
-    // if (!this.config.sorting || this.config.sorting.length ===0) {
-    //   this.config.sorting = this.columns;
-    // }
-
-    this.changeShowRows();
-  }
-
-  public getCheckedV() {
-    const checkboxArr: any = $('.table input');
-    const ids: any = [];
-    for (const i in checkboxArr) {
-      if (checkboxArr[i].checked === undefined) {
-        continue;
-      }
-      if (checkboxArr[i].attributes.value) {
-        ids.push(checkboxArr[i].value);
-      }
-    }
-  }
-
 
   /**
    * 修改已经选择的行的checkbox
@@ -338,67 +328,13 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
       }
     }
   }
-
-
-  public ngDoCheck() {
-    this.setCheckBoxChecked();
+  goPointNum(index: any) {
+    this.toPage(index);
   }
-
-
-  /**
-   * 监控
-   */
-  public ngOnChanges(): void {
-    // console.log('ngDoCheck....');
-    // this.onChangeTable(this.config);
-    if (this.pager && this.pager.ext) {
-      if (this.pager.last_sync_time !== this.last_sync_time) {
-        this.initData();
-        this.last_sync_time = this.pager.last_sync_time;
-      }
-    }
-
+  goSelectNum(event: any) {
+    const pageindex = this.numberIndex_all[event.currentTarget.selectedIndex];
+    this.toPage(pageindex.index);
   }
-
-
-  public initPage(sort_config: any): any {
-    //初始化分页参数
-    // if (sort_config) {
-    //   console.log('设置排序字段:' + sort_config.title + '| ' + sort_config.sort);
-    //   let sortCol = sort_config.name;
-    //   let sortBy = sort_config.sort;
-
-    //   //保存排序
-    //   this.config.sorting = sort_config;
-
-    //   if (!this.pager.ext) {
-    //     this.pager.ext = new IPagerExt();
-    //   }
-    //   if (sortBy === 'asc') {
-    //     this.pager.ext.sort = ISort.SORT_ASC;
-    //   } else if (sortBy === 'desc') {
-    //     this.pager.ext.sort = ISort.SORT_DESC;
-    //   }
-    //   if (sortCol) {
-    //     let col = sortCol.replace('col_', '');
-    //     if (!this.pager.ext.sort_head) {
-    //       this.pager.ext.sort_head = new IPagerHead();
-    //     }
-
-    //     this.pager.ext.sortCol = ISortCol.SC_CUSTOM;
-    //     this.pager.ext.sort_head.h_identity = parseInt(col);
-    //   }
-    // }
-    // if (sort_config.itemsPerPage) {
-    //   this.pager.pagePerCount = sort_config.itemsPerPage;
-    // }
-    // if (sort_config.page) {
-    //   this.pager.pageNo = sort_config.page;
-    // }
-
-    // this.changeShowRows();
-  }
-
   /**
    * 切换页面
    * @param page
@@ -406,21 +342,53 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
   public toPage(page: any) {
     // tslint:disable-next-line:radix
     page = parseInt(page);
-    if (page < 1 || page > this.numPages) {
+    if (page < 1 || page > this.totalPage) {
       return;
     }
-    this.page = page;
-
-    this.changeShowRows();
+    this.pager.pageNo = page;
+    this.initData();
   }
 
   public initPageNum() {
     this.pagenum = [];
     let i = 1;
-    while (i <= this.numPages) {
+    while (i <= this.totalPage) {
       this.pagenum.push(i);
       i++;
     }
+  }
+
+  pageIndex() {
+    const page: any = this.pager;
+    const needShowCount: any = 5;
+    const pageIndexArr: any = [];
+    const temIndex: any = Math.floor(needShowCount / 2);
+    if (page.pageNo - temIndex <= 0 || this.totalPage <= needShowCount) {   // 开头
+      const endIndex = this.totalPage > needShowCount ? needShowCount : this.totalPage;
+      for (let i = 1; i <= endIndex; i++) {
+        pageIndexArr.push({ index: i, currentPage: i === page.pageNo });
+      }
+    } else if (page.pageNo + temIndex >= this.totalPage) {  //末尾
+      const start = this.totalPage - needShowCount;
+      for (let k = start + 1; k <= this.totalPage; k++) {
+        pageIndexArr.push({ index: k, currentPage: k === page.pageNo });
+      }
+    } else {  //中间
+      const start = page.pageNo - temIndex;
+      const endIndex = (start + needShowCount) > this.totalPage ? this.totalPage : (start + needShowCount);
+      for (let j = start; j < endIndex; j++) {
+        pageIndexArr.push({ index: j, currentPage: j === page.pageNo });
+      }
+    }
+    return pageIndexArr;
+  }
+  pageIndexAll() {
+    const page: any = this.pager;
+    const pageIndexArr: any = [];
+    for (let i = 1; i <= this.totalPage; i++) {
+      pageIndexArr.push({ index: i, currentPage: i === page.pageNo });
+    }
+    return pageIndexArr;
   }
 
 
@@ -436,17 +404,27 @@ export class NgStaticTableComponent implements OnInit, OnChanges, DoCheck {
     }
     return false;
   }
-
-
-  public changeShowRows() {
-    console.log(this.page);
-    const start = (this.page - 1) * this.itemsPerPage;
-    const end = this.itemsPerPage > -1 ? (start + this.itemsPerPage) : this.rows.length;
-    this.showrows = this.rows.slice(start, end);
-
-    (<any>$('#all_checkbox')).attr('checked', false);
-
+  next() {
+    if (this.pager.pageNo >= this.totalPage) {
+      return;
+    }
+    this.toPage(this.pager.pageNo + 1);
   }
 
-
+  prev() {
+    if (this.pager.pageNo <= 1) {
+      return;
+    }
+    this.toPage(this.pager.pageNo - 1);
+  }
+  setCheckedV(value: any) {
+    // console.log('setCheckedV   : ' + JSON.stringify(value));
+    if (value) {
+      value.split(',').forEach((v: any) => {
+        if (_.indexOf(this.checkedV, v) === -1) {
+          this.checkedV.push(v);
+        }
+      });
+    }
+  }
 }

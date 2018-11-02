@@ -1,13 +1,12 @@
 <section class="hbox stretch">
-  <aside class="aside-xl bg-white b-r" id="subNav">
-    <ng-tree [config]="config" [tree_setting]="tree_setting" [treeFormData_add]="treeFormData_add"
-             [treeFormData_edit]="treeFormData_edit"
+  <aside class="aside-xl b-r" id="subNav">
+    <ng-tree-in [config]="config" [tree_setting]="tree_setting" [treeFormData]="treeFormData"
              [treeData]="tree_data"
              (formSubmited)="formSubmit_add($event)"
              (treeDetailed)="treeDetail($event)"
              (treeDeleted)="treeDelete($event)"
              (itemClicked)="itemClick($event)"
-    ></ng-tree>
+    ></ng-tree-in>
   </aside>
 
   <aside id="subContent">
@@ -40,7 +39,6 @@
                      (loadDataOut)="loadData($event)"
                      (delOut)="del($event)"
                      (unbindOut)="unbind($event)"
-                     [content_right]="false"
                      [opt_config]="opt_config" class="vbox">
         </f-table-cmp>
       </div>

@@ -1,36 +1,4 @@
-<!--<div class="page-content">-->
-    <!--&lt;!&ndash; BEGIN PAGE CONTAINER&ndash;&gt;-->
-    <!--<div class="container-fluid">-->
-
-        <!--&lt;!&ndash; BEGIN PAGE HEADER&ndash;&gt;-->
-        <!--<div class="row-fluid">-->
-            <!--<div class="span12">-->
-                <!--&lt;!&ndash; BEGIN PAGE TITLE & BREADCRUMB&ndash;&gt;-->
-                <!--<ul class="breadcrumb">-->
-                    <!--<span>当前位置：</span>-->
-                    <!--<li *ngFor="let nav of formData.nav_list ;let i = index">-->
-                        <!--<a *ngIf="nav.router_link" href="#" [routerLink]="nav.router_link">{{nav.label}}</a>-->
-                        <!--<span *ngIf="!nav.router_link">{{nav.label}}</span>-->
-                        <!--<i *ngIf="!nav.is_last" class="icon-angle-right"></i>-->
-                    <!--</li>-->
-                <!--</ul>-->
-                <!--&lt;!&ndash; END PAGE TITLE & BREADCRUMB&ndash;&gt;-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--&lt;!&ndash; END PAGE HEADER&ndash;&gt;-->
-
-        <!--<df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"></df-form>-->
-
-      <!--&lt;!&ndash; END PAGE CONTENT&ndash;&gt;-->
-    <!--</div>-->
-    <!--&lt;!&ndash; END PAGE CONTAINER&ndash;&gt;-->
-
-    <!--&lt;!&ndash; END PAGE &ndash;&gt;-->
-<!--</div>-->
-
-
-
-<div class="scrollable padder content-right">
+  <section class="padder scrollable">
   <ul class="breadcrumb no-border no-radius b-b b-light pull-in">
     <li *ngFor="let nav of formData.nav_list" [class.active]="nav.is_last" >
       <a *ngIf="nav.router_link"  [routerLink]="nav.router_link"><i class="fa fa-home"></i>{{ nav.label }}</a>
@@ -45,9 +13,9 @@
     </header>
     <df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"
               (btnclickout)="btnclick($event)"
+              (customSubmitOut)="customSubmit($event)"
              (selectchangeout)="selectchange($event)"></df-form>
 
   </section>
+</section>
 
-
-</div>

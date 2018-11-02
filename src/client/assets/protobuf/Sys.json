@@ -105,11 +105,128 @@
             "AIC_SYS_FN_USER_PROFILE_UPDATE": 15007
           }
         },
+        "SysAmqpMessageStatsDetail": {
+          "fields": {
+            "rate": {
+              "type": "double",
+              "id": 1
+            }
+          }
+        },
+        "SysAmqpMessageStats": {
+          "fields": {
+            "ack": {
+              "type": "int64",
+              "id": 1
+            },
+            "ack_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 2
+            },
+            "deliver": {
+              "type": "int64",
+              "id": 3
+            },
+            "deliver_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 4
+            },
+            "deliver_get": {
+              "type": "int64",
+              "id": 5
+            },
+            "deliver_get_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 6
+            },
+            "disk_writes": {
+              "type": "int64",
+              "id": 7
+            },
+            "disk_writes_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 8
+            },
+            "publish": {
+              "type": "int64",
+              "id": 9
+            },
+            "publish_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 10
+            }
+          }
+        },
+        "SysAmqpQueue": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "memory": {
+              "type": "int64",
+              "id": 1
+            },
+            "messages": {
+              "type": "int64",
+              "id": 2
+            },
+            "messages_unacknowledged": {
+              "type": "int64",
+              "id": 3
+            },
+            "consumers": {
+              "type": "int64",
+              "id": 4
+            },
+            "state": {
+              "type": "string",
+              "id": 5
+            },
+            "messages_bytes": {
+              "type": "int64",
+              "id": 6
+            },
+            "name": {
+              "type": "string",
+              "id": 10
+            },
+            "vhost": {
+              "type": "string",
+              "id": 11
+            },
+            "message_stats": {
+              "type": "SysAmqpMessageStats",
+              "id": 12
+            }
+          }
+        },
+        "SysAmqpQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
         "SysAmqpEntry": {
           "fields": {
             "token": {
               "type": "com2.IToken",
               "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 7
+            },
+            "query": {
+              "type": "SysAmqpQuery",
+              "id": 8
             },
             "at": {
               "type": "AmqpType",
@@ -126,6 +243,15 @@
             "sms": {
               "type": "com2.ComSmsBase",
               "id": 6
+            },
+            "proto": {
+              "type": "SysAmqpQueue",
+              "id": 10
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "SysAmqpQueue",
+              "id": 11
             }
           },
           "nested": {
@@ -258,6 +384,10 @@
             "table_list": {
               "type": "string",
               "id": 7
+            },
+            "acc_source": {
+              "type": "string",
+              "id": 8
             }
           }
         },
@@ -571,6 +701,10 @@
             "show_proto": {
               "type": "bool",
               "id": 5
+            },
+            "exceptionHolder": {
+              "type": "string",
+              "id": 7
             }
           }
         },
@@ -620,6 +754,10 @@
               "type": "int32",
               "id": 32
             },
+            "maxActive": {
+              "type": "int32",
+              "id": 33
+            },
             "ds_packages": {
               "rule": "repeated",
               "type": "string",
@@ -664,6 +802,10 @@
               "rule": "repeated",
               "type": "string",
               "id": 4
+            },
+            "name": {
+              "type": "string",
+              "id": 5
             }
           }
         },
@@ -693,6 +835,10 @@
               "rule": "repeated",
               "type": "string",
               "id": 10
+            },
+            "permission_provider": {
+              "type": "string",
+              "id": 5
             },
             "http_cache": {
               "type": "string",
@@ -746,6 +892,10 @@
               "rule": "repeated",
               "type": "string",
               "id": 6
+            },
+            "api_port": {
+              "type": "int32",
+              "id": 7
             }
           }
         },
@@ -770,6 +920,18 @@
             "context": {
               "type": "string",
               "id": 5
+            },
+            "file_load_url": {
+              "type": "string",
+              "id": 6
+            },
+            "file_load_url_secu": {
+              "type": "string",
+              "id": 7
+            },
+            "wx_url": {
+              "type": "string",
+              "id": 8
             }
           }
         },
@@ -778,6 +940,23 @@
             "wx_proxy_class": {
               "type": "string",
               "id": 1
+            }
+          }
+        },
+        "SysQuartzPlugin": {
+          "fields": {
+            "quartz_plugin_class": {
+              "type": "string",
+              "id": 1
+            },
+            "quartz_ds_name": {
+              "type": "string",
+              "id": 2
+            },
+            "task_init": {
+              "rule": "repeated",
+              "type": "SysQuartzTask",
+              "id": 12
             }
           }
         },
@@ -828,6 +1007,10 @@
               "type": "SysAppWx",
               "id": 11
             },
+            "quartz_plugin": {
+              "type": "SysQuartzPlugin",
+              "id": 12
+            },
             "enable_ext_conf": {
               "type": "bool",
               "id": 100
@@ -864,6 +1047,92 @@
               "rule": "repeated",
               "type": "SysConfBase",
               "id": 6
+            }
+          }
+        },
+        "SysQuartzType": {
+          "values": {
+            "SQT_UN_USE": 0,
+            "SQT_CRON": 1,
+            "SQT_TIME": 2
+          }
+        },
+        "SysQuartzTask": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id": {
+              "type": "int64",
+              "id": 1
+            },
+            "group": {
+              "type": "string",
+              "id": 3
+            },
+            "name": {
+              "type": "string",
+              "id": 4
+            },
+            "qt": {
+              "type": "SysQuartzType",
+              "id": 5
+            },
+            "cron": {
+              "type": "string",
+              "id": 6
+            },
+            "time": {
+              "type": "int64",
+              "id": 7
+            },
+            "job_class": {
+              "type": "string",
+              "id": 8
+            },
+            "params": {
+              "keyType": "string",
+              "type": "string",
+              "id": 9
+            }
+          }
+        },
+        "SysQuartzQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "SysQuartzEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "SysQuartzQuery",
+              "id": 3
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "SysQuartzTask",
+              "id": 4
+            },
+            "proto": {
+              "type": "SysQuartzTask",
+              "id": 5
             }
           }
         },
@@ -3235,6 +3504,13 @@
             "AST_SHA1": 2
           }
         },
+        "ILang": {
+          "values": {
+            "IL_NO_USE": 0,
+            "IL_CN": 1,
+            "IL_EN": 2
+          }
+        },
         "IAccessToken": {
           "fields": {
             "access_token": {
@@ -3415,6 +3691,10 @@
               "options": {
                 "json_name": "t_ext_5"
               }
+            },
+            "lang": {
+              "type": "ILang",
+              "id": 20
             }
           }
         },
@@ -3594,6 +3874,62 @@
               "options": {
                 "json_name": "sms"
               }
+            }
+          }
+        },
+        "DBTableCom": {
+          "fields": {
+            "pt_id": {
+              "type": "IID",
+              "id": 1
+            },
+            "version": {
+              "type": "int64",
+              "id": 3
+            },
+            "create_uuid": {
+              "type": "string",
+              "id": 4
+            },
+            "update_uuid": {
+              "type": "string",
+              "id": 5
+            },
+            "disable_uuid": {
+              "type": "string",
+              "id": 6
+            },
+            "del_uuid": {
+              "type": "string",
+              "id": 7
+            },
+            "create_at": {
+              "type": "int64",
+              "id": 8
+            },
+            "update_at": {
+              "type": "int64",
+              "id": 9
+            },
+            "disable_at": {
+              "type": "int64",
+              "id": 10
+            },
+            "del_at": {
+              "type": "int64",
+              "id": 11
+            },
+            "sql_status": {
+              "type": "SQLStatus",
+              "id": 12
+            },
+            "state": {
+              "type": "int32",
+              "id": 13
+            },
+            "channel_id": {
+              "type": "string",
+              "id": 14
             }
           }
         },

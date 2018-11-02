@@ -26,7 +26,7 @@ export class ChartspieComponent implements OnInit, OnChanges {
 
     @Input()
     set title_text(value: any) {
-        console.log('set title_text...');
+        // console.log('set title_text...');
         this.getChart().setTitle({ text: value || '' });
     }
 
@@ -118,7 +118,7 @@ export class ChartspieComponent implements OnInit, OnChanges {
             this.chart = Highcharts.chart(this.el.nativeElement.firstChild,
                 this.getPie()
             );
-            console.log('ngOnInit chart.....');
+            // console.log('ngOnInit chart.....');
         }
         return this.chart;
     }

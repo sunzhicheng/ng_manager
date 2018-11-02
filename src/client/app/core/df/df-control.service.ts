@@ -4,181 +4,57 @@ import { CustomValidators } from 'ng2-validation';
 
 @Injectable()
 export class DFControlService {
-  // constructor() { }
+  /**
+   * 标识number类型的空值，供接口统一处理成空  eg.场景 修改表单  本来有值 重新设置成空
+   */
+  empty_int = -999999;
+  /**
+   * 标识Text类型的空值，供接口统一处理成空  eg.场景 修改表单  本来有值 重新设置成空
+   */
+  empty_char = 'NULL';
 
-  public cascading: any;
-
-  // 根据表单配置参数创建表单规则
+  /**
+   * 根据表单配置参数创建表单规则
+   * @param formData
+   */
   toIFormGroup(formData: any) {
     const group: any = {};
-
     if (formData.row_list) {
       formData.row_list.forEach((row: any) => {
         if (row.item_list) {
           row.item_list.forEach((item: any) => {
-            // console.log('toIFormGroup item : ', item);
-            if (item.fi_type === 1
-              || item.fi_type === 2
-              || item.fi_type === 3
-              || item.fi_type === 4
-              || item.fi_type === 5
-              || item.fi_type === 12
-              || item.fi_type === 13
-              || item.fi_type === 14
-              || item.fi_type === 16
-              || item.fi_type === 17
-              || item.fi_type === 18
-              || item.fi_type === 19
-              || item.fi_type === 20
-              || item.fi_type === 21) {
-              const v = { value: item.d_value || '', disabled: item.disabled };
-              let fg = new FormControl(v);
-              if (item.is_require) {
-                fg = new FormControl(v, Validators.required);
+            //提交和取消或者其他按钮不需要加入ngGroup
+            if (item.fi_type !== 6 && item.fi_type !== 7 && item.fi_type !== 21) {
+              if (item.key) {
+                const fgoup = this.addValidators(item);
+                group[item.key] = fgoup;
               }
-              if (item.fi_type === 4 || item.fi_type === 14) {
-                for (let index = 0, len = item.opt_list.length; index < len; index++) {
-                  group[item.key + '_' + item.opt_list[index].key.l_id] = new FormControl(v);
-                }
-              } else {
-                group[item.key] = fg;
-              }
-
-              if (item.fi_type === 2) {
-                // 选中状态
-                if (!item.opt_list) {
-                  item.opt_list = [];
-                }
-                item.opt_list.forEach((opt: any) => {
-                  if (opt.selected) {
-                    item.select_id = opt.key;
-                  }
-                });
-              }
-              // //级联
-              // if(item.fi_type === 11) {
-              //
-              // }
             }
           });
         }
       });
     }
-    return new FormGroup(group);
-  }
-
-  // 刷新
-  refreshIFormGroup(formData: any, form: FormGroup) {
-    if (formData.row_list) {
-      formData.row_list.forEach((row: any) => {
-        if (row.item_list) {
-          row.item_list.forEach((item: any) => {
-            // console.log('toIFormGroup item : ', item);
-            if (item.fi_type === 1
-              || item.fi_type === 2
-              || item.fi_type === 3
-              || item.fi_type === 4
-              || item.fi_type === 5) {
-              const v = item.d_value || ''; //{ value: item.d_value || '', disabled: item.disabled };
-              let fg = new FormControl(v);
-              if (item.is_require) {
-                // console.log('toIFormGroup item.is_require : ', item.label);
-                fg = new FormControl(v, Validators.required);
-              }
-              if (item.fi_type === 4) {
-                for (let index = 0, len = item.opt_list.length; index < len; index++) {
-                  form.addControl(item.key + '_' + index, new FormControl(v));
-                  // group[item.key+'_'+index] = new FormControl(v);
-                }
-              } else {
-                form.addControl(item.key, fg);
-                // group[item.key] = fg;
-                // console.log('item.key='+item.key+" item.value" + fg.value);
-                // if (item.fi_type === 1) {
-                //   (<FormControl>form.controls[item.key]).updateValue(fg.value);
-                // }
-                // (<FormControl>form.controls[item.key]).setErrors(null);
-
-              }
-
-              if (item.fi_type === 2) {
-                // 选中状态
-                item.opt_list.forEach((opt: any) => {
-                  if (opt.selected) {
-                    // 没有设置选中ID才设置一次
-                    // if (!item.select_id || item.select_id.l_id === 0) {
-                      item.select_id = opt.key;
-                    // }
-                  }
-                });
-              }
-
-            }
-          });
-        }
-      });
-    }
-  }
-
-   // 刷新
-  refreshIFormGroupValid(formData: any, form: FormGroup) {
-    if (formData.row_list) {
-      formData.row_list.forEach((row: any) => {
-        if (row.item_list) {
-          row.item_list.forEach((item: any) => {
-            // console.log('toIFormGroup item : ', item);
-            if (item.fi_type === 1
-              || item.fi_type === 2
-              || item.fi_type === 3
-              || item.fi_type === 4
-              || item.fi_type === 5) {
-              const v = item.d_value || ''; //{ value: item.d_value || '', disabled: item.disabled };
-              let fg = new FormControl(v);
-              if (item.is_require) {
-                // console.log('toIFormGroup item.is_require : ', item.label);
-                fg = new FormControl(v, Validators.required);
-              }
-              if (item.fi_type === 4) {
-                for (let index = 0, len = item.opt_list.length; index < len; index++) {
-                  form.addControl(item.key + '_' + index, new FormControl(v));
-                  // group[item.key+'_'+index] = new FormControl(v);
-                }
-              } else {
-                form.addControl(item.key, fg);
-                // group[item.key] = fg;
-                // console.log('item.key='+item.key+" item.value" + fg.value);
-                if (item.fi_type === 1) {
-                  (<FormControl>form.controls[item.key]).setValue(fg.value);
-                }
-                (<FormControl>form.controls[item.key]).setErrors(null);
-
-              }
-
-              if (item.fi_type === 2) {
-                // 选中状态
-                item.opt_list.forEach((opt: any) => {
-                  if (opt.selected) {
-                    // 没有设置选中ID才设置一次
-                    if (!item.select_id) {
-                      item.select_id = opt.key;
-                    }
-                  }
-                });
-              }
-
-            }
-          });
-        }
-      });
-    }
+    const fg = new FormGroup(group);
+    return fg;
   }
 
   //添加规则
-  addValidators(item: any, v: any) {
-    let fg = new FormControl(v);
-    if (item.rules) {
+  addValidators(item: any) {
+    let fg = new FormControl(item.d_value || '');
+    if (item.rules && !item.hidden) {
       const gz: any = [];
-      item.rules.forEach((rule: any) => {
+      this.addRules(gz, item.rules);
+      if (gz.lenght === 0) {
+        fg = new FormControl(item.d_value || '');
+      } else {
+        fg = new FormControl(item.d_value || '', gz);
+      }
+    }
+    return fg;
+  }
+  addRules(gz: any, rules: any) {
+    if (rules && rules.length > 0) {
+      rules.forEach((rule: any) => {
         if (rule.name === 'required') {
           gz.push(Validators.required);
         }
@@ -224,17 +100,16 @@ export class DFControlService {
         if (rule.name === 'equalTo') {
           gz.push(CustomValidators.equalTo(rule.value));
         }
+        if (rule.name === 'phone') {
+          gz.push(CustomValidators.phone('CN'));
+        }
         if (rule.name === 'customer') {
-          gz.push(rule.fun);
+          gz.push((input: FormControl) => {
+            const result = rule.fun.call(this, input.value);
+            return result ? null : { customer: true };
+          });
         }
       });
-      if (gz.lenght === 0) {
-        fg = new FormControl(v);
-      } else {
-        fg = new FormControl(v, gz);
-      }
     }
-    return fg;
   }
-
 }

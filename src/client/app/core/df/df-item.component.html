@@ -1,70 +1,35 @@
-
-
-
 <!--列表查询表单-->
 <div [formGroup]="form" *ngIf="f_type===1">
   <div [ngSwitch]="item.fi_type">
     <!--功能按钮-->
-    <div *ngSwitchCase="8" class="col-sm-1 m-b-xs">
-      <a  class="btn btn-default btn-sm btn-primary btn-block" [routerLink]="item.router_link">
+    <div *ngSwitchCase="8" class="col-sm-1" style="text-align:right;width: auto;" [hidden]="!hasSubmit(item.permissoin)">
+      <a  class="btn btn-sm btn-default btn-block" [routerLink]="item.router_link" >
         <i class="fa fa-plus"></i>{{ item.label }}
       </a>
     </div>
     <!--输入框-->
-    <div  *ngSwitchCase="1" class="col-sm-2 m-b-xs"  >
-      <input type="text" class="input-sm form-control" [step]="'0.01'"
-             [formControlName]="item.key" [id]="item.key" [type]="item.type ||'text'" [value]="item.d_value||''"
+    <div  *ngSwitchCase="1" class="col-sm-2"  >
+      <input class="input-sm form-control" 
+             [formControlName]="item.key" [id]="item.key" [type]="item.type ||'text'" 
              [attr.placeholder]="item.label">
     </div>
     <!--下拉框-->
-    <div *ngSwitchCase="2"  class="m-b-xs" [ngClass]="item.class_name || 'col-sm-2'">
-      <select [id]="item.key" class="input-sm form-control inline"
+    <div *ngSwitchCase="2" [ngClass]="item.class_name || 'col-sm-2'">
+      <select class="input-sm form-control inline" 
               [formControlName]="item.key"
-              [(ngModel)]="item.select_id.l_id">
-        <option *ngFor="let opt of item.opt_list" [value]="opt.key.l_id">{{ opt.value.open_id }}</option>
+              >
+        <option *ngFor="let opt of item.opt_list" [value]="opt.key.l_id" >{{ opt.value.open_id }}</option>
       </select>
     </div>
 
-    <!--多选按钮-->
-    <!--<div *ngSwitchCase="4" class="col-sm-4 m-b-xs">-->
-      <!--<div [ngClass]="item.class_name || 'checkbox_default m-wrap span3'" *ngFor="let opt of item.opt_list;let i = index">-->
-        <!--<input type="checkbox" value="{{opt.key.l_id.low}}"-->
-        <!--[formControlName]="item.key+'_'+i" id="{{item.key}}_{{i}}" [(ngModel)]="opt.selected">-->
-        <!--<label [attr.for]="item.key+'_'+i">{{opt.value.open_id}}</label>-->
-      <!--</div>-->
-    <!--</div>-->
-
-    <div *ngSwitchCase="4" class="col-sm-10">
-      <div class="row">
-        <div class="col-sm-6">
-          <!-- radio -->
-          <div class="radio" *ngFor="let opt of item.opt_list ; let i = index">
-            <label class="radio-custom">
-              <input type="checkbox" value="{{ opt.key.l_id.low }}"
-                     [formControlName]="item.key+'_'+i" id="{{ item.key }}_{{ i }}" [(ngModel)]="opt.selected">
-              <i class="fa fa-circle-o" [attr.for]="item.key+'_'+i">{{ opt.value.open_id }}</i>
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!--省市区-->
-    <sd-procitycounty #procitycounty *ngSwitchCase="15" [item]="item" >
-
-    </sd-procitycounty>
-
     <!--时间控件-->
-    <div  *ngSwitchCase="13" class="col-sm-2 m-b-xs" >
-      <input  *ngIf="item" type="text" class="form-control form_datetime"
-              [placeholder]="item.label"
-              [formControlName]="item.key" [id]="item.key"  [(ngModel)]="date_str" >
+    <div  *ngSwitchCase="13" class="col-sm-2" >
+      <datepicker-dynamic [formControlName]="item.key" [format]="item.format" [minView]="item.minView"></datepicker-dynamic>
     </div>
 
     <!--查询按钮-->
-    <div  *ngSwitchCase="6" class="col-sm-1" style="text-align:right;">
-      <button class="btn btn-sm btn-default btn-block" type="submit" [disabled]="!form.valid">{{ item.label }}</button>
+    <div  *ngSwitchCase="6" class="col-sm-1" style="text-align:right;width: auto;">
+      <button class="btn btn-default  btn-sm btn-primary btn-block"  type="submit" [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
     </div>
 
     <!--其他按钮-->
@@ -77,48 +42,233 @@
 
 
 <!--数据更新添加表单-->
-<div [formGroup]="form" *ngIf="f_type===2&&item.fi_type!=6&&item.fi_type!=7&&!item.is_hidden"  [id]="item.key+'_div'" >
+<div [formGroup]="form" *ngIf="f_type===2&&item.fi_type!=6&&item.fi_type!=7&&!item.hidden"  [id]="item.key+'_div'" >
   <div [ngSwitch]="item.fi_type">
     <!--输入框-->
-    <div class="form-group" *ngSwitchCase="1" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
+    <div class="form-group" *ngSwitchCase="1" [hidden]="item.hidden" [ngClass]="{'has-error':!isValid}" >
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
-               <input  class="form-control"
-       [step]="'0.01'"
-       [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+               <input  class="form-control "  *ngIf="!item.type || item.type === 'text'"
+       [formControlName]="item.key" type="text" >
+
+       <input  class="form-control "    *ngIf="item.type === 'number'||item.type === 'int'
+        || item.type === 'long' || item.type === 'sec' || item.type === 'min' || item.type === 'hour'|| item.type === 'price'"
+           type="number"
+       [formControlName]="item.key"  (input)="limitLength($event,item);limitValue($event,item)"  >
+
+       <input  class="form-control "    *ngIf="item.type === 'password'"   type="password"
+       [formControlName]="item.key"   >
       </div>
-      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+          <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+      </div>
     </div>
 
-    <!--输入框 整数类型-->
-    <div class="form-group" *ngSwitchCase="21" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
+    <!--下拉框-->
+    <div  class="form-group" *ngSwitchCase="2" [hidden]="item.hidden"  [ngClass]="{'has-error':!isValid}">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
-        <input  class="form-control"
-                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+        <select  class="form-control"   
+                (change)="selectchange($event)"
+                [formControlName]="item.key" 
+                >
+          <option *ngFor="let opt of item.opt_list" [value]="opt.key.l_id"  [selected]="item.d_value==opt.key.l_id">{{ opt.value.open_id }}</option>
+        </select>
       </div>
-      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
     </div>
 
-    <!--输入框(带动态数据的)-->
-    <div class="form-group" *ngSwitchCase="19" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <label class="col-sm-1 control-label">{{ item.before_label }}</label>
-      <div class="col-sm-3">
-        <input  class="form-control"
-                [step]="'1'"
-                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+    <!--副文本-->
+    <div  class="form-group" *ngSwitchCase="3"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6" >
+        <keeditor-dynamic [formControlName]="item.key" [config]="item.config"></keeditor-dynamic>
       </div>
-      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!--多选按钮  boxType=1 1行   boxType=2 多行 -->
+    <div *ngSwitchCase="4" class="form-group" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+          <checkboxs-dynamic [formControlName]="item.key"   (changeOut)="selectchange($event)"
+          [opt_list]="item.opt_list"   [boxType]="item.boxType"></checkboxs-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!-- 地图取点 -->
+    <div  class="form-group" *ngSwitchCase="5" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <takepoint-dynamic [formControlName]="item.key" [source]="item.source" [model]="item.model" >
+        </takepoint-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!-- 树选择框-->
+    <div  class="form-group" *ngSwitchCase="8" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <modal-tree-dynamic [formControlName]="item.key"
+         [config]="item.config" [selectType]="item.selectType" 
+         [request_url]="item.request_url"  [proto]="item.proto"
+         [filterJson]="item.filterJson" [chkboxType]="item.chkboxType"
+         (changeOut)="selectchange($event)"
+         >
+        </modal-tree-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!-- table选择框-->
+    <div  class="form-group" *ngSwitchCase="10" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <modal-table-dynamic [formControlName]="item.key" [config]="item.config" 
+        [request_url]="item.request_url" [proto]="item.proto" 
+        [filterJson]="item.filterJson"  (changeOut)="selectchange($event)"
+        >
+        </modal-table-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!--图片上传-->
+    <div  class="form-group" *ngSwitchCase="12" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+                  <img-dynamic [config]="item.config" [formControlName]="item.key" [fileType]="item.fileType" ></img-dynamic>     
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+        <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>   
+    </div>
+
+    <!--时间控件-->
+    <div class="form-group" *ngSwitchCase="13"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <!-- <input  *ngIf="item" type="text" class="form-control form_datetime"
+                [formControlName]="item.key" [id]="item.key" > -->
+                <datepicker-dynamic [formControlName]="item.key" [format]="item.format" [minView]="item.minView" [minuteStep]="item.minuteStep"></datepicker-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!-- 带搜索的下拉框 -->
+    <div  class="form-group" *ngSwitchCase="14" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <select-search-dynamic
+          (changeOut)="selectchange($event)"
+          [opt_list]="item.opt_list"
+          [select_width] = "item.select_width"
+          [formControlName]="item.key" 
+        ></select-search-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+
+    <!--省市区-->
+    <div class="form-group" *ngSwitchCase="15" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <provincecityarea-dynamic [formControlName]="item.key"  >
+            </provincecityarea-dynamic>
+        <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-xs-3">
+          <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+      </div>
+    </div>
+
+
+    <!--多行文本-->
+    <div class="form-group" *ngSwitchCase="16" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <textarea  class="form-control"
+               [formControlName]="item.key"  >
+        </textarea>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+     <!--视频上传-->
+     <div  class="form-group" *ngSwitchCase="17" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <uploadvideo-app   (getId)="setIConImg($event)"
+                      [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></uploadvideo-app>
+      </div>
+      <input  type="text" class="form-control" style="display: none;"
+              [formControlName]="item.key" [id]="item.key" >
+        <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+        <div class="col-lg-4" >
+          <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+      </div>
+    </div>
+
+    <!--时分秒选择控件-->
+    <div class="form-group" *ngSwitchCase="18" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
+        <combodate-dynamic [formControlName]="item.key" [dataforma]="item.dataforma" [datatemplate]="item.datatemplate"></combodate-dynamic>
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+      <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>
+    </div>
+
+    <!--图片截取-->
+    <div  class="form-group" *ngSwitchCase="19" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-10">
+                  <img-cut-dynamic [config]="item.config" [formControlName]="item.key" [fileType]="item.fileType" ></img-cut-dynamic>     
+      </div>
+      <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
+        <div class="col-lg-4" >
+        <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
+    </div>   
     </div>
 
     <!--item右侧按钮功能-->
-    <div class="form-group" *ngSwitchCase="20" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-4">
+    <div class="form-group" *ngSwitchCase="20" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
+      <div class="col-sm-6">
         <input  class="form-control"
-                [step]="'0.01'"
-                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" [value]="item.d_value||''">
+                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" >
       </div>
       <div class="col-sm-2">
         <a  class="btn btn-default btn-primary btn-block"
@@ -127,133 +277,21 @@
       </div>
     </div>
 
-    <!--下拉框-->
-    <div  class="form-group" *ngSwitchCase="2" >
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-4">
-        <select [id]="item.key" class="form-control"
-                [formControlName]="item.key"
-                (change)="selectchange()"
-                [(ngModel)]="item.select_id&&item.select_id.l_id">
-          <option *ngFor="let opt of item.opt_list" [value]="opt.key.l_id">{{ opt.value.open_id }}</option>
-        </select>
-      </div>
-      <label *ngIf="item.desc" class="col-sm-2 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
-    </div>
-
-    <!--多选按钮 1行-->
-    <div *ngSwitchCase="4" class="form-group">
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-10">
-        <div class="row">
-
-          <div class="col-sm-10">
-            <label class="checkbox-inline"  *ngFor="let opt of item.opt_list; let i = index">
-              <input type="checkbox" value="{{opt.key.l_id.low}}"
-                     [disabled]="item.disabled"
-                     [formControlName]="item.key+'_'+opt.key.l_id" id="{{item.key}}_{{opt.key.l_id}}" [(ngModel)]="opt.selected">
-              {{ opt.value.open_id }}
-            </label>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!--多选按钮 多行-->
-    <div *ngSwitchCase="14" class="form-group">
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-10">
-        <div class="checkbox" *ngFor="let opt of item.opt_list ; let i = index">
-          <label>
-            <input type="checkbox" value="{{ opt.key.l_id }}"
-                   [disabled]="item.disabled"
-                   [formControlName]="item.key+'_'+opt.key.l_id" id="{{item.key}}_{{opt.key.l_id}}" [(ngModel)]="opt.selected">
-            {{ opt.value.open_id }}
-          </label>
-        </div>
-
-      </div>
-    </div>
-
-
-    <!--&lt;!&ndash;级联下拉&ndash;&gt;-->
-    <sd-cascading #cascading *ngSwitchCase="11" [item]="item" [data]="item.data" >
-    </sd-cascading>
-
-    <!--图片上传-->
-    <div  class="form-group" *ngSwitchCase="12" >
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <upload-app   (getId)="setIConImg($event)"
-                       [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></upload-app>
-      </div>
-      <input  type="text" class="form-control" style="display: none;"
-             [formControlName]="item.key" [id]="item.key"  [(ngModel)]="img_id">
-    </div>
-
-    <!--视频上传-->
-    <div  class="form-group" *ngSwitchCase="17" >
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <uploadvideo-app   (getId)="setIConImg($event)"
-                      [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></uploadvideo-app>
-      </div>
-      <input  type="text" class="form-control" style="display: none;"
-              [formControlName]="item.key" [id]="item.key"  [(ngModel)]="img_id">
-    </div>
-
-    <!--时间控件-->
-    <div class="form-group" *ngSwitchCase="13" >
-      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <input  *ngIf="item" type="text" class="form-control form_datetime"
-                [formControlName]="item.key" [id]="item.key"  [(ngModel)]="date_str" >
-      </div>
-    </div>
-
-    <!--省市区-->
-    <sd-procitycounty #procitycounty *ngSwitchCase="15" [item]="item" >
-
-    </sd-procitycounty>
-
-    <!--多行文本-->
-    <div class="form-group" *ngSwitchCase="16" >
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <textarea  class="form-control"
-                   style="width: 608px;height: 150px;resize: none;"
-               [formControlName]="item.key" [id]="item.key" [value]="item.d_value||''" >
-        </textarea>
-      </div>
-    </div>
-
-    <!--时分秒选择控件-->
-    <div class="form-group" *ngSwitchCase="18" >
-      <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="item.is_require" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <!--<input  *ngIf="item" type="time" class="form-control form_datetime"-->
-                <!--[formControlName]="item.key" [id]="item.key" [value]="item.d_value||''" >-->
-        <input *ngIf="item" type="text" class="combodate form-control hour_min_sec"
-               [attr.formControlName]="item.key" [id]="item.key"
-               [attr.data-format]="'HH:mm'" [attr.data-template]="'HH : mm'"
-                [value]="item.d_value||''">
-      </div>
-    </div>
-
     <!--标签-->
     <!--<div class="form-group" *ngSwitchCase="18" >-->
       <!--<label class="col-sm-2 control-label" for="">{{item.label}}：</label>-->
       <!--<div class="col-sm-6">-->
         <!--<input type="hidden" class="select2-tags-df" style="width:100%"-->
-               <!--[formControlName]="item.key" [id]="item.key" [type]="item.type" [value]="item.d_value||''">-->
+               <!--[formControlName]="item.key" [id]="item.key" [type]="item.type" >-->
       <!--</div>-->
     <!--</div>-->
 
   </div>
 </div>
-<!--提交按钮-->
-<button *ngIf="item.fi_type===6 && f_type===2" type="submit" class="btn btn-default" [disabled]="!form.valid">{{ item.label }}</button>
-
 <!--取消按钮-->
-<button *ngIf="item.fi_type===7 && f_type===2&&item.router_link" type="button" [routerLink]="item.router_link" class="btn btn-primary" >{{ item.label }}</button>
+<button *ngIf="item.fi_type===7 && f_type===2&&item.router_link" type="button" style="float:left;" [routerLink]="item.router_link"  class="btn btn-default m-r-sm">{{ item.label }}</button>
+<!--提交按钮-->
+<button *ngIf="item.fi_type===6 && f_type===2 && !item.hidden && hasSubmit(item.permissoin)" style="float:left;"  type="submit"    class="btn btn-primary m-r-sm"  [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
+<!--自定义按钮功能-->
+<button *ngIf="item.fi_type===21 && f_type===2 && !item.hidden"  style="float:left;"  type="button" [disabled]="(item.hasValid  && !form.valid) || item.disabled"  (click)="customSubmit($event)" class="btn btn-info m-r-sm" >{{ item.label }}</button>
+

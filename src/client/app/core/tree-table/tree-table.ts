@@ -1,10 +1,8 @@
 import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ToolGpbService } from '../../shared/tool/tool-gpb.service';
-import { ToolHttpService } from '../../shared/tool/tool-http.service';
 import { FormTableComponent } from '../f-table/f-table.component';
-import { TreeComponent } from '../tree/tree';
+import { TreeInComponent } from '../tree/tree.in';
 
 // 不建议使用
 declare let $: any;
@@ -20,8 +18,8 @@ declare let $: any;
 
 export class TreeTableComponent implements OnInit {
 
-  @ViewChild(TreeComponent)
-  public tree: TreeComponent;
+  @ViewChild(TreeInComponent)
+  public tree: TreeInComponent;
 
   @Input()
   public config: any = {
@@ -41,10 +39,7 @@ export class TreeTableComponent implements OnInit {
   public opt_config: any;
 
   @Input()
-  public treeFormData_add: any;
-
-  @Input()
-  public treeFormData_edit: any;
+  public treeFormData: any;
 
   @Input()
   public tree_setting: any;
@@ -78,9 +73,8 @@ export class TreeTableComponent implements OnInit {
 
   public breadcrumb = false;
 
-  constructor(private toolHttp: ToolHttpService,
-              private toolGpb: ToolGpbService,
-              private _router: Router) {
+  constructor(
+    private _router: Router) {
   }
 
   ngOnInit() {
