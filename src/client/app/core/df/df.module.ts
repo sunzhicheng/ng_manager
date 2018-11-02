@@ -47,6 +47,13 @@ import { ImgCutComponent } from '../upload/img.cut';
     ProvinceCityAreaDynamicComponent, ModalTreeDynamicComponent, ModalTableDynamicComponent,
     SelectSearchDynamicComponent, ImgCutDynamicComponent, ImgCutComponent
   ],
+  entryComponents: [
+    DFItemComponent, DfFromComponent,
+    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent,
+    CheckboxsDynamicComponent, CombodateDynamicComponent, TakePointDynamicComponent,
+    ProvinceCityAreaDynamicComponent, ModalTreeDynamicComponent, ModalTableDynamicComponent,
+    SelectSearchDynamicComponent, ImgCutDynamicComponent, ImgCutComponent
+  ],
   providers: [DFControlService]
 })
 export class DFModule { }

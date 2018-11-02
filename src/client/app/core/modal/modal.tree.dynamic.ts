@@ -2,8 +2,6 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output, forwardRef, DoCheck } from '@angular/core';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { ControlValueAccessor } from '@angular/forms';
-import { ModalTreeComponent } from './modal.tree.component';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';

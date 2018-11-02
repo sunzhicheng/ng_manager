@@ -13,6 +13,7 @@ import { Ng2TableModule } from '../table/ng-table-module';
   imports: [CommonModule, RouterModule, TreeModule, DFModule, Ng2TableModule],
   declarations: [ModalTreeComponent, ModalFormComponent, ModalTableComponent],
   exports: [ModalTreeComponent, ModalFormComponent, ModalTableComponent],
+  entryComponents: [ModalTreeComponent, ModalFormComponent, ModalTableComponent],
   providers: []
 })
 export class ModalModule { }

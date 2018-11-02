@@ -1,4 +1,3 @@
-import { IdSysPerCenterAccountFormComponent } from './idsysappacount/idsysappacountcenter.form';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
@@ -8,7 +7,6 @@ import { TreeModule } from '../core/tree/tree.module';
 import { IdSysAppAcountComponent } from './idsysappacount/idsysappacount.component';
 import { IdSysAccountFormComponent } from './idsysappacount/idsysappacount.form';
 import { IdSysAppAcountService } from './idsysappacount/idsysappacount.service';
-import { BusinessLoginComponent } from './login/business.login.component';
 import { LoginService } from './login/login.service';
 import { OperateLoginComponent } from './login/operate.login.component';
 
@@ -24,14 +22,13 @@ import { OperateLoginComponent } from './login/operate.login.component';
     FormTableModule
   ],
   exports: [
-    OperateLoginComponent, BusinessLoginComponent,
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
   ],
   declarations: [
-    OperateLoginComponent, BusinessLoginComponent,
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
   ],
   entryComponents: [
-    OperateLoginComponent, BusinessLoginComponent,
-    IdSysAppAcountComponent, IdSysAccountFormComponent, IdSysPerCenterAccountFormComponent,
+    OperateLoginComponent, IdSysAccountFormComponent, IdSysAppAcountComponent
   ],
   providers: [
     LoginService,

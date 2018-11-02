@@ -20,11 +20,13 @@ import { RouteReuseStrategy } from '@angular/router';
 import { CustomReuseStrategy } from './shared/tool/CustomReuseStrategy';
 // 网页Title控制
 import { Title } from '@angular/platform-browser';
+import { HomeModule } from './common/home/home.module';
 
 
 @NgModule({
   imports: [BrowserModule, ReactiveFormsModule,
     HttpClientModule, AppRoutingModule,
+    HomeModule,
     VideoModule,
     HighchartsExampleModule,
     MqttModule,
