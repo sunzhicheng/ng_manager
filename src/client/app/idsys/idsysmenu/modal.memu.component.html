@@ -1,0 +1,17 @@
+<div class="modal fade" id="menu_modal">
+    <div class="modal-dialog" style="width: 450px;">
+      <div class="modal-content" style="min-height: 600px;">
+        <ng-tree-in style="height: 550px;" [config]="tree_config"
+                 [tree_setting]="tree_setting"
+                 [treeData]="tree_data"
+        ></ng-tree-in>
+  
+        <div class="modal-footer" style="margin:0;">
+            <!--提交按钮-->
+            <button  type="button" class="btn btn-primary" (click)="save()" >确定</button>
+            <!--取消按钮-->
+            <button  type="button" class="btn btn-default" (click)="hide()">取消</button>
+          </div>
+      </div>
+    </div>
+  </div>
