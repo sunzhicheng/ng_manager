@@ -47,7 +47,7 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
     return jsonFormData;
   }
 
-  initFD(): void {
+  start(): void {
     $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       this.formData = this.idAccountUser.initFormData();

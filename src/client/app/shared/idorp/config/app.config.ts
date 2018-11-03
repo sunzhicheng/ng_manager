@@ -27,7 +27,8 @@ export enum HTTPREQ {
 export enum APISOURCE {
     DEFAULT,        //api
     TREE,           //tree_api
-    LIST            //list_api
+    LIST,           //list_api
+    FORM            //form_api
 }
 
 

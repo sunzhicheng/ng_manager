@@ -42,7 +42,7 @@ export class TreeTableComponent implements OnInit {
   public treeFormData: any;
 
   @Input()
-  public tree_setting: any;
+  public tree_button_setting: any;
 
   @Output()
   public formSubmited: EventEmitter<any> = new EventEmitter();

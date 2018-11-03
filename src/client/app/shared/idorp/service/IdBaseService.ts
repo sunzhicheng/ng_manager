@@ -14,40 +14,29 @@ export class DyBaseService {
     //控制列表刷新
     isReLoad = false;
     /**
-     * 列表接口定义
-     */
-    protected api: any = {
-        add: '',
+     * 列表接口定义  总共类型: 
+     *  add: '',
         update: '',
         query: '',
         del: '',
         detail: '',
         enable: '',
+        tree: '',
         proto: ''
-    };
+     */
+    protected api: any;
+    /**
+     * form表单接口定义
+     */
+    protected form_api: any;
     /**
      * 列表接口定义
      */
-    protected list_api: any = {
-        add: '',
-        update: '',
-        query: '',
-        del: '',
-        detail: '',
-        enable: '',
-        proto: ''
-    };
+    protected list_api: any;
     /**
      * 树接口定义
      */
-    protected tree_api: any = {
-        add: '',
-        update: '',
-        del: '',
-        detail: '',
-        tree: '',
-        proto: ''
-    };
+    protected tree_api: any;
     /**
      * 校验诸如 add query 等 api  是否存在
      * @param opt
@@ -183,9 +172,11 @@ export class DyBaseService {
     private getApi(source: APISOURCE) {
         switch (source) {
             case APISOURCE.LIST:
-                return this.list_api;
+                return this.list_api ? this.list_api : this.api;
             case APISOURCE.TREE:
-                return this.tree_api;
+                return this.tree_api ? this.tree_api : this.api;
+            case APISOURCE.FORM:
+                return this.form_api ? this.form_api : this.api;
             default:
                 return this.api;
         }

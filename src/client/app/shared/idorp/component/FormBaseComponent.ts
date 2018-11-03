@@ -43,7 +43,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     ngOnInit() {
         this.initForm();
     }
-    abstract initFD(): void;
+    abstract start(): void;
     /**
      * 保存操作调用接口之前的处理方法
      * @param data 表单填写的JSON数据
@@ -331,7 +331,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     private initForm() {
         this.formEntry = {};
         //给子类加载 formData属性
-        this.initFD();
+        this.start();
         //通知组件formData已经初始化完成
         this.initComplete();
     }

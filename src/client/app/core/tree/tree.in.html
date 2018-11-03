@@ -8,10 +8,10 @@
     </section>
   </section>
 
-<div class="modal fade" id="tree_modal">
+<div class="modal fade" id="tree_modal"  *ngIf="_config.useform && _treeFormData">
   <div class="modal-dialog">
     <div class="modal-content">
-      <df-form *ngIf="_config.useform" #form [formData]="_treeFormData" (selectchangeout)="selectChange($event)" (formSubmit)="formSubmit($event)"></df-form>
+      <df-form #form [formData]="_treeFormData" (selectchangeout)="selectChange($event)" (formSubmit)="formSubmit($event)"></df-form>
     </div>
     <!-- /.modal-content -->
   </div>

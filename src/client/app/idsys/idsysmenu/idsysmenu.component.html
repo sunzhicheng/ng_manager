@@ -1,7 +1,7 @@
 
 
               <aside class="aside-md b-r bg-white" id="subNav">
-                  <ng-tree-in  *ngIf="tree_data" [config]="tree_config" [tree_setting]="tree_setting" [treeFormData]="treeFormData"
+                  <ng-tree-in *ngIf="treeFormData" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
                   [treeData]="tree_data"
                   (formSubmited)="formSubmit($event)"
                   (treeDeleted)="treeDelete($event)"

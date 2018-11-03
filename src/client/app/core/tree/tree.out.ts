@@ -63,7 +63,7 @@ export class TreeOutComponent implements OnInit, OnChanges {
     }
   };
 
-  public _tree_setting: any = {
+  public _tree_button_setting: any = {
     selectedMulti: false, //是否可多选
     addBtn: false, //增加按钮
     editBtn: false, //修改按钮
@@ -108,9 +108,9 @@ export class TreeOutComponent implements OnInit, OnChanges {
   }
 
   @Input()
-  public set tree_setting(values: any) {
+  public set tree_button_setting(values: any) {
     this.setInit = true;
-    IUtils.mergeAFromB(this._tree_setting, values, {});
+    IUtils.mergeAFromB(this._tree_button_setting, values, {});
     this.initTree();
   }
 
@@ -205,7 +205,7 @@ export class TreeOutComponent implements OnInit, OnChanges {
     } else {
       //添加
       if (treeNode.level < parseInt(this._config.maxLevel, 10)) {
-        if (this._tree_setting.addBtn) {
+        if (this._tree_button_setting.addBtn) {
           const addStr: any = '<span id=diyBtn_add_' +
             treeNode.id + ' ></span>';
           aObj.append(addStr);
@@ -222,7 +222,7 @@ export class TreeOutComponent implements OnInit, OnChanges {
 
 
       //删除
-      if (this._tree_setting.deleteBtn) {
+      if (this._tree_button_setting.deleteBtn) {
         const deleteStr: any = '<span id=diyBtn_delete_' +
           treeNode.id + ' ></span>';
         aObj.append(deleteStr);
@@ -239,7 +239,7 @@ export class TreeOutComponent implements OnInit, OnChanges {
     }
 
     //修改
-    if (this._tree_setting.editBtn) {
+    if (this._tree_button_setting.editBtn) {
       const editStr: any = '<span id=diyBtn_edit_' +
         treeNode.id + ' ></span>';
       aObj.append(editStr);
@@ -256,14 +256,14 @@ export class TreeOutComponent implements OnInit, OnChanges {
 
   public removeHoverDom(treeId: any, treeNode: any) {
     // if (treeNode.parentTId && treeNode.getParentNode().id!=1) return;
-    if (this._tree_setting) {
-      if (this._tree_setting.addBtn) {
+    if (this._tree_button_setting) {
+      if (this._tree_button_setting.addBtn) {
         (<any>$)('#diyBtn_add_' + treeNode.id).unbind().remove();
       }
-      if (this._tree_setting.editBtn) {
+      if (this._tree_button_setting.editBtn) {
         (<any>$)('#diyBtn_edit_' + treeNode.id).unbind().remove();
       }
-      if (this._tree_setting.editBtn) {
+      if (this._tree_button_setting.editBtn) {
         (<any>$)('#diyBtn_delete_' + treeNode.id).unbind().remove();
       }
     }

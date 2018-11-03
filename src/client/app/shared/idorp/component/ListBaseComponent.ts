@@ -3,7 +3,7 @@ import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
 import { PromptUtil } from '../providers/PromptUtil';
-import { PAGER_INIT } from '../config/app.config';
+import { PAGER_INIT, APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类
  */
@@ -23,7 +23,7 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
      * 组件协议对像数据
      */
     listEntry: any = this.entryInit;
-    constructor(protected listService: DyBaseService | any) {
+    constructor(protected listServ: DyBaseService | any) {
         super();
     }
     beforeQuery(listEntry: any) {
@@ -33,7 +33,7 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
         if (!this.listFormData) {
             return;
         }
-        if (!this.hasMethod(this.listService, this.method_list_query)) {
+        if (!this.hasMethod(this.listServ, this.method_list_query)) {
             return;
         }
         if (!this.listEntry) {
@@ -53,7 +53,7 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
             return;
         }
         this.log('query brefore : ', this.listEntry);
-        this.listService[this.method_list_query](this.listEntry).subscribe(
+        this.listServ[this.method_list_query](this.listEntry, APISOURCE.LIST).subscribe(
             (protoMsg: any) => {
                 this.listFormData.pager = protoMsg.pager;
                 this.listEntry = protoMsg;
@@ -76,30 +76,30 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
      */
     loadData(pager: any) {
         this.listEntry.pager = pager;
-        if (this.listService) {
+        if (this.listServ) {
             this.query();
         }
     }
     del(uuid: any) {
-        if (!this.hasMethod(this.listService, this.method_list_del)) {
+        if (!this.hasMethod(this.listServ, this.method_list_del)) {
             return;
         }
         PromptUtil._confirm('确认要删除吗？', () => {
             const entry = { query: { uuid: uuid } };
-            this.listService[this.method_list_del](entry).subscribe((result: any) => {
+            this.listServ[this.method_list_del](entry, APISOURCE.LIST).subscribe((result: any) => {
                 PromptUtil._success();
                 this.loadData(this.listEntry.pager);
             });
         });
     }
     enable(uuid: any) {
-        if (!this.hasMethod(this.listService, this.method_list_enable)) {
+        if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
         PromptUtil._confirm('确认要启用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 1 });
-            this.listService[this.method_list_enable](entry).subscribe((result: any) => {
+            this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {
                 PromptUtil._success();
                 this.loadData(this.listEntry.pager);
             });
@@ -107,13 +107,13 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
     }
 
     stop(uuid: any) {
-        if (!this.hasMethod(this.listService, this.method_list_enable)) {
+        if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
         PromptUtil._confirm('确认要禁用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 2 });
-            this.listService[this.method_list_enable](entry).subscribe((result: any) => {
+            this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {
                 PromptUtil._success();
                 this.loadData(this.listEntry.pager);
             });
@@ -140,8 +140,8 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
      * 如果返回详情页面回来则刷新数据
     */
     ngAfterContentChecked() {
-        if (this.listService.isReLoad) {
-            this.listService.isReLoad = false;
+        if (this.listServ && this.listServ.isReLoad) {
+            this.listServ.isReLoad = false;
             this.query();
         }
     }

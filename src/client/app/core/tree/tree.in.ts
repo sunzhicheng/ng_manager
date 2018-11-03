@@ -81,7 +81,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
     }
   };
 
-  public _tree_setting: any = {
+  public _tree_button_setting: any = {
     selectedMulti: false, //是否可多选
     check: false, //是否显示选择按钮
     addBtn: false, //增加按钮
@@ -147,16 +147,16 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
 
   @Input()
   public set config(values: any) {
-    IUtils.mergeAFromB(this._config, values, {});
-    this.base_setting.async.enable = this._config.async;
-    this.configInit = true;
-    this.initTree();
+      IUtils.mergeAFromB(this._config, values, {});
+      this.base_setting.async.enable = this._config.async;
+      this.configInit = true;
+      this.initTree();
   }
 
   @Input()
-  public set tree_setting(values: any) {
-    IUtils.mergeAFromB(this._tree_setting, values, {});
-    this.base_setting.check.enable = this._tree_setting.check ? true : false;
+  public set tree_button_setting(values: any) {
+    IUtils.mergeAFromB(this._tree_button_setting, values, {});
+    this.base_setting.check.enable = this._tree_button_setting.check ? true : false;
     this.setInit = true;
     this.initTree();
   }
@@ -325,7 +325,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
     if ((<any>$)('#diyBtn_delete_' + treeNode.id).length > 0) return;
     //添加
     if (treeNode.level <= parseInt(this._config.maxLevel, 10)) {
-      if (this._tree_setting.addBtn) {
+      if (this._tree_button_setting.addBtn) {
         const editStr: any = '<span id=diyBtn_add_' +
           treeNode.id + ' title=添加></span>';
         aObj.append(editStr);
@@ -341,7 +341,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
     }
 
     //修改
-    if (this._tree_setting.editBtn) {
+    if (this._tree_button_setting.editBtn) {
       if (treeNode.level === 0 && !this._config.rootCreate) {
         // this.log('rootCreate === false 不能修改根目录');
       } else {
@@ -359,7 +359,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
       }
     }
     //删除
-    if (this._tree_setting.deleteBtn) {
+    if (this._tree_button_setting.deleteBtn) {
       if (treeNode.level === 0 && !this._config.rootCreate) {
         // this.log('rootCreate === false 不能删除根目录');
       } else {
@@ -376,7 +376,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
         }
       }
     }
-    if (this._tree_setting.bindBtn) {
+    if (this._tree_button_setting.bindBtn) {
       const bindStr: any = '<span id=diyBtn_bind_' +
         treeNode.id + ' ></span>';
       aObj.append(bindStr);
@@ -393,16 +393,16 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
 
   public removeHoverDom(treeId: any, treeNode: any) {
     // if (treeNode.parentTId && treeNode.getParentNode().id!=1) return;
-    if (this._tree_setting.addBtn) {
+    if (this._tree_button_setting.addBtn) {
       (<any>$)('#diyBtn_add_' + treeNode.id).unbind().remove();
     }
-    if (this._tree_setting.editBtn) {
+    if (this._tree_button_setting.editBtn) {
       (<any>$)('#diyBtn_edit_' + treeNode.id).unbind().remove();
     }
-    if (this._tree_setting.editBtn) {
+    if (this._tree_button_setting.editBtn) {
       (<any>$)('#diyBtn_delete_' + treeNode.id).unbind().remove();
     }
-    if (this._tree_setting.bindBtn) {
+    if (this._tree_button_setting.bindBtn) {
       (<any>$)('#diyBtn_bind_' + treeNode.id).unbind().remove();
     }
 

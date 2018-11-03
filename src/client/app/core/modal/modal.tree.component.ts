@@ -21,7 +21,7 @@ export class ModalTreeComponent extends BaseComponent implements OnInit {
         showhead: true,
         useform: false
     };
-    _tree_setting: any = {
+    _tree_button_setting: any = {
         check: true
     };
 

@@ -14,7 +14,7 @@ declare const $: any;
 /**
  * 系统模块 菜单配置 组件
  */
-export class IdSysMenuComponent extends TreeBaseComponent implements OnInit {
+export class IdSysMenuComponent extends TreeBaseComponent {
     tree_config: any = {
         title: '菜单列表',
         rootCreate: true,
@@ -22,14 +22,12 @@ export class IdSysMenuComponent extends TreeBaseComponent implements OnInit {
         maxLevel: 5
     };
     constructor(
-                protected _router: Router,
-                protected treeService: TreeService,
-                protected sysMenuService: IdSysMenuService) {
-                 super(sysMenuService, _router, treeService);
+        protected treeService: TreeService,
+        protected sysMenuService: IdSysMenuService) {
+        super(sysMenuService, treeService, null);  //这里 第一个参数是  list列表service  在treeTable的时候会用到
     }
-    ngOnInit() {
+    start() {
         $('sd-idsysmenu').addClass('hbox stretch');
-        this.getTreeData(1);
         this.treeFormData = this.sysMenuService.initFormData();
     }
 }

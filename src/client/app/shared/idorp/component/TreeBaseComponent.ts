@@ -1,7 +1,7 @@
 import { TreeService } from '../service/TreeService';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
-import { ViewChild } from '@angular/core';
+import { ViewChild, AfterViewInit, OnInit } from '@angular/core';
 import { TreeInComponent } from '../../../core/tree/tree.in';
 import { FormUtils } from '../providers/FormUtils';
 import { ListBaseComponent } from './ListBaseComponent';
@@ -9,7 +9,7 @@ import { APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类
  */
-export class TreeBaseComponent extends ListBaseComponent {
+export abstract class TreeBaseComponent extends ListBaseComponent implements OnInit {
     //重新命名该属性的时候   必须保证相应的子service 有相应的方法
     method_tree_query: any = 'tree';
     method_tree_detail: any = 'detail';
@@ -26,7 +26,7 @@ export class TreeBaseComponent extends ListBaseComponent {
     //父id
     parent_key: any = 'parent_id';
     //树数据
-    tree_data: any = [];
+    tree_data: any;
     //树节点新增修改的form  表单
     treeFormData: any;
     //树配置
@@ -53,15 +53,23 @@ export class TreeBaseComponent extends ListBaseComponent {
     //已经被选择的集合
     checkeds: any;
 
+    //异步加载需要配置的参数
+    async_config: any;
+
     @ViewChild(TreeInComponent)
     protected tree_in: TreeInComponent;
 
-    constructor(protected listService: DyBaseService | any,
-        protected treeService: DyBaseService | any,
+    constructor(
+        protected treeServ: DyBaseService | any,
         protected treeUtil: TreeService,
+        protected listServ: DyBaseService | any,
     ) {
-        super(listService);
+        super(listServ);
     }
+    ngOnInit() {
+        this.initTree();
+    }
+    abstract start(): void;
     beforeQuery() {
         this.log('父类空方法 用于封装查询条件 供子类实现 ');
     }
@@ -70,7 +78,7 @@ export class TreeBaseComponent extends ListBaseComponent {
      * @param openIndex  默认打开数到第几层
      */
     getTreeData(openIndex: any = 9999) {
-        if (!this.hasMethod(this.treeService, this.method_tree_query)) {
+        if (!this.hasMethod(this.treeServ, this.method_tree_query)) {
             return;
         }
         if (!this.treeEntry) {
@@ -81,7 +89,7 @@ export class TreeBaseComponent extends ListBaseComponent {
         }
 
         this.log('tree query brefore : ', this.treeEntry);
-        this.treeService[this.method_tree_query](this.treeEntry, APISOURCE.TREE).subscribe(
+        this.treeServ[this.method_tree_query](this.treeEntry, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
                 this.log('tree query result : ', protoMsg);
                 this.tree_data = [];
@@ -95,12 +103,12 @@ export class TreeBaseComponent extends ListBaseComponent {
         );
     }
     treeDetail(node: any) {
-        if (!this.hasMethod(this.treeService, this.method_tree_detail)) {
+        if (!this.hasMethod(this.treeServ, this.method_tree_detail)) {
             return;
         }
-        const detailProto = { proto: { dtc: { pt_id: { open_id: node.id } } } };
+        const detailProto = { query: {uuid: node.id} };
         this.log('treeDetail query brefore : ', detailProto);
-        this.treeService[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe(
+        this.treeServ[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
                 this.log('treeDetail query result : ', protoMsg);
                 this.tree_in.toEdit(protoMsg.proto);
@@ -128,7 +136,7 @@ export class TreeBaseComponent extends ListBaseComponent {
         this.tree_in.delSuccess();
     }
     treeSubmit(fdata: any) {
-        if (!this.hasMethod(this.treeService, this.method_tree_save)) {
+        if (!this.hasMethod(this.treeServ, this.method_tree_save)) {
             return;
         }
         const saveProto = { proto: fdata, query: { uuid: fdata.id } };
@@ -136,7 +144,7 @@ export class TreeBaseComponent extends ListBaseComponent {
             saveProto.proto[this.parent_key] = fdata.add_parentNode.id;
         }
         this.log('tree formSubmit brefore : ', saveProto);
-        this.treeService[this.method_tree_save](saveProto, fdata.id ? false : true, APISOURCE.TREE).subscribe(
+        this.treeServ[this.method_tree_save](saveProto, fdata.id ? false : true, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
                 this.log('tree formSubmit result : ', protoMsg);
                 if (fdata.id) {
@@ -149,12 +157,12 @@ export class TreeBaseComponent extends ListBaseComponent {
         );
     }
     treeDelete(node: any) {
-        if (!this.hasMethod(this.treeService, this.method_tree_del)) {
+        if (!this.hasMethod(this.treeServ, this.method_tree_del)) {
             return;
         }
         const delProto = { query: { uuid: node.id } };
         this.log('treeDelete brefore : ', delProto);
-        this.treeService[this.method_tree_del](delProto, APISOURCE.TREE).subscribe(
+        this.treeServ[this.method_tree_del](delProto, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
                 this.log('treeDelete result : ', protoMsg);
                 this.delSuccessCallback(protoMsg);
@@ -278,5 +286,27 @@ export class TreeBaseComponent extends ListBaseComponent {
         if (formData) {
             FormUtils.updateFilterJson(formData, key, filterJson);
         }
+    }
+    /**
+     * formData 初始化完成操作
+     */
+    private initComplete() {
+        if (this.tree_config.useform && !this.treeFormData) {
+            console.error('initComplete错误: treeFormData属性为null');
+            return;
+        }
+        if (this.tree_config.async && !this.async_config) {
+            console.error('initComplete错误: 缺少异步加载必须配置参数<async_config>');
+            return;
+        }
+        this.tree_config.complete = true;
+    }
+    private initTree() {
+        //请求tree  数据
+        this.getTreeData(1);
+        //给子类加载必须属性  如 treeFormData属性
+        this.start();
+        //通知组件formData已经初始化完成
+        this.initComplete();
     }
 }
