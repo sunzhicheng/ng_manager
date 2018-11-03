@@ -1,10 +1,10 @@
-<div class="wrapper b-b header" *ngIf="_config.showhead" style="position:relative;">{{_config.title}}
+<div class="wrapper b-b header" *ngIf="_config.showhead" style="position:relative;">{{ _config.title }}
     <a *ngIf="_config.rootCreate" class="btn btn-sm btn-default" style="position: absolute; top: 0; right:10px;z-index: 500;" (click)="addClick(null)">
       <i class="fa fa-plus"></i> 新建</a>
   </div>
   <section class="vbox">
     <section class="middle-content scrollable tree-content">
-        <ul id="{{treeId}}" class="ztree"></ul>
+        <ul id="{{ treeId }}" class="ztree"></ul>
     </section>
   </section>
 

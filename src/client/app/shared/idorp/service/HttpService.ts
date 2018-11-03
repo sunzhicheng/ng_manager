@@ -168,9 +168,9 @@ export class HttpService {
     isNotEx(token: any) {
         if (token && token.ex) {
             const error_type = token.ex.ex_type;
-            let errorMsg = IUtils.getVFromJson(token, 'ex.ex_short_msg');
+            let errorMsg = IUtils.getJson(token, 'ex.ex_short_msg');
             if (!errorMsg) {
-                errorMsg = IUtils.getVFromJson(token, 'ex.ex_tips');
+                errorMsg = IUtils.getJson(token, 'ex.ex_tips');
             }
             if (error_type === 1 || error_type === 2) {
                 // const ptType = localStorage.getItem('ptType');

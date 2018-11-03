@@ -26,7 +26,7 @@ import { GpbService } from '../../shared/idorp/service/gpb.service';
       <input type="checkbox" value="{{opt.key.l_id}}" (change)="changed($event)"
              [disabled]="isDisabled"
              [checked]="isChecked(opt.key.l_id)">
-      {{opt.value.open_id}}
+      {{ opt.value.open_id }}
     </label>
   </div>
 </ng-container>

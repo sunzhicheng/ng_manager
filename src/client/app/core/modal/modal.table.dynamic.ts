@@ -24,7 +24,7 @@ declare let $: any;
         <div class="modal-content" style="min-height: 440px;">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h4 class="modal-title">{{_config.title}}</h4>
+            <h4 class="modal-title">{{ _config.title }}</h4>
           </div>
           <div>
             <ng-static-table  [pager]="pager"  (allCheckedV)="valueChange($event)"

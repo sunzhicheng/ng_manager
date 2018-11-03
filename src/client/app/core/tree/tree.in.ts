@@ -438,11 +438,11 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
   }
 
   public toEdit(fromValue: any) {
-    if (this.pp(fromValue, 'dtc.pt_id.open_id', '') === '') {
+    if (this.getJson(fromValue, 'dtc.pt_id.open_id', '') === '') {
       console.error('未传修改ID!!!');
       return;
     }
-    this.edit_id = this.pp(fromValue, 'dtc.pt_id.open_id', '');
+    this.edit_id = this.getJson(fromValue, 'dtc.pt_id.open_id', '');
     this.form.reset(fromValue);
     this.toShowADU(null);
   }

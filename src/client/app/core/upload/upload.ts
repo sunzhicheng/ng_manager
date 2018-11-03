@@ -3,8 +3,8 @@ import { PromptUtil } from './../../shared/idorp/providers/PromptUtil';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpService } from '../../shared/idorp/service/HttpService';
-import { BASE_URL_GEN } from '../../shared/idorp/config/env.config';
 import { IDCONF } from '../../shared/idorp/config/app.config';
+import _ from 'lodash';
 
 // 不建议使用
 declare function $(filter: string): void;
@@ -73,7 +73,7 @@ export class UploadComponent {
         this.isInloading = false;
         if (this.toolHttp.isNotEx(token)) {
           console.log('上传成功!');
-          const uploadId = IUtils.getVFromJson(result, 'attList[0].pt_id.open_id', '');
+          const uploadId = _.get(result, 'attList[0].pt_id.open_id', '');
           this.img_id = uploadId;
           PromptUtil.hideLoad();
           const f: any = $('#' + this.namekey);

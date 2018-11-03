@@ -239,10 +239,10 @@ export class IdSysAppAcountService extends DyBaseService {
                  for ( let i = 0; i < protoMsg.proto_list.length; i++) {
                    proto_list.push({
                      key: {
-                       l_id: IUtils.getVFromJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
+                       l_id: IUtils.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
                      },
                      value: {
-                       open_id: IUtils.getVFromJson(protoMsg.proto_list[i], 'username', '')
+                       open_id: IUtils.getJson(protoMsg.proto_list[i], 'username', '')
                      }
                    });
                  }

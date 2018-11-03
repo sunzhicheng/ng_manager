@@ -32,7 +32,7 @@ export class FormUtils {
         if (!this.authFromData(formData)) {
             return;
         }
-        let item_list = IUtils.getVFromJson(formData, 'row_list[0].item_list', null);
+        let item_list = IUtils.getJson(formData, 'row_list[0].item_list', null);
         if (!item_list) {
             item_list = [];
         }
@@ -42,7 +42,7 @@ export class FormUtils {
         if (!this.authFromData(formData)) {
             return;
         }
-        let item_list = IUtils.getVFromJson(formData, 'row_list[1].item_list', null);
+        let item_list = IUtils.getJson(formData, 'row_list[1].item_list', null);
         if (!item_list) {
             item_list = [];
         }
@@ -60,7 +60,7 @@ export class FormUtils {
             return;
         }
         let item_list: any[] = [];
-        item_list = IUtils.getVFromJson(formData, 'row_list[0].item_list', null);
+        item_list = IUtils.getJson(formData, 'row_list[0].item_list', null);
         if (item_list) {
             item_list.forEach(e => {
                 if (e.key === key) {

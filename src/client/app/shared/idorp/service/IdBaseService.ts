@@ -121,7 +121,7 @@ export class DyBaseService {
      */
     save(entry: any, isAdd: boolean, source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
         const api = this.getApi(source);
-        return this.requestApi(this.getUrl(api, 'save'), api.proto, entry, source);
+        return this.requestApi(isAdd ? this.getUrl(api, 'add') : this.getUrl(api, 'update'), api.proto, entry, source);
     }
     /**
      * 公共 根据uuid  查找详情方法
@@ -132,9 +132,9 @@ export class DyBaseService {
         const api = this.getApi(source);
         const uuid = this._.get(entry, 'query.uuid', '');
         if (uuid === '') {
-           return  Observable.create((observer: any) => {
+            return Observable.create((observer: any) => {
                 observer.error('DyBaseService.detail错误: ', uuid);
-           });
+            });
         }
         return this.requestApi(this.getUrl(api, 'detail') + '/' + uuid, api.proto, entry, source, HTTPREQ.GET);
     }

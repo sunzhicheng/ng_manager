@@ -63,9 +63,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
           this.loginService.loginByTokenInvaild(sysUserEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               if (protoMsg.token && protoMsg.token.ex) {
-                let errorMsg = IUtils.getVFromJson(protoMsg.token, 'ex.ex_short_msg');
+                let errorMsg = IUtils.getJson(protoMsg.token, 'ex.ex_short_msg');
                 if (!errorMsg) {
-                     errorMsg = IUtils.getVFromJson(protoMsg.token, 'ex.ex_tips');
+                     errorMsg = IUtils.getJson(protoMsg.token, 'ex.ex_tips');
                 }
                 this.errorMessage = errorMsg;
               } else {

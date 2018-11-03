@@ -66,7 +66,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 let isChecked = false;
-                const uuid = IUtils.getVFromJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -84,9 +84,9 @@ export class TreeService extends DyBaseService {
     proto2Node(proto: any, pId: any, isOpen: boolean = true, isChecked: boolean = false) {
         const subList = _.get(proto, this.sub_key || 'sub_list');
         const node = {
-            id: IUtils.getVFromJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+            id: IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
             pId: pId,
-            name: IUtils.getVFromJson(proto, this.name_key || 'name', ''),
+            name: IUtils.getJson(proto, this.name_key || 'name', ''),
             isParent: subList && subList.length > 0 ? true : false,
             open: isOpen,
             checked: isChecked,
@@ -103,7 +103,7 @@ export class TreeService extends DyBaseService {
             for (const i in superItem[this.sub_key || 'sub_list']) {
                 const proto: any = superItem[this.sub_key || 'sub_list'][i];
                 let isChecked = false;
-                const uuid = IUtils.getVFromJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -112,7 +112,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 const node = this.proto2Node(proto,
-                    IUtils.getVFromJson(superItem, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                    IUtils.getJson(superItem, this.uuid_key || 'dtc.pt_id.open_id', ''),
                     isOpen, isChecked);
                 tree_arr.push(node);
                 this.getSubNode(proto, tree_arr, openIndex, index + 1);
@@ -141,9 +141,9 @@ export class TreeService extends DyBaseService {
         if (proto) {
             this.checkProto(proto);
             const node = {
-                id: IUtils.getVFromJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
-                pId: IUtils.getVFromJson(proto, this.parent_key || 'parent_id', ''),
-                name: IUtils.getVFromJson(proto, this.name_key || 'name', ''),
+                id: IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                pId: IUtils.getJson(proto, this.parent_key || 'parent_id', ''),
+                name: IUtils.getJson(proto, this.name_key || 'name', ''),
                 isParent: true,
             };
             return node;

@@ -60,10 +60,10 @@ export class OperateLoginComponent extends BaseComponent implements OnInit, Afte
         this.loginService.initSession(sysUserEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               if (this.loginService.isNotEx(protoMsg.token)) {
-                this.loginService.sessionId = this.pp(protoMsg, 'token.ext.pt_session_id');
+                this.loginService.sessionId = this.getJson(protoMsg, 'token.ext.pt_session_id');
                 this.getCaptcha();
-              } else if (this.pp(protoMsg, 'token.ex') !== '') {
-                this.errorMessage = this.pp(protoMsg, 'token.ex.ex_tips');
+              } else if (this.getJson(protoMsg, 'token.ex') !== '') {
+                this.errorMessage = this.getJson(protoMsg, 'token.ex.ex_tips');
               }
             },
             (error: any) => console.error(error)

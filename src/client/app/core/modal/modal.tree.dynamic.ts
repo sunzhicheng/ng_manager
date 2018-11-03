@@ -19,16 +19,16 @@ declare let $: any;
   template: `
   <input  type="text" class="form-control" [value]="selectNames"  (click)="show()"
   readonly>
-    <div class="modal fade" id="{{namekey}}">
+    <div class="modal fade" id="{{ namekey }}">
     <div class="modal-dialog" style="width: 450px;">
       <div class="modal-content" style="min-height: 450px;">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h4 class="modal-title">{{_config.title}}</h4>
+          <h4 class="modal-title">{{ _config.title }}</h4>
         </div>
         <div class="modal-body" style="height:500px;overflow-y: auto;padding: 0;">
           <div class="tree-content">
-            <ul id="{{treeId}}" class="ztree"></ul>
+            <ul id="{{ treeId }}" class="ztree"></ul>
           </div>
         </div>
         <div class="modal-footer" style="margin:0;">

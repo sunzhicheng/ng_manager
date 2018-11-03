@@ -69,7 +69,7 @@ export class ImgDynamicBaseComponent extends DynamicBase {
           this.isUploading = false;
           if (this.toolHttp.isNotEx(token)) {
             this.log('上传成功!');
-            const uploadId = IUtils.getVFromJson(result, 'attList[0].pt_id.open_id', '');
+            const uploadId = IUtils.getJson(result, 'attList[0].pt_id.open_id', '');
             this.img_arr.push(uploadId);
             if (this.propagateChange) {
               this.propagateChange(_.join(this.img_arr, ','));

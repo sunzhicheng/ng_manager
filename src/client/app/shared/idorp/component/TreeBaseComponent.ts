@@ -1,8 +1,6 @@
 import { TreeService } from '../service/TreeService';
-import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
-import { BaseComponent } from './BaseComponent';
 import { ViewChild } from '@angular/core';
 import { TreeInComponent } from '../../../core/tree/tree.in';
 import { FormUtils } from '../providers/FormUtils';
@@ -12,11 +10,11 @@ import { APISOURCE } from '../config/app.config';
  * 列表组件基类
  */
 export class TreeBaseComponent extends ListBaseComponent {
-     //重新命名该属性的时候   必须保证相应的子service 有相应的方法
-     method_tree_query: any = 'tree';
-     method_tree_detail: any = 'detail';
-     method_tree_save: any = 'save';
-     method_tree_del: any = 'del';
+    //重新命名该属性的时候   必须保证相应的子service 有相应的方法
+    method_tree_query: any = 'tree';
+    method_tree_detail: any = 'detail';
+    method_tree_save: any = 'save';
+    method_tree_del: any = 'del';
 
 
     //用来获取子集的JSON key
@@ -58,10 +56,10 @@ export class TreeBaseComponent extends ListBaseComponent {
     @ViewChild(TreeInComponent)
     protected tree_in: TreeInComponent;
 
-    constructor(protected listService: DyBaseService|any,
-        protected treeService: DyBaseService|any,
+    constructor(protected listService: DyBaseService | any,
+        protected treeService: DyBaseService | any,
         protected treeUtil: TreeService,
-        ) {
+    ) {
         super(listService);
     }
     beforeQuery() {
@@ -89,7 +87,7 @@ export class TreeBaseComponent extends ListBaseComponent {
                 this.tree_data = [];
                 if (protoMsg.proto_list) {
                     this.tree_data.splice(0, this.tree_data.length);
-                    this.treeUtil.setMappingKey( this.name_key, this.uuid_key, this.sub_key);
+                    this.treeUtil.setMappingKey(this.name_key, this.uuid_key, this.sub_key);
                     this.tree_data = this.treeUtil.toTreeData(protoMsg.proto_list, openIndex);
                 }
             },
@@ -100,7 +98,7 @@ export class TreeBaseComponent extends ListBaseComponent {
         if (!this.hasMethod(this.treeService, this.method_tree_detail)) {
             return;
         }
-        const detailProto = { proto: {dtc: {pt_id: {open_id: node.id}}}};
+        const detailProto = { proto: { dtc: { pt_id: { open_id: node.id } } } };
         this.log('treeDetail query brefore : ', detailProto);
         this.treeService[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
@@ -122,25 +120,25 @@ export class TreeBaseComponent extends ListBaseComponent {
      * @param entryResult
      */
     addSuccessCallback(result: any) {
-        this.treeUtil.setMappingKey(this.name_key, this.uuid_key, this.sub_key );
+        this.treeUtil.setMappingKey(this.name_key, this.uuid_key, this.sub_key);
         const node = this.treeUtil.proto2Node(result.proto, result.proto[this.parent_key], true);
         this.tree_in.addSuccess(node);
     }
     delSuccessCallback(result: any) {
         this.tree_in.delSuccess();
     }
-    formSubmit(fdata: any) {
+    treeSubmit(fdata: any) {
         if (!this.hasMethod(this.treeService, this.method_tree_save)) {
             return;
         }
-        const saveProto = { proto: fdata, query: {uuid: fdata.id}};
+        const saveProto = { proto: fdata, query: { uuid: fdata.id } };
         if (!fdata.id && fdata.add_parentNode) {
             saveProto.proto[this.parent_key] = fdata.add_parentNode.id;
         }
         this.log('tree formSubmit brefore : ', saveProto);
         this.treeService[this.method_tree_save](saveProto, fdata.id ? false : true, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
-                this.log('tree formSubmit result : ' , protoMsg);
+                this.log('tree formSubmit result : ', protoMsg);
                 if (fdata.id) {
                     this.updateSuccessCallback(protoMsg);
                 } else {
@@ -154,32 +152,131 @@ export class TreeBaseComponent extends ListBaseComponent {
         if (!this.hasMethod(this.treeService, this.method_tree_del)) {
             return;
         }
-        const delProto = { query: {uuid: node.id}};
+        const delProto = { query: { uuid: node.id } };
         this.log('treeDelete brefore : ', delProto);
         this.treeService[this.method_tree_del](delProto, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
-                this.log('treeDelete result : ' , protoMsg);
+                this.log('treeDelete result : ', protoMsg);
                 this.delSuccessCallback(protoMsg);
             },
             (error: any) => console.error(error)
         );
     }
-    //数节点的 修改和新增表单使用  start..
-   addDisabledList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addDisabledList(this.treeFormData, keyArr, opt, dealOther);
-   }
 
-   setItemValueByJson(json: any) {
-       FormUtils.setItemValueByJson(this.tree_in.form, this.treeFormData, json);
+    /** ****************************************需要手动刷新的方法 start************************************/
+    /**
+   * 绑定下拉列表,必须调用刷新方法注：
+   * 1.下拉列表的label必须与传过来的key相同
+   * 2.用户类型必须放在row_list[0]中
+   * @param optList
+   * @param key
+   */
+    bindFormDateOptList(optList: any, key: any) {
+        if (this.tree_in.form) {
+            FormUtils.bindFormDateOptList(this.tree_in.form, this.treeFormData, optList, key);
+        }
     }
-    addHiddenList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addHiddenList(this.treeFormData, keyArr, opt, dealOther);
+    setItemValueByJson(json: any) {
+        if (this.tree_in.form) {
+            FormUtils.setItemValueByJson(this.tree_in.form, this.treeFormData, json);
+        }
     }
+    /**
+     * 向表单对象动态添加tiem
+     * @param items  item的数组对象
+     * @param afterKey 在哪个item key后面开始添加
+     * @param isRefresh 是否自动刷新表单  默认不刷新
+     */
+    addItemList(items: any, afterKey: String) {
+        FormUtils.addItemList(this.treeFormData, items, afterKey);
+    }
+    /**
+     * 向表单对象动态删除tiem
+     * @param keyArr 需要删除的item key  集合
+     * @param isRefresh 是否自动刷新表单 默认不刷新
+     */
+    delItemList(keyArr: any) {
+        FormUtils.delItemList(this.treeFormData, keyArr);
+    }
+    updateRules(keyArr: any, rule: any, isAdd: boolean = true) {
+        FormUtils.updateRules(this.treeFormData, keyArr, rule, isAdd);
+    }
+    clearRules(keyArr: any) {
+        FormUtils.clearRules(this.treeFormData, keyArr);
+    }
+    /**
+    * 修改的时候  向动态表单中添加disabled属性
+    * @param formData
+    * @param key
+    */
+    addDisabledList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
+        FormUtils.addDisabledList(this.treeFormData, keyArr, opt, dealOther);
+    }
+    /**
+     * 动态设置校验规则
+     * @param formData
+     * @param key
+     * @param isAdd
+     */
+    addRequiredRules(formData: any, key: any, isAdd: boolean = true) {
+        if (formData) {
+            FormUtils.updateRules(formData, [key], {
+                name: 'required',
+                errorMsg: '必填'
+            }, isAdd);
+        }
+    }
+
+    addHiddenList(keyArr: any, opt: boolean = true) {
+        FormUtils.addHiddenList(this.treeFormData, keyArr, opt);
+    }
+
+    /** ****************************************需要手动刷新的方法 end************************************/
+
+
+    /** ****************************************不需要手动刷新的方法 startr************************************/
+    /**
+     * 设置某个属性为空
+     * @param key
+     */
+    setNullByKey(key: any) {
+        if (this.tree_in.form) {
+            FormUtils.setNullByKey(this.tree_in.form, key);
+        }
+    }
+    addHiddenButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
+        FormUtils.addHiddenButtonList(this.treeFormData, keyArr, opt, dealOther);
+    }
+    addDisabledButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
+        FormUtils.addDisabledButtonList(this.treeFormData, keyArr, opt, dealOther);
+    }
+    getButtonKeyDisabledStatus(key: any) {
+        return FormUtils.getButtonKeyStatus(this.treeFormData, key);
+    }
+    getButtonKeyHiddenStatus(key: any) {
+        return FormUtils.getButtonKeyStatus(this.treeFormData, key, 'hidden');
+    }
+    addButtonList(items: any, afterKey: String) {
+        FormUtils.addButtonList(this.treeFormData, items, afterKey);
+    }
+    /******************************************不需要手动刷新的方法 end************************************/
+
+
     /**
      * item 变动  手动刷新表单
      */
     refreshItem() {
         FormUtils.refreshItem(this.tree_in.form, this.treeFormData);
     }
-    //数节点的 修改和新增表单使用  end..
+    refreshRule() {
+        if (this.tree_in.form && this.tree_in.form) {
+            FormUtils.refreshRule(this.tree_in.form, this.treeFormData);
+        }
+    }
+
+    updateFilterJson(formData: any, key: any, filterJson: any) {
+        if (formData) {
+            FormUtils.updateFilterJson(formData, key, filterJson);
+        }
+    }
 }

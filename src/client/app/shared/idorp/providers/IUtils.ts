@@ -252,7 +252,7 @@ export class IUtils {
  * @param name 属性名称
  * @param defaultValue 默认值
  */
-  static getVFromJson(proto: any, name: string, defaultValue = ''): any {
+  static getJson(proto: any, name: string, defaultValue = ''): any {
     if (proto && name) {
       const v = _.get(proto, name, defaultValue);
       // this.log('proto , name , default ', proto, name, defaultValue);
@@ -312,7 +312,7 @@ export class IUtils {
   static bindQueryData(entry: any, data: any, isConcat: boolean = false) {
     let q_item_list: any = new Array();
     if (isConcat) {
-      q_item_list = this.getVFromJson(entry, 'query.q_item_list') || new Array();
+      q_item_list = this.getJson(entry, 'query.q_item_list') || new Array();
     }
     for (const key in data) {
       const exist_index = _.findIndex(q_item_list, (o: any) => {

@@ -13,7 +13,7 @@ export class FormFormComponent implements OnInit {
     fd: any;
     @Input()
     set formData(fd: any) {
-        if(fd && fd.complete) {
+        if (fd && fd.complete) {
             this.fd = fd;
         }
     }
@@ -46,7 +46,7 @@ export class FormFormComponent implements OnInit {
     }
 
     selectchange(item: any) {
-      this.selectchangeout.emit(item);
+        this.selectchangeout.emit(item);
     }
 
     btnclick(item: any) {
@@ -54,6 +54,6 @@ export class FormFormComponent implements OnInit {
     }
     customSubmit(item: any) {
         this.customSubmitOut.emit(item);
-      }
+    }
 
 }

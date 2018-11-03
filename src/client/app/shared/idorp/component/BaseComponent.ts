@@ -1,8 +1,6 @@
 import { IUtils } from '../providers/IUtils';
 import * as _ from 'lodash';
 import { PAGER_INIT, API_DEBUG } from '../config/app.config';
-import { platform_name, platform_operate_name, platform_business_name } from '../config/app.config';
-import { FormUtils } from '../providers/FormUtils';
 
 export class BaseComponent {
     _: any = _;
@@ -75,8 +73,8 @@ export class BaseComponent {
             }
         }
     }
-    pp(proto: any, name: string, defaultValue = ''): any {
-        return IUtils.getVFromJson(proto, name, defaultValue);
+    getJson(proto: any, name: string, defaultValue = ''): any {
+        return IUtils.getJson(proto, name, defaultValue);
     }
 
     setJson(json: any, name: string, value: any): any {

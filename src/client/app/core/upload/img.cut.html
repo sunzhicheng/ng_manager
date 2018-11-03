@@ -1,10 +1,10 @@
-<div  id="tailoring_container_{{namekey}}" class="tailoring-container" [hidden]="ishidden"
+<div  id="tailoring_container_{{ namekey }}" class="tailoring-container" [hidden]="ishidden"
 >
 <div class="black-cloth" (click)="hideTailor()"></div>
-<div class="tailoring-content"  id="tailoring_content_{{namekey}}">
+<div class="tailoring-content"  id="tailoring_content_{{ namekey }}">
     <div class="tailoring-content-one">
-        <label title="上传图片" for="chooseImg_{{namekey}}" class="l-btn choose-btn"  [ngClass]="{'disabled':isDisabled}">
-            <input type="file" [attr.accept]="accept" [disabled]="isDisabled"  id="chooseImg_{{namekey}}" name="file" class="hidden"
+        <label title="上传图片" for="chooseImg_{{ namekey }}" class="l-btn choose-btn"  [ngClass]="{'disabled':isDisabled}">
+            <input type="file" [attr.accept]="accept" [disabled]="isDisabled"  id="chooseImg_{{ namekey }}" name="file" class="hidden"
                 (change)="selectImg($event)">
             选择图片
         </label>
@@ -12,13 +12,13 @@
     </div>
     <div class="tailoring-content-two">
         <div class="tailoring-box-parcel">
-            <img id="tailoringImg_{{namekey}}">
+            <img id="tailoringImg_{{ namekey }}">
         </div>
         <div class="preview-box-parcel">
             <p>图片预览：</p>
-            <div class="square previewImg" id="previewImgDIV_{{namekey}}"></div>
-            <p *ngIf="cropRusult">宽X高： {{cropRusult.width.toFixed(2)}} X {{cropRusult.height.toFixed(2)}}</p>
-            <p *ngIf="cropRusult">大小： {{cutImgSize}}</p>
+            <div class="square previewImg" id="previewImgDIV_{{ namekey }}"></div>
+            <p *ngIf="cropRusult">宽X高： {{ cropRusult.width.toFixed(2) }} X {{ cropRusult.height.toFixed(2) }}</p>
+            <p *ngIf="cropRusult">大小： {{ cutImgSize }}</p>
             <!-- <div class="circular previewImg"></div> -->
         </div>
     </div>

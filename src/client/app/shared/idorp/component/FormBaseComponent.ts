@@ -108,31 +108,24 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
         if (!this.hasMethod(this.service, this.method_form_save)) {
             return;
         }
-        if (!this.service.checkApi(this.isAdd ? 'add' : 'update')) {
-            return;
+        if (!this.isAdd) {
+            this.formEntry.query = { uuid: this.uuid };
         }
-        this.service.getProtoEntry().subscribe(
-            (protoMessage: any) => {
-                if (!this.isAdd) {
-                    this.formEntry.query = { uuid: this.uuid };
+        this.log('IdorpFormComponent save   formEntry : ' , this.formEntry);
+        this.service[this.method_form_save](this.formEntry, this.isAdd).subscribe(
+            (protoMsg: any) => {
+                if (this.service.isNotEx(protoMsg.token)) {
+                    this.formEntry = protoMsg;
+                    this.service.isReLoad = true;
+                    const afterEntry = this.afterSave(this.formEntry);
+                    if (!afterEntry) {
+                        console.warn('save错误: afterSave返回的协议对象为空,将采用原来的接口返回对象');
+                    } else {
+                        this.formEntry = afterEntry;
+                    }
+                    this.log('IdorpFormComponent save result : ' , this.formEntry);
                 }
-                // this.log('IdorpFormComponent save   formEntry : ' + JSON.stringify(this.formEntry));
-                this.service[this.method_form_save](this.formEntry, protoMessage, this.isAdd).subscribe(
-                    (protoMsg: any) => {
-                        if (this.service.isNotEx(protoMsg.token)) {
-                            this.formEntry = protoMsg;
-                            this.service.isReLoad = true;
-                            const afterEntry = this.afterSave(this.formEntry);
-                            if (!afterEntry) {
-                                console.warn('save错误: afterSave返回的协议对象为空,将采用原来的接口返回对象');
-                            } else {
-                                this.formEntry = afterEntry;
-                            }
-                            this.log('save request api result : ' + JSON.stringify(this.formEntry));
-                        }
-                    },
-                );
-            }
+            },
         );
     }
     /**
@@ -140,7 +133,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      */
     loadDetail(loadProto: any = null) {
         if (this.isAdd) {
-            console.error('表单数据加载失败.请确认是否设置isAdd=false');
+            console.error('IdorpFormComponent.loadDetail错误: 表单数据加载失败.请确认是否设置isAdd=false');
             return;
         }
         if (!this.hasMethod(this.service, this.method_form_detail)) {
@@ -170,7 +163,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
                         this.proto = this.formEntry.proto;
                         this.resetFormData();
                     }
-                    this.log('loadDetail result : ' + JSON.stringify(this.formEntry));
+                    this.log('IdorpFormComponent.loadDetail result : ' , this.formEntry);
                 },
             );
         }
@@ -198,20 +191,13 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
             let jsonFormData = IUtils.json2FromData(this.proto);
             jsonFormData = this.afterLoad(jsonFormData);
             if (!jsonFormData) {
-                console.warn('afterLoad: 返回的数据映射对象为空,请添加返回值');
+                console.warn('IdorpFormComponent.afterLoad: 返回的数据映射对象为空,请添加返回值');
                 return;
             }
             form.reset(jsonFormData);
             this.afterSetForm(form.getFormValue());
         }
     }
-
-    /*****************************************赋值给[formData]="formData"之前调用的方法 start*************************************/
-
-
-    /*****************************************赋值给[formData]="formData"之前调用的方法 end*************************************/
-
-
     /** ****************************************需要手动刷新的方法 start************************************/
     /**
    * 绑定下拉列表,必须调用刷新方法注：
@@ -315,6 +301,9 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * item 变动  手动刷新表单
      */
     refreshItem() {
+        FormUtils.refreshItem(this.fform.dy_form, this.formData);
+    }
+    refreshForm() {
         FormUtils.refreshForm(this.fform, this.formData);
     }
     refreshRule() {
@@ -340,6 +329,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
         this.formData.complete = true;
     }
     private initForm() {
+        this.formEntry = {};
         //给子类加载 formData属性
         this.initFD();
         //通知组件formData已经初始化完成
