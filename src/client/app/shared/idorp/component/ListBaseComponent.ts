@@ -7,7 +7,7 @@ import { PAGER_INIT, APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类
  */
-export class ListBaseComponent extends BaseComponent implements AfterContentChecked {
+export abstract class ListBaseComponent extends BaseComponent implements AfterContentChecked {
     //重新命名该属性的时候   必须保证相应的子service 有相应的方法
     method_list_query: any = 'query';
     method_list_del: any = 'del';
@@ -28,6 +28,10 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
     ) {
         super();
     }
+    ngOnInit() {
+        this.initList();
+    }
+    abstract start(): void;
     /**
      * 添加统一样式
      * @param c
@@ -156,5 +160,25 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
             this.listServ.isReLoad = false;
             this.query();
         }
+    }
+    /**
+     * formData 初始化完成操作
+     */
+    protected initComplete() {
+        if (!this.listFormData) {
+            console.error('initComplete错误: listFormData属性为null');
+            return;
+        }
+        this.listFormData.complete = true;
+    }
+    private initList() {
+        //给子类加载 formData属性
+        this.start();
+        //设置默认样式
+        this.addDefaultClass();
+        //加载数据
+        this.query();
+        //通知组件formData已经初始化完成
+        this.initComplete();
     }
 }

@@ -1,7 +1,6 @@
 import { IUtils } from '../providers/IUtils';
 import * as _ from 'lodash';
 import { PAGER_INIT, API_DEBUG } from '../config/app.config';
-import { ElementRef } from '@angular/core';
 
 export class BaseComponent {
     _: any = _;

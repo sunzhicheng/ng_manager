@@ -15,7 +15,7 @@ import { SysEvent } from '../../shared/idorp/event/sys.event';
 /**
  * 系统模块 运营管理人员 组件
  */
-export class IdSysAppAcountComponent extends ListBaseComponent implements OnInit {
+export class IdSysAppAcountComponent extends ListBaseComponent {
 
 
     opt_config: any = { del: { rowIndex: 5, value: '用户自建'} };
@@ -26,10 +26,8 @@ export class IdSysAppAcountComponent extends ListBaseComponent implements OnInit
         ) {
             super(idAccountUser, eleRef);
     }
-    ngOnInit(): void {
-        this.log('idAccountUserComponent ngOnInit ');
+    start(): void {
         this.listFormData = this.idAccountUser.initListData();
-        this.query();
     }
 
     beforeQuery(entry: any) {
