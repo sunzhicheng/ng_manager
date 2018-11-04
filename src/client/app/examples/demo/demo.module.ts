@@ -1,20 +1,20 @@
 import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { FormTableModule } from '../core/f-table/f-table.module';
-import { SharedModule } from '../shared/shared.module';
-import { TreeModule } from '../core/tree/tree.module';
+import { FormTableModule } from '../../core/f-table/f-table.module';
+import { SharedModule } from '../../shared/shared.module';
+import { TreeModule } from '../../core/tree/tree.module';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { ModalModule } from '../core/modal/modal.module';
+import { ModalModule } from '../../core/modal/modal.module';
 import { DemoFormComponent } from './demo.form';
 import { DemoService } from './demo.service';
 import { DemoListComponent } from './demo.list.component';
-import { HighChartsModule } from '../core/hightcharts/highcharts.module';
+import { HighChartsModule } from '../../core/hightcharts/highcharts.module';
 import { DemoHightchartsComponent } from './demo.hightcharts';
 import { DemoTreeComponent } from './demo.tree';
 import { DemoTreeOutComponent } from './demo.tree.out';
-import { TreeTableModule } from '../core/tree-table/tree-table.module';
+import { TreeTableModule } from '../../core/tree-table/tree-table.module';
 import { DemoTreeTableComponent } from './demo.tree.table';
 
 /**

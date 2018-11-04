@@ -1,13 +1,9 @@
-import { ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
-import { IDCONF } from '../shared/idorp/config/app.config';
+import { IDCONF } from '../../shared/idorp/config/app.config';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { DyBaseService } from '../shared/idorp/service/IdBaseService';
-import { BASE_URL_GEN } from '../shared/idorp/config/env.config';
-import { HttpService } from '../shared/idorp/service/HttpService';
-import { GpbService } from '../shared/idorp/service/gpb.service';
-import { HTTPREQ, PAGER_INIT } from '../shared/idorp/config/app.config';
-import { IdSysAreaService } from '../idsys/idsysarea/idsysarea.service';
+import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
+import { HttpService } from '../../shared/idorp/service/HttpService';
+import { GpbService } from '../../shared/idorp/service/gpb.service';
+import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
 
 /**
  * demo

@@ -21,7 +21,7 @@ import { CustomReuseStrategy } from './shared/tool/CustomReuseStrategy';
 // 网页Title控制
 import { Title } from '@angular/platform-browser';
 import { HomeModule } from './common/home/home.module';
-import { AuthService } from './shared/tool/AuthService';
+import { AuthAvtivate } from './shared/tool/AuthActivate';
 
 
 @NgModule({
@@ -36,7 +36,7 @@ import { AuthService } from './shared/tool/AuthService';
   providers: [{
     provide: APP_BASE_HREF,
     useValue: ''
-  }, AuthService,
+  }, AuthAvtivate,
   Title,
   { provide: RouteReuseStrategy, useClass: CustomReuseStrategy }],
   bootstrap: [AppComponent]

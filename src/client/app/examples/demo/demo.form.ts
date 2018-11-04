@@ -1,14 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IdorpFormComponent } from '../shared/idorp/component/IdorpFormComponent';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DemoService } from './demo.service';
-import { IdSysAppAcountService } from '../idsys/idsysappacount/idsysappacount.service';
-import { IUtils } from '../shared/idorp/providers/IUtils';
-import { SysEvent } from '../shared/idorp/event/sys.event';
-import { Observable } from 'rxjs';
-import { FormBaseComponent } from '../shared/idorp/component/FormBaseComponent';
-import { PromptUtil } from '../shared/idorp/providers/PromptUtil';
+import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
+import { SysEvent } from '../../shared/idorp/event/sys.event';
+import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
+import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
 
 
 
@@ -31,9 +27,10 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     private route: ActivatedRoute,
     public demoService: DemoService,
     private sysEvent: SysEvent,
+    protected eleRef: ElementRef,
     public accountService: IdSysAppAcountService,
     public _router: Router) {
-    super(demoService);
+    super(demoService ,eleRef);
   }
 
   /**
@@ -99,7 +96,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     this.sysEvent.publishRoute(new Date().getTime());
   }
 
-  ngOnInit() {
+  start() {
     $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       const fd = this.demoService.initFormData();
@@ -111,8 +108,8 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
         this.uuid = params['uuid'];
         this.isAdd = false;
         //如果是修改  更新某些属性不可写
-        this.addDisabled(fd, 'testnull');
-        this.loadFormData();
+        // this.addDisabled(fd, 'testnull');
+        // this.loadFormData();
         this.formData = fd;
         this.log(' update form component  uuid :' + this.uuid);
       } else {

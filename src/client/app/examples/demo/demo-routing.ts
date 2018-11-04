@@ -1,6 +1,4 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Route } from '@angular/router';
-import { AuthService } from '../shared/tool/AuthService';
+import { Route } from '@angular/router';
 import { DemoFormComponent } from './demo.form';
 import { DemoListComponent } from './demo.list.component';
 import { DemoHightchartsComponent } from './demo.hightcharts';

@@ -1,11 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IdorpFormComponent } from '../shared/idorp/component/IdorpFormComponent';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DemoService } from './demo.service';
-import { IdSysAppAcountService } from '../idsys/idsysappacount/idsysappacount.service';
-import { IUtils } from '../shared/idorp/providers/IUtils';
-import { IdorpBaseComponent } from '../shared/idorp/component/IdorpBaseComponent';
+import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
+import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 
 
 
@@ -49,7 +46,7 @@ declare let $: any;
   viewProviders: []
 })
 
-export class DemoHightchartsComponent extends IdorpBaseComponent implements OnInit {
+export class DemoHightchartsComponent extends BaseComponent implements OnInit {
   xAxis_categories: any;
   series: any;
   public constructor(

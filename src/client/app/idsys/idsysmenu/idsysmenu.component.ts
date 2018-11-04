@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewContainerRef, Renderer2, ElementRef } from '@angular/core';
 import { IdSysMenuService } from './idsysmenu.service';
-import { TreeBaseComponent } from '../../shared/idorp/component/TreeBaseComponent';
+import { TreeBaseComponent } from "../../shared/idorp/component/TreeBaseComponent";
 import { TreeService } from '../../shared/idorp/service/TreeService';
 declare const $: any;
 

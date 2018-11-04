@@ -4,7 +4,7 @@ import { Router, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { PromptUtil } from '../idorp/providers/PromptUtil';
 
 @Injectable()
-export class AuthService implements CanActivate {
+export class AuthAvtivate implements CanActivate {
 
     constructor(public router: Router) { }
 

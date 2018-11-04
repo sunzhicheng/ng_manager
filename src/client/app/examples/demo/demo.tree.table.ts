@@ -1,12 +1,10 @@
-import { IdorpTreeComponent } from '../shared/idorp/component/IdorpTreeComponent';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { TreeService } from '../shared/idorp/service/TreeService';
-import { IdSysAreaService } from '../idsys/idsysarea/idsysarea.service';
-import { IdSysMenuService } from '../idsys/idsysmenu/idsysmenu.service';
-import { IdorpBaseComponent } from '../shared/idorp/component/IdorpBaseComponent';
+import { TreeService } from '../../shared/idorp/service/TreeService';
+import { IdSysMenuService } from '../../idsys/idsysmenu/idsysmenu.service';
 import { DemoService } from './demo.service';
-import { IdorpTreeTableComponent } from '../shared/idorp/component/IdorpTreeTableComponent';
+import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
+import { TreeTableBaseComponent } from '../../shared/idorp/component/TreeTableBaseComponent';
 declare const $: any;
 
 
@@ -19,7 +17,7 @@ declare const $: any;
 /**
  * demo  左边树  右边table
  */
-export class DemoTreeTableComponent extends IdorpTreeTableComponent {
+export class DemoTreeTableComponent extends TreeTableBaseComponent {
 
     tree_config: any = {
         title: '树列表',
@@ -38,19 +36,17 @@ export class DemoTreeTableComponent extends IdorpTreeTableComponent {
             parent_key: null,
           },
     };
-
     constructor(
                 protected _router: Router,
-                protected treeService: TreeService,
+                protected treeUtil: TreeService,
+                protected accountService: IdSysAppAcountService,
                 protected demoService: DemoService,
-                protected sysAreaService: IdSysAreaService,
+                protected eleRef: ElementRef,
                 protected menuService: IdSysMenuService) {
-                    super(demoService, treeService);
+                    super(menuService, treeUtil, accountService, eleRef);
     }
-    ngOnInit() {
-        $('demo-area').addClass('hbox stretch');
-        this.formData = this.demoService.initListData();
-        this.treeFormData = this.sysAreaService.initFormData();
+    start() {
+        this.listFormData = this.demoService.initListData();
         this.getTreeData(1);
         this.treeFormData = this.menuService.initFormData();
         this.query();

@@ -1,4 +1,4 @@
-import { AfterContentChecked, ElementRef } from '@angular/core';
+import { AfterContentChecked, ElementRef, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
@@ -7,7 +7,7 @@ import { PAGER_INIT, APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类
  */
-export abstract class ListBaseComponent extends BaseComponent implements AfterContentChecked {
+export abstract class ListBaseComponent extends BaseComponent implements OnInit, AfterContentChecked {
     //重新命名该属性的时候   必须保证相应的子service 有相应的方法
     method_list_query: any = 'query';
     method_list_del: any = 'del';

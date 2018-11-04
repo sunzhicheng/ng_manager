@@ -52,7 +52,10 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     async_config: any;
     @ViewChild(TreeInComponent)
     protected tree_in: TreeInComponent;
-    constructor(protected treeServ: DyBaseService | any, protected treeUtil: TreeService, protected listServ: DyBaseService | any, protected eleRef: ElementRef) {
+    constructor(protected treeServ: DyBaseService | any,
+        protected treeUtil: TreeService,
+        protected listServ: DyBaseService | any,
+        protected eleRef: ElementRef) {
         super(listServ, eleRef);
     }
     ngOnInit() {
@@ -139,8 +142,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
             this.log('tree formSubmit result : ', protoMsg);
             if (fdata.id) {
                 this.updateSuccessCallback(protoMsg);
-            }
-            else {
+            } else {
                 this.addSuccessCallback(protoMsg);
             }
         }, (error: any) => console.error(error));

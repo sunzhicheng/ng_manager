@@ -1,11 +1,11 @@
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
-import { IdorpListComponent } from '../shared/idorp/component/IdorpListComponent';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
 import { Router } from '@angular/router';
 import { DemoService } from './demo.service';
 import { ViewChild } from '@angular/core';
-import { ModalFormComponent } from '../core/modal/modal.form.component';
-import { ModalTableComponent } from '../core/modal/modal.table.component';
-import { SysEvent } from '../shared/idorp/event/sys.event';
+import { ModalFormComponent } from '../../core/modal/modal.form.component';
+import { ModalTableComponent } from '../../core/modal/modal.table.component';
+import { SysEvent } from '../../shared/idorp/event/sys.event';
 import { of, fromEvent, interval, Observable, timer, forkJoin, combineLatest } from 'rxjs';
 import { mergeMap, map, debounceTime, scan, distinctUntilChanged, mapTo, concatMap, concat, pairwise, switchMap } from 'rxjs/operators';
 declare let $: any;
@@ -36,7 +36,7 @@ declare let $: any;
 /**
  * demo模块
  */
-export class DemoListComponent extends IdorpListComponent implements OnInit {
+export class DemoListComponent extends ListBaseComponent implements OnInit {
 
 
     @ViewChild(ModalFormComponent)
@@ -47,20 +47,16 @@ export class DemoListComponent extends IdorpListComponent implements OnInit {
 
     constructor(public demoService: DemoService,
         private sysEvent: SysEvent,
+        protected eleRef: ElementRef,
         private _router: Router
     ) {
-        super(demoService);
+        super(demoService, eleRef);
         sysEvent.subscribeRoute((data: any) => {
             this.log('sysEvent ::  route ' + JSON.stringify(data));
         });
     }
-    ngOnInit(): void {
-        // this.queryMethod = 'queryTest';  //修改了以method结尾的参数  必须保证service中存在该方法
-        this.log('idAccountUserComponent ngOnInit ');
-        this.formData = this.demoService.initListData();
-        this.query();
-        // 刷新菜单
-        // this.toolHttp.sideBarUpdate('AIC_SYS_WEB_AIC_GROUP_LIST_QUERY');
+    start(): void {
+        this.listFormData = this.demoService.initListData();
     }
 
     beforeQuery() {

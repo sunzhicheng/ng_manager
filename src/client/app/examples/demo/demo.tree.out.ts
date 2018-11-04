@@ -1,7 +1,7 @@
-import { IdorpTreeComponent } from '../shared/idorp/component/IdorpTreeComponent';
-import { Component, OnInit } from '@angular/core';
-import { TreeService } from '../shared/idorp/service/TreeService';
-import { IdSysMenuService } from '../idsys/idsysmenu/idsysmenu.service';
+import { TreeBaseComponent } from '../../shared/idorp/component/TreeBaseComponent';
+import { Component, OnInit, ElementRef } from '@angular/core';
+import { TreeService } from '../../shared/idorp/service/TreeService';
+import { IdSysMenuService } from '../../idsys/idsysmenu/idsysmenu.service';
 declare const $: any;
 
 
@@ -21,7 +21,7 @@ declare const $: any;
 /**
  * 系统模块 区域管理 demo
  */
-export class DemoTreeOutComponent extends IdorpTreeComponent implements OnInit {
+export class DemoTreeOutComponent extends TreeBaseComponent implements OnInit {
 
     tree_config: any = {
         title: '区域列表',
@@ -40,13 +40,12 @@ export class DemoTreeOutComponent extends IdorpTreeComponent implements OnInit {
     };
     constructor(
                 protected treeService: TreeService,
+                protected eleRef: ElementRef,
                 protected menuService: IdSysMenuService) {
-                 super(menuService, treeService);
+                    super(menuService, treeService, null, eleRef); 
     }
-    ngOnInit() {
-        $('demo-area').addClass('hbox stretch');
+    start() {
         this.treeFormData = this.menuService.initFormData();
-        this.getTreeData(0);
     }
 }
 
