@@ -1,5 +1,5 @@
 
-<f-table-cmp  *ngIf="listFormData" [formData]="listFormData" (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)" (updateOut)="update($event)"
+<f-table-cmp  *ngIf="listFormData" [formData]="listFormData" (listSubmited)="listSubmit($event)" (loadDataOut)="loadData($event)" (updateOut)="update($event)"
 (delOut)="del($event)" (bindOut)="bind($event)"  [opt_config]="opt_config"  
 [config]="{permissoinBase:'operate:idsysappacount'}" 
 >

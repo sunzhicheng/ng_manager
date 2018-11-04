@@ -1,4 +1,4 @@
-import { AfterContentChecked } from '@angular/core';
+import { AfterContentChecked, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
@@ -23,9 +23,21 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
      * 组件协议对像数据
      */
     listEntry: any = this.entryInit;
-    constructor(protected listServ: DyBaseService | any) {
+    constructor(protected listServ: DyBaseService | any,
+        protected eleRef: ElementRef,
+    ) {
         super();
     }
+    /**
+     * 添加统一样式
+     * @param c
+     */
+    addDefaultClass(c?: string) {
+        if (c !== null) {
+            this.eleRef.nativeElement.className = c || 'vbox';
+        }
+    }
+
     beforeQuery(listEntry: any) {
         return listEntry;
     }
@@ -66,7 +78,7 @@ export class ListBaseComponent extends BaseComponent implements AfterContentChec
      * 查询列表
      * @param data
      */
-    formSubmit(data: any) {
+    listSubmit(data: any) {
         this.log('查询参数 :' + JSON.stringify(data));
         this.bindQueryData(this.listEntry, data, true);
         this.query();

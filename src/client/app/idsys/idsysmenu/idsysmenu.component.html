@@ -3,9 +3,8 @@
               <aside class="aside-md b-r bg-white" id="subNav">
                   <ng-tree-in *ngIf="treeFormData" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
                   [treeData]="tree_data"
-                  (formSubmited)="formSubmit($event)"
+                  (formSubmited)="treeSubmit($event)"
                   (treeDeleted)="treeDelete($event)"
                   (treeDetailed)="treeDetail($event)"
                  ></ng-tree-in>
-
                 </aside>

@@ -1,5 +1,5 @@
 import { IdSysAppAcountService } from './idsysappacount.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
@@ -23,8 +23,9 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
   public constructor(
     public idAccountUser: IdSysAppAcountService,
     private route: ActivatedRoute,
+    protected eleRef: ElementRef,
     public _router: Router) {
-      super(idAccountUser);
+      super(idAccountUser, eleRef);
   }
 
   beforeSave(data: any) {
@@ -48,7 +49,6 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
   }
 
   start(): void {
-    $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       this.formData = this.idAccountUser.initFormData();
       if (params['uuid']) {

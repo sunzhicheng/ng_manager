@@ -14,7 +14,7 @@ export class DyBaseService {
     //控制列表刷新
     isReLoad = false;
     /**
-     * 列表接口定义  总共类型: 
+     * 列表接口定义  总共类型:
      *  add: '',
         update: '',
         query: '',

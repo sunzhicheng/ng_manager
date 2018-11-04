@@ -32,7 +32,7 @@ export class FormTableComponent implements OnInit {
     public content_right = true; //样式控制
 
     @Output()
-    public formSubmited: EventEmitter<any> = new EventEmitter();
+    public listSubmited: EventEmitter<any> = new EventEmitter();
 
     @Output()
     public btnclickout: EventEmitter<any> = new EventEmitter();
@@ -96,9 +96,9 @@ export class FormTableComponent implements OnInit {
         // console.log('FormTableComponent init : ', this.formData);
     }
 
-    formSubmit(formValue: any) {
-        // console.log('FormTableComponent  formSubmit : ' + formValue);
-        this.formSubmited.emit(formValue);
+    listSubmit(formValue: any) {
+        // console.log('FormTableComponent  listSubmit : ' + formValue);
+        this.listSubmited.emit(formValue);
     }
 
     loadData(pager: any) {

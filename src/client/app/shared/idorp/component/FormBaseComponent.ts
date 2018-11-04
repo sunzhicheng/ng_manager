@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
-import { ViewChild, OnInit } from '@angular/core';
+import { ViewChild, OnInit, ElementRef } from '@angular/core';
 import { FormFormComponent } from '../../../core/f-table/f-form.component';
 import { IUtils } from '../providers/IUtils';
 import { FormUtils } from '../providers/FormUtils';
@@ -37,6 +37,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
 
     private proto: any;
     constructor(public service: DyBaseService | any,
+        protected eleRef: ElementRef,
     ) {
         super();
     }
@@ -44,6 +45,15 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
         this.initForm();
     }
     abstract start(): void;
+    /**
+     * 添加统一样式
+     * @param c
+     */
+    addDefaultClass(c?: string) {
+        if (c !== null) {
+            this.eleRef.nativeElement.className = c || 'vbox';
+        }
+    }
     /**
      * 保存操作调用接口之前的处理方法
      * @param data 表单填写的JSON数据
@@ -111,7 +121,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
         if (!this.isAdd) {
             this.formEntry.query = { uuid: this.uuid };
         }
-        this.log('IdorpFormComponent save   formEntry : ' , this.formEntry);
+        this.log('IdorpFormComponent save   formEntry : ', this.formEntry);
         this.service[this.method_form_save](this.formEntry, this.isAdd).subscribe(
             (protoMsg: any) => {
                 if (this.service.isNotEx(protoMsg.token)) {
@@ -123,7 +133,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
                     } else {
                         this.formEntry = afterEntry;
                     }
-                    this.log('IdorpFormComponent save result : ' , this.formEntry);
+                    this.log('IdorpFormComponent save result : ', this.formEntry);
                 }
             },
         );
@@ -163,7 +173,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
                         this.proto = this.formEntry.proto;
                         this.resetFormData();
                     }
-                    this.log('IdorpFormComponent.loadDetail result : ' , this.formEntry);
+                    this.log('IdorpFormComponent.loadDetail result : ', this.formEntry);
                 },
             );
         }
@@ -332,6 +342,8 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
         this.formEntry = {};
         //给子类加载 formData属性
         this.start();
+        //设置默认样式
+        this.addDefaultClass();
         //通知组件formData已经初始化完成
         this.initComplete();
     }

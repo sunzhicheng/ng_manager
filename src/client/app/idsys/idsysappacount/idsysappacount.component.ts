@@ -1,5 +1,5 @@
 import { IdSysAppAcountService } from './idsysappacount.service';
-import { Component, OnInit, AfterContentChecked } from '@angular/core';
+import { Component, OnInit, AfterContentChecked, ElementRef } from '@angular/core';
 import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
 import { Router } from '@angular/router';
 import { SysEvent } from '../../shared/idorp/event/sys.event';
@@ -21,9 +21,10 @@ export class IdSysAppAcountComponent extends ListBaseComponent implements OnInit
     opt_config: any = { del: { rowIndex: 5, value: '用户自建'} };
 
     constructor(public idAccountUser: IdSysAppAcountService,
+        protected eleRef: ElementRef,
         private _router: Router
         ) {
-            super(idAccountUser);
+            super(idAccountUser, eleRef);
     }
     ngOnInit(): void {
         this.log('idAccountUserComponent ngOnInit ');

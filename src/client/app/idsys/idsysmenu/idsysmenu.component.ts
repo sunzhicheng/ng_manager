@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewContainerRef, Renderer2, ElementRef } from '@angular/core';
 import { IdSysMenuService } from './idsysmenu.service';
 import { TreeBaseComponent } from '../../shared/idorp/component/TreeBaseComponent';
 import { TreeService } from '../../shared/idorp/service/TreeService';
@@ -23,11 +22,12 @@ export class IdSysMenuComponent extends TreeBaseComponent {
     };
     constructor(
         protected treeService: TreeService,
+        protected render: Renderer2,
+        protected eleRef: ElementRef,
         protected sysMenuService: IdSysMenuService) {
-        super(sysMenuService, treeService, null);  //这里 第一个参数是  list列表service  在treeTable的时候会用到
+        super(sysMenuService, treeService, null, eleRef);  //这里 第一个参数是  list列表service  在treeTable的时候会用到
     }
     start() {
-        $('sd-idsysmenu').addClass('hbox stretch');
         this.treeFormData = this.sysMenuService.initFormData();
     }
 }

@@ -1,7 +1,7 @@
 import { TreeService } from '../service/TreeService';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
-import { ViewChild, AfterViewInit, OnInit } from '@angular/core';
+import { ViewChild, AfterViewInit, OnInit, ElementRef } from '@angular/core';
 import { TreeInComponent } from '../../../core/tree/tree.in';
 import { FormUtils } from '../providers/FormUtils';
 import { ListBaseComponent } from './ListBaseComponent';
@@ -63,8 +63,9 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         protected treeServ: DyBaseService | any,
         protected treeUtil: TreeService,
         protected listServ: DyBaseService | any,
+        protected eleRef: ElementRef,
     ) {
-        super(listServ);
+        super(listServ, eleRef);
     }
     ngOnInit() {
         this.initTree();
@@ -72,6 +73,15 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     abstract start(): void;
     beforeQuery() {
         this.log('父类空方法 用于封装查询条件 供子类实现 ');
+    }
+     /**
+     * 添加统一样式
+     * @param c
+     */
+    addDefaultClass(c?: string) {
+        if (c !== null) {
+            this.eleRef.nativeElement.className = c || 'hbox stretch';
+        }
     }
     /**
      * 获取数结构数据
@@ -106,7 +116,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         if (!this.hasMethod(this.treeServ, this.method_tree_detail)) {
             return;
         }
-        const detailProto = { query: {uuid: node.id} };
+        const detailProto = { query: { uuid: node.id } };
         this.log('treeDetail query brefore : ', detailProto);
         this.treeServ[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe(
             (protoMsg: any) => {
@@ -306,6 +316,8 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         this.getTreeData(1);
         //给子类加载必须属性  如 treeFormData属性
         this.start();
+        //设置默认样式
+        this.addDefaultClass();
         //通知组件formData已经初始化完成
         this.initComplete();
     }

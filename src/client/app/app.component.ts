@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Title } from '@angular/platform-browser';
-declare const $:any;
+declare const $: any;
 /**
  * This class represents the main application component.
  */

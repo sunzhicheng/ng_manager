@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { LoginService } from './login.service';
@@ -30,6 +30,7 @@ export class OperateLoginComponent extends BaseComponent implements OnInit, Afte
   constructor(
     private title: Title,
     private _router: Router,
+    protected eleRef: ElementRef,
     private localCache: LocalStorageCacheService,
     private loginService: LoginService) {
       super();
