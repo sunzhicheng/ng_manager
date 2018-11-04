@@ -1,0 +1,22 @@
+<sd-tree-table 
+        [tree_config]="tree_config" [tree_data]="tree_data" 
+        [async_config]="async_config" [treeFormData]="treeFormData"
+        (formSubmit_added)="formSubmit_add_edit($event)"
+        (treeDetailed)="treeDetail($event)"
+        (treeDeleted)="treeDelete($event)"
+        (itemClicked)="itemClick($event)"
+        [tree_setting]="tree_setting"
+
+        [formData]="formData" (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)"
+        [opt_config]="opt_config" (unbindOut)="unbind($event)"
+>
+</sd-tree-table>
+
+
+    <!-- 树的配置 
+    tree_config,async_config
+    tree_data
+    
+    
+    
+    -->
