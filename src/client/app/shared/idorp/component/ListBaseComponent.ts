@@ -31,7 +31,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
     ngOnInit() {
         this.initList();
     }
-    abstract start(): void;
+    abstract myInit(): void;
     /**
      * 添加统一样式
      * @param c
@@ -173,7 +173,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
     }
     private initList() {
         //给子类加载 formData属性
-        this.start();
+        this.myInit();
         //设置默认样式
         this.addDefaultClass();
         //加载数据

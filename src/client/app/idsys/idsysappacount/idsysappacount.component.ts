@@ -26,7 +26,7 @@ export class IdSysAppAcountComponent extends ListBaseComponent {
         ) {
             super(idAccountUser, eleRef);
     }
-    start(): void {
+    myInit(): void {
         this.listFormData = this.idAccountUser.initListData();
     }
 

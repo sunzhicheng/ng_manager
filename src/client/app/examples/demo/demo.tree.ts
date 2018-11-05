@@ -11,7 +11,7 @@ declare const $: any;
     selector: 'demo-area',
     template: `
         <aside class="aside-md b-r bg-white" id="subNav">
-        <ng-tree-in  *ngIf="tree_data" [config]="tree_config" [tree_setting]="tree_setting" [treeFormData]="treeFormData"
+        <ng-tree-in  *ngIf="tree_data" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
         [treeData]="tree_data"
         [async_config]="async_config"
         (formSubmited)="treeSave($event)"
@@ -50,7 +50,7 @@ export class DemoTreeComponent extends TreeBaseComponent implements OnInit {
                 protected sysMenuService: IdSysMenuService) {
                     super(sysMenuService, treeService, null, eleRef); 
     }
-    start() {
+    myInit() {
         this.treeFormData = this.sysMenuService.initFormData();
     }
 }

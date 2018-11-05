@@ -1,7 +1,7 @@
-<section class="hbox stretch">
   <aside class="aside-xl b-r" id="subNav">
     <ng-tree-in [config]="config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
              [treeData]="tree_data"
+             [async_config] = "async_config"
              (formSubmited)="formSubmit_add($event)"
              (treeDetailed)="treeDetail($event)"
              (treeDeleted)="treeDelete($event)"
@@ -35,7 +35,7 @@
           </div>
         </header>
 
-        <f-table-cmp [formData]="formData" (formSubmited)="formSubmit($event)" [breadcrumb]="breadcrumb"
+        <f-table-cmp [formData]="formData" (listSubmited)="listSubmit($event)" [breadcrumb]="breadcrumb"
                      (loadDataOut)="loadData($event)"
                      (delOut)="del($event)"
                      (unbindOut)="unbind($event)"
@@ -44,4 +44,3 @@
       </div>
     </section>
   </aside>
-</section>

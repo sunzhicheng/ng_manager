@@ -48,7 +48,7 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
     return jsonFormData;
   }
 
-  start(): void {
+  myInit(): void {
     this.route.params.subscribe(params => {
       this.formData = this.idAccountUser.initFormData();
       if (params['uuid']) {

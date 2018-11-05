@@ -15,7 +15,7 @@ declare let $: any;
     moduleId: module.id,
     selector: 'sd-idsysappacount',
     template: `
-    <f-table-cmp  *ngIf="formData" [formData]="formData"
+    <f-table-cmp  *ngIf="formData" [formData]="listFormData"
     (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)" (updateOut)="update($event)"
     (delOut)="del($event)" (bindOut)="bind($event)"  [opt_config]="opt_config"
     (btnclickout)="btnClick($event)"
@@ -55,7 +55,7 @@ export class DemoListComponent extends ListBaseComponent implements OnInit {
             this.log('sysEvent ::  route ' + JSON.stringify(data));
         });
     }
-    start(): void {
+    myInit(): void {
         this.listFormData = this.demoService.initListData();
     }
 

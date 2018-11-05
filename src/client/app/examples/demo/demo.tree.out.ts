@@ -9,12 +9,13 @@ declare const $: any;
     moduleId: module.id,
     selector: 'demo-area',
     template: `
-        <ng-tree-out  *ngIf="tree_data" [config]="tree_config" [tree_setting]="tree_setting" [treeFormData]="treeFormData"
+        <ng-tree-out  *ngIf="treeFormData" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
         [treeData]="tree_data"
-        (formSubmited)="formSubmit($event)"
+        (formSubmited)="treeSubmit($event)"
         (treeDeleted)="treeDelete($event)"
         (treeDetailed)="treeDetail($event)"
         ></ng-tree-out>
+
   `
 })
 
@@ -36,15 +37,15 @@ export class DemoTreeOutComponent extends TreeBaseComponent implements OnInit {
             uuid_key: null,
             sub_key: null,
             parent_key: null,
-          },
+        },
     };
     constructor(
-                protected treeService: TreeService,
-                protected eleRef: ElementRef,
-                protected menuService: IdSysMenuService) {
-                    super(menuService, treeService, null, eleRef); 
+        protected treeService: TreeService,
+        protected eleRef: ElementRef,
+        protected menuService: IdSysMenuService) {
+        super(menuService, treeService, null, eleRef);
     }
-    start() {
+    myInit() {
         this.treeFormData = this.menuService.initFormData();
     }
 }

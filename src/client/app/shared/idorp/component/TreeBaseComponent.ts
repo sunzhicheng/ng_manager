@@ -61,10 +61,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     ngOnInit() {
         this.initTree();
     }
-    abstract start(): void;
-    beforeQuery() {
-        this.log('父类空方法 用于封装查询条件 供子类实现 ');
-    }
+    abstract myInit(): void;
     /**
     * 添加统一样式
     * @param c
@@ -285,7 +282,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         //请求tree  数据
         this.getTreeData(1);
         //给子类加载必须属性  如 treeFormData属性
-        this.start();
+        this.myInit();
         //设置默认样式
         this.addDefaultClass();
         //通知组件formData已经初始化完成

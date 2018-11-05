@@ -30,7 +30,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     protected eleRef: ElementRef,
     public accountService: IdSysAppAcountService,
     public _router: Router) {
-    super(demoService ,eleRef);
+    super(demoService, eleRef);
   }
 
   /**
@@ -96,7 +96,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     this.sysEvent.publishRoute(new Date().getTime());
   }
 
-  start() {
+  myInit() {
     $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       const fd = this.demoService.initFormData();

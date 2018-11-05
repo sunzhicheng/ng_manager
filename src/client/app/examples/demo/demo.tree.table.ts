@@ -45,11 +45,9 @@ export class DemoTreeTableComponent extends TreeTableBaseComponent {
                 protected menuService: IdSysMenuService) {
                     super(menuService, treeUtil, accountService, eleRef);
     }
-    start() {
+    myInit() {
         this.listFormData = this.demoService.initListData();
-        this.getTreeData(1);
         this.treeFormData = this.menuService.initFormData();
-        this.query();
     }
 
     

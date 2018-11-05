@@ -44,7 +44,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     ngOnInit() {
         this.initForm();
     }
-    abstract start(): void;
+    abstract myInit(): void;
     /**
      * 添加统一样式
      * @param c
@@ -341,7 +341,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     private initForm() {
         this.formEntry = {};
         //给子类加载 formData属性
-        this.start();
+        this.myInit();
         //设置默认样式
         this.addDefaultClass();
         //通知组件formData已经初始化完成
