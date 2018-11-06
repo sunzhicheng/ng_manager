@@ -289,7 +289,7 @@
   </div>
 </div>
 <!--取消按钮-->
-<button *ngIf="item.fi_type===7 && f_type===2&&item.router_link" type="button" style="float:left;" [routerLink]="item.router_link"  class="btn btn-default m-r-sm">{{ item.label }}</button>
+<button *ngIf="item.fi_type===7 && f_type===2" type="button" style="float:left;" (click)="cancel()"  class="btn btn-default m-r-sm">{{ item.label }}</button>
 <!--提交按钮-->
 <button *ngIf="item.fi_type===6 && f_type===2 && !item.hidden && hasSubmit(item.permissoin)" style="float:left;"  type="submit"    class="btn btn-primary m-r-sm"  [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
 <!--自定义按钮功能-->

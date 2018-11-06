@@ -177,7 +177,7 @@ export class IdSysAppAcountService extends DyBaseService {
             {
               fi_type: 7,
               label: '取消',
-              router_link: '/home/idsysappacount'
+              // router_link: '/home/idsysappacount'
             }
           ]
         }

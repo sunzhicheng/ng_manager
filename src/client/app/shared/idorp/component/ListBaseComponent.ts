@@ -96,6 +96,10 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
             this.query();
         }
     }
+    /**
+     * 删除该条数据 
+     * @param uuid  存在格式： { query: { uuid: uuid } };
+     */
     del(uuid: any) {
         if (!this.hasMethod(this.listServ, this.method_list_del)) {
             return;
@@ -108,6 +112,10 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
             });
         });
     }
+    /**
+     * 启用该条数据 
+     * @param uuid  存在格式： { query: { uuid: uuid } };
+     */
     enable(uuid: any) {
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
@@ -122,6 +130,10 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         });
     }
 
+    /**
+     * 停用该条数据 
+     * @param uuid  存在格式： { query: { uuid: uuid } };
+     */
     stop(uuid: any) {
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;

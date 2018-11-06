@@ -12,25 +12,26 @@ import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
 export class DemoService extends DyBaseService {
   count = 1;
   /**
-   * 数据接口定义
+   * 数据接口定义   当只存在一种情况的时候   可以使用api   demo 这边因为有 treetable 例子 
    */
-  public api: any = {
-    base: IDCONF().api_base,
-    list_query: '/idsys/idsysappacount/query',
-    list_add: '/idsys/idsysappacount/add',
-    list_loadByUUID: '/idsys/idsysappacount/',
-    list_update: '/idsys/idsysappacount/update',
-    list_del: '/idsys/idsysappacount/del',
+  public list_api: any = {
+    query: '/idsys/idsysappacount/query',
+    add: '/idsys/idsysappacount/add',
+    loadByUUID: '/idsys/idsysappacount/',
+    update: '/idsys/idsysappacount/update',
+    del: '/idsys/idsysappacount/del',
+    proto: 'idsys.IdSysAppAcountEntry',  //右边的列表查询接口需要用到的  协议
+  };
+  public tree_api: any = {
 
     tree: '/idsys/idsysmenu/tree',
-    tree_query: '/idsys/idsysmenu/query',
-    tree_add: '/idsys/idsysmenu/add',
-    tree_loadByUUID: '/idsys/idsysmenu/',
-    tree_update: '/idsys/idsysmenu/update',
-    tree_del: '/idsys/idsysmenu/del',
-    list_proto: 'idsys.IdSysAppAcountEntry',  //右边的列表查询接口需要用到的  协议
-    tree_proto: 'idsys.IdSysMenuEntry',     //左边的树查询接口需要用到的  协议
-  };
+    query: '/idsys/idsysmenu/query',
+    add: '/idsys/idsysmenu/add',
+    loadByUUID: '/idsys/idsysmenu/',
+    update: '/idsys/idsysmenu/update',
+    del: '/idsys/idsysmenu/del',
+    proto: 'idsys.IdSysMenuEntry',     //左边的树查询接口需要用到的  协议
+  }
   /**
    * 初始化列表表单数据
    */
@@ -423,7 +424,6 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 7,
               label: '取消',
-              router_link: '/home/idsysbank'
             },
             {
               fi_type: 21,

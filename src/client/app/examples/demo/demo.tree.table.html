@@ -8,6 +8,7 @@
         [tree_button_setting]="tree_button_setting"
 
         [formData]="listFormData" (listSubmited)="listSubmit($event)" (loadDataOut)="loadData($event)"
+        (updateOut)="update($event)" (delOut)="del($event)" 
         [opt_config]="opt_config" (unbindOut)="unbind($event)"
 >
 </sd-tree-table>

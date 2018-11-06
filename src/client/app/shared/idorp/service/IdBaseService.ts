@@ -14,7 +14,7 @@ export class DyBaseService {
     //控制列表刷新
     isReLoad = false;
     /**
-     * 列表接口定义  总共类型:
+     * 接口定义  总共类型:   当页面同时出现两个的时候  默认api 就不能用了
      *  add: '',
         update: '',
         query: '',

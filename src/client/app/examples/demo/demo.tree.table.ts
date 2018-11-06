@@ -49,7 +49,10 @@ export class DemoTreeTableComponent extends TreeTableBaseComponent {
         this.listFormData = this.demoService.initListData();
         this.treeFormData = this.menuService.initFormData();
     }
-
-    
+    update(id: any) {
+        this.log('  update id : ' + id);
+        const link = ['home/idsysappacount/update', id.toString()];
+        this._router.navigate(link);
+    }
 }
 

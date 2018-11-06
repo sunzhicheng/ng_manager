@@ -96,6 +96,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
     showhead: true,
     useform: false, //是否使用表单
     maxLevel: 5,
+    defaltSelect: false, //默认选择第一个(在tree table 中会用到)
     async: false,  //是否启用异步加载
   };
 
@@ -147,10 +148,12 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
 
   @Input()
   public set config(values: any) {
+    if (values) {
       IUtils.mergeAFromB(this._config, values, {});
       this.base_setting.async.enable = this._config.async;
       this.configInit = true;
       this.initTree();
+    }
   }
 
   @Input()
@@ -203,10 +206,27 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
         if (this.setInit && this.dataInit) { //普通加载
           if (this._treeData) {
             this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), me.base_setting, this._treeData);
+            if (this._config.defaltSelect) {
+              //初始化现实第一个数据
+              let defaltSelectId = this.getFirstId();
+              var node = this.ztree.getNodeByParam('id', defaltSelectId);
+              this.ztree.selectNode(node);
+              this.ztree.setting.callback.onClick(null, this.ztree.setting.treeId, node);//调用事件
+            }
           }
         }
       }
     }
+  }
+  getFirstId() {
+    let firstId = 0;
+    for (var i in this._treeData) {
+      var item: any = this._treeData[i];
+      if (!item.isParent) {
+        firstId = item.id;
+      }
+    }
+    return firstId;
   }
   constructor(
     protected treeService: TreeService,

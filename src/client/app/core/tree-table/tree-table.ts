@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { FormTableComponent } from '../f-table/f-table.component';
 import { TreeInComponent } from '../tree/tree.in';
+import { IUtils } from '../../shared/idorp/providers/IUtils';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -18,11 +19,16 @@ export class TreeTableComponent implements OnInit {
   @ViewChild(TreeInComponent)
   public tree: TreeInComponent;
 
-  @Input()
-  public config: any = {
+  _config: any = {
     title: '树结构标题',
-    rootCreate: true
+    rootCreate: false,
+    defaltSelect: true,
   };
+
+  @Input()
+  public set config(values: any) {
+      IUtils.coverAFromB(this._config, values);
+  }
 
   @Input()
   public async_config: any;
@@ -66,6 +72,10 @@ export class TreeTableComponent implements OnInit {
 
   @Output()
   public unbindOut: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  public updateOut: EventEmitter<any> = new EventEmitter();
+  
 
   @ViewChild(FormTableComponent)
   public formTable: FormTableComponent;
@@ -137,6 +147,9 @@ export class TreeTableComponent implements OnInit {
 
   public unbind(id: any) {
     this.unbindOut.emit(id);
+  }
+  public update(id: any) {
+    this.updateOut.emit(id);
   }
 
   /**

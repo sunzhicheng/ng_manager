@@ -29,7 +29,7 @@ declare const $: any;
 export class DemoTreeComponent extends TreeBaseComponent implements OnInit {
 
     tree_config: any = {
-        title: '区域列表',
+        title: '区域列表(异步加载)',
         rootCreate: true,
         useform: true,
         maxLevel: 5,
@@ -42,13 +42,13 @@ export class DemoTreeComponent extends TreeBaseComponent implements OnInit {
             uuid_key: null,
             sub_key: null,
             parent_key: null,
-          },
+        },
     };
     constructor(
-                protected treeService: TreeService,
-                protected eleRef: ElementRef,
-                protected sysMenuService: IdSysMenuService) {
-                    super(sysMenuService, treeService, null, eleRef); 
+        protected treeService: TreeService,
+        protected eleRef: ElementRef,
+        protected sysMenuService: IdSysMenuService) {
+        super(sysMenuService, treeService, null, eleRef);
     }
     myInit() {
         this.treeFormData = this.sysMenuService.initFormData();

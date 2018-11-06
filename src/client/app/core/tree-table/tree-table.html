@@ -1,5 +1,5 @@
   <aside class="aside-xl b-r" id="subNav">
-    <ng-tree-in [config]="config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
+    <ng-tree-in [config]="_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
              [treeData]="tree_data"
              [async_config] = "async_config"
              (formSubmited)="formSubmit_add($event)"
@@ -39,6 +39,8 @@
                      (loadDataOut)="loadData($event)"
                      (delOut)="del($event)"
                      (unbindOut)="unbind($event)"
+                     (updateOut)="update($event)"
+                     (delOut)="del($event)"
                      [opt_config]="opt_config" class="vbox">
         </f-table-cmp>
       </div>

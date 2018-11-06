@@ -1,8 +1,9 @@
-import { Component, Input, ViewChild, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import _ from 'lodash';
+import { Router } from '@angular/router';
 
 declare let $: any;
 
@@ -32,6 +33,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
   private defaultValue: any;
   private tempValue: any;
   constructor(private qcs: DFControlService,
+    private _router: Router
   ) {
   }
   ngAfterViewChecked(): void {
@@ -127,8 +129,16 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
   /**
    * 控制表单里面的按钮点击   或者   列表页面  除去搜索按钮的其他操作
    */
-  public btnclick() {
+  btnclick() {
     this.btnclickout.emit(this.item);
+  }
+  cancel() {
+    if (this.item.router_link) {
+      const link = [this.item.router_link];
+      this._router.navigate(link);
+    } else {
+      history.back();
+    }
   }
 
   /**

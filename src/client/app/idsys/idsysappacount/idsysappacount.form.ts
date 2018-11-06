@@ -25,29 +25,8 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
     private route: ActivatedRoute,
     protected eleRef: ElementRef,
     public _router: Router) {
-      super(idAccountUser, eleRef);
+    super(idAccountUser, eleRef);
   }
-
-  beforeSave(data: any) {
-    if (data.user_type) {
-      data.user_type = parseInt(data.user_type, 10);
-    }
-    return data;
-  }
-  /**
-  * 给子类实现
-  * @param protoEntry
-  */
-  afterSave(formEntry: any) {
-      const link = ['home/idsysappacount'];
-      this._router.navigate(link);
-  }
-  afterLoad(jsonFormData: any) {
-    //清空密码
-    jsonFormData.password = '';
-    return jsonFormData;
-  }
-
   myInit(): void {
     this.route.params.subscribe(params => {
       this.formData = this.idAccountUser.initFormData();
@@ -62,6 +41,16 @@ export class IdSysAccountFormComponent extends FormBaseComponent {
         this.log(' add form component ');
       }
     });
+  }
+
+  /**
+     * 请求接口获取数据成功后处理的方法  只需要对jsonFormData的数据 进行处理 这个方法还没有对表单进行set 值
+     * @param formEntry
+     */
+  afterLoad(jsonFormData: any) {
+    //清空密码
+    jsonFormData.password = '';
+    return jsonFormData;
   }
 
 }

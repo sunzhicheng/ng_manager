@@ -136,11 +136,4 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     //设置某个item 为空
     // this.setNullByKey('demo_keeditor');
   }
-
-  customSubmit(data: any) {
-    alert('提交的表单数据 :' + JSON.stringify(data.v));
-    //调用这个方法只是为了演示afterSetForm的效果
-    this.afterSetForm(data.v);
-    return data.v;
-  }
 }

@@ -6,6 +6,7 @@ import { RouteReuseStrategy, DetachedRouteHandle, ActivatedRouteSnapshot } from 
 export class CustomReuseStrategy implements RouteReuseStrategy {
 
   static RouteArr: any = [
+      'demo/tree/table',
       'idsysappacount',
       'idsysenterprisemsg', 'idsysserviceconfig' , 'idsysuser', 'idsysusertype', 'idwxpayaccount', 'idmallgoods' ,
       'idwxpublicaccount', 'idmallad' , 'idmallgoodscategory', 'nlksyscoolcoinconfigure', 'idsysblacklist', 'idmallgoods' ,

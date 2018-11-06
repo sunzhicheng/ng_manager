@@ -15,7 +15,7 @@ declare let $: any;
     moduleId: module.id,
     selector: 'sd-idsysappacount',
     template: `
-    <f-table-cmp  *ngIf="formData" [formData]="listFormData"
+    <f-table-cmp  *ngIf="listFormData" [formData]="listFormData"
     (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)" (updateOut)="update($event)"
     (delOut)="del($event)" (bindOut)="bind($event)"  [opt_config]="opt_config"
     (btnclickout)="btnClick($event)"
@@ -59,8 +59,9 @@ export class DemoListComponent extends ListBaseComponent implements OnInit {
         this.listFormData = this.demoService.initListData();
     }
 
-    beforeQuery() {
+    beforeQuery(listEntry: any) {
         this.log('搜索之前需要的业务需求');
+        return listEntry;
     }
 
     getAllCheckedV(checked: string) {

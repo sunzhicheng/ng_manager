@@ -66,6 +66,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * @param formEntry 接口返回的协议对象
      */
     afterSave(formEntry: any) {
+        history.back();
         return formEntry;
     }
     /**
@@ -129,7 +130,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
                     this.service.isReLoad = true;
                     const afterEntry = this.afterSave(this.formEntry);
                     if (!afterEntry) {
-                        console.warn('save错误: afterSave返回的协议对象为空,将采用原来的接口返回对象');
+                        console.warn('save警告: afterSave返回的协议对象为空,将采用原来的接口返回对象');
                     } else {
                         this.formEntry = afterEntry;
                     }
