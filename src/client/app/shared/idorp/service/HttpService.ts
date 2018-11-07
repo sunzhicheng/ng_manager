@@ -110,12 +110,6 @@ export class HttpService {
             }, (err: any) => {
                 if (err.status === 401) {
                     (<any>$('#tokenInvaildDiv')).modal('show');
-                    // const ptType = localStorage.getItem('ptType');
-                    // if (ptType) {
-                    //     this._router.navigateByUrl(ptType + '/login');
-                    // } else {
-                    //     this._router.navigateByUrl('/');
-                    // }
                 }
                 observer.error(err);
             });

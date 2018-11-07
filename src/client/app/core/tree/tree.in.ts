@@ -448,7 +448,7 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
   }
 
   public deleteClick(treeNode: any) {
-    PromptUtil._confirm('确认要删除嘛？', () => {
+    PromptUtil.confirm('确认要删除嘛？', () => {
       this.current_del = treeNode;
       this.treeDeleted.emit(treeNode);
     });

@@ -179,7 +179,7 @@ export class TakePointDynamicComponent extends DynamicBase implements AfterViewI
           this.map.centerAndZoom(pt, 13);
           this.addPoint(this.point);
         } else {
-          PromptUtil._error('请输入正确的搜索条件');
+          PromptUtil.error('请输入正确的搜索条件');
         }
       }
     });

@@ -17,22 +17,11 @@ export class PromptUtil {
     this.success('操作成功');
   }
 
-  static _error(msg: any) {
-    this.error(msg);
-  }
-
-  static _waring(msg: any) {
-    this.waring(msg);
-  }
-
-  static _confirm(msg: any, callback: any) {
-    this.confirm(msg, callback);
-  }
-
-
   static error(tips: any) {
     const w: any = window;
-    w.sweetAlert('操作异常', tips, 'error');
+    setTimeout(() => {
+      w.sweetAlert('操作异常', tips, 'error');
+    }, 200);
   }
 
   static success(content: any) {
@@ -41,7 +30,9 @@ export class PromptUtil {
       content = '';
     }
     // swal({   title: '操作成功!',   text: ' ',   timer: 2000,   showConfirmButton: false });
-    w.swal('操作成功!', content, 'success');
+    setTimeout(() => {
+      w.swal('操作成功!', content, 'success');
+    }, 200);
   }
  static warningTime(content: any, callback: any) {
     const w: any = window;
@@ -53,12 +44,6 @@ export class PromptUtil {
          () => {
           callback.call();
          },
-        // // handling the promise rejection
-        // function (dismiss) {
-        //     if (dismiss === 'timer') {
-        //         console.log('I was closed by the timer')
-        //     }
-        // }
     );
  }
 
@@ -67,8 +52,9 @@ export class PromptUtil {
     if (!content) {
       content = '';
     }
-    w.swal({ title: content, text: '', type: 'warning' });
-    // swal({ title: content,   text: ' ',   timer: 2000,   showConfirmButton: false });
+    setTimeout(() => {
+      w.swal({ title: content, text: '', type: 'warning' });
+    }, 200);
   }
 
   static confirm(title: any, callback: any) {

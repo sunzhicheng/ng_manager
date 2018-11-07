@@ -36,7 +36,7 @@ export class AuthAvtivate implements CanActivate {
               });
             }
             if (!isHasPermission) {
-                PromptUtil._error('访问的路径没有权限');
+                PromptUtil.error('访问的路径没有权限');
                 const ptType = localStorage.getItem('ptType');
                 if (ptType) {
                     this.router.navigateByUrl(ptType + '/login');

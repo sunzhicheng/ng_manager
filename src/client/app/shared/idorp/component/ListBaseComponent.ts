@@ -104,7 +104,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_del)) {
             return;
         }
-        PromptUtil._confirm('确认要删除吗？', () => {
+        PromptUtil.confirm('确认要删除吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.listServ[this.method_list_del](entry, APISOURCE.LIST).subscribe((result: any) => {
                 PromptUtil._success();
@@ -120,7 +120,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
-        PromptUtil._confirm('确认要启用吗？', () => {
+        PromptUtil.confirm('确认要启用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 1 });
             this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {
@@ -138,7 +138,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
-        PromptUtil._confirm('确认要禁用吗？', () => {
+        PromptUtil.confirm('确认要禁用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 2 });
             this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {

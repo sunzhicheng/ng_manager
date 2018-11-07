@@ -166,7 +166,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         }
       }
     } else {
-      PromptUtil._waring('用户没有配置菜单');
+      PromptUtil.waring('用户没有配置菜单');
       history.back();
     }
   }

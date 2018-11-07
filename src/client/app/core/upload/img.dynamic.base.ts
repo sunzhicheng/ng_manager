@@ -47,7 +47,7 @@ export class ImgDynamicBaseComponent extends DynamicBase {
   }
   upload(parmFile: any) {
     if (!parmFile || parmFile.length === 0) {
-      PromptUtil._error('请选择图片.');
+      PromptUtil.error('请选择图片.');
       return;
     }
     let check = true;
@@ -55,7 +55,7 @@ export class ImgDynamicBaseComponent extends DynamicBase {
       const fileSize = file.size;
       if (fileSize > this._config.fileSize * 1024) {
         check = false;
-        PromptUtil._error('上传最大文件大小为' + this._config.fileSize + 'KB');
+        PromptUtil.error('上传最大文件大小为' + this._config.fileSize + 'KB');
         return;
       }
     });
