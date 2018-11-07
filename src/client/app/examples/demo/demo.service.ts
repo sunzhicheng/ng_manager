@@ -115,7 +115,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_text',
               key: 'demo_text',
-              label: '文本框',
+              label: '文本框(fi_text)',
               type: 'text',
               rules: [
                 {
@@ -145,44 +145,44 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_text',
               key: 'demo_int',
-              label: 'int类型',
+              label: 'int类型(fi_text)',
               type: 'int',
-              desc: '可以自定义length 属性,默认9'
+              desc: '可以自定义length 属性,默认9,type=int'
             },
             {
               fi_type: 'fi_text',
               key: 'demo_long',
-              label: 'long类型',
+              label: 'long类型(fi_text)',
               type: 'long',
-              desc: '可以自定义length 属性,默认18',
+              desc: '可以自定义length 属性,默认18,type=long',
               max_value: 10000,
               min_value: 20
             },
             {
               fi_type: 'fi_text',
               key: 'demo_sec',
-              label: '时间类型(秒)',
+              label: '时间类型(秒)(fi_text)',
               type: 'sec',
-              desc: '可以自定义length'
+              desc: '可以自定义length, type=sec'
             },
             {
               fi_type: 'fi_text',
               key: 'demo_min',
-              label: '时间类型(分钟)',
+              label: '时间类型(分钟)(fi_text)',
               type: 'min',
-              desc: '可以自定义length'
+              desc: '可以自定义length,type=min'
             },
             {
               fi_type: 'fi_text',
               key: 'demo_hour',
-              label: '时间类型(小时)',
+              label: '时间类型(小时)(fi_text)',
               type: 'hour',
-              desc: '可以自定义length'
+              desc: '可以自定义length,type=hour'
             },
             {
               fi_type: 'fi_textarea',
               key: 'demo_textArea',
-              label: '多行文本',
+              label: '多行文本(fi_textarea)',
               type: 'text',
             },
             {
@@ -212,7 +212,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_select',
               key: 'demo_select',
-              label: '下拉框',
+              label: '下拉框(fi_select)',
               type: 'text',
               opt_list: [
                 {
@@ -243,7 +243,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_keeditor',
               key: 'demo_keeditor',
-              label: '副文本框',
+              label: '副文本框(fi_keeditor)',
               d_value: '你好,副文本框',
               config: {
                 needCutImg: true, //是否需要裁剪图片  默认false
@@ -258,7 +258,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_checkbox',
               key: 'demo_checkboxs',
-              label: '多选按钮',
+              label: '多选按钮(fi_checkbox)',
               boxType: 1,
               opt_list: [
                 {
@@ -284,7 +284,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_takepoint_map',
               key: 'demo_takepoint',
-              label: '地图取点',
+              label: '地图取点(fi_takepoint_map)',
               source: 'baidu',
               model: 'map',
               desc: 'source默认baidu可以=qq,model默认从地图选择,也可以input输入形式,经纬度逗号隔开',
@@ -292,7 +292,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_select_tree',
               key: 'demo_tree',
-              label: '选择树',
+              label: '选择树(fi_select_tree)',
               selectType: 'radio',
               chkboxType: 'none', //  默认为relate(勾选子节点自动选择父节点)
               config: {
@@ -317,7 +317,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_select_table',
               key: 'demo_table',
-              label: '选择列表',
+              label: '选择列表(fi_select_table)',
               proto: 'idsys.IdSysBankEntry',
               request_url: '/idsys/web/idsysbank/query',
               d_value: '096f6b80-422a-4b6b-919c-21028cbdb0f9',
@@ -327,7 +327,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_img',
               key: 'demo_upload_img',
-              label: '上传图片',
+              label: '上传图片(fi_img)',
               config: {
                 fileSize : 5 * 1024,  //单位KB    默认5M  可以不写
                 canUploadCount: 4,  //限制图片的数目  默认为1  可以不写
@@ -339,7 +339,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_file',
               key: 'demo_upload_file',
-              label: '上传文件',
+              label: '上传文件(fi_file)',
               config: {
                 fileSize : 5 * 1024,  //单位KB    默认5M  可以不写
                 canUploadCount: 4,  //限制图片的数目  默认为1  可以不写
@@ -349,26 +349,26 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_time',
               key: 'demo_time',
-              label: '选择时间',
+              label: '选择时间(fi_time)',
               format: 'yyyy-mm-dd',
               desc: 'format表示时间格式 默认是yyyy-mm-dd hh:mm:ss '
             },
             {
               fi_type: 'fi_provincecityarea',
               key: 'demo_ssq',
-              label: '省市区',
+              label: '省市区(fi_provincecityarea)',
               desc: '需要sys接口支持'
             },
             {
               fi_type: 'fi_combodate',
               key: 'demo_ssq',
-              label: '时分秒',
+              label: '时分秒(fi_combodate)',
               // desc: ''
             },
             {
               fi_type: 'fi_select_search',
               key: 'demo_search_select',
-              label: '搜索选择框',
+              label: '搜索选择框(fi_select_search)',
               d_value: 2,
               select_width: 200, //select的宽度  默认为200
               // disabled: true,
@@ -410,7 +410,7 @@ export class DemoService extends DyBaseService {
             {
               fi_type: 'fi_img_cut',
               key: 'imgCut',
-              label: '裁剪图片',
+              label: '裁剪图片(fi_img_cut)',
               disabled: false,
               config: {
                 fileSize : 500,  //单位KB

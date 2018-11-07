@@ -32,7 +32,30 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     public _router: Router) {
     super(demoService, eleRef);
   }
-
+/*
+  'fi_text',                    //input=’text‘ 输入框
+    'fi_select',                  // 下拉框 select
+    'fi_time',                    //时间选择器
+    'fi_button_search',           //列表页面搜索按钮
+    'fi_button_search_customer',  //列表页面自定义按钮
+    'fi_keeditor',                //富文本
+    'fi_checkbox',                //多选checkbox
+    'fi_takepoint_map',           //地图取点
+    'fi_select_tree',             //树选择器
+    'fi_select_table',            //列表选择器
+    'fi_img',                     //上传图片
+    'fi_img_cut',                 //上传裁剪图片
+    'fi_select_search',           //带搜索的下拉框
+    'fi_provincecityarea',        //省市区选择
+    'fi_textarea',                //多行文本
+    'fi_video',                   //视频上传
+    'fi_combodate',               //时分秒
+    'fi_file',                    //文件上传
+    'fi_button_cancel',           //取消按钮
+    'fi_submit',                  //提交按钮
+    'fi_submit_customer',         //自定义提交按钮
+    'fi_button_add'               //列表新增按钮
+*/
   /**
      * 保存操作调用接口之前的处理方法
      * @param data 表单填写的JSON数据

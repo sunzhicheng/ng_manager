@@ -6,10 +6,29 @@ import * as _ from 'lodash';
 @Injectable()
 export class DFControlService {
   FI_TYPE: any = [
-    'fi_text', 'fi_select', 'fi_time', 'fi_button_search', 'fi_button_search_customer', 'fi_keeditor',
-    'fi_checkbox', 'fi_takepoint_map', 'fi_select_tree', 'fi_select_table', 'fi_img', 'fi_img_cut',
-    'fi_select_search', 'fi_provincecityarea', 'fi_textarea', 'fi_video', 'fi_combodate', 'fi_file',
-    'fi_button_cancel', 'fi_submit', 'fi_submit_customer', 'fi_button_add'];
+    'fi_text',                    //input=’text‘ 输入框
+    'fi_select',                  // 下拉框 select
+    'fi_time',                    //时间选择器
+    'fi_button_search',           //列表页面搜索按钮
+    'fi_button_search_customer',  //列表页面自定义按钮
+    'fi_keeditor',                //富文本
+    'fi_checkbox',                //多选checkbox
+    'fi_takepoint_map',           //地图取点
+    'fi_select_tree',             //树选择器
+    'fi_select_table',            //列表选择器
+    'fi_img',                     //上传图片
+    'fi_img_cut',                 //上传裁剪图片
+    'fi_select_search',           //带搜索的下拉框
+    'fi_provincecityarea',        //省市区选择
+    'fi_textarea',                //多行文本
+    'fi_video',                   //视频上传
+    'fi_combodate',               //时分秒
+    'fi_file',                    //文件上传
+    'fi_button_cancel',           //取消按钮
+    'fi_submit',                  //提交按钮
+    'fi_submit_customer',         //自定义提交按钮
+    'fi_button_add'               //列表新增按钮
+  ];
   /**
    * 标识number类型的空值，供接口统一处理成空  eg.场景 修改表单  本来有值 重新设置成空
    */
