@@ -75,8 +75,6 @@ export class TreeTableComponent implements OnInit {
 
   @Output()
   public updateOut: EventEmitter<any> = new EventEmitter();
-  
-
   @ViewChild(FormTableComponent)
   public formTable: FormTableComponent;
 

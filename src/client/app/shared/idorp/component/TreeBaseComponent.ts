@@ -27,7 +27,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     //树节点新增修改的form  表单
     treeFormData: any;
     //树配置
-    protected tree_config: any = {
+    tree_config: any = {
         title: '数列表',
         rootCreate: true,
         useform: true,
@@ -35,7 +35,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         async: false
     };
     //树按钮 控制
-    protected tree_button_setting: any = {
+     tree_button_setting: any = {
         selectedMulti: false,
         addBtn: true,
         editBtn: true,

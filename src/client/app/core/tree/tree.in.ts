@@ -206,22 +206,24 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
         if (this.setInit && this.dataInit) { //普通加载
           if (this._treeData) {
             this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), me.base_setting, this._treeData);
-            if (this._config.defaltSelect) {
-              //初始化现实第一个数据
-              let defaltSelectId = this.getFirstId();
-              var node = this.ztree.getNodeByParam('id', defaltSelectId);
-              this.ztree.selectNode(node);
-              this.ztree.setting.callback.onClick(null, this.ztree.setting.treeId, node);//调用事件
-            }
           }
+        }
+      }
+      if (this.ztree) {
+        if (this._config.defaltSelect) {
+          //初始化现实第一个数据
+          const defaltSelectId = this.getFirstId();
+          const node = this.ztree.getNodeByParam('id', defaltSelectId);
+          this.ztree.selectNode(node);
+          this.ztree.setting.callback.onClick(null, this.ztree.setting.treeId, node); //调用事件
         }
       }
     }
   }
   getFirstId() {
     let firstId = 0;
-    for (var i in this._treeData) {
-      var item: any = this._treeData[i];
+    for (const i in this._treeData) {
+      const item: any = this._treeData[i];
       if (!item.isParent) {
         firstId = item.id;
       }
@@ -502,7 +504,6 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
 
   getAllSelect() {
     const zTree: any = (<any>$).fn.zTree.getZTreeObj(this.treeId);
-    // var nodes = zTree.getChangeCheckedNodes();
     const checkNodes = zTree.getCheckedNodes(true);
     const ns: any = [];
     for (let i = 0; i < checkNodes.length; i++) {
@@ -514,7 +515,6 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
 
   getSelectParent() {
     const zTree: any = (<any>$).fn.zTree.getZTreeObj(this.treeId);
-    // var nodes = zTree.getChangeCheckedNodes();
     const checkNodes = zTree.getCheckedNodes(true);
     const ns: any = [];
     for (let i = 0; i < checkNodes.length; i++) {
@@ -529,7 +529,6 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
    */
   getSelectSub() {
     const zTree: any = (<any>$).fn.zTree.getZTreeObj(this.treeId);
-    // var nodes = zTree.getChangeCheckedNodes();
     const checkNodes = zTree.getCheckedNodes(true);
     const ns: any = [];
     for (let i = 0; i < checkNodes.length; i++) {

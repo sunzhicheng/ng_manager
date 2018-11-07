@@ -97,7 +97,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         }
     }
     /**
-     * 删除该条数据 
+     * 删除该条数据
      * @param uuid  存在格式： { query: { uuid: uuid } };
      */
     del(uuid: any) {
@@ -113,7 +113,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         });
     }
     /**
-     * 启用该条数据 
+     * 启用该条数据
      * @param uuid  存在格式： { query: { uuid: uuid } };
      */
     enable(uuid: any) {
@@ -131,7 +131,7 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
     }
 
     /**
-     * 停用该条数据 
+     * 停用该条数据
      * @param uuid  存在格式： { query: { uuid: uuid } };
      */
     stop(uuid: any) {

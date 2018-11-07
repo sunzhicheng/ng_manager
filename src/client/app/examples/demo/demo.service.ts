@@ -12,7 +12,7 @@ import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
 export class DemoService extends DyBaseService {
   count = 1;
   /**
-   * 数据接口定义   当只存在一种情况的时候   可以使用api   demo 这边因为有 treetable 例子 
+   * 数据接口定义   当只存在一种情况的时候   可以使用api   demo 这边因为有 treetable 例子
    */
   public list_api: any = {
     query: '/idsys/idsysappacount/query',
@@ -31,7 +31,7 @@ export class DemoService extends DyBaseService {
     update: '/idsys/idsysmenu/update',
     del: '/idsys/idsysmenu/del',
     proto: 'idsys.IdSysMenuEntry',     //左边的树查询接口需要用到的  协议
-  }
+  };
   /**
    * 初始化列表表单数据
    */
