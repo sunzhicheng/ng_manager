@@ -2,28 +2,33 @@
 //base
 // @import "base/normalize";
 @import "base/reset";
-@import "base/phone";
+// @import "base/phone";
 // @import "base/typography";
 //vendors
 @import "vendors/animate";
 //@import "vendors/bootstrap-3.3.7";
-@import 'vendors/bootstrap-4.0.0/bootstrap';
-//@import "vendors/onsen-css-components";
-//@import "vendors/weui";
+//@import 'vendors/bootstrap-4.0.0';
+// @import "vendors/onsen-css-components";
+// @import "vendors/weui";
 //@import "vendors/jquery-weui";
-//@import "vendors/swiper";
-//@import "vendors/app.v2";
+@import "vendors/swiper";
+@import "vendors/app.v2";
+// @import "//at.alicdn.com/t/font_795353_siswwu84k7a.css";
 @import "vendors/iconfont";
-@import "//at.alicdn.com/t/font_628895_cs1t6iodfmkj4i.css";
+@import "vendors/aos";
+@import "vendors/easing";
+// @import "vendors/dropload";
 // @import "vendors/font-awesome";
 // @import "vendors/nestable";
-// @import "vendors/metroStyle";
+@import "vendors/metroStyle";
 // @import "vendors/fuelux";
 // @import "vendors/sweetalert";
 // @import "vendors/bootstrap-datetimepicker";
 // @import "vendors/select2";
 // @import "vendors/theme";
-// @import "vendors/awesome";
+@import "vendors/awesome";
+@import "vendors/cropper";
+@import "vendors/ImgCropping";
 //bourbon
 @import "neat";
 @import "bourbon";
@@ -33,8 +38,8 @@
 @import "helpers/mixin";
 @import "helpers/helpers";
 //layout
-@import "layout/global";
-@import "layout/grid";
+// @import "layout/global";
+// @import "layout/grid";
 // @import "layout/forms";
 // @import "layout/header";
 // @import "layout/footer";
@@ -51,6 +56,7 @@
 @import "components/loading";
 //pages
 @import "pages/common";
+@import "pages/color";
 //themes
 @import "themes/admin";
 @import "themes/theme";

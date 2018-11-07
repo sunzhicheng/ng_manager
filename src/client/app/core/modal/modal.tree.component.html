@@ -1,0 +1,20 @@
+
+  
+
+  <div class="modal fade" id="{{ name_key }}">
+      <div class="modal-dialog" style="width: 450px;">
+        <div class="modal-content" style="min-height: 450px;">
+          <ng-tree-alert style="height: 350px;" #modal_tree [config]="_tree_config"
+                   [tree_button_setting]="_tree_button_setting"
+                   [treeData]="modal_Data"
+          ></ng-tree-alert>
+    
+          <div class="modal-footer" style="margin:0;">
+              <!--提交按钮-->
+              <button  type="button" class="btn btn-primary" (click)="select()" >确定</button>
+              <!--取消按钮-->
+              <button  type="button" class="btn btn-default" (click)="hide()">取消</button>
+            </div>
+        </div>
+      </div>
+    </div>

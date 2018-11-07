@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Output, Input, OnChanges, SimpleChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolHttpService } from '../../shared/tool';
 
 declare let $: any;
 
@@ -43,8 +42,7 @@ export class ImgPointComponent implements OnInit, OnChanges {
   //是否加载完成
   loaded = false;
 
-  public constructor(private toolHttp: ToolHttpService,
-                     private _router: Router
+  public constructor(private _router: Router
         ) {
   }
 
@@ -101,7 +99,7 @@ export class ImgPointComponent implements OnInit, OnChanges {
       img.style.left = 'calc(' + left + '% - 11px' + ')';
 
       img.onclick = () => {
-        console.log(img.getAttribute('id'));
+        // console.log(img.getAttribute('id'));
         const clickId = img.getAttribute('id');
         this.clickBack.emit(clickId);
         const arr: any = [];
@@ -148,7 +146,7 @@ export class ImgPointComponent implements OnInit, OnChanges {
     const mousePos = this.getMousePos();
     const x = mousePos.x; //鼠标的x
     const y = mousePos.y; //鼠标的y
-    console.log('鼠标在图片的位置：  ' + (x - X) + ',' + (y - Y)); //这里减8是减去图标的一半，具体可以根据实际图标来定义
+    // console.log('鼠标在图片的位置：  ' + (x - X) + ',' + (y - Y)); //这里减8是减去图标的一半，具体可以根据实际图标来定义
     const C = divId.position().top;
     const D = divId.position().left;
     // console.log('图片距离文档：  '+X+','+Y);

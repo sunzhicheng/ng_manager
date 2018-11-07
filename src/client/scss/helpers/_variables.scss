@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+// 主色
 $color-primary: #04BE02;
 $color-danger: #f6383a;
 $color-warning: #f60;
@@ -11,7 +12,7 @@ $color-warning-active: darken($color-warning, 10%);
 $color-success-active: darken($color-success, 10%);
 
 $color-split: #e7e7e7;  //分割线的颜色
-$color-bg: #f4f7f9;
+$color-bg: #ffffff;
 $color-text: #3d4145; //文案色
 $color-text-secondary: #5f646e; //次级文案
 $color-text-gray: #9b9b9b; //灰色文案

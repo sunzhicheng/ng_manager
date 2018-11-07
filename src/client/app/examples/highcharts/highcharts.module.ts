@@ -5,11 +5,11 @@ import { NgModule } from '@angular/core';
 import { SharedModule } from './../../shared/shared.module';
 import { HighchartsRoutingModule } from './highcharts-routing.module';
 import { HighchartsComponent } from './highcharts';
-import { CoreModule } from '../../core/core.module';
+import { HighChartsModule } from '../../core/hightcharts/highcharts.module';
 
 
 @NgModule({
-  imports: [SharedModule, CoreModule,
+  imports: [SharedModule, HighChartsModule,
     CommonModule,
     FormsModule,
     HighchartsRoutingModule],
@@ -17,4 +17,4 @@ import { CoreModule } from '../../core/core.module';
   exports: [HighchartsComponent],
   providers: []
 })
-export class HighchartsModule { }
+export class HighchartsExampleModule { }

@@ -1,0 +1,10 @@
+<div class="modal fade" id="{{ name_key }}">
+    <div class="modal-dialog" style="width: 550px;">
+      <div class="modal-content" style="min-height: 450px;">
+          <div class="wrapper b-b header" >{{ title }}</div>
+                <df-form #dy_form [formData]="formData" (formSubmit)="formSubmit($event)"
+                (selectchangeout)="selectchange($event)"></df-form>
+      </div>
+    </div>
+  </div>
+  

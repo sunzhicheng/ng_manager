@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { ToolGpbService } from '../../shared/tool/tool-gpb.service';
-import { ToolHttpService } from '../../shared/tool/tool-http.service';
+import { HttpService } from '../../shared/idorp/service/HttpService';
 
 declare let $: any;
 
@@ -58,8 +56,7 @@ export class DatePickerComponent implements OnInit {
   }
 
 
-  public constructor(private toolGpb: ToolGpbService,
-                     private toolHttp: ToolHttpService,
+  public constructor(private toolHttp: HttpService,
                      private route: ActivatedRoute,
                      public _router: Router) {
   }
@@ -72,7 +69,7 @@ export class DatePickerComponent implements OnInit {
     if (this.formatHasInit && this.date_strHasInit) {
       this.hasInit = true;
 
-      this.id = this.id || 'format' + this.toolHttp.getUnlike_num();
+      this.id = this.id || 'format' ;
       // var _mat:any = this._format||'yyyy-mm-dd hh:mm:ss';
       const _mat1: any = this._format === 2 ? 'yyyy-MM-dd hh:mm:ss' : 'yyyy-MM-dd';
       const _mat2: any = this._format === 2 ? 'yyyy-mm-dd hh:mm:ss' : 'yyyy-mm-dd';

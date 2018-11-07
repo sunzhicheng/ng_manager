@@ -1,13 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ToolGpbService } from '../../shared/tool/tool-gpb.service';
-import { ToolHttpService } from '../../shared/tool/tool-http.service';
 import { FormTableComponent } from '../f-table/f-table.component';
-import { TreeComponent } from '../tree/tree';
-
-// 不建议使用
-declare let $: any;
+import { TreeAlertComponent } from '../tree/tree.alert';
+import { IUtils } from '../../shared/idorp/providers/IUtils';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -20,15 +16,22 @@ declare let $: any;
 
 export class TreeTableComponent implements OnInit {
 
-  @ViewChild(TreeComponent)
-  public tree: TreeComponent;
+  @ViewChild(TreeAlertComponent)
+  public tree: TreeAlertComponent;
 
-  @Input()
-  public config: any = {
+  _config: any = {
     title: '树结构标题',
-    rootCreate: true
+    rootCreate: false,
+    defaltSelect: true,
   };
 
+  @Input()
+  public set config(values: any) {
+      IUtils.coverAFromB(this._config, values);
+  }
+
+  @Input()
+  public async_config: any;
   @Input()
   public tree_data: any;
 
@@ -41,16 +44,13 @@ export class TreeTableComponent implements OnInit {
   public opt_config: any;
 
   @Input()
-  public treeFormData_add: any;
+  public treeFormData: any;
 
   @Input()
-  public treeFormData_edit: any;
-
-  @Input()
-  public tree_setting: any;
+  public tree_button_setting: any;
 
   @Output()
-  public formSubmited: EventEmitter<any> = new EventEmitter();
+  public listSubmited: EventEmitter<any> = new EventEmitter();
 
   @Output()
   public formSubmit_added: EventEmitter<any> = new EventEmitter();
@@ -73,26 +73,26 @@ export class TreeTableComponent implements OnInit {
   @Output()
   public unbindOut: EventEmitter<any> = new EventEmitter();
 
+  @Output()
+  public updateOut: EventEmitter<any> = new EventEmitter();
   @ViewChild(FormTableComponent)
   public formTable: FormTableComponent;
 
   public breadcrumb = false;
 
-  constructor(private toolHttp: ToolHttpService,
-              private toolGpb: ToolGpbService,
-              private _router: Router) {
+  constructor(
+    private eleRef: ElementRef,
+    private _router: Router) {
   }
 
   ngOnInit() {
-    const index_cmp: any = $('sd-tree-table');
-    index_cmp.addClass('hbox stretch');
-    const parent_cmp: any = index_cmp.parent();
-    parent_cmp.addClass('hbox stretch');
+    this.eleRef.nativeElement.className = 'hbox stretch';
+    this.eleRef.nativeElement.parentElement.className = 'hbox stretch';
   }
 
-  formSubmit(formValue: any) {
+  listSubmit(formValue: any) {
     // console.log('FormTableComponent  formSubmit : ' + formValue);
-    this.formSubmited.emit(formValue);
+    this.listSubmited.emit(formValue);
   }
 
   formSubmit_add(formValue: any) {
@@ -145,6 +145,9 @@ export class TreeTableComponent implements OnInit {
 
   public unbind(id: any) {
     this.unbindOut.emit(id);
+  }
+  public update(id: any) {
+    this.updateOut.emit(id);
   }
 
   /**

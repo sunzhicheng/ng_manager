@@ -21,7 +21,7 @@ export class NgTableSortingDirective {
       event.preventDefault();
     }
 
-    if (this.ngTableSorting && this.column && this.column.sort !== false) {
+    if (this.column && this.column.sort !== false) {
       switch (this.column.sort) {
         case 'asc':
           this.column.sort = 'desc';

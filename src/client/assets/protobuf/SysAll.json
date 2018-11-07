@@ -2,23 +2,6 @@
   "nested": {
     "com2": {
       "nested": {
-        "AIC": {
-          "values": {
-            "AIC_NO_USE": 0,
-            "AIC_COM_VERSION": 1,
-            "AIC_COM_FILE_GET": 200,
-            "AIC_COM_FILE_UPLOAD_N": 201,
-            "AIC_COM_FILE_UPLOAD_S": 202,
-            "AIC_COM_FILE_LOAD_N": 203,
-            "AIC_COM_FILE_LOAD_S": 204,
-            "AIC_COM_IMG_LOAD_S": 205,
-            "AIC_COM_IMG_LOAD_N": 206,
-            "AIC_COM_SMS_SEND": 300,
-            "AIC_COM_SU_ADD": 400,
-            "AIC_COM_SU_UPDATE": 401,
-            "AIC_COM_SU_DIRECT": 402
-          }
-        },
         "ICity": {
           "fields": {
             "pt_id": {
@@ -1246,7 +1229,7 @@
               }
             },
             "q_type": {
-              "type": "IQIType",
+              "type": "IQType",
               "id": 13,
               "options": {
                 "json_name": "q_type"
@@ -1269,7 +1252,8 @@
                 "IQIT_D": 3,
                 "IQIT_I": 4,
                 "IQIT_F": 5,
-                "IQIT_G": 6
+                "IQIT_G": 6,
+                "IQIT_JION": 7
               }
             },
             "IQType": {
@@ -1285,16 +1269,36 @@
                 "IQT_NIN": 8,
                 "IQT_LIKE": 9,
                 "IQT_LIKE_PRE": 10,
-                "IQT_LIKE_SUF": 11
+                "IQT_LIKE_SUF": 11,
+                "IQT_BETWEEN": 12
               }
             },
             "IQJoinType": {
               "values": {
                 "IQJT_NO_USE": 0,
                 "IQJT_AND": 1,
-                "IQJT_OR": 2
+                "IQJT_OR": 2,
+                "IQJT_P_LEFT": 3,
+                "IQJT_P_RIGHT": 4
               }
             }
+          }
+        },
+        "AIC": {
+          "values": {
+            "AIC_NO_USE": 0,
+            "AIC_COM_VERSION": 1,
+            "AIC_COM_FILE_GET": 200,
+            "AIC_COM_FILE_UPLOAD_N": 201,
+            "AIC_COM_FILE_UPLOAD_S": 202,
+            "AIC_COM_FILE_LOAD_N": 203,
+            "AIC_COM_FILE_LOAD_S": 204,
+            "AIC_COM_IMG_LOAD_S": 205,
+            "AIC_COM_IMG_LOAD_N": 206,
+            "AIC_COM_SMS_SEND": 300,
+            "AIC_COM_SU_ADD": 400,
+            "AIC_COM_SU_UPDATE": 401,
+            "AIC_COM_SU_DIRECT": 402
           }
         },
         "ComAmqpEntry": {
@@ -1318,7 +1322,16 @@
             "AAS_OPEN_IF": 5,
             "AAS_MANAGER": 6,
             "AAS_WX_OAUTH": 7,
-            "AAS_PT_OAUTH": 8
+            "AAS_PT_OAUTH": 8,
+            "AAS_MIN_PRO": 9,
+            "AAS_ANDROID": 10,
+            "AAS_IOS": 11,
+            "AAS_WEBSITE": 12,
+            "AAS_PERSON": 13,
+            "AAS_ALIPAY": 14,
+            "AAS_PRI_MANAGER": 15,
+            "AAS_WEBSITE_MOB": 16,
+            "AAS_IOT_PAD": 17
           }
         },
         "ISignType": {
@@ -1326,6 +1339,13 @@
             "AST_NO_USE": 0,
             "AST_MD5": 1,
             "AST_SHA1": 2
+          }
+        },
+        "ILang": {
+          "values": {
+            "IL_NO_USE": 0,
+            "IL_CN": 1,
+            "IL_EN": 2
           }
         },
         "IAccessToken": {
@@ -1508,6 +1528,80 @@
               "options": {
                 "json_name": "t_ext_5"
               }
+            },
+            "t_ext_6": {
+              "type": "string",
+              "id": 30,
+              "options": {
+                "json_name": "t_ext_6"
+              }
+            },
+            "t_ext_7": {
+              "type": "string",
+              "id": 21,
+              "options": {
+                "json_name": "t_ext_7"
+              }
+            },
+            "t_ext_8": {
+              "type": "string",
+              "id": 22,
+              "options": {
+                "json_name": "t_ext_8"
+              }
+            },
+            "t_ext_9": {
+              "type": "string",
+              "id": 23,
+              "options": {
+                "json_name": "t_ext_9"
+              }
+            },
+            "t_ext_10": {
+              "type": "string",
+              "id": 24,
+              "options": {
+                "json_name": "t_ext_10"
+              }
+            },
+            "t_ext_11": {
+              "type": "string",
+              "id": 25,
+              "options": {
+                "json_name": "t_ext_11"
+              }
+            },
+            "t_ext_12": {
+              "type": "string",
+              "id": 26,
+              "options": {
+                "json_name": "t_ext_12"
+              }
+            },
+            "t_ext_13": {
+              "type": "string",
+              "id": 27,
+              "options": {
+                "json_name": "t_ext_13"
+              }
+            },
+            "t_ext_14": {
+              "type": "string",
+              "id": 28,
+              "options": {
+                "json_name": "t_ext_14"
+              }
+            },
+            "t_ext_15": {
+              "type": "string",
+              "id": 29,
+              "options": {
+                "json_name": "t_ext_15"
+              }
+            },
+            "lang": {
+              "type": "ILang",
+              "id": 20
             }
           }
         },
@@ -1567,6 +1661,11 @@
               "rule": "repeated",
               "type": "string",
               "id": 9
+            },
+            "acc_list": {
+              "rule": "repeated",
+              "type": "string",
+              "id": 10
             }
           },
           "nested": {
@@ -3408,11 +3507,128 @@
             "AIC_SYS_FN_USER_PROFILE_UPDATE": 15007
           }
         },
+        "SysAmqpMessageStatsDetail": {
+          "fields": {
+            "rate": {
+              "type": "double",
+              "id": 1
+            }
+          }
+        },
+        "SysAmqpMessageStats": {
+          "fields": {
+            "ack": {
+              "type": "int64",
+              "id": 1
+            },
+            "ack_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 2
+            },
+            "deliver": {
+              "type": "int64",
+              "id": 3
+            },
+            "deliver_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 4
+            },
+            "deliver_get": {
+              "type": "int64",
+              "id": 5
+            },
+            "deliver_get_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 6
+            },
+            "disk_writes": {
+              "type": "int64",
+              "id": 7
+            },
+            "disk_writes_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 8
+            },
+            "publish": {
+              "type": "int64",
+              "id": 9
+            },
+            "publish_details": {
+              "type": "SysAmqpMessageStatsDetail",
+              "id": 10
+            }
+          }
+        },
+        "SysAmqpQueue": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "memory": {
+              "type": "int64",
+              "id": 1
+            },
+            "messages": {
+              "type": "int64",
+              "id": 2
+            },
+            "messages_unacknowledged": {
+              "type": "int64",
+              "id": 3
+            },
+            "consumers": {
+              "type": "int64",
+              "id": 4
+            },
+            "state": {
+              "type": "string",
+              "id": 5
+            },
+            "messages_bytes": {
+              "type": "int64",
+              "id": 6
+            },
+            "name": {
+              "type": "string",
+              "id": 10
+            },
+            "vhost": {
+              "type": "string",
+              "id": 11
+            },
+            "message_stats": {
+              "type": "SysAmqpMessageStats",
+              "id": 12
+            }
+          }
+        },
+        "SysAmqpQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
         "SysAmqpEntry": {
           "fields": {
             "token": {
               "type": "com2.IToken",
               "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 7
+            },
+            "query": {
+              "type": "SysAmqpQuery",
+              "id": 8
             },
             "at": {
               "type": "AmqpType",
@@ -3429,6 +3645,15 @@
             "sms": {
               "type": "com2.ComSmsBase",
               "id": 6
+            },
+            "proto": {
+              "type": "SysAmqpQueue",
+              "id": 10
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "SysAmqpQueue",
+              "id": 11
             }
           },
           "nested": {
@@ -3525,7 +3750,8 @@
             "SCGT_JAVA_RESTY": 1,
             "SCGT_IONIC_NG_CORDOVS": 2,
             "SCGT_NG5": 3,
-            "SCGT_PROTO": 4
+            "SCGT_PROTO": 4,
+            "SCGT_LATEX": 5
           }
         },
         "SysCodeGenJdbc": {
@@ -3561,6 +3787,10 @@
             "table_list": {
               "type": "string",
               "id": 7
+            },
+            "acc_source": {
+              "type": "string",
+              "id": 8
             }
           }
         },
@@ -3874,6 +4104,10 @@
             "show_proto": {
               "type": "bool",
               "id": 5
+            },
+            "exceptionHolder": {
+              "type": "string",
+              "id": 7
             }
           }
         },
@@ -3923,6 +4157,10 @@
               "type": "int32",
               "id": 32
             },
+            "maxActive": {
+              "type": "int32",
+              "id": 33
+            },
             "ds_packages": {
               "rule": "repeated",
               "type": "string",
@@ -3967,6 +4205,10 @@
               "rule": "repeated",
               "type": "string",
               "id": 4
+            },
+            "name": {
+              "type": "string",
+              "id": 5
             }
           }
         },
@@ -3996,6 +4238,10 @@
               "rule": "repeated",
               "type": "string",
               "id": 10
+            },
+            "permission_provider": {
+              "type": "string",
+              "id": 5
             },
             "http_cache": {
               "type": "string",
@@ -4049,6 +4295,18 @@
               "rule": "repeated",
               "type": "string",
               "id": 6
+            },
+            "api_port": {
+              "type": "int32",
+              "id": 7
+            },
+            "is_mq_enable": {
+              "type": "bool",
+              "id": 8
+            },
+            "mq_provider": {
+              "type": "string",
+              "id": 9
             }
           }
         },
@@ -4073,6 +4331,22 @@
             "context": {
               "type": "string",
               "id": 5
+            },
+            "file_load_url": {
+              "type": "string",
+              "id": 6
+            },
+            "file_load_url_secu": {
+              "type": "string",
+              "id": 7
+            },
+            "wx_url": {
+              "type": "string",
+              "id": 8
+            },
+            "is_img_compress": {
+              "type": "bool",
+              "id": 9
             }
           }
         },
@@ -4081,6 +4355,47 @@
             "wx_proxy_class": {
               "type": "string",
               "id": 1
+            }
+          }
+        },
+        "SysAppAlipay": {
+          "fields": {
+            "alipay_proxy_class": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "SysAppJpush": {
+          "fields": {
+            "jpush_proxy_class": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "SysAppMessage": {
+          "fields": {
+            "message_proxy_class": {
+              "type": "string",
+              "id": 1
+            }
+          }
+        },
+        "SysQuartzPlugin": {
+          "fields": {
+            "quartz_plugin_class": {
+              "type": "string",
+              "id": 1
+            },
+            "quartz_ds_name": {
+              "type": "string",
+              "id": 2
+            },
+            "task_init": {
+              "rule": "repeated",
+              "type": "SysQuartzTask",
+              "id": 12
             }
           }
         },
@@ -4131,9 +4446,25 @@
               "type": "SysAppWx",
               "id": 11
             },
+            "quartz_plugin": {
+              "type": "SysQuartzPlugin",
+              "id": 12
+            },
             "enable_ext_conf": {
               "type": "bool",
               "id": 100
+            },
+            "alipay_conf": {
+              "type": "SysAppAlipay",
+              "id": 101
+            },
+            "jpush_conf": {
+              "type": "SysAppJpush",
+              "id": 102
+            },
+            "message_conf": {
+              "type": "SysAppMessage",
+              "id": 103
             }
           }
         },
@@ -4167,6 +4498,92 @@
               "rule": "repeated",
               "type": "SysConfBase",
               "id": 6
+            }
+          }
+        },
+        "SysQuartzType": {
+          "values": {
+            "SQT_UN_USE": 0,
+            "SQT_CRON": 1,
+            "SQT_TIME": 2
+          }
+        },
+        "SysQuartzTask": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "id": {
+              "type": "int64",
+              "id": 1
+            },
+            "group": {
+              "type": "string",
+              "id": 3
+            },
+            "name": {
+              "type": "string",
+              "id": 4
+            },
+            "qt": {
+              "type": "SysQuartzType",
+              "id": 5
+            },
+            "cron": {
+              "type": "string",
+              "id": 6
+            },
+            "time": {
+              "type": "int64",
+              "id": 7
+            },
+            "job_class": {
+              "type": "string",
+              "id": 8
+            },
+            "params": {
+              "keyType": "string",
+              "type": "string",
+              "id": 9
+            }
+          }
+        },
+        "SysQuartzQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "SysQuartzEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "SysQuartzQuery",
+              "id": 3
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "SysQuartzTask",
+              "id": 4
+            },
+            "proto": {
+              "type": "SysQuartzTask",
+              "id": 5
             }
           }
         },
@@ -5208,8 +5625,510 @@
         }
       }
     },
+    "idsurl": {
+      "nested": {
+        "IdSuAccessLog": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "su_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "access_time": {
+              "type": "int64",
+              "id": 16
+            },
+            "access_ip": {
+              "type": "string",
+              "id": 17
+            },
+            "access_area": {
+              "type": "string",
+              "id": 18
+            },
+            "access_short_url": {
+              "type": "string",
+              "id": 19
+            }
+          }
+        },
+        "IdSuAccessLogQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSuAccessLogEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSuAccessLogQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSuAccessLog",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSuAccessLog",
+              "id": 5
+            }
+          }
+        },
+        "IdSuBlackDomain": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "domain": {
+              "type": "string",
+              "id": 15
+            }
+          }
+        },
+        "IdSuBlackDomainQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSuBlackDomainEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSuBlackDomainQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSuBlackDomain",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSuBlackDomain",
+              "id": 5
+            }
+          }
+        },
+        "IdSuUrl": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "origin_url": {
+              "type": "string",
+              "id": 15
+            },
+            "short_url": {
+              "type": "string",
+              "id": 16
+            },
+            "origin_url_sha1": {
+              "type": "string",
+              "id": 17
+            },
+            "name": {
+              "type": "string",
+              "id": 18
+            },
+            "last_update_time": {
+              "type": "int64",
+              "id": 19
+            },
+            "total_access_count": {
+              "type": "int64",
+              "id": 20
+            },
+            "expired_time": {
+              "type": "int64",
+              "id": 21
+            }
+          }
+        },
+        "IdSuUrlQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSuUrlEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSuUrlQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSuUrl",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSuUrl",
+              "id": 5
+            }
+          }
+        }
+      }
+    },
     "idsys": {
       "nested": {
+        "IdSysAmqpQueues": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "memory": {
+              "type": "int64",
+              "id": 15
+            },
+            "messages": {
+              "type": "int64",
+              "id": 16
+            },
+            "messages_unacknowledged": {
+              "type": "int64",
+              "id": 17
+            },
+            "consumers": {
+              "type": "int64",
+              "id": 18
+            },
+            "state_str": {
+              "type": "string",
+              "id": 19
+            },
+            "messages_bytes": {
+              "type": "int64",
+              "id": 20
+            },
+            "name": {
+              "type": "string",
+              "id": 21
+            },
+            "vhost": {
+              "type": "string",
+              "id": 22
+            },
+            "ack": {
+              "type": "int64",
+              "id": 23
+            },
+            "deliver": {
+              "type": "int64",
+              "id": 24
+            },
+            "deliver_get": {
+              "type": "int64",
+              "id": 25
+            },
+            "disk_writes": {
+              "type": "int64",
+              "id": 26
+            },
+            "publish": {
+              "type": "int64",
+              "id": 27
+            },
+            "ack_rate": {
+              "type": "double",
+              "id": 28
+            },
+            "deliver_rate": {
+              "type": "double",
+              "id": 29
+            },
+            "deliver_get_rate": {
+              "type": "double",
+              "id": 30
+            },
+            "disk_writes_rate": {
+              "type": "double",
+              "id": 31
+            }
+          }
+        },
+        "IdSysAmqpQueuesQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysAmqpQueuesEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysAmqpQueuesQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysAmqpQueues",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysAmqpQueues",
+              "id": 5
+            }
+          }
+        },
+        "IdSysAppAcountExt": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "app_name": {
+              "type": "string",
+              "id": 15
+            },
+            "app_remark": {
+              "type": "string",
+              "id": 16
+            },
+            "app_logo_uuid": {
+              "type": "string",
+              "id": 17
+            },
+            "account_id": {
+              "type": "string",
+              "id": 18
+            }
+          }
+        },
+        "IdSysAppAcountExtQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysAppAcountExtEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysAppAcountExtQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysAppAcountExt",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysAppAcountExt",
+              "id": 5
+            }
+          }
+        },
+        "IdSysAppAcount": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "username": {
+              "type": "string",
+              "id": 3
+            },
+            "password": {
+              "type": "string",
+              "id": 4
+            },
+            "nickname": {
+              "type": "string",
+              "id": 5
+            },
+            "user_type": {
+              "type": "int32",
+              "id": 18
+            },
+            "sys_user_uuid": {
+              "type": "string",
+              "id": 19
+            }
+          }
+        },
+        "IdSysAppAcountQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysAppAcountEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysAppAcountQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysAppAcount",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysAppAcount",
+              "id": 5
+            }
+          }
+        },
+        "IdSysAppVersion": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "version_name": {
+              "type": "string",
+              "id": 15
+            },
+            "version_code": {
+              "type": "int64",
+              "id": 16
+            },
+            "upload_id": {
+              "type": "string",
+              "id": 17
+            },
+            "app_type": {
+              "type": "int32",
+              "id": 18
+            },
+            "release_note": {
+              "type": "string",
+              "id": 19
+            }
+          }
+        },
+        "IdSysAppVersionQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysAppVersionEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysAppVersionQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysAppVersion",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysAppVersion",
+              "id": 5
+            }
+          }
+        },
         "IdSysArea": {
           "fields": {
             "dtc": {
@@ -5239,6 +6158,11 @@
             "type": {
               "type": "int32",
               "id": 20
+            },
+            "sub_list": {
+              "rule": "repeated",
+              "type": "IdSysArea",
+              "id": 2000
             }
           }
         },
@@ -5276,6 +6200,138 @@
             "proto_list": {
               "rule": "repeated",
               "type": "IdSysArea",
+              "id": 5
+            }
+          }
+        },
+        "IdSysBank": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "bank_name": {
+              "type": "string",
+              "id": 15
+            },
+            "bank_code": {
+              "type": "string",
+              "id": 16
+            },
+            "bank_logo": {
+              "type": "string",
+              "id": 17
+            },
+            "for_short": {
+              "type": "string",
+              "id": 18
+            }
+          }
+        },
+        "IdSysBankQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysBankEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysBankQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysBank",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysBank",
+              "id": 5
+            }
+          }
+        },
+        "IdSysBlackList": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "user_ext_uuid": {
+              "type": "string",
+              "id": 15
+            },
+            "license_no": {
+              "type": "string",
+              "id": 16
+            },
+            "card_number": {
+              "type": "string",
+              "id": 17
+            },
+            "tel": {
+              "type": "string",
+              "id": 18
+            },
+            "start_time": {
+              "type": "int64",
+              "id": 19
+            },
+            "end_time": {
+              "type": "int64",
+              "id": 20
+            }
+          }
+        },
+        "IdSysBlackListQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysBlackListEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysBlackListQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysBlackList",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysBlackList",
               "id": 5
             }
           }
@@ -5369,11 +6425,11 @@
               "id": 8
             },
             "registered_capital": {
-              "type": "string",
+              "type": "int64",
               "id": 9
             },
             "paid_capital": {
-              "type": "string",
+              "type": "int64",
               "id": 10
             },
             "establishment_date": {
@@ -5419,6 +6475,10 @@
             "link_man_hold_id": {
               "type": "string",
               "id": 33
+            },
+            "audit_remarks": {
+              "type": "string",
+              "id": 34
             }
           }
         },
@@ -5497,6 +6557,18 @@
             "comment": {
               "type": "string",
               "id": 22
+            },
+            "audit_status": {
+              "type": "int32",
+              "id": 23
+            },
+            "audit_remarks": {
+              "type": "string",
+              "id": 24
+            },
+            "is_show": {
+              "type": "int32",
+              "id": 25
             }
           }
         },
@@ -5538,6 +6610,188 @@
             }
           }
         },
+        "IdSysFeedback": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "content": {
+              "type": "string",
+              "id": 15
+            },
+            "sys_user_uuid": {
+              "type": "string",
+              "id": 16
+            },
+            "feedback_status": {
+              "type": "int32",
+              "id": 17
+            },
+            "feedback_type": {
+              "type": "int32",
+              "id": 18
+            }
+          }
+        },
+        "IdSysFeedbackQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysFeedbackEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysFeedbackQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysFeedback",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysFeedback",
+              "id": 5
+            }
+          }
+        },
+        "IdSysFootprint": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "type": {
+              "type": "int32",
+              "id": 15
+            },
+            "product_id": {
+              "type": "string",
+              "id": 16
+            },
+            "sys_user_uuid": {
+              "type": "string",
+              "id": 17
+            }
+          }
+        },
+        "IdSysFootprintQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysFootprintEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysFootprintQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysFootprint",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysFootprint",
+              "id": 5
+            }
+          }
+        },
+        "IdSysInstruction": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "title": {
+              "type": "string",
+              "id": 15
+            },
+            "content": {
+              "type": "string",
+              "id": 16
+            },
+            "pic_uuid": {
+              "type": "string",
+              "id": 17
+            },
+            "ins_type": {
+              "type": "int32",
+              "id": 18
+            }
+          }
+        },
+        "IdSysInstructionQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysInstructionEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysInstructionQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysInstruction",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysInstruction",
+              "id": 5
+            }
+          }
+        },
         "IdSysMenu": {
           "fields": {
             "dtc": {
@@ -5557,7 +6811,7 @@
               "id": 5
             },
             "sort": {
-              "type": "int64",
+              "type": "int32",
               "id": 6
             },
             "href": {
@@ -5591,6 +6845,15 @@
             "api_url": {
               "type": "string",
               "id": 14
+            },
+            "is_admin": {
+              "type": "int32",
+              "id": 15
+            },
+            "sub_list": {
+              "rule": "repeated",
+              "type": "IdSysMenu",
+              "id": 2000
             }
           }
         },
@@ -5632,6 +6895,340 @@
             }
           }
         },
+        "IdSysMessage": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "send_id": {
+              "type": "string",
+              "id": 15
+            },
+            "receive_id": {
+              "type": "string",
+              "id": 16
+            },
+            "msg": {
+              "type": "string",
+              "id": 17
+            },
+            "msg_type": {
+              "type": "int32",
+              "id": 18
+            },
+            "is_read": {
+              "type": "int32",
+              "id": 19
+            },
+            "title": {
+              "type": "string",
+              "id": 20
+            }
+          }
+        },
+        "IdSysMessageQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysMessageEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysMessageQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysMessage",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysMessage",
+              "id": 5
+            }
+          }
+        },
+        "IdSysMsgConfigureBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "msg_key": {
+              "type": "string",
+              "id": 15
+            },
+            "key_color": {
+              "type": "string",
+              "id": 16
+            },
+            "msg_value": {
+              "type": "string",
+              "id": 17
+            },
+            "value_color": {
+              "type": "string",
+              "id": 18
+            },
+            "msg_sort": {
+              "type": "int32",
+              "id": 19
+            },
+            "wx_configure_uuid": {
+              "type": "string",
+              "id": 20
+            },
+            "scene_val": {
+              "type": "int32",
+              "id": 21
+            }
+          }
+        },
+        "IdSysMsgConfigureQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysMsgConfigureEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysMsgConfigureQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysMsgConfigureBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysMsgConfigureBase",
+              "id": 5
+            }
+          }
+        },
+        "IdSysServiceConfig": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "title": {
+              "type": "string",
+              "id": 15
+            },
+            "content": {
+              "type": "string",
+              "id": 16
+            },
+            "sort": {
+              "type": "int32",
+              "id": 17
+            },
+            "service_pic_uuid": {
+              "type": "string",
+              "id": 2000
+            }
+          }
+        },
+        "IdSysServiceConfigQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysServiceConfigEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysServiceConfigQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysServiceConfig",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysServiceConfig",
+              "id": 5
+            }
+          }
+        },
+        "IdSysStockInOutBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "disk_writes_rate": {
+              "type": "double",
+              "id": 15
+            },
+            "good_uuid": {
+              "type": "string",
+              "id": 16
+            },
+            "good_num": {
+              "type": "int32",
+              "id": 17
+            },
+            "stock_type": {
+              "type": "int32",
+              "id": 18
+            },
+            "remarks": {
+              "type": "string",
+              "id": 19
+            }
+          }
+        },
+        "IdSysStockInOutQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysStockInOutEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysStockInOutQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysStockInOutBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysStockInOutBase",
+              "id": 5
+            }
+          }
+        },
+        "IdSysTimeSetBase": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "title": {
+              "type": "string",
+              "id": 15
+            },
+            "set_type": {
+              "type": "int32",
+              "id": 16
+            },
+            "time_length": {
+              "type": "int64",
+              "id": 17
+            },
+            "remarks": {
+              "type": "string",
+              "id": 18
+            }
+          }
+        },
+        "IdSysTimeSetQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysTimeSetEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysTimeSetQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysTimeSetBase",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysTimeSetBase",
+              "id": 5
+            }
+          }
+        },
         "IdSysTrConfigure": {
           "fields": {
             "dtc": {
@@ -5653,6 +7250,10 @@
             "gain_type": {
               "type": "int32",
               "id": 18
+            },
+            "add_or_sub": {
+              "type": "int32",
+              "id": 19
             }
           }
         },
@@ -5701,7 +7302,7 @@
               "id": 100000
             },
             "change_num": {
-              "type": "string",
+              "type": "int64",
               "id": 3
             },
             "remarks": {
@@ -5723,6 +7324,34 @@
             "detail_type": {
               "type": "int32",
               "id": 8
+            },
+            "from_type": {
+              "type": "int32",
+              "id": 21
+            },
+            "audit_status": {
+              "type": "int32",
+              "id": 22
+            },
+            "audit_remarks": {
+              "type": "string",
+              "id": 23
+            },
+            "bank_id": {
+              "type": "string",
+              "id": 24
+            },
+            "rest_num": {
+              "type": "int64",
+              "id": 25
+            },
+            "order_no": {
+              "type": "string",
+              "id": 26
+            },
+            "pay_type": {
+              "type": "int32",
+              "id": 27
             }
           }
         },
@@ -5760,6 +7389,238 @@
             "proto_list": {
               "rule": "repeated",
               "type": "IdSysTrHistory",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUpload": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "name": {
+              "type": "string",
+              "id": 15
+            },
+            "size": {
+              "type": "int64",
+              "id": 16
+            },
+            "unit": {
+              "type": "string",
+              "id": 17
+            },
+            "ext_media_id": {
+              "type": "string",
+              "id": 18
+            },
+            "ext_media_token": {
+              "type": "string",
+              "id": 19
+            },
+            "local_full_path": {
+              "type": "string",
+              "id": 20
+            },
+            "m_source": {
+              "type": "int32",
+              "id": 21
+            },
+            "content_type": {
+              "type": "string",
+              "id": 22
+            },
+            "duration": {
+              "type": "int64",
+              "id": 23
+            },
+            "secu": {
+              "type": "int32",
+              "id": 24
+            },
+            "w": {
+              "type": "int32",
+              "id": 25
+            },
+            "h": {
+              "type": "int32",
+              "id": 26
+            },
+            "host_base": {
+              "type": "string",
+              "id": 27
+            },
+            "http_suffix": {
+              "type": "string",
+              "id": 28
+            },
+            "compress_suffix": {
+              "type": "string",
+              "id": 29
+            },
+            "compress_w": {
+              "type": "int32",
+              "id": 30
+            },
+            "compress_h": {
+              "type": "int32",
+              "id": 31
+            },
+            "compress_size": {
+              "type": "int64",
+              "id": 32
+            },
+            "min_suffix": {
+              "type": "string",
+              "id": 33
+            },
+            "min_w": {
+              "type": "int32",
+              "id": 34
+            },
+            "min_h": {
+              "type": "int32",
+              "id": 35
+            },
+            "min_size": {
+              "type": "int64",
+              "id": 36
+            },
+            "att_type": {
+              "type": "int32",
+              "id": 37
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 38
+            }
+          }
+        },
+        "IdSysUploadQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUploadEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUploadQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUpload",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUpload",
+              "id": 5
+            }
+          }
+        },
+        "IdSysUserExt": {
+          "fields": {
+            "dtc": {
+              "type": "com2.DBTableCom",
+              "id": 100000
+            },
+            "union_id": {
+              "type": "string",
+              "id": 3
+            },
+            "last_login": {
+              "type": "int64",
+              "id": 4
+            },
+            "id_sys_user_uuid": {
+              "type": "string",
+              "id": 5
+            },
+            "user_type": {
+              "type": "int32",
+              "id": 6
+            },
+            "open_id": {
+              "type": "string",
+              "id": 7
+            },
+            "nickname": {
+              "type": "string",
+              "id": 8
+            },
+            "user_pic": {
+              "type": "string",
+              "id": 9
+            },
+            "invite_id": {
+              "type": "string",
+              "id": 10
+            },
+            "invite_score": {
+              "type": "int64",
+              "id": 11
+            },
+            "app_id": {
+              "type": "string",
+              "id": 24
+            },
+            "id_sys_user": {
+              "type": "IdSysUser",
+              "id": 2000
+            }
+          }
+        },
+        "IdSysUserExtQuery": {
+          "fields": {
+            "uuid": {
+              "type": "string",
+              "id": 1
+            },
+            "q_item_list": {
+              "rule": "repeated",
+              "type": "com2.ISQLQueryItem",
+              "id": 2
+            }
+          }
+        },
+        "IdSysUserExtEntry": {
+          "fields": {
+            "token": {
+              "type": "com2.IToken",
+              "id": 1
+            },
+            "pager": {
+              "type": "com2.IPager",
+              "id": 2
+            },
+            "query": {
+              "type": "IdSysUserExtQuery",
+              "id": 3
+            },
+            "proto": {
+              "type": "IdSysUserExt",
+              "id": 4
+            },
+            "proto_list": {
+              "rule": "repeated",
+              "type": "IdSysUserExt",
               "id": 5
             }
           }
@@ -5809,6 +7670,22 @@
             "profile_id": {
               "type": "string",
               "id": 12
+            },
+            "profile": {
+              "type": "IdSysUserProfile",
+              "id": 2013
+            },
+            "userType": {
+              "type": "IdSysUserType",
+              "id": 2014
+            },
+            "enterprise": {
+              "type": "IdSysEnterpriseMsg",
+              "id": 2015
+            },
+            "invite": {
+              "type": "IdSysUser",
+              "id": 2016
             }
           }
         },
@@ -5846,88 +7723,6 @@
             "proto_list": {
               "rule": "repeated",
               "type": "IdSysUser",
-              "id": 5
-            }
-          }
-        },
-        "IdSysUserExt": {
-          "fields": {
-            "dtc": {
-              "type": "com2.DBTableCom",
-              "id": 100000
-            },
-            "union_id": {
-              "type": "string",
-              "id": 3
-            },
-            "last_login": {
-              "type": "int64",
-              "id": 4
-            },
-            "id_sys_user_uuid": {
-              "type": "string",
-              "id": 5
-            },
-            "user_type": {
-              "type": "int32",
-              "id": 6
-            },
-            "open_id": {
-              "type": "string",
-              "id": 7
-            },
-            "nickname": {
-              "type": "string",
-              "id": 8
-            },
-            "user_pic": {
-              "type": "string",
-              "id": 9
-            },
-            "invite_id": {
-              "type": "string",
-              "id": 10
-            },
-            "invite_score": {
-              "type": "int64",
-              "id": 11
-            }
-          }
-        },
-        "IdSysUserExtQuery": {
-          "fields": {
-            "uuid": {
-              "type": "string",
-              "id": 1
-            },
-            "q_item_list": {
-              "rule": "repeated",
-              "type": "com2.ISQLQueryItem",
-              "id": 2
-            }
-          }
-        },
-        "IdSysUserExtEntry": {
-          "fields": {
-            "token": {
-              "type": "com2.IToken",
-              "id": 1
-            },
-            "pager": {
-              "type": "com2.IPager",
-              "id": 2
-            },
-            "query": {
-              "type": "IdSysUserExtQuery",
-              "id": 3
-            },
-            "proto": {
-              "type": "IdSysUserExt",
-              "id": 4
-            },
-            "proto_list": {
-              "rule": "repeated",
-              "type": "IdSysUserExt",
               "id": 5
             }
           }
@@ -5997,6 +7792,34 @@
             "card_hold_id": {
               "type": "string",
               "id": 29
+            },
+            "pay_type": {
+              "type": "string",
+              "id": 30
+            },
+            "wx_public_account_uuid": {
+              "type": "string",
+              "id": 32
+            },
+            "alipay_app_uuid": {
+              "type": "string",
+              "id": 35
+            },
+            "wx_pay_account_uuid": {
+              "type": "string",
+              "id": 34
+            },
+            "audit_remarks": {
+              "type": "string",
+              "id": 33
+            },
+            "shop_name": {
+              "type": "string",
+              "id": 36
+            },
+            "shop_logo": {
+              "type": "string",
+              "id": 37
             }
           }
         },
@@ -6095,6 +7918,14 @@
             "is_open": {
               "type": "int32",
               "id": 27
+            },
+            "type_pic": {
+              "type": "string",
+              "id": 28
+            },
+            "up_remarks": {
+              "type": "string",
+              "id": 2000
             }
           }
         },
@@ -6219,6 +8050,10 @@
             "reviewed_remarks": {
               "type": "string",
               "id": 20
+            },
+            "id_sys_user": {
+              "type": "IdSysUser",
+              "id": 2000
             }
           }
         },

@@ -20,7 +20,7 @@ $item-nomargin: ( gutter: 0, );
         }
     }
     &.justify {
-        @include grid-collapse;
+        @include grid-collapse($item-nomargin);
     }
     &.no-margin {
         @for $i from 1 to 13 {

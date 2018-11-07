@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { Config } from './shared/config/env.config';
-
+import { Title } from '@angular/platform-browser';
+declare const $: any;
 /**
  * This class represents the main application component.
  */
@@ -11,7 +11,14 @@ import { Config } from './shared/config/env.config';
   styleUrls: ['app.component.css'],
 })
 export class AppComponent {
-  constructor() {
-    console.log('Environment config', Config);
+  constructor(private title: Title) {
+    $('sd-app').addClass('vbox');
+    console.log('AppComponent... ');
+    // const ptType = localStorage.getItem('ptType');
+    // if (ptType === 'operate') {
+    //   this.title.setTitle(platform_name + platform_operate_name);
+    // } else {
+    //   this.title.setTitle(platform_name + platform_business_name);
+    // }
   }
 }

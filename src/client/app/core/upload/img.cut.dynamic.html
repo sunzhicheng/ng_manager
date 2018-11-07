@@ -1,0 +1,76 @@
+<div class="img-upload-box">
+    <div class="img-list">
+        <ul>
+            <li *ngFor="let img of img_arr; let i = index;">
+                <div class="img-box" title="双击放大" (dblclick)="showEnlargeImg(img)">
+                    <img id="finalImg" src="{{ showImg(img) }}" alt="">
+                    <a *ngIf="(img!=='notImg')&&(!isDisabled)" (click)="delImg(img)" class="times" title="删除">&times;</a>
+                    <a *ngIf="i>0 &&(!isDisabled)" (click)="toPrev(img)" class="left" title="排前"></a>
+                    <a *ngIf="i<img_arr.length-1 &&(!isDisabled)" (click)="toAfter(img)" class="right" title="排后"></a>
+                </div>
+            </li>
+            <li *ngIf="canUpload() && !isDisabled">
+                <div *ngIf="isUploading" class="img-box"><img src="{{ showImg('loading') }}" alt=""></div>
+                <a *ngIf="!isUploading" class="add-img-box" id="replaceImg" (click)="showTailor()">
+                    <span class="plus">+</span>
+                    <span>新增图片</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id="tailoring_container_{{ namekey }}" class="tailoring-container" [hidden]="ishidden">
+    <div class="black-cloth" (click)="hideTailor()"></div>
+    <div class="tailoring-content" id="tailoring_content_{{ namekey }}">
+        <div class="tailoring-content-one">
+            <label title="上传图片" for="chooseImg_{{ namekey }}" class="l-btn choose-btn">
+                <input type="file" [attr.accept]="accept" [disabled]="isDisabled" id="chooseImg_{{ namekey }}" name="file"
+                    class="hidden" (change)="selectImg($event)">
+                选择图片
+            </label>
+            <div class="close-tailoring" (click)="hideTailor()">×</div>
+        </div>
+        <div class="tailoring-content-two">
+            <div class="tailoring-box-parcel">
+                <img id="tailoringImg_{{ namekey }}">
+            </div>
+            <div class="preview-box-parcel">
+                <p>图片预览：</p>
+                <div class="square previewImg" id="previewImgDIV_{{ namekey }}"></div>
+                <p *ngIf="cropRusult">宽X高： {{ cropRusult.width.toFixed(2) }} X {{ cropRusult.height.toFixed(2) }}</p>
+                <p *ngIf="cropRusult">大小： {{ cutImgSize }}</p>
+                <!-- <div class="circular previewImg"></div> -->
+            </div>
+        </div>
+        <div class="tailoring-content-three">
+            <button type="button" class="l-btn cropper-reset-btn m-r-sm" (click)="resetBtn()">复位</button>
+            <button type="button" class="l-btn cropper-rotate-btn m-r-sm" (click)="rotateBtn()">旋转</button>
+            <button type="button" class="l-btn cropper-scaleX-btn m-r-sm" (click)="scaleXBtn()">换向</button>
+            <button type="button" class="l-btn cropper-scaleX-btn" (click)="getSize()">计算</button>
+            <button type="button" class="l-btn sureCut" (click)="originResult()" *ngIf="_config.isShowOriginBtn">原图上传</button>
+            <button type="button" class="l-btn sureCut m-r-sm" (click)="cutResult()">裁剪上传</button>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="img_enlarge_{{ namekey }}">
+    <div class="img-box-abs">
+        <img src="{{ enlargeImg }}" alt="">
+    </div>
+</div>
+
+
+<style>
+    .img-box-abs {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 3000;
+    }
+
+    .img-box-abs img {
+        width: 100%;
+        height: auto;
+    }
+</style>

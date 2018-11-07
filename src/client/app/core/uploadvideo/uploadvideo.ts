@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { ToolHttpService } from '../../shared/tool/tool-http.service';
+import { HttpService } from '../../shared/idorp/service/HttpService';
+import { IDCONF } from '../../shared/idorp/config/app.config';
 
 // 不建议使用
 declare function $(filter: string): void;
@@ -44,7 +45,7 @@ export class UploadVideoComponent {
 
   public isInloading = false;
 
-  public constructor(private toolHttp: ToolHttpService,
+  public constructor(private toolHttp: HttpService,
                      private _router: Router
   ) {
 
@@ -61,11 +62,12 @@ export class UploadVideoComponent {
     parmFile.push(file);
     this.toolHttp.showLoad();
     this.isInloading = true;
-    this.toolHttp.filesAjax(parmFile, (result: any, t: any) => {
+    const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
+    this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
       if (result) {
         const token = result.token;
         this.isInloading = false;
-        if (this.toolHttp.isEx(token)) {
+        if (this.toolHttp.isNotEx(token)) {
           // let error_type = token.ex.ex_type;
           // me.toolHttp._error(token.ex.ex_tips);
           // if (error_type === 1 || error_type === 2) {
