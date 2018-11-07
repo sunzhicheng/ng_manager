@@ -112,7 +112,6 @@ export class IUtils {
       .replace(/s/ig, String(time.Second))
       .replace(/fff/ig, String(time.Millisecond));
   }
-
   /**
    * 返回字符串长度，中文计数为2
    * @param str
