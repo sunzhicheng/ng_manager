@@ -1,0 +1,116 @@
+import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { Input } from '@angular/core';
+import { HttpService } from '../../shared/idorp/service/HttpService';
+import { IDCONF } from '../../shared/idorp/config/app.config';
+import * as _ from 'lodash';
+import { DynamicBase } from '../dynamic.base';
+
+/**
+ * 所有上传的基类  如图片 文件  等
+ */
+export class UploadDynamicBaseComponent extends DynamicBase {
+  file_arr: any = []; //存放id 的数组
+  initFlag = false; //标识初始化是否结束
+
+  //是否正在上传服务器
+  isUploading = false;
+  //支持的文件类型
+  _config: any = {
+    canUploadCount: 1, fileSize: 5 * 1024,  //图片的公共属性
+    width: 400, height: 400,  //裁剪之后的宽和高
+    outFileType: 'jpeg', //裁剪之后 输出的图片格式
+    isShowOriginBtn: false, //是否现实原图上传按钮
+    viewMode: 0,  //裁剪控件  模式  0：没有限制，3可以移动到2外。
+    // 1 : 3只能在2内移动。 2：2图片 不全部铺满1 （即缩小时可以有一边出现空隙） 3：2图片填充整个1
+    dragMode: 'move',  //‘crop’: 可以产生一个新的裁剪框3 ‘move’: 只可以移动3 ‘none’: 什么也不处理
+
+  };
+  @Input()
+  public set config(values: any) {
+    if (values) {
+      IUtils.mergeAFromB(this._config, values, {});
+    }
+  }
+
+
+  afterUpload(uploadId: any) {
+    this.log('上传成功回调处理');
+  }
+  /**
+   * 检测文件大小
+   * @param parmFile
+   * @param fSize
+   */
+  checkSize(parmFile: any, fSize: any) {
+    let check = true;
+    if (parmFile) {
+      parmFile.forEach((file: any) => {
+        const fileSize = file.size;
+        if (fileSize > fSize * 1024) {
+          check = false;
+          PromptUtil.error('上传最大文件大小为' + fSize + 'KB');
+        }
+      });
+    } else {
+      check = false;
+    }
+    return check;
+  }
+
+  upload(parmFile: any) {
+    if (!parmFile || parmFile.length === 0) {
+      PromptUtil.error('请选择图片.');
+      return;
+    }
+    const checked = this.checkSize(parmFile, this._config.fileSize);
+    if (checked) {
+      const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
+      PromptUtil.showLoad();
+      this.isUploading = true;
+      this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+        if (result) {
+          const token = result.token;
+          this.isUploading = false;
+          if (this.toolHttp.isNotEx(token)) {
+            this.log('上传成功!');
+            const uploadId = IUtils.getJson(result, 'attList[0].pt_id.open_id', '');
+            this.file_arr.push(uploadId);
+            if (this.propagateChange) {
+              this.propagateChange(_.join(this.file_arr, ','));
+            }
+            if (this.propagateTouched) {
+              this.propagateTouched();
+            }
+            PromptUtil.hideLoad();
+            this.afterUpload(uploadId);
+          }
+        }
+      }, this, this);
+    }
+  }
+  canUpload() {
+    const leng = this.file_arr.length;
+    return this._config.canUploadCount > leng;
+  }
+  public constructor(
+    protected toolHttp: HttpService) {
+    super();
+  }
+
+  delfile(imgId: any) {
+    this.log('delfile  : ' + imgId);
+    _.remove(this.file_arr, (n: any) => {
+      return n === imgId;
+    });
+  }
+  /**
+   * 给外部formControl写入数据
+   * @param {*} value
+   */
+  writeValue(value: any) {
+    if (IUtils.isNotEmpty(value)) {
+      this.file_arr = value.split(',');
+    }
+  }
+}
