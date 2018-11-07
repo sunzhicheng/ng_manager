@@ -5,6 +5,7 @@ import { TreeAlertComponent } from '../../../core/tree/tree.alert';
 import { FormUtils } from '../providers/FormUtils';
 import { ListBaseComponent } from './ListBaseComponent';
 import { APISOURCE } from '../config/app.config';
+import { TreeInComponent } from '../../../core/tree/tree.in';
 /**
  * 列表组件基类
  */
@@ -35,7 +36,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         async: false
     };
     //树按钮 控制
-     tree_button_setting: any = {
+    tree_button_setting: any = {
         selectedMulti: false,
         addBtn: true,
         editBtn: true,
@@ -51,7 +52,9 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     //异步加载需要配置的参数
     async_config: any;
     @ViewChild(TreeAlertComponent)
-    protected tree_in: TreeAlertComponent;
+    private tree_alert: TreeAlertComponent;
+    @ViewChild(TreeInComponent)
+    private tree_in: TreeInComponent;
     constructor(protected treeServ: DyBaseService | any,
         protected treeUtil: TreeService,
         protected listServ: DyBaseService | any,
@@ -70,6 +73,19 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         if (c !== null) {
             this.eleRef.nativeElement.className = c || 'hbox stretch';
         }
+    }
+    /**
+     * 获取树组件对象
+     */
+    getTreeComp() {
+        let treeCom: any = this.tree_alert;
+        if (!treeCom) {
+            treeCom = this.tree_in;
+        }
+        if (!treeCom) {
+            throw new Error('TreeBaseComponent.getTreeComp 错误:  获取的树对象为null');
+        }
+        return treeCom;
     }
     /**
      * 获取数结构数据
@@ -104,7 +120,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         this.log('treeDetail query brefore : ', detailProto);
         this.treeServ[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe((protoMsg: any) => {
             this.log('treeDetail query result : ', protoMsg);
-            this.tree_in.toEdit(protoMsg.proto);
+            this.getTreeComp().toEdit(protoMsg.proto);
         });
     }
     /**
@@ -112,7 +128,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      * @param entryResult
      */
     updateSuccessCallback(result: any) {
-        this.tree_in.editSuccess(result.proto[this.name_key]);
+        this.getTreeComp().editSuccess(result.proto[this.name_key]);
     }
     /**
      * 新增回调方法
@@ -121,10 +137,10 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     addSuccessCallback(result: any) {
         this.treeUtil.setMappingKey(this.name_key, this.uuid_key, this.sub_key);
         const node = this.treeUtil.proto2Node(result.proto, result.proto[this.parent_key], true);
-        this.tree_in.addSuccess(node);
+        this.getTreeComp().addSuccess(node);
     }
     delSuccessCallback(result: any) {
-        this.tree_in.delSuccess();
+        this.getTreeComp().delSuccess();
     }
     treeSubmit(fdata: any) {
         if (!this.hasMethod(this.treeServ, this.method_tree_save)) {
@@ -164,13 +180,13 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
    * @param key
    */
     bindFormDateOptList(optList: any, key: any) {
-        if (this.tree_in.form) {
-            FormUtils.bindFormDateOptList(this.tree_in.form, this.treeFormData, optList, key);
+        if (this.getTreeComp().form) {
+            FormUtils.bindFormDateOptList(this.getTreeComp().form, this.treeFormData, optList, key);
         }
     }
     setItemValueByJson(json: any) {
-        if (this.tree_in.form) {
-            FormUtils.setItemValueByJson(this.tree_in.form, this.treeFormData, json);
+        if (this.getTreeComp().form) {
+            FormUtils.setItemValueByJson(this.getTreeComp().form, this.treeFormData, json);
         }
     }
     /**
@@ -228,8 +244,8 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      * @param key
      */
     setNullByKey(key: any) {
-        if (this.tree_in.form) {
-            FormUtils.setNullByKey(this.tree_in.form, key);
+        if (this.getTreeComp().form) {
+            FormUtils.setNullByKey(this.getTreeComp().form, key);
         }
     }
     addHiddenButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
@@ -252,11 +268,11 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      * item 变动  手动刷新表单
      */
     refreshItem() {
-        FormUtils.refreshItem(this.tree_in.form, this.treeFormData);
+        FormUtils.refreshItem(this.getTreeComp().form, this.treeFormData);
     }
     refreshRule() {
-        if (this.tree_in.form && this.tree_in.form) {
-            FormUtils.refreshRule(this.tree_in.form, this.treeFormData);
+        if (this.getTreeComp().form && this.getTreeComp().form) {
+            FormUtils.refreshRule(this.getTreeComp().form, this.treeFormData);
         }
     }
     updateFilterJson(formData: any, key: any, filterJson: any) {

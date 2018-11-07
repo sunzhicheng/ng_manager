@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { DFModule } from '../df/df.module';
 import { TreeAlertComponent } from './tree.alert';
-import { TreeOutComponent } from './tree.out';
+import { TreeInComponent } from './tree.in';
 
 
 @NgModule({
   imports: [CommonModule, RouterModule, DFModule],
-  declarations: [TreeAlertComponent, TreeOutComponent],
-  exports: [TreeAlertComponent, TreeOutComponent],
+  declarations: [TreeAlertComponent, TreeInComponent],
+  exports: [TreeAlertComponent, TreeInComponent],
   providers: []
 })
 export class TreeModule { }

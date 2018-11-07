@@ -10,7 +10,9 @@ import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.
 import { TreeService } from '../../shared/idorp/service/TreeService';
 
 declare const $: any;
-
+/**
+ * 树表单的新增和修改将以弹框的形式出现
+ */
 @Component({
   moduleId: module.id,
   selector: 'ng-tree-alert',
@@ -210,23 +212,22 @@ export class TreeAlertComponent extends BaseComponent implements OnInit, OnChang
       if (this.ztree) {
         if (this._config.defaltSelect) {
           //初始化现实第一个数据
-          const defaltSelectId = this.getFirstId();
-          const node = this.ztree.getNodeByParam('id', defaltSelectId);
-          this.ztree.selectNode(node);
-          this.ztree.setting.callback.onClick(null, this.ztree.setting.treeId, node); //调用事件
+          const nodes = this.ztree.getNodes();
+          const defaltSelectNode = this.getFirstId(nodes);
+          this.ztree.selectNode(defaltSelectNode);
+          this.ztree.setting.callback.onClick(null, this.ztree.setting.treeId, defaltSelectNode); //调用事件
         }
       }
     }
   }
-  getFirstId() {
+  getFirstId(nodes: any): any {
     let firstId = 0;
-    for (const i in this._treeData) {
-      const item: any = this._treeData[i];
-      if (!item.isParent) {
-        firstId = item.id;
-      }
+    const firstNode = nodes[0];
+    if(!firstNode.isParent) {
+      return firstNode;
+    } else {
+      return this.getFirstId(firstNode.children);
     }
-    return firstId;
   }
   constructor(
     protected treeService: TreeService,

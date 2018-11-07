@@ -12,8 +12,8 @@ import { DemoService } from './demo.service';
 import { DemoListComponent } from './demo.list.component';
 import { HighChartsModule } from '../../core/hightcharts/highcharts.module';
 import { DemoHightchartsComponent } from './demo.hightcharts';
-import { DemoTreeComponent } from './demo.tree';
-import { DemoTreeOutComponent } from './demo.tree.out';
+import { DemoTreeAlertComponent } from './demo.tree.alert';
+import { DemoTreeInComponent } from './demo.tree.in';
 import { TreeTableModule } from '../../core/tree-table/tree-table.module';
 import { DemoTreeTableComponent } from './demo.tree.table';
 
@@ -29,16 +29,16 @@ import { DemoTreeTableComponent } from './demo.tree.table';
     FormTableModule, ModalModule, HighChartsModule, TreeTableModule
   ],
   exports: [
-    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeComponent,
-    DemoTreeOutComponent, DemoTreeTableComponent
+    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeAlertComponent,
+    DemoTreeInComponent, DemoTreeTableComponent
   ],
   declarations: [
-    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeComponent,
-    DemoTreeOutComponent, DemoTreeTableComponent
+    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeAlertComponent,
+    DemoTreeInComponent, DemoTreeTableComponent
   ],
   entryComponents: [
-    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeComponent,
-    DemoTreeOutComponent, DemoTreeTableComponent
+    DemoFormComponent, DemoListComponent, DemoHightchartsComponent, DemoTreeAlertComponent,
+    DemoTreeInComponent, DemoTreeTableComponent
   ],
   providers: [
     DemoService
