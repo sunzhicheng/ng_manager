@@ -263,21 +263,6 @@
     </div>   
     </div>
 
-    <!--item右侧按钮功能-->
-    <div class="form-group" *ngSwitchCase="20" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
-      <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <input  class="form-control"
-                [formControlName]="item.key" [id]="item.key" [type]="item.type||'text'" >
-      </div>
-      <div class="col-sm-2">
-        <a  class="btn btn-default btn-primary btn-block"
-            (click)="btnclick()"
-            >{{ item.btn_txt }}</a>
-      </div>
-    </div>
-
-
     <div  class="form-group" *ngSwitchCase="'fi_file'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">

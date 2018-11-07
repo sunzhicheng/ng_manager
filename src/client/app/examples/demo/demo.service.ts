@@ -421,6 +421,11 @@ export class DemoService extends DyBaseService {
                 isShowOriginBtn: true, //是否显示原图上传按钮  默认为false
               }
             },
+            {
+              fi_type: 20,
+              key: 'rightBtn',
+              label: '右侧按钮',
+            },
           ]
         },
         {

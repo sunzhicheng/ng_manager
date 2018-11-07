@@ -27,7 +27,7 @@ export class DFControlService {
     'fi_button_cancel',           //取消按钮
     'fi_submit',                  //提交按钮
     'fi_submit_customer',         //自定义提交按钮
-    'fi_button_add'               //列表新增按钮
+    'fi_button_add',               //列表新增按钮
   ];
   /**
    * 标识number类型的空值，供接口统一处理成空  eg.场景 修改表单  本来有值 重新设置成空
