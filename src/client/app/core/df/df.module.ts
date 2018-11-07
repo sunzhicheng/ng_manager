@@ -23,6 +23,7 @@ import { Ng2TableModule } from '../table/ng-table-module';
 import { SelectSearchDynamicComponent } from '../selectsearch/select.search.dynamic';
 import { ImgCutDynamicComponent } from '../upload/img.cut.dynamic';
 import { ImgCutComponent } from '../upload/img.cut';
+import { FileDynamicComponent } from '../upload/file.dynamic';
 
 
 @NgModule({
@@ -35,21 +36,21 @@ import { ImgCutComponent } from '../upload/img.cut';
     UploadAudioModule ],
   declarations: [
     DFItemComponent, DfFromComponent,
-    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent,
+    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent, FileDynamicComponent,
     CheckboxsDynamicComponent, CombodateDynamicComponent, TakePointDynamicComponent,
     ProvinceCityAreaDynamicComponent, ModalTreeDynamicComponent, ModalTableDynamicComponent,
     SelectSearchDynamicComponent, ImgCutDynamicComponent, ImgCutComponent
   ],
   exports: [
     DFItemComponent, DfFromComponent,
-    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent,
+    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent, FileDynamicComponent,
     CheckboxsDynamicComponent, CombodateDynamicComponent, TakePointDynamicComponent,
     ProvinceCityAreaDynamicComponent, ModalTreeDynamicComponent, ModalTableDynamicComponent,
     SelectSearchDynamicComponent, ImgCutDynamicComponent, ImgCutComponent
   ],
   entryComponents: [
     DFItemComponent, DfFromComponent,
-    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent,
+    KeEditorDynamicComponent, DatePickerDynamicComponent, ImgDynamicComponent, FileDynamicComponent,
     CheckboxsDynamicComponent, CombodateDynamicComponent, TakePointDynamicComponent,
     ProvinceCityAreaDynamicComponent, ModalTreeDynamicComponent, ModalTableDynamicComponent,
     SelectSearchDynamicComponent, ImgCutDynamicComponent, ImgCutComponent

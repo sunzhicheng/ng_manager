@@ -112,4 +112,7 @@ export class DFControlService {
       });
     }
   }
+  checkFIType(item: any) {
+
+  }
 }

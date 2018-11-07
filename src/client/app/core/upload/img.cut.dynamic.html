@@ -1,12 +1,12 @@
 <div class="img-upload-box">
     <div class="img-list">
         <ul>
-            <li *ngFor="let img of img_arr; let i = index;">
+            <li *ngFor="let img of file_arr; let i = index;">
                 <div class="img-box" title="双击放大" (dblclick)="showEnlargeImg(img)">
                     <img id="finalImg" src="{{ showImg(img) }}" alt="">
-                    <a *ngIf="(img!=='notImg')&&(!isDisabled)" (click)="delImg(img)" class="times" title="删除">&times;</a>
+                    <a *ngIf="(img!=='notImg')&&(!isDisabled)" (click)="delfile(img)" class="times" title="删除">&times;</a>
                     <a *ngIf="i>0 &&(!isDisabled)" (click)="toPrev(img)" class="left" title="排前"></a>
-                    <a *ngIf="i<img_arr.length-1 &&(!isDisabled)" (click)="toAfter(img)" class="right" title="排后"></a>
+                    <a *ngIf="i<file_arr.length-1 &&(!isDisabled)" (click)="toAfter(img)" class="right" title="排后"></a>
                 </div>
             </li>
             <li *ngIf="canUpload() && !isDisabled">
