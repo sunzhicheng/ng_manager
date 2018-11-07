@@ -1,9 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from 'ng2-validation';
+import * as _ from 'lodash';
 
 @Injectable()
 export class DFControlService {
+  FI_TYPE: any = [
+    'fi_text', 'fi_select', 'fi_time', 'fi_button_search', 'fi_button_search_customer', 'fi_keeditor',
+    'fi_checkbox', 'fi_takepoint_map', 'fi_select_tree', 'fi_select_table', 'fi_img', 'fi_img_cut',
+    'fi_select_search', 'fi_provincecityarea', 'fi_textarea', 'fi_video', 'fi_combodate', 'fi_file',
+    'fi_button_cancel', 'fi_submit', 'fi_submit_customer', 'fi_button_add'];
   /**
    * 标识number类型的空值，供接口统一处理成空  eg.场景 修改表单  本来有值 重新设置成空
    */
@@ -112,7 +118,33 @@ export class DFControlService {
       });
     }
   }
-  checkFIType(item: any) {
-
+  checkFIType(fd: any) {
+    if (fd) {
+      const form_item_list = _.get(fd, 'row_list[0].item_list', null);
+      const button_item_list = _.get(fd, 'row_list[1].item_list', null);
+      let result = true;
+      if (form_item_list) {
+        form_item_list.forEach((item: any) => {
+          if (item.fi_type) {
+            if (this.FI_TYPE.indexOf(item.fi_type) === -1) {
+              console.error('fi_type错误,不存在的类型:' + item.fi_type, item);
+              result = false;
+            }
+          }
+        });
+      }
+      if (button_item_list) {
+        button_item_list.forEach((item: any) => {
+          if (item.fi_type) {
+            if (this.FI_TYPE.indexOf(item.fi_type) === -1) {
+              console.error('fi_type错误,不存在的类型:' + item.fi_type, item);
+              result = false;
+            }
+          }
+        });
+      }
+      return result;
+    }
+    return false;
   }
 }

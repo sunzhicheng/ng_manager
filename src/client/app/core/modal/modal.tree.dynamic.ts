@@ -7,6 +7,7 @@ import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import { TreeService } from '../../shared/idorp/service/TreeService';
+import { join } from 'path';
 
 declare let $: any;
 
@@ -51,7 +52,7 @@ declare let $: any;
   }]
 })
 
-export class ModalTreeDynamicComponent   extends DynamicBase  implements OnInit , DoCheck {
+export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, DoCheck {
   treeId: any = IUtils.uuid();
   public _config: any = {
     title: '树结构标题',
@@ -131,11 +132,11 @@ export class ModalTreeDynamicComponent   extends DynamicBase  implements OnInit 
   }
 
   public initTree() {
-      const me = this;
-      if (this.treeData) {
-        this.addCheckedNode();
-        this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), me.base_setting, this.treeData);
-      }
+    const me = this;
+    if (this.treeData) {
+      this.addCheckedNode();
+      this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), me.base_setting, this.treeData);
+    }
   }
 
   addCheckedNode() {
@@ -169,9 +170,9 @@ export class ModalTreeDynamicComponent   extends DynamicBase  implements OnInit 
     return ns;
   }
 
-    /**
-   * 获取所有最终子节点
-   */
+  /**
+ * 获取所有最终子节点
+ */
   getSelectSub() {
     const zTree: any = (<any>$).fn.zTree.getZTreeObj(this.treeId);
     // var nodes = zTree.getChangeCheckedNodes();
@@ -231,6 +232,9 @@ export class ModalTreeDynamicComponent   extends DynamicBase  implements OnInit 
         });
       });
       this.selectNames = _.join(selectNamesArr, ',');
+      if (!this.selectNames && !IUtils.isEmptyArray(this.inV)) {
+        console.error('modal tree 初始值错误,没有找到对应的树节点,初始值=' + this.inV.join());
+      }
     } else {
       setTimeout(() => {
         this.initSelectName();
@@ -262,16 +266,16 @@ export class ModalTreeDynamicComponent   extends DynamicBase  implements OnInit 
             this.bindQueryData(this.protoEntry, this.filterJson);
           }
           if (this.protoEntry.pager) {
-              this.protoEntry.pager = undefined;
+            this.protoEntry.pager = undefined;
           }
           this.httpService.httpRequest(IDCONF().api_base + this._request_url, this.protoEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               this.treeData = [];
               if (protoMsg.proto_list) {
-                  this.treeData.splice(0, this.treeData.length);
-                  this.treeService.setMappingKey(this._config.name_key, this._config.uuid_key, this._config.sub_key);
-                  this.treeData = this.treeService.toTreeData(protoMsg.proto_list, openIndex);
-                  this.initTree();
+                this.treeData.splice(0, this.treeData.length);
+                this.treeService.setMappingKey(this._config.name_key, this._config.uuid_key, this._config.sub_key);
+                this.treeData = this.treeService.toTreeData(protoMsg.proto_list, openIndex);
+                this.initTree();
               }
             },
             (error: any) => {

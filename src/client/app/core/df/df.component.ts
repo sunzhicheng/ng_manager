@@ -23,8 +23,9 @@ export class DfFromComponent implements OnInit {
   @Output()
   public btnclickout: EventEmitter<any> = new EventEmitter();
   @Output()
-  public customSubmitOut: EventEmitter<any> = new EventEmitter();
-
+  public customerSubmitOut: EventEmitter<any> = new EventEmitter();
+  //检查formData的fi_type 是否正确
+  CHECK_FITYPE = false;
   private form: FormGroup;
   @ViewChildren(DFItemComponent)
   private itemList: QueryList<DFItemComponent>;
@@ -155,19 +156,23 @@ export class DfFromComponent implements OnInit {
   }
 
   refreshValue(values: any = null) {
-    if (!values) {
-      values = this.form.getRawValue();
+    //每次刷新校验formData的 fi_type
+    this.CHECK_FITYPE = this.qcs.checkFIType(this.formData);
+    if (this.CHECK_FITYPE) {
+      if (!values) {
+        values = this.form.getRawValue();
+      }
+      if (this.formData.row_list) {
+        this.formData.row_list.forEach((row: any) => {
+          if (row.item_list) {
+            row.item_list.forEach((item: any) => {
+              values[item.key] = { value: values[item.key], disabled: item.disabled };
+            });
+          }
+        });
+      }
+      this.form.reset(values);
     }
-    if (this.formData.row_list) {
-      this.formData.row_list.forEach((row: any) => {
-        if (row.item_list) {
-          row.item_list.forEach((item: any) => {
-            values[item.key] = { value: values[item.key], disabled: item.disabled };
-          });
-        }
-      });
-    }
-    this.form.reset(values);
   }
   /**
    * 刷新验证规则
@@ -292,8 +297,8 @@ export class DfFromComponent implements OnInit {
   btnclick(item: any) {
     this.btnclickout.emit(item);
   }
-  customSubmit(item: any) {
+  customerSubmit(item: any) {
     const formJson = this.getSubmitData();
-    this.customSubmitOut.emit({ item: item, v: formJson });
+    this.customerSubmitOut.emit({ item: item, v: formJson });
   }
 }

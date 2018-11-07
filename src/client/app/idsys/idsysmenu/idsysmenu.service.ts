@@ -80,7 +80,7 @@ export class IdSysMenuService extends DyBaseService  {
               {
                 item_list: [
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'name',
                     label: '菜单名称',
                     type: 'text',
@@ -94,7 +94,7 @@ export class IdSysMenuService extends DyBaseService  {
                     ]
                   },
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'sort',
                     label: '排序',
                     type: 'text',
@@ -108,7 +108,7 @@ export class IdSysMenuService extends DyBaseService  {
                     ]
                   },
                   {
-                    fi_type: 2,
+                    fi_type: 'fi_select',
                     key: 'is_show',
                     label: '是否显示',
                     d_value: 1,
@@ -139,7 +139,7 @@ export class IdSysMenuService extends DyBaseService  {
                       ],
                   },
                   {
-                    fi_type: 2,
+                    fi_type: 'fi_select',
                     key: 'is_admin',
                     label: '超级管理员显示',
                     d_value: 1,
@@ -170,25 +170,25 @@ export class IdSysMenuService extends DyBaseService  {
                       ]
                   },
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'icon',
                     label: '图标样式',
                     type: 'text',
                   },
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'permission',
                     label: '权限标识',
                     type: 'text',
                   },
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'href',
                     label: '页面链接',
                     type: 'text',
                   },
                   {
-                    fi_type: 1,
+                    fi_type: 'fi_text',
                     key: 'api_url',
                     label: 'API路由',
                     type: 'text',
@@ -198,7 +198,7 @@ export class IdSysMenuService extends DyBaseService  {
               {
                 item_list: [
                   {
-                    fi_type: 6,
+                    fi_type: 'fi_button_search',
                     label: '提交'
                   },
                 ]

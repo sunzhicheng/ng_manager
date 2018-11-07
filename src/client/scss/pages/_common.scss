@@ -157,3 +157,30 @@
     }
   }
 }
+
+.file-upload-box{
+  ul{
+    margin-top: 5px;
+    li{
+      span{
+        font-size: 13px;
+        line-height: 20px;
+      }
+      a.times{
+        margin-left: 5px;
+      }
+    }
+  }
+  .btn{
+    input[type="file"] {
+      position: absolute;
+      width: 200%;
+      height: 100%;
+      right: 0;
+      top: 0;
+      outline: none;
+      cursor: pointer;
+      opacity: 0;
+    }
+  }
+}

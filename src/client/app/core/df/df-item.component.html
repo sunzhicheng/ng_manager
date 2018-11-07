@@ -2,19 +2,19 @@
 <div [formGroup]="form" *ngIf="f_type===1">
   <div [ngSwitch]="item.fi_type">
     <!--功能按钮-->
-    <div *ngSwitchCase="8" class="col-sm-1" style="text-align:right;width: auto;" [hidden]="!hasSubmit(item.permissoin)">
+    <div *ngSwitchCase="'fi_button_add'" class="col-sm-1" style="text-align:right;width: auto;" [hidden]="!hasSubmit(item.permissoin)">
       <a  class="btn btn-sm btn-default btn-block" [routerLink]="item.router_link" >
         <i class="fa fa-plus"></i>{{ item.label }}
       </a>
     </div>
     <!--输入框-->
-    <div  *ngSwitchCase="1" class="col-sm-2"  >
+    <div  *ngSwitchCase="'fi_text'" class="col-sm-2"  >
       <input class="input-sm form-control" 
              [formControlName]="item.key" [id]="item.key" [type]="item.type ||'text'" 
              [attr.placeholder]="item.label">
     </div>
     <!--下拉框-->
-    <div *ngSwitchCase="2" [ngClass]="item.class_name || 'col-sm-2'">
+    <div *ngSwitchCase="'fi_select'" [ngClass]="item.class_name || 'col-sm-2'">
       <select class="input-sm form-control inline" 
               [formControlName]="item.key"
               >
@@ -23,17 +23,17 @@
     </div>
 
     <!--时间控件-->
-    <div  *ngSwitchCase="13" class="col-sm-2" >
+    <div  *ngSwitchCase="'fi_time'" class="col-sm-2" >
       <datepicker-dynamic [formControlName]="item.key" [format]="item.format" [minView]="item.minView"></datepicker-dynamic>
     </div>
 
     <!--查询按钮-->
-    <div  *ngSwitchCase="6" class="col-sm-1" style="text-align:right;width: auto;">
+    <div  *ngSwitchCase="'fi_button_search'" class="col-sm-1" style="text-align:right;width: auto;">
       <button class="btn btn-default  btn-sm btn-primary btn-block"  type="submit" [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
     </div>
 
     <!--其他按钮-->
-    <div  *ngSwitchCase="9" class="col-sm-1" style="text-align:right;width: auto;">
+    <div  *ngSwitchCase="'fi_button_search_customer'" class="col-sm-1" style="text-align:right;width: auto;">
       <a class="btn btn-sm btn-default btn-block" (click)="btnclick()" >{{ item.label }}</a>
     </div>
 
@@ -42,10 +42,10 @@
 
 
 <!--数据更新添加表单-->
-<div [formGroup]="form" *ngIf="f_type===2&&item.fi_type!=6&&item.fi_type!=7&&!item.hidden"  [id]="item.key+'_div'" >
+<div [formGroup]="form" *ngIf="f_type===2&&item.fi_type!=='fi_submit'&&item.fi_type!=='fi_button_cancel'&&item.fi_type!=='fi_submit_customer'&&!item.hidden"  [id]="item.key+'_div'" >
   <div [ngSwitch]="item.fi_type">
     <!--输入框-->
-    <div class="form-group" *ngSwitchCase="1" [hidden]="item.hidden" [ngClass]="{'has-error':!isValid}" >
+    <div class="form-group" *ngSwitchCase="'fi_text'" [hidden]="item.hidden" [ngClass]="{'has-error':!isValid}" >
       <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
                <input  class="form-control "  *ngIf="!item.type || item.type === 'text'"
@@ -66,7 +66,7 @@
     </div>
 
     <!--下拉框-->
-    <div  class="form-group" *ngSwitchCase="2" [hidden]="item.hidden"  [ngClass]="{'has-error':!isValid}">
+    <div  class="form-group" *ngSwitchCase="'fi_select'" [hidden]="item.hidden"  [ngClass]="{'has-error':!isValid}">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <select  class="form-control"   
@@ -83,7 +83,7 @@
     </div>
 
     <!--副文本-->
-    <div  class="form-group" *ngSwitchCase="3"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_keeditor'"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6" >
         <keeditor-dynamic [formControlName]="item.key" [config]="item.config"></keeditor-dynamic>
@@ -95,7 +95,7 @@
     </div>
 
     <!--多选按钮  boxType=1 1行   boxType=2 多行 -->
-    <div *ngSwitchCase="4" class="form-group" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div *ngSwitchCase="'fi_checkbox'" class="form-group" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
           <checkboxs-dynamic [formControlName]="item.key"   (changeOut)="selectchange($event)"
@@ -108,7 +108,7 @@
     </div>
 
     <!-- 地图取点 -->
-    <div  class="form-group" *ngSwitchCase="5" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_takepoint_map'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <takepoint-dynamic [formControlName]="item.key" [source]="item.source" [model]="item.model" >
@@ -121,7 +121,7 @@
     </div>
 
     <!-- 树选择框-->
-    <div  class="form-group" *ngSwitchCase="8" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_select_tree'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <modal-tree-dynamic [formControlName]="item.key"
@@ -139,7 +139,7 @@
     </div>
 
     <!-- table选择框-->
-    <div  class="form-group" *ngSwitchCase="10" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_select_table'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <modal-table-dynamic [formControlName]="item.key" [config]="item.config" 
@@ -155,7 +155,7 @@
     </div>
 
     <!--图片上传-->
-    <div  class="form-group" *ngSwitchCase="12" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_img'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
                   <img-dynamic [config]="item.config" [formControlName]="item.key" [fileType]="item.fileType" ></img-dynamic>     
@@ -167,7 +167,7 @@
     </div>
 
     <!--时间控件-->
-    <div class="form-group" *ngSwitchCase="13"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div class="form-group" *ngSwitchCase="'fi_time'"  [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <!-- <input  *ngIf="item" type="text" class="form-control form_datetime"
@@ -181,7 +181,7 @@
     </div>
 
     <!-- 带搜索的下拉框 -->
-    <div  class="form-group" *ngSwitchCase="14" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_select_search'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <select-search-dynamic
@@ -199,7 +199,7 @@
 
 
     <!--省市区-->
-    <div class="form-group" *ngSwitchCase="15" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div class="form-group" *ngSwitchCase="'fi_provincecityarea'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <provincecityarea-dynamic [formControlName]="item.key"  >
             </provincecityarea-dynamic>
@@ -211,7 +211,7 @@
 
 
     <!--多行文本-->
-    <div class="form-group" *ngSwitchCase="16" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div class="form-group" *ngSwitchCase="'fi_textarea'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label" for="">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <textarea  class="form-control"
@@ -225,7 +225,7 @@
     </div>
 
      <!--视频上传-->
-     <div  class="form-group" *ngSwitchCase="17" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+     <div  class="form-group" *ngSwitchCase="'fi_video'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <uploadvideo-app   (getId)="setIConImg($event)"
@@ -240,7 +240,7 @@
     </div>
 
     <!--时分秒选择控件-->
-    <div class="form-group" *ngSwitchCase="18" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div class="form-group" *ngSwitchCase="'fi_combodate'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
         <combodate-dynamic [formControlName]="item.key" [dataforma]="item.dataforma" [datatemplate]="item.datatemplate"></combodate-dynamic>
@@ -252,7 +252,7 @@
     </div>
 
     <!--图片截取-->
-    <div  class="form-group" *ngSwitchCase="19" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_img_cut'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-10">
                   <img-cut-dynamic [config]="item.config" [formControlName]="item.key" [fileType]="item.fileType" ></img-cut-dynamic>     
@@ -278,7 +278,7 @@
     </div>
 
 
-    <div  class="form-group" *ngSwitchCase="22" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
+    <div  class="form-group" *ngSwitchCase="'fi_file'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
       <div class="col-sm-6">
                   <file-dynamic [config]="item.config" [formControlName]="item.key" ></file-dynamic>     
@@ -301,9 +301,9 @@
   </div>
 </div>
 <!--取消按钮-->
-<button *ngIf="item.fi_type===7 && f_type===2" type="button" style="float:left;" (click)="cancel()"  class="btn btn-default m-r-sm">{{ item.label }}</button>
+<button *ngIf="item.fi_type==='fi_button_cancel' && f_type===2" type="button" style="float:left;" (click)="cancel()"  class="btn btn-default m-r-sm">{{ item.label }}</button>
 <!--提交按钮-->
-<button *ngIf="item.fi_type===6 && f_type===2 && !item.hidden && hasSubmit(item.permissoin)" style="float:left;"  type="submit"    class="btn btn-primary m-r-sm"  [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
+<button *ngIf="item.fi_type==='fi_submit' && f_type===2 && !item.hidden && hasSubmit(item.permissoin)" style="float:left;"  type="submit"    class="btn btn-primary m-r-sm"  [disabled]="!form.valid || item.disabled || lazyClick">{{ item.label }}</button>
 <!--自定义按钮功能-->
-<button *ngIf="item.fi_type===21 && f_type===2 && !item.hidden"  style="float:left;"  type="button" [disabled]="(item.hasValid  && !form.valid) || item.disabled"  (click)="customSubmit($event)" class="btn btn-info m-r-sm" >{{ item.label }}</button>
+<button *ngIf="item.fi_type==='fi_submit_customer' && f_type===2 && !item.hidden"  style="float:left;"  type="button" [disabled]="(item.hasValid  && !form.valid) || item.disabled"  (click)="customerSubmit($event)" class="btn btn-info m-r-sm" >{{ item.label }}</button>
 

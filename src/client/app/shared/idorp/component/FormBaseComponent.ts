@@ -82,7 +82,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * 自定义button  提交
      * @param data 表单填写的JSON数据  返回值是 { item: item, v: formJson }这样的新式
      */
-    customSubmit(data: any) {
+    customerSubmit(data: any) {
         this.log('自定义表单提交方式，表单参数 :' + JSON.stringify(data));
         return data.v;
     }
@@ -95,9 +95,9 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     formSubmit(data: any, isCustomer: any = false) {
         //自定义提交方式需要根据对应的item  去做不同的处理 这里留给子类实现
         if (isCustomer) {
-            data = this.customSubmit(data);
+            data = this.customerSubmit(data);
             if (!data) {
-                console.log('customSubmit:处理之后返回的表单JSON对象为空.如果formSubmit已经被覆盖可忽略该警告');
+                console.log('customerSubmit:处理之后返回的表单JSON对象为空.如果formSubmit已经被覆盖可忽略该警告');
                 return;
             }
         }

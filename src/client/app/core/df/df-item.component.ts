@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
@@ -13,7 +13,6 @@ declare let $: any;
   templateUrl: 'df-item.component.html'
 })
 export class DFItemComponent implements OnChanges, AfterViewChecked {
-
   @Input() item: any;
   @Input() f_type: any = 1;
   @Input() form: FormGroup;
@@ -27,7 +26,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
 
   //自定义按钮点击
   @Output()
-  public customSubmitOut: EventEmitter<any> = new EventEmitter();
+  public customerSubmitOut: EventEmitter<any> = new EventEmitter();
   //控制按钮频繁点击
   lazyClick = false;
   private defaultValue: any;
@@ -118,7 +117,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
    * @param target
    */
   public selectchange(target: any) {
-    if (this.item.fi_type === 2) { //下拉框特殊处理
+    if (this.item.fi_type === 'fi_select') { //下拉框特殊处理
       const tagetIndex = target.currentTarget.selectedIndex;
       const value = this.item.opt_list[tagetIndex].key.l_id;
       this.selectchangeout.emit({ item: this.item, v: value });
@@ -137,15 +136,17 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
       const link = [this.item.router_link];
       this._router.navigate(link);
     } else {
-      history.back();
+      if (history.state.navigationId > 1) {
+        history.back();
+      }
     }
   }
 
   /**
    * 除了确认和取消按钮之外的  提交动作  如表单审核
    */
-  customSubmit() {
-    this.customSubmitOut.emit(this.item);
+  customerSubmit() {
+    this.customerSubmitOut.emit(this.item);
   }
 
   isRequire() {

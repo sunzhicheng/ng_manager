@@ -1,9 +1,8 @@
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { Injectable } from '@angular/core';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
+import { PAGER_INIT } from '../../shared/idorp/config/app.config';
 
 /**
  * demo
@@ -52,33 +51,33 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 8,
+              fi_type: 'fi_button_add',
               label: '新增',
               router_link: '/home/demo/form',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'nickname',
               label: '昵称',
               type: 'text',
             },
             {
-              fi_type: 6,
+              fi_type: 'fi_button_search',
               key: 'query',
               label: '查询'
             },
             {
-              fi_type: 9,
+              fi_type: 'fi_button_search_customer',
               key: 'modalForm',
               label: '表单弹框'
             },
             {
-              fi_type: 9,
+              fi_type: 'fi_button_search_customer',
               key: 'modalTable',
               label: '列表弹框'
             },
             {
-              fi_type: 9,
+              fi_type: 'fi_button_search_customer',
               key: 'modallogin',
               label: '登陆弹框'
             },
@@ -114,7 +113,7 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_text',
               label: '文本框',
               type: 'text',
@@ -144,14 +143,14 @@ export class DemoService extends DyBaseService {
               desc: '验证统一写在rules标签下面',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_int',
               label: 'int类型',
               type: 'int',
               desc: '可以自定义length 属性,默认9'
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_long',
               label: 'long类型',
               type: 'long',
@@ -160,34 +159,34 @@ export class DemoService extends DyBaseService {
               min_value: 20
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_sec',
               label: '时间类型(秒)',
               type: 'sec',
               desc: '可以自定义length'
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_min',
               label: '时间类型(分钟)',
               type: 'min',
               desc: '可以自定义length'
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_hour',
               label: '时间类型(小时)',
               type: 'hour',
               desc: '可以自定义length'
             },
             {
-              fi_type: 16,
+              fi_type: 'fi_textarea',
               key: 'demo_textArea',
               label: '多行文本',
               type: 'text',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'demo_customer',
               label: 'customer验证',
               type: 'number',
@@ -211,7 +210,7 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 2,
+              fi_type: 'fi_select',
               key: 'demo_select',
               label: '下拉框',
               type: 'text',
@@ -242,7 +241,7 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 3,
+              fi_type: 'fi_keeditor',
               key: 'demo_keeditor',
               label: '副文本框',
               d_value: '你好,副文本框',
@@ -257,7 +256,7 @@ export class DemoService extends DyBaseService {
               ],
             },
             {
-              fi_type: 4,
+              fi_type: 'fi_checkbox',
               key: 'demo_checkboxs',
               label: '多选按钮',
               boxType: 1,
@@ -283,7 +282,7 @@ export class DemoService extends DyBaseService {
               desc: 'boxType=1显示单行,boxType=2 显示多行'
             },
             {
-              fi_type: 5,
+              fi_type: 'fi_takepoint_map',
               key: 'demo_takepoint',
               label: '地图取点',
               source: 'baidu',
@@ -291,8 +290,8 @@ export class DemoService extends DyBaseService {
               desc: 'source默认baidu可以=qq,model默认从地图选择,也可以input输入形式,经纬度逗号隔开',
             },
             {
-              fi_type: 8,
-              key: 'tree',
+              fi_type: 'fi_select_tree',
+              key: 'demo_tree',
               label: '选择树',
               selectType: 'radio',
               chkboxType: 'none', //  默认为relate(勾选子节点自动选择父节点)
@@ -306,7 +305,7 @@ export class DemoService extends DyBaseService {
               proto: 'idsys.IdSysMenuEntry',
               request_url: '/idsys/idsysmenu/tree',
               filterJson: this.getFilterJson(),
-              d_value: '853adfa3-61d6-47ff-8f0a-d4308c8937e4',
+              d_value: '4444bd04-a8ee-4274-baad-7b0b79cf8a33',
               desc: 'selectType可以是{radio, checkbox} 两种形式, filterJson的过滤查询条件 格式{key:value} 接口统一从q_item_list中获取',
               // rules: [
               //   {
@@ -316,7 +315,7 @@ export class DemoService extends DyBaseService {
               // ],
             },
             {
-              fi_type: 10,
+              fi_type: 'fi_select_table',
               key: 'demo_table',
               label: '选择列表',
               proto: 'idsys.IdSysBankEntry',
@@ -326,7 +325,7 @@ export class DemoService extends DyBaseService {
               desc: 'filterJson的过滤查询条件 格式{key:value} 接口统一从q_item_list中获取',
             },
             {
-              fi_type: 12,
+              fi_type: 'fi_img',
               key: 'demo_upload_img',
               label: '上传图片',
               config: {
@@ -338,7 +337,7 @@ export class DemoService extends DyBaseService {
               desc: 'canUploadCount表示最多上传几张图片 默认是1  '
             },
             {
-              fi_type: 22,
+              fi_type: 'fi_file',
               key: 'demo_upload_file',
               label: '上传文件',
               config: {
@@ -348,26 +347,26 @@ export class DemoService extends DyBaseService {
               desc: 'canUploadCount表示最多上传几个文件 默认是1  '
             },
             {
-              fi_type: 13,
+              fi_type: 'fi_time',
               key: 'demo_time',
               label: '选择时间',
               format: 'yyyy-mm-dd',
               desc: 'format表示时间格式 默认是yyyy-mm-dd hh:mm:ss '
             },
             {
-              fi_type: 15,
+              fi_type: 'fi_provincecityarea',
               key: 'demo_ssq',
               label: '省市区',
               desc: '需要sys接口支持'
             },
             {
-              fi_type: 18,
+              fi_type: 'fi_combodate',
               key: 'demo_ssq',
               label: '时分秒',
               // desc: ''
             },
             {
-              fi_type: 14,
+              fi_type: 'fi_select_search',
               key: 'demo_search_select',
               label: '搜索选择框',
               d_value: 2,
@@ -409,7 +408,7 @@ export class DemoService extends DyBaseService {
               ],
             },
             {
-              fi_type: 19,
+              fi_type: 'fi_img_cut',
               key: 'imgCut',
               label: '裁剪图片',
               disabled: false,
@@ -427,16 +426,16 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 6,
+              fi_type: 'fi_button_search',
               label: '提交',
               // permissoin: 'operate:idsysappacount:update,operate:idsysappacount:add'
             },
             {
-              fi_type: 7,
+              fi_type: 'fi_button_cancel',
               label: '取消',
             },
             {
-              fi_type: 21,
+              fi_type: 'fi_submit_customer',
               key: 'auth',
               label: '表单数据',
               hasValid: true,  //是否需要判断表单验证
@@ -456,7 +455,7 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'username',
               label: '帐号',
               type: 'text',
@@ -473,7 +472,7 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'nickname',
               label: '用户名',
               type: 'text',
@@ -485,7 +484,7 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 2,
+              fi_type: 'fi_select',
               key: 'user_type',
               label: '用户类型',
               type: 'text',
@@ -515,13 +514,13 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'password',
               label: '密码',
               type: 'password',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel1',
               label: '手机号码1',
               type: 'number',
@@ -534,43 +533,43 @@ export class DemoService extends DyBaseService {
               ]
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel2',
               label: '手机号码2',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel3',
               label: '手机号码3',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel4',
               label: '手机号码4',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel5',
               label: '手机号码5',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel6',
               label: '手机号码6',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel7',
               label: '手机号码7',
               type: 'number',
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'tel8',
               label: '手机号码8',
               type: 'number',
@@ -580,7 +579,7 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 6,
+              fi_type: 'fi_button_search',
               label: '提交',
               // permissoin: 'operate:idsysappacount:update'
             },

@@ -17,7 +17,7 @@ declare let $: any;
   moduleId: module.id,
   selector: 'sys-account-form',
   // templateUrl: 'idsysappacount.form.html',
-  template: `<f-form-cmp *ngIf="formData" [formData]="formData"  (customSubmitOut)="customSubmit($event)"
+  template: `<f-form-cmp *ngIf="formData" [formData]="formData"  (customerSubmitOut)="customerSubmit($event)"
    (formSubmited)="formSubmit($event)" (selectchangeout)="selectChange($event)"></f-form-cmp>`,
   viewProviders: []
 })
@@ -70,13 +70,13 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
   afterSetForm(formValue: any) {
     const itemArr = [
       {
-        fi_type: 1,
+        fi_type: 'fi_text',
         key: 'demo_text1',
         label: '文本框1',
         type: 'text',
       },
       {
-        fi_type: 1,
+        fi_type: 'fi_text',
         key: 'demo_text2',
         label: '文本框2',
         type: 'text',
@@ -135,5 +135,11 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     this.log('selectChange' + JSON.stringify(v));
     //设置某个item 为空
     // this.setNullByKey('demo_keeditor');
+  }
+  customerSubmit(data: any) {
+    alert('提交的表单数据 :' + JSON.stringify(data.v));
+    //调用这个方法只是为了演示afterSetForm的效果
+    this.afterSetForm(data.v);
+    return data.v;
   }
 }

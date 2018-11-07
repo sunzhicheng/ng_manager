@@ -48,19 +48,19 @@ export class IdSysAppAcountService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 8,
+              fi_type: 'fi_button_add',
               label: '新增',
               router_link: '/home/idsysappacount/add',
               permissoin: 'operate:idsysappacount:add'
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'nickname',
               label: '名称',
               type: 'text',
             },
             {
-              fi_type: 6,
+              fi_type: 'fi_button_search',
               key: 'query',
               label: '查询'
             },
@@ -96,7 +96,7 @@ export class IdSysAppAcountService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'username',
               label: '帐号',
               type: 'text',
@@ -113,7 +113,7 @@ export class IdSysAppAcountService extends DyBaseService {
               ]
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'nickname',
               label: '名称',
               type: 'text',
@@ -125,13 +125,13 @@ export class IdSysAppAcountService extends DyBaseService {
               ]
             },
             {
-              fi_type: 1,
+              fi_type: 'fi_text',
               key: 'password',
               label: '密码',
               type: 'password',
             },
             {
-              fi_type: 2,
+              fi_type: 'fi_select',
               key: 'user_type',
               label: '用户类型',
               opt_list: [
@@ -161,7 +161,7 @@ export class IdSysAppAcountService extends DyBaseService {
               ]
             },
             {
-              fi_type: 2,
+              fi_type: 'fi_select',
               key: 'sys_user_uuid',
               label: '用户角色',
             },
@@ -170,12 +170,12 @@ export class IdSysAppAcountService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 6,
+              fi_type: 'fi_button_search',
               label: '提交',
               permissoin: 'operate:idsysappacount:update'
             },
             {
-              fi_type: 7,
+              fi_type: 'fi_button_cancel',
               label: '取消',
               // router_link: '/home/idsysappacount'
             }

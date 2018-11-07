@@ -28,7 +28,7 @@ export class FormFormComponent implements OnInit {
     public btnclickout: EventEmitter<any> = new EventEmitter();
 
     @Output()
-    public customSubmitOut: EventEmitter<any> = new EventEmitter();
+    public customerSubmitOut: EventEmitter<any> = new EventEmitter();
 
     @ViewChild('dy_form')
     dy_form: DfFromComponent;
@@ -52,8 +52,8 @@ export class FormFormComponent implements OnInit {
     btnclick(item: any) {
         this.btnclickout.emit(item);
     }
-    customSubmit(item: any) {
-        this.customSubmitOut.emit(item);
+    customerSubmit(item: any) {
+        this.customerSubmitOut.emit(item);
     }
 
 }
