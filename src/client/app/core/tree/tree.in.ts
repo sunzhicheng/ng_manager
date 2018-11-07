@@ -222,9 +222,8 @@ export class TreeInComponent extends BaseComponent implements OnInit, OnChanges 
     }
   }
   getFirstId(nodes: any): any {
-    let firstId = 0;
     const firstNode = nodes[0];
-    if(!firstNode.isParent) {
+    if (!firstNode.isParent) {
       return firstNode;
     } else {
       return this.getFirstId(firstNode.children);

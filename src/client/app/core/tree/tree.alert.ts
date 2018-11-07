@@ -221,9 +221,8 @@ export class TreeAlertComponent extends BaseComponent implements OnInit, OnChang
     }
   }
   getFirstId(nodes: any): any {
-    let firstId = 0;
     const firstNode = nodes[0];
-    if(!firstNode.isParent) {
+    if (!firstNode.isParent) {
       return firstNode;
     } else {
       return this.getFirstId(firstNode.children);
