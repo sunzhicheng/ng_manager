@@ -2,7 +2,7 @@ import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { TreeInComponent } from '../../core/tree/tree.in';
+import { TreeAlertComponent } from '../tree/tree.alert';
 declare const $: any;
 
 @Component({
@@ -26,7 +26,7 @@ export class ModalTreeComponent extends BaseComponent implements OnInit {
     };
 
     @ViewChild('modal_tree')
-    public modal_tree: TreeInComponent;
+    public modal_tree: TreeAlertComponent;
 
     @Input()
     public set modal_config(values: any) {

@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output, ViewChild, ElementRef }
 import { Router } from '@angular/router';
 
 import { FormTableComponent } from '../f-table/f-table.component';
-import { TreeInComponent } from '../tree/tree.in';
+import { TreeAlertComponent } from '../tree/tree.alert';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 
 /**
@@ -16,8 +16,8 @@ import { IUtils } from '../../shared/idorp/providers/IUtils';
 
 export class TreeTableComponent implements OnInit {
 
-  @ViewChild(TreeInComponent)
-  public tree: TreeInComponent;
+  @ViewChild(TreeAlertComponent)
+  public tree: TreeAlertComponent;
 
   _config: any = {
     title: '树结构标题',

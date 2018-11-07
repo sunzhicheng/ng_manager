@@ -1,12 +1,12 @@
   <aside class="aside-xl b-r" id="subNav">
-    <ng-tree-in [config]="_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
+    <ng-tree-alert [config]="_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
              [treeData]="tree_data"
              [async_config] = "async_config"
              (formSubmited)="formSubmit_add($event)"
              (treeDetailed)="treeDetail($event)"
              (treeDeleted)="treeDelete($event)"
              (itemClicked)="itemClick($event)"
-    ></ng-tree-in>
+    ></ng-tree-alert>
   </aside>
 
   <aside id="subContent">

@@ -402,7 +402,7 @@ export class DemoService extends DyBaseService {
               fi_type: 19,
               key: 'imgCut',
               label: '裁剪图片',
-              disabled: true,
+              disabled: false,
               config: {
                 fileSize : 500,  //单位KB
                 width: 500,  //裁剪的宽度

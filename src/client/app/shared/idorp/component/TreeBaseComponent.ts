@@ -1,7 +1,7 @@
 import { TreeService } from '../service/TreeService';
 import { DyBaseService } from '../service/IdBaseService';
 import { ViewChild, OnInit, ElementRef } from '@angular/core';
-import { TreeInComponent } from '../../../core/tree/tree.in';
+import { TreeAlertComponent } from '../../../core/tree/tree.alert';
 import { FormUtils } from '../providers/FormUtils';
 import { ListBaseComponent } from './ListBaseComponent';
 import { APISOURCE } from '../config/app.config';
@@ -50,8 +50,8 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     checkeds: any;
     //异步加载需要配置的参数
     async_config: any;
-    @ViewChild(TreeInComponent)
-    protected tree_in: TreeInComponent;
+    @ViewChild(TreeAlertComponent)
+    protected tree_in: TreeAlertComponent;
     constructor(protected treeServ: DyBaseService | any,
         protected treeUtil: TreeService,
         protected listServ: DyBaseService | any,

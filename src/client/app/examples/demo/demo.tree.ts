@@ -11,13 +11,13 @@ declare const $: any;
     selector: 'demo-area',
     template: `
         <aside class="aside-md b-r bg-white" id="subNav">
-        <ng-tree-in  *ngIf="tree_data" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
+        <ng-tree-alert  *ngIf="tree_data" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
         [treeData]="tree_data"
         [async_config]="async_config"
         (formSubmited)="treeSave($event)"
         (treeDeleted)="treeDelete($event)"
         (treeDetailed)="treeDetail($event)"
-    ></ng-tree-in>
+    ></ng-tree-alert>
 
     </aside>
   `
