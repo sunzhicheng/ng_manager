@@ -1,0 +1,20 @@
+<ng-container *ngIf="_boxType === 1">
+    <label class="checkbox-inline"  *ngFor="let opt of opt_list">
+      <input type="checkbox" value="{{getJson(opt, 'key.l_id')}}"  (change)="changed($event)"
+            [disabled]="isDisabled"
+            [checked]="isChecked(getJson(opt, 'key.l_id'))"
+            >
+      {{ getJson(opt, 'value.open_id') }}
+    </label>
+  </ng-container>
+
+  <ng-container  *ngIf="_boxType === 2">
+  <div class="checkbox" *ngFor="let opt of opt_list">
+    <label>
+      <input type="checkbox" value="{{getJson(opt, 'key.l_id')}}" (change)="changed($event)"
+             [disabled]="isDisabled"
+             [checked]="isChecked(getJson(opt, 'key.l_id'))">
+        {{ getJson(opt, 'value.open_id') }}
+    </label>
+  </div>
+</ng-container>

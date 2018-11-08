@@ -1,7 +1,6 @@
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
 import { Input } from '@angular/core';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { UploadService } from '../../shared/idorp/service/UploadService';
@@ -73,7 +72,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
           this.isUploading = false;
           if (this.toolUpload.isNotEx(token)) {
             this.log('上传成功!');
-            const uploadId = IUtils.getJson(result, 'attList[0].pt_id.open_id', '');
+            const uploadId = _.get(result, 'attList[0].pt_id.open_id', '');
             this.file_arr.push(uploadId);
             if (this.propagateChange) {
               this.propagateChange(_.join(this.file_arr, ','));

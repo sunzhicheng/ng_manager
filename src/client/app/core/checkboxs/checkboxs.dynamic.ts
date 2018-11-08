@@ -1,36 +1,13 @@
 import { IUtils } from './../../shared/idorp/providers/IUtils';
-import { HttpService } from './../../shared/idorp/service/HttpService';
-import { Component, OnInit, AfterViewInit, Input, OnChanges, Output, EventEmitter, forwardRef } from '@angular/core';
-import { IDCONF } from '../../shared/idorp/config/app.config';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
 
 @Component({
+  moduleId: module.id,
   selector: 'checkboxs-dynamic',
-  template: `
-  <ng-container *ngIf="_boxType === 1">
-    <label class="checkbox-inline"  *ngFor="let opt of opt_list">
-      <input type="checkbox" value="{{opt.key.l_id}}"  (change)="changed($event)"
-            [disabled]="isDisabled"
-            [checked]="isChecked(opt.key.l_id)"
-            >
-      {{ opt.value.open_id }}
-    </label>
-  </ng-container>
-
-  <ng-container  *ngIf="_boxType === 2">
-  <div class="checkbox" *ngFor="let opt of opt_list">
-    <label>
-      <input type="checkbox" value="{{opt.key.l_id}}" (change)="changed($event)"
-             [disabled]="isDisabled"
-             [checked]="isChecked(opt.key.l_id)">
-      {{ opt.value.open_id }}
-    </label>
-  </div>
-</ng-container>
-	  `,
+  templateUrl: 'checkboxs.dynamic.html',
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CheckboxsDynamicComponent),

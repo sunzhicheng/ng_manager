@@ -3,6 +3,7 @@ import { DyBaseService } from '../service/IdBaseService';
 import { OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TreeBaseComponent } from './TreeBaseComponent';
 import { TreeTableComponent } from '../../../core/tree-table/tree-table';
+import { TreeComponent } from '../../../core/tree/tree.base';
 /**
  * 列表组件基类
  */
@@ -20,7 +21,7 @@ export abstract class TreeTableBaseComponent extends TreeBaseComponent implement
         this.initTreeTable();
     }
     abstract myInit(): void;
-    getTreeComp() {
+    getTreeComp(): TreeComponent {
         return this.tree_table.tree;
     }
     /**

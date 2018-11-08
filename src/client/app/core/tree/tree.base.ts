@@ -16,9 +16,6 @@ declare const $: any;
 /**
  * 树表单的新增和修改将以弹框的形式出现
  */
-@Component({
-  changeDetection: ChangeDetectionStrategy.OnPush
-})
 export class TreeComponent extends BaseComponent implements OnChanges {
 
   @ViewChild('form')
@@ -461,11 +458,11 @@ export class TreeComponent extends BaseComponent implements OnChanges {
   }
 
   public toEdit(fromValue: any) {
-    if (this.getJson(fromValue, 'dtc.pt_id.open_id', '') === '') {
+    if (_.get(fromValue, 'dtc.pt_id.open_id', '') === '') {
       console.error('未传修改ID!!!');
       return;
     }
-    this.edit_id = this.getJson(fromValue, 'dtc.pt_id.open_id', '');
+    this.edit_id = _.get(fromValue, 'dtc.pt_id.open_id', '');
     this.form.reset(fromValue);
     this.toForm(null);
   }

@@ -6,6 +6,7 @@ import { FormUtils } from '../providers/FormUtils';
 import { ListBaseComponent } from './ListBaseComponent';
 import { APISOURCE } from '../config/app.config';
 import { TreeInComponent } from '../../../core/tree/tree.in';
+import { TreeComponent } from '../../../core/tree/tree.base';
 /**
  * 列表组件基类
  */
@@ -77,7 +78,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     /**
      * 获取树组件对象
      */
-    getTreeComp() {
+    getTreeComp(): TreeComponent {
         let treeCom: any = this.tree_alert;
         if (!treeCom) {
             treeCom = this.tree_in;
