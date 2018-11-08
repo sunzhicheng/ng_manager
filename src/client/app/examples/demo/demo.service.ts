@@ -436,7 +436,7 @@ export class DemoService extends DyBaseService {
         {
           item_list: [
             {
-              fi_type: 'fi_button_search',
+              fi_type: 'fi_submit',
               label: '提交',
               // permissoin: 'operate:idsysappacount:update,operate:idsysappacount:add'
             },

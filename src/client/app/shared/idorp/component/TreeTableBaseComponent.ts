@@ -1,12 +1,15 @@
 import { TreeService } from '../service/TreeService';
 import { DyBaseService } from '../service/IdBaseService';
-import { OnInit, ElementRef } from '@angular/core';
+import { OnInit, ElementRef, ViewChild } from '@angular/core';
 import { TreeBaseComponent } from './TreeBaseComponent';
+import { TreeTableComponent } from '../../../core/tree-table/tree-table';
 /**
  * 列表组件基类
  */
 export abstract class TreeTableBaseComponent extends TreeBaseComponent implements OnInit {
 
+    @ViewChild(TreeTableComponent)
+    private tree_table: TreeTableComponent;
     constructor(protected treeServ: DyBaseService | any,
         protected treeUtil: TreeService,
         protected listServ: DyBaseService | any,
@@ -17,6 +20,9 @@ export abstract class TreeTableBaseComponent extends TreeBaseComponent implement
         this.initTreeTable();
     }
     abstract myInit(): void;
+    getTreeComp() {
+        return this.tree_table.tree;
+    }
     /**
      * 点击树节点 ,加载列表数据
      * @param nodeId

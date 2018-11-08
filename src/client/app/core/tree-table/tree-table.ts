@@ -53,7 +53,7 @@ export class TreeTableComponent implements OnInit {
   public listSubmited: EventEmitter<any> = new EventEmitter();
 
   @Output()
-  public formSubmit_added: EventEmitter<any> = new EventEmitter();
+  public formSubmited: EventEmitter<any> = new EventEmitter();
 
   @Output()
   public treeDetailed: EventEmitter<any> = new EventEmitter();
@@ -95,8 +95,8 @@ export class TreeTableComponent implements OnInit {
     this.listSubmited.emit(formValue);
   }
 
-  formSubmit_add(formValue: any) {
-    this.formSubmit_added.emit(formValue);
+  formSubmit(formValue: any) {
+    this.formSubmited.emit(formValue);
   }
 
   treeDetail(formValue: any) {

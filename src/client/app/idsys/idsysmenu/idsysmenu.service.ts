@@ -198,7 +198,7 @@ export class IdSysMenuService extends DyBaseService  {
               {
                 item_list: [
                   {
-                    fi_type: 'fi_button_search',
+                    fi_type: 'fi_submit',
                     label: '提交'
                   },
                 ]

@@ -2,7 +2,7 @@
     <ng-tree-alert [config]="_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
              [treeData]="tree_data"
              [async_config] = "async_config"
-             (formSubmited)="formSubmit_add($event)"
+             (formSubmited)="formSubmit($event)"
              (treeDetailed)="treeDetail($event)"
              (treeDeleted)="treeDelete($event)"
              (itemClicked)="itemClick($event)"
