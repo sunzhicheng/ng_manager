@@ -1,0 +1,15 @@
+<div class="file-upload-box" id="audio_upload_{{ namekey }}">
+    <ul>
+        <li *ngFor="let file of file_arr; let i = index;">
+            <audio id="audiofile1" src="{{ getUrl(file) }}" controls="controls" preload hidden></audio>
+            <button class="btn btn-default btn-sm" id="btn-1" href="#btn-1" data-toggle="class:btn-success">
+                <i class="fa fa-play text"></i>
+                <span class="text" (click)="playAudio()">播放</span>
+                <i class="fa fa-pause text-active"></i>
+                <span class="text-active" (click)="pauseAudio()">结束</span>
+            </button>
+            <span class="m-t-xs">{{ duration }}</span>
+        </li>
+    </ul>
+    <a class="btn btn-default" *ngIf="canUpload() && !isDisabled">点击上传<input type="file" (change)='uploadAudio($event)'></a>
+</div>

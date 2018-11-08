@@ -5,7 +5,7 @@ import { IDCONF } from '../../shared/idorp/config/app.config';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { DynamicBase } from '../dynamic.base';
-import { ImgCutComponent } from '../upload/img.cut';
+import { ImgCutComponent } from '../upload/img/img.cut';
 import { UploadService } from '../../shared/idorp/service/UploadService';
 declare var KindEditor: any;
 declare var $: any;

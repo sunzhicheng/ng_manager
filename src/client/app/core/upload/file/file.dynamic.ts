@@ -1,10 +1,9 @@
 
 import { Component, forwardRef } from '@angular/core';
-import { UploadService } from '../../shared/idorp/service/UploadService';
+import { UploadService } from '../../../shared/idorp/service/UploadService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { UploadDynamicBaseComponent } from './upload.dynamic.base.';
+import { UploadDynamicBaseComponent } from '../upload.dynamic.base.';
 
 /**
  * 动态表单上传文件
@@ -50,7 +49,7 @@ export class FileDynamicComponent extends UploadDynamicBaseComponent {
    * @param file
    */
   getDownUrl(file: any) {
-    const downUrl = IUtils.getFileUrl(file.id);
+    const downUrl = this.getUrl(file.id);
     window.open(downUrl);
   }
   /**

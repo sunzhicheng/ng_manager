@@ -347,6 +347,16 @@ export class DemoService extends DyBaseService {
               desc: 'canUploadCount表示最多上传几个文件 默认是1  '
             },
             {
+              fi_type: 'fi_audio',
+              key: 'demo_upload_audio',
+              label: '上传音频(fi_audio)',
+              config: {
+                fileSize : 5 * 1024,  //单位KB    默认5M  可以不写
+                canUploadCount: 4,  //限制图片的数目  默认为1  可以不写
+              },
+              desc: 'canUploadCount表示最多上传几个文件 默认是1  '
+            },
+            {
               fi_type: 'fi_time',
               key: 'demo_time',
               label: '选择时间(fi_time)',

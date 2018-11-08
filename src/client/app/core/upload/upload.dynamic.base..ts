@@ -124,6 +124,9 @@ export class UploadDynamicBaseComponent extends DynamicBase {
   initValue(file_arr: any) {
     console.log('initValue 采用默认不处理');
   }
+  getUrl(uploadId: any) {
+    return IUtils.getFileUrl(uploadId);
+  }
   /**
    * 给外部formControl写入数据
    * @param {*} value

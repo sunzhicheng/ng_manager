@@ -54,6 +54,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     'fi_submit',                  //提交按钮
     'fi_submit_customer',         //自定义提交按钮
     'fi_button_add'               //列表新增按钮
+    'fi_audio',                     //音频上传
 */
   /**
      * 保存操作调用接口之前的处理方法
