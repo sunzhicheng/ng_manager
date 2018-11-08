@@ -48,7 +48,6 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     'fi_select_search',           //带搜索的下拉框
     'fi_provincecityarea',        //省市区选择
     'fi_textarea',                //多行文本
-    'fi_video',                   //视频上传
     'fi_combodate',               //时分秒
     'fi_file',                    //文件上传
     'fi_button_cancel',           //取消按钮

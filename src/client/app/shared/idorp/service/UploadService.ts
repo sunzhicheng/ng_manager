@@ -24,44 +24,41 @@ export class UploadService extends HttpService {
    * 上传文件
    * @param files
    */
-    filesAjax(files: any, url: any, callback: any, target: any, t: any) {
-        const me = this;
-        this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
-            (protoMessage: any) => {
-                // FormData 对象
-                const form = new FormData();
-                for (const i in files) {
-                    form.append('file' + i, files[i]); // 文件对象
-                }
-                // XMLHttpRequest 对象
-                const xhr = new XMLHttpRequest();
-                xhr.open('post', url, true);
-                xhr.setRequestHeader('id-proto', 'base64');
-                xhr.setRequestHeader('id-token', this.getToken(url));
-                xhr.onreadystatechange = () => {
-                    if (xhr.readyState === 4) {
-                        if (callback) {
-                            // 过滤空字符,避免解析错误
-                            // const body = xhr.responseText.replace(/\s/g, '');
-                            const body = xhr.responseText;
-                            // console.log('ajaxJson2 response string : ', body);
-                            const result = me.toolGpbService.bas64ToProto(body, protoMessage);
-                            callback.call(target, result, t); //回调函数
-                        }
+    filesAjax(files: any): Observable<any> {
+        return Observable.create((observer: any) => {
+            const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
+            this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
+                (protoMessage: any) => {
+                    // FormData 对象
+                    const form = new FormData();
+                    for (const i in files) {
+                        form.append('file' + i, files[i]); // 文件对象
                     }
-                };
-                xhr.send(form);
-            },
-            (error: any) => {
-                console.error(' 上传文件 错误 : ' + JSON.stringify(error));
-            }
-        );
+                    // XMLHttpRequest 对象
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('post', fileUrl, true);
+                    xhr.setRequestHeader('id-proto', 'base64');
+                    xhr.setRequestHeader('id-token', this.getToken(fileUrl));
+                    xhr.onreadystatechange = () => {
+                        if (xhr.readyState === 4) {
+                            const body = xhr.responseText;
+                            const result = this.toolGpbService.bas64ToProto(body, protoMessage);
+                            observer.next(result);
+                        }
+                    };
+                    xhr.send(form);
+                },
+                (error: any) => {
+                    observer.error(' 上传文件 错误 : ' + JSON.stringify(error));
+                }
+            );
+        });
     }
     /**
      *  通过uuid 集合获取文件详情
      * @param file_arr
      */
-    fileDetail(file_arr: any) {
+    fileDetail(file_arr: any): Observable<any> {
         return Observable.create((observer: any) => {
             const attArr: any = [];
             file_arr.forEach((uploadId: any) => {

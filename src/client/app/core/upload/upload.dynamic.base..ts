@@ -65,10 +65,9 @@ export class UploadDynamicBaseComponent extends DynamicBase {
     }
     const checked = this.checkSize(parmFile, this._config.fileSize);
     if (checked) {
-      const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
       PromptUtil.showLoad();
       this.isUploading = true;
-      this.toolUpload.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+      this.toolUpload.filesAjax(parmFile).subscribe((result: any) => {
         if (result) {
           const token = result.token;
           this.isUploading = false;
@@ -86,7 +85,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
             this.afterUpload(uploadId, parmFile[0]);
           }
         }
-      }, this, this);
+      });
     }
   }
   canUpload() {

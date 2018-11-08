@@ -26,7 +26,7 @@ declare var $: any;
   }]
 })
 
-export class KeEditorDynamicComponent   extends DynamicBase  implements AfterViewInit {
+export class KeEditorDynamicComponent extends DynamicBase implements AfterViewInit {
 
   uploadUrl = IDCONF().api_file + '/idsys/idfileupload/kindeditor/uploadweb';
   initChange = false;
@@ -42,7 +42,7 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
     outFileType: 'jpeg', //裁剪之后 输出的图片格式
     isShowOriginBtn: false, //是否现实原图上传按钮
     viewMode: 0,  //裁剪控件  模式  0：没有限制，3可以移动到2外。
-                  // 1 : 3只能在2内移动。 2：2图片 不全部铺满1 （即缩小时可以有一边出现空隙） 3：2图片填充整个1
+    // 1 : 3只能在2内移动。 2：2图片 不全部铺满1 （即缩小时可以有一边出现空隙） 3：2图片填充整个1
     dragMode: 'move',  //‘crop’: 可以产生一个新的裁剪框3 ‘move’: 只可以移动3 ‘none’: 什么也不处理
     //裁剪图片 的配置 end
 
@@ -62,7 +62,7 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
 
 
   public constructor(protected toolGpb: GpbService,
-    protected toolHttp: UploadService) {
+    protected toolUpload: UploadService) {
     super();
   }
   getUploadId(uploadId: any) {
@@ -75,13 +75,13 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
     const me = this;
     if (this._config.needCutImg) {
       k.lang({
-        image : '裁剪图片'
+        image: '裁剪图片'
       });
-      k.plugin('image', function(K: any) {
+      k.plugin('image', function (K: any) {
         me.dom = this,
-        me.dom.clickToolbar('image', function() {
-          me.imgCut.showTailor();
-        });
+          me.dom.clickToolbar('image', function () {
+            me.imgCut.showTailor();
+          });
       });
     }
     this.editor = k.create('textarea[name=' + this.namekey + ']', {
@@ -90,7 +90,7 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
       uploadJson: this.uploadUrl,
       pasteType: this._config.pasteType,
       designMode: this._config.designMode,
-      items : [
+      items: [
         'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste',
         'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright',
         'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript',
@@ -99,16 +99,16 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
         'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|',
         'image',
         // 'flash', 'media','insertfile',
-         'table', 'hr',
-          // 'emoticons', //表情
-          //'baidumap', 'pagebreak','anchor', 'link',
-          'unlink', 'about'
+        'table', 'hr',
+        // 'emoticons', //表情
+        //'baidumap', 'pagebreak','anchor', 'link',
+        'unlink', 'about'
       ],
-      noDisableItems : ['source', 'fullscreen'],
+      noDisableItems: ['source', 'fullscreen'],
       uploadImageAjax: { fun: me.uploadImageAjax, target: me },
       afterChange: () => {
         if (this.editor) {
-          if (!this.initChange ) {
+          if (!this.initChange) {
             this.propagateChange(this.editor.html());
             this.propagateTouched();
           } else {
@@ -125,22 +125,22 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
   public uploadImageAjax(file: any, imageUploadAjaxAfter: any) {
     const files: any = [];
     files.push(file);
-    this.toolHttp.filesAjax(files, this.uploadUrl, (fileEntry: any, t: any) => {
+    this.toolUpload.filesAjax(files).subscribe((result: any) => {
       let data: any;
-      if (this.toolHttp.isNotEx(fileEntry)) {
-        const att = fileEntry.attList[0];
+      if (this.toolUpload.isNotEx(result)) {
+        const att = result.attList[0];
         data = {
           url: IUtils.getImgUrl(att.pt_id.open_id),
           error: 0,
           message: '上传成功'
         };
       } else {
-        data = { error: 1, message: fileEntry.token.ex.ex_tips };
+        data = { error: 1, message: result.token.ex.ex_tips };
       }
       if (imageUploadAjaxAfter) {
         imageUploadAjaxAfter.fun.call(imageUploadAjaxAfter.target, data);
       }
-    }, this, null);
+    });
   }
   /**
    * 给外部formControl写入数据

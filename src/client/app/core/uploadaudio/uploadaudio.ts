@@ -59,8 +59,7 @@ export class UploadAudioComponent {
 
   public duration: any;
 
-  public constructor(private toolHttp: UploadService,
-                     private _router: Router
+  public constructor(private toolUpload: UploadService,
         ) {
   }
 
@@ -77,12 +76,11 @@ export class UploadAudioComponent {
     parmFile.push(file);
     PromptUtil.showLoad();
     this.isInloading = true;
-    const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
-    this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+    this.toolUpload.filesAjax(parmFile).subscribe((result: any) => {
       if (result) {
         const token = result.token;
         this.isInloading = false;
-        if (this.toolHttp.isNotEx(token)) {
+        if (this.toolUpload.isNotEx(token)) {
           console.log('上传成功!');
           const uploadId = result['attList'][0]['pt_id']['l_id'];
           PromptUtil.hideLoad();
@@ -92,7 +90,7 @@ export class UploadAudioComponent {
           this.getPtId.emit(result['attList'][0]['pt_id']);
         }
       }
-    }, this, target);
+    });
   }
 
   public showImg() {

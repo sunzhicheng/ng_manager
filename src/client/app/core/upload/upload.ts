@@ -66,8 +66,7 @@ export class UploadComponent {
     parmFile.push(file);
     PromptUtil.showLoad();
     this.isInloading = true;
-    const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
-    this.toolUpload.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+    this.toolUpload.filesAjax(parmFile).subscribe((result: any) => {
       if (result) {
         const token = result.token;
         this.isInloading = false;
@@ -82,7 +81,7 @@ export class UploadComponent {
           this.getPtId.emit(result['attList'][0]['pt_id']);
         }
       }
-    }, this, target);
+    });
   }
 
   public showImg() {
