@@ -2,7 +2,7 @@ import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { PromptUtil } from './../../shared/idorp/providers/PromptUtil';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import _ from 'lodash';
 
@@ -49,7 +49,7 @@ export class UploadComponent {
 
   public isInloading = false;
 
-  public constructor(private toolHttp: HttpService,
+  public constructor(private toolUpload: UploadService,
                      private _router: Router
         ) {
 
@@ -67,11 +67,11 @@ export class UploadComponent {
     PromptUtil.showLoad();
     this.isInloading = true;
     const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
-    this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+    this.toolUpload.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
       if (result) {
         const token = result.token;
         this.isInloading = false;
-        if (this.toolHttp.isNotEx(token)) {
+        if (this.toolUpload.isNotEx(token)) {
           console.log('上传成功!');
           const uploadId = _.get(result, 'attList[0].pt_id.open_id', '');
           this.img_id = uploadId;

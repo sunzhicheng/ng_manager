@@ -2,8 +2,8 @@ import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
-import { HttpService } from '../../shared/idorp/service/HttpService';
 import { IDCONF } from '../../shared/idorp/config/app.config';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 
 // 不建议使用
 declare  let $: any;
@@ -59,7 +59,7 @@ export class UploadAudioComponent {
 
   public duration: any;
 
-  public constructor(private toolHttp: HttpService,
+  public constructor(private toolHttp: UploadService,
                      private _router: Router
         ) {
   }

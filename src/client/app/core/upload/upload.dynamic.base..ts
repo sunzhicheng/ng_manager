@@ -1,10 +1,10 @@
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
 import { Input } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 
 /**
  * 所有上传的基类  如图片 文件  等
@@ -34,7 +34,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
   }
 
 
-  afterUpload(uploadId: any) {
+  afterUpload(uploadId: any, file: any) {
     this.log('上传成功回调处理');
   }
   /**
@@ -68,11 +68,11 @@ export class UploadDynamicBaseComponent extends DynamicBase {
       const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
       PromptUtil.showLoad();
       this.isUploading = true;
-      this.toolHttp.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
+      this.toolUpload.filesAjax(parmFile, fileUrl, (result: any, t: any) => {
         if (result) {
           const token = result.token;
           this.isUploading = false;
-          if (this.toolHttp.isNotEx(token)) {
+          if (this.toolUpload.isNotEx(token)) {
             this.log('上传成功!');
             const uploadId = IUtils.getJson(result, 'attList[0].pt_id.open_id', '');
             this.file_arr.push(uploadId);
@@ -83,7 +83,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
               this.propagateTouched();
             }
             PromptUtil.hideLoad();
-            this.afterUpload(uploadId);
+            this.afterUpload(uploadId, parmFile[0]);
           }
         }
       }, this, this);
@@ -94,15 +94,36 @@ export class UploadDynamicBaseComponent extends DynamicBase {
     return this._config.canUploadCount > leng;
   }
   public constructor(
-    protected toolHttp: HttpService) {
+    protected toolUpload: UploadService) {
     super();
   }
 
-  delfile(imgId: any) {
-    this.log('delfile  : ' + imgId);
+  /**
+   * 用于其他删除处理的操作
+   * @param uploadId
+   */
+  delOther(uploadId: any) {
+    console.log('delOther 采用默认不处理');
+  }
+  /**
+   * 删除文件
+   * @param uploadId
+   */
+  delfile(uploadId: any) {
+    this.log('delfile  : ' + uploadId);
     _.remove(this.file_arr, (n: any) => {
-      return n === imgId;
+      return n === uploadId;
     });
+    if (uploadId) {
+      this.delOther(uploadId);
+    }
+  }
+  /**
+   * 用于初始化文件显示  图片默认不需要  文件需要请求接口获取文件名
+   * @param file_arr
+   */
+  initValue(file_arr: any) {
+    console.log('initValue 采用默认不处理');
   }
   /**
    * 给外部formControl写入数据
@@ -111,6 +132,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
   writeValue(value: any) {
     if (IUtils.isNotEmpty(value)) {
       this.file_arr = value.split(',');
+      this.initValue(this.file_arr);
     }
   }
 }

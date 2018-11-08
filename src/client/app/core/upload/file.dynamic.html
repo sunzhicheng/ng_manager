@@ -1,7 +1,7 @@
 <div class="file-upload-box" id="file_upload_{{ namekey }}">
     <ul>
-        <li *ngFor="let file of file_arr; let i = index;">
-            <span>{{ file }}</span><a href="" class="times"><span class="fa fa-times"></span></a>
+        <li *ngFor="let file of allFile; let i = index;">
+            <span><a (click)="getDownUrl(file)">{{ file.name }}</a></span><a (click)="delfile(file.id)" class="times"><span class="fa fa-times"></span></a>
         </li>
     </ul>
     <a class="btn btn-default" *ngIf="canUpload() && !isDisabled">点击上传<input type="file" (change)='uploadFile($event)'></a>

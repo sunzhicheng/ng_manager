@@ -1,11 +1,12 @@
 import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { HttpService } from './../../shared/idorp/service/HttpService';
-import { Component, OnInit, AfterViewInit, Input, Output, EventEmitter, forwardRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, Input, forwardRef, ViewChild } from '@angular/core';
 import { IDCONF } from '../../shared/idorp/config/app.config';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { DynamicBase } from '../dynamic.base';
 import { ImgCutComponent } from '../upload/img.cut';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 declare var KindEditor: any;
 declare var $: any;
 
@@ -61,7 +62,7 @@ export class KeEditorDynamicComponent   extends DynamicBase  implements AfterVie
 
 
   public constructor(protected toolGpb: GpbService,
-    protected toolHttp: HttpService) {
+    protected toolHttp: UploadService) {
     super();
   }
   getUploadId(uploadId: any) {

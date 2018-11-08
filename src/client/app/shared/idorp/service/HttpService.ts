@@ -1,6 +1,5 @@
 import { PromptUtil } from './../providers/PromptUtil';
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IUtils } from '../providers/IUtils';
@@ -16,14 +15,11 @@ declare let $: any;
     providedIn: 'root',
  })
 export class HttpService {
-    [x: string]: any;
-
     public apiHead = new HttpHeaders();
 
-    constructor(private http: HttpClient,
-        private localCache: LocalStorageCacheService,
-        private toolGpbService: GpbService,
-        private _router: Router) {
+    constructor(protected http: HttpClient,
+        protected localCache: LocalStorageCacheService,
+        protected toolGpbService: GpbService) {
         this.apiHead = this.apiHead.append('Content-Type', 'application/json; charset=utf-8');
         this.apiHead = this.apiHead.append('id-proto', 'base64');
     }
@@ -115,45 +111,6 @@ export class HttpService {
             });
         });
     }
-    /**
-   * 上传文件
-   * @param files
-   */
-    filesAjax(files: any, url: any, callback: any, target: any, t: any) {
-        const me = this;
-        this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
-            (protoMessage: any) => {
-                // FormData 对象
-                const form = new FormData();
-                for (const i in files) {
-                    form.append('file' + i, files[i]); // 文件对象
-                }
-                // XMLHttpRequest 对象
-                const xhr = new XMLHttpRequest();
-                xhr.open('post', url, true);
-                xhr.setRequestHeader('id-proto', 'base64');
-                xhr.setRequestHeader('id-token', this.getToken(url));
-                xhr.onreadystatechange = () => {
-                    if (xhr.readyState === 4) {
-                        if (callback) {
-                            // 过滤空字符,避免解析错误
-                            // const body = xhr.responseText.replace(/\s/g, '');
-                            const body = xhr.responseText;
-                            // console.log('ajaxJson2 response string : ', body);
-                            const result = me.toolGpbService.bas64ToProto(body, protoMessage);
-                            callback.call(target, result, t); //回调函数
-                        }
-                    }
-                };
-                xhr.send(form);
-            },
-            (error: any) => {
-                console.error(' 上传文件 错误 : ' + JSON.stringify(error));
-            }
-        );
-    }
-
-
     /**
      * 是否请求正常，正常返回 true, 异常返回 false
      * @param token 请求标识

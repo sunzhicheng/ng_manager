@@ -292,6 +292,9 @@ export class IUtils {
   }
 
   static getImgUrl(id: any) {
+    return IDCONF().api_file + '/idsys/idfileupload/loadimg/' + id;
+  }
+  static getFileUrl(id: any) {
     return IDCONF().api_file + '/idsys/idfileupload/load/' + id;
   }
   static compareArray(a: Array<String>, b: Array<String>) {

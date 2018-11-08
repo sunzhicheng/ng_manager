@@ -1,5 +1,5 @@
 import { Component, forwardRef } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { ImgDynamicBaseComponent } from './img.dynamic.base';
@@ -20,8 +20,8 @@ import { ImgDynamicBaseComponent } from './img.dynamic.base';
 
 export class ImgDynamicComponent extends ImgDynamicBaseComponent {
   public constructor(
-    protected toolHttp: HttpService) {
-    super(toolHttp);
+    protected toolUpload: UploadService) {
+    super(toolUpload);
   }
 
   public uploadImg(target: any) {
@@ -33,7 +33,7 @@ export class ImgDynamicComponent extends ImgDynamicBaseComponent {
     parmFile.push(file);
     this.upload(parmFile);
   }
-  afterUpload() {
+  afterUpload(uploadId: any, file: any) {
     // this.log('上传成功');
   }
 }

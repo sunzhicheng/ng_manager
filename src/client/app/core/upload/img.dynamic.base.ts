@@ -1,6 +1,6 @@
 import { IUtils } from './../../shared/idorp/providers/IUtils';
 import { Input } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 import * as _ from 'lodash';
 import { UploadDynamicBaseComponent } from './upload.dynamic.base.';
 
@@ -22,8 +22,8 @@ export class ImgDynamicBaseComponent extends UploadDynamicBaseComponent {
   }
 
   public constructor(
-    protected toolHttp: HttpService) {
-    super(toolHttp);
+    protected toolUpload: UploadService) {
+    super(toolUpload);
   }
 
   public get accept() {

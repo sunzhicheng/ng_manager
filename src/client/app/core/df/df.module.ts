@@ -7,7 +7,6 @@ import { DFControlService } from './df-control.service';
 import { DFItemComponent } from './df-item.component';
 import { DfFromComponent } from './df.component';
 import { UploadModule } from '../upload/upload.module';
-import { UploadVideoModule } from '../uploadvideo/uploadvideo.module';
 import { UploadAudioModule } from '../uploadaudio/uploadaudio.module';
 import { KeEditorDynamicComponent } from '../keditor/keEditor.dynamic';
 import { DatePickerDynamicComponent } from '../datepicker/datepicker.dynamic';
@@ -31,7 +30,6 @@ import { FileDynamicComponent } from '../upload/file.dynamic';
     ReactiveFormsModule,
     RouterModule,
     UploadModule,
-    UploadVideoModule,
     FormsModule, CustomFormsModule, Ng2TableModule,
     UploadAudioModule ],
   declarations: [

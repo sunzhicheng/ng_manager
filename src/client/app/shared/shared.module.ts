@@ -7,6 +7,7 @@ import { HttpService } from './idorp/service/HttpService';
 import { TreeService } from './idorp/service/TreeService';
 import { LocalStorageCacheService } from './idorp/cache/localstorage.service';
 import { SessionStorageCacheService } from './idorp/cache/sessionStorage.service';
+import { UploadService } from './idorp/service/UploadService';
 
 /**
  * Do not specify providers for modules that might be imported by a lazy loaded module.
@@ -21,6 +22,7 @@ export class SharedModule {
       ngModule: SharedModule,
       providers: [
         HttpService,
+        UploadService,
         GpbService,
         TreeService,
         LocalStorageCacheService,

@@ -224,21 +224,6 @@
     </div>
     </div>
 
-     <!--视频上传-->
-     <div  class="form-group" *ngSwitchCase="'fi_video'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
-      <label class="col-sm-2 control-label">{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>
-      <div class="col-sm-6">
-        <uploadvideo-app   (getId)="setIConImg($event)"
-                      [namekey]="'upload_iconId'" [img_id]="img_id" [item]="item"  ></uploadvideo-app>
-      </div>
-      <input  type="text" class="form-control" style="display: none;"
-              [formControlName]="item.key" [id]="item.key" >
-        <label *ngIf="item.desc" class="col-sm-4 control-label" style="color: red;text-align: left;">({{ item.desc }})</label>
-        <div class="col-lg-4" >
-          <i style="padding-top:7px;display:block;"   *ngIf="!isValid">{{ getErrorMsg() }}</i>
-      </div>
-    </div>
-
     <!--时分秒选择控件-->
     <div class="form-group" *ngSwitchCase="'fi_combodate'" [ngClass]="{'has-error':!isValid}" [hidden]="item.hidden">
       <label class="col-sm-2 control-label" >{{ item.label }}<font *ngIf="isRequire()" color="red">*</font>：</label>

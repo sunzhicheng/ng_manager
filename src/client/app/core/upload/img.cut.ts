@@ -12,7 +12,7 @@ declare const $: any;
 export class ImgCutComponent extends ImgCutDynamicComponent implements OnInit {
   @Output()
   public outUploadId: EventEmitter<any> = new EventEmitter();
-  afterUpload(uploadId: any) {
+  afterUpload(uploadId: any, file: any) {
     this.log('图片上传成功回调处理 uploadId : ' + uploadId);
     this.hideTailor();
     this.outUploadId.emit(uploadId);

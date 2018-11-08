@@ -1,5 +1,5 @@
 import { Component, forwardRef, OnInit } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { ImgDynamicBaseComponent } from './img.dynamic.base';
@@ -92,7 +92,7 @@ export class ImgCutDynamicComponent extends ImgDynamicBaseComponent implements O
     this.upload(parmFile);
   }
 
-  afterUpload(uploadId: any) {
+  afterUpload(uploadId: any, file: any) {
     this.hideTailor();
   }
 
@@ -116,8 +116,8 @@ export class ImgCutDynamicComponent extends ImgDynamicBaseComponent implements O
   }
 
   public constructor(
-     toolHttp: HttpService) {
-    super(toolHttp);
+     toolUpload: UploadService) {
+    super(toolUpload);
   }
   ngOnInit() {
     　　this.log('');

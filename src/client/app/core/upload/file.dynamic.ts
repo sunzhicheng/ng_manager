@@ -1,11 +1,9 @@
 
-import { Component, forwardRef, Input } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { Component, forwardRef } from '@angular/core';
+import { UploadService } from '../../shared/idorp/service/UploadService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { UploadDynamicBaseComponent } from './upload.dynamic.base.';
 
 /**
@@ -23,9 +21,10 @@ import { UploadDynamicBaseComponent } from './upload.dynamic.base.';
 })
 
 export class FileDynamicComponent extends UploadDynamicBaseComponent {
+  allFile: any = [];
   constructor(
-    protected toolHttp: HttpService) {
-    super(toolHttp);
+    protected toolUpload: UploadService) {
+    super(toolUpload);
   }
 
   public uploadFile(target: any) {
@@ -37,8 +36,45 @@ export class FileDynamicComponent extends UploadDynamicBaseComponent {
     parmFile.push(file);
     this.upload(parmFile);
   }
-  afterUpload() {
-    // this.log('上传成功');
+  /**
+   * 上传成功处理
+   * @param uploadId
+   * @param file
+   */
+  afterUpload(uploadId: any, file: any) {
+    console.log('uploadId', uploadId);
+    this.allFile.push({ id: uploadId, name: file.name });
+  }
+  /**
+   * 下载
+   * @param file
+   */
+  getDownUrl(file: any) {
+    const downUrl = IUtils.getFileUrl(file.id);
+    window.open(downUrl);
+  }
+  /**
+   * 删除文件
+   * @param uploadId
+   */
+  delOther(uploadId: any) {
+    _.remove(this.allFile, (n: any) => {
+      return n.id === uploadId;
+    });
+  }
+  /**
+   * 初始化值的处理
+   * @param file_arr
+   */
+  initValue(file_arr: any) {
+    this.toolUpload.fileDetail(file_arr).subscribe((result: any) => {
+      result.attList.forEach((att: any) => {
+        this.allFile.push({
+          id: _.get(att, 'pt_id.open_id'),
+          name: _.get(att, 'name')
+        });
+      });
+    });
   }
 
 }
