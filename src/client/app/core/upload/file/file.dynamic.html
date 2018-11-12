@@ -4,5 +4,14 @@
             <span><a (click)="getDownUrl(file)">{{ file.name }}</a></span><a (click)="delfile(file.id)" class="times"><span class="fa fa-times"></span></a>
         </li>
     </ul>
-    <a class="btn btn-default" *ngIf="canUpload() && !isDisabled">点击上传<input type="file" (change)='uploadFile($event)'></a>
+    <div class="row" *ngIf="isUploading">
+        <div class="col-xs-4">
+            <div class="progress progress-sm progress-striped active">
+                <div class="progress-bar progress-bar-info" data-toggle="tooltip"
+                    [attr.data-original-title]="progress()"
+                    [style.width]="progress()"></div>
+            </div>
+        </div>
+    </div>
+    <a class="btn btn-default" *ngIf="canUpload() && !isDisabled" [ngClass]="{'disabled': isUploading}">点击上传<input type="file" [disabled]="isUploading" (change)='uploadFile($event)'></a>
 </div>

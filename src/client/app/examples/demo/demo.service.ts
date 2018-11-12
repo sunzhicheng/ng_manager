@@ -341,7 +341,7 @@ export class DemoService extends DyBaseService {
               key: 'demo_upload_file',
               label: '上传文件(fi_file)',
               config: {
-                fileSize : 5 * 1024,  //单位KB    默认5M  可以不写
+                fileSize : 100 * 1024,  //单位KB    默认5M  可以不写
                 canUploadCount: 4,  //限制图片的数目  默认为1  可以不写
               },
               desc: 'canUploadCount表示最多上传几个文件 默认是1  '

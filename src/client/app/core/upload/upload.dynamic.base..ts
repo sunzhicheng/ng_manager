@@ -11,7 +11,7 @@ import { UploadService } from '../../shared/idorp/service/UploadService';
 export class UploadDynamicBaseComponent extends DynamicBase {
   file_arr: any = []; //存放id 的数组
   initFlag = false; //标识初始化是否结束
-
+  percentage: any = 0; //上传文件进度
   //是否正在上传服务器
   isUploading = false;
   //支持的文件类型
@@ -31,7 +31,9 @@ export class UploadDynamicBaseComponent extends DynamicBase {
       IUtils.mergeAFromB(this._config, values, {});
     }
   }
-
+  beforeUpload() {
+    this.log('上传接口之前处理');
+  }
 
   afterUpload(uploadId: any, file: any) {
     this.log('上传成功回调处理');
@@ -63,10 +65,15 @@ export class UploadDynamicBaseComponent extends DynamicBase {
       return;
     }
     const checked = this.checkSize(parmFile, this._config.fileSize);
+    this.beforeUpload();
     if (checked) {
       PromptUtil.showLoad();
       this.isUploading = true;
-      this.toolUpload.filesAjax(parmFile).subscribe((result: any) => {
+      this.toolUpload.filesAjax(parmFile, (evt: any) => {
+        if (evt.lengthComputable) { //计算完成百分比
+          this.percentage = Math.round(evt.loaded / evt.total * 100);
+        }
+      }).subscribe((result: any) => {
         if (result) {
           const token = result.token;
           this.isUploading = false;
@@ -80,7 +87,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
             if (this.propagateTouched) {
               this.propagateTouched();
             }
-            PromptUtil.hideLoad();
+            this.percentage = 0;
             this.afterUpload(uploadId, parmFile[0]);
           }
         }

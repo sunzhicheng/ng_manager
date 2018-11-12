@@ -24,9 +24,9 @@ export class UploadService extends HttpService {
    * 上传文件
    * @param files
    */
-    filesAjax(files: any): Observable<any> {
+    filesAjax(files: any, progress?: any): Observable<any> {
         return Observable.create((observer: any) => {
-            const fileUrl = IDCONF().api_file + '/idsys/idfileupload/upload';
+            const fileUrl = IDCONF().api_file + '/idsys/idfileupload/uploadweb';
             this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
                 (protoMessage: any) => {
                     // FormData 对象
@@ -46,6 +46,9 @@ export class UploadService extends HttpService {
                             observer.next(result);
                         }
                     };
+                    if (progress) {
+                        xhr.upload.onprogress = progress; //【上传进度调用方法实现】
+                    }
                     xhr.send(form);
                 },
                 (error: any) => {

@@ -35,6 +35,9 @@ export class FileDynamicComponent extends UploadDynamicBaseComponent {
     parmFile.push(file);
     this.upload(parmFile);
   }
+  beforeUpload() {
+    this.log('');
+  }
   /**
    * 上传成功处理
    * @param uploadId
@@ -43,6 +46,10 @@ export class FileDynamicComponent extends UploadDynamicBaseComponent {
   afterUpload(uploadId: any, file: any) {
     console.log('uploadId', uploadId);
     this.allFile.push({ id: uploadId, name: file.name });
+  }
+
+  progress() {
+    return this.percentage + '%';
   }
   /**
    * 下载
