@@ -1,5 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, DoCheck } from '@angular/core';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 
 const _ = require('lodash');
 
@@ -95,7 +95,7 @@ export class NgStaticTableComponent implements OnInit, OnChanges {
   };
   @Input()
   public set opt_config(values: any) {
-    IUtils.mergeAFromB(this.optConfig, values, {});
+    IdTool.mergeAFromB(this.optConfig, values, {});
   }
 
   ngOnInit() {

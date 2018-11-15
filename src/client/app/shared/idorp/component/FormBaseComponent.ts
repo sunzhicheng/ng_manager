@@ -3,8 +3,8 @@ import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
 import { ViewChild, OnInit, ElementRef } from '@angular/core';
 import { FormFormComponent } from '../../../core/f-table/f-form.component';
-import { IUtils } from '../providers/IUtils';
-import { FormUtils } from '../providers/FormUtils';
+import { IdTool } from '../../tool/IdTool';
+import { ToolForm } from '../../tool/ToolForm';
 declare const $: any;
 /**
  *  表单组件基类
@@ -199,7 +199,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     resetFormData() {
         if (this.proto) {
             const form = this.fform.getDyFormComp();
-            let jsonFormData = IUtils.json2FromData(this.proto);
+            let jsonFormData = IdTool.json2FromData(this.proto);
             jsonFormData = this.afterLoad(jsonFormData);
             if (!jsonFormData) {
                 console.warn('IdorpFormComponent.afterLoad: 返回的数据映射对象为空,请添加返回值');
@@ -219,12 +219,12 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
    */
     bindFormDateOptList(optList: any, key: any) {
         if (this.fform) {
-            FormUtils.bindFormDateOptList(this.fform.getDyFormComp(), this.formData, optList, key);
+            ToolForm.bindFormDateOptList(this.fform.getDyFormComp(), this.formData, optList, key);
         }
     }
     setItemValueByJson(json: any) {
         if (this.fform) {
-            FormUtils.setItemValueByJson(this.fform.getDyFormComp(), this.formData, json);
+            ToolForm.setItemValueByJson(this.fform.getDyFormComp(), this.formData, json);
         }
     }
     /**
@@ -234,7 +234,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * @param isRefresh 是否自动刷新表单  默认不刷新
      */
     addItemList(items: any, afterKey: String) {
-        FormUtils.addItemList(this.formData, items, afterKey);
+        ToolForm.addItemList(this.formData, items, afterKey);
     }
     /**
      * 向表单对象动态删除tiem
@@ -242,13 +242,13 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * @param isRefresh 是否自动刷新表单 默认不刷新
      */
     delItemList(keyArr: any) {
-        FormUtils.delItemList(this.formData, keyArr);
+        ToolForm.delItemList(this.formData, keyArr);
     }
     updateRules(keyArr: any, rule: any, isAdd: boolean = true) {
-        FormUtils.updateRules(this.formData, keyArr, rule, isAdd);
+        ToolForm.updateRules(this.formData, keyArr, rule, isAdd);
     }
     clearRules(keyArr: any) {
-        FormUtils.clearRules(this.formData, keyArr);
+        ToolForm.clearRules(this.formData, keyArr);
     }
     /**
     * 修改的时候  向动态表单中添加disabled属性
@@ -256,7 +256,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     * @param key
     */
     addDisabledList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addDisabledList(this.formData, keyArr, opt, dealOther);
+        ToolForm.addDisabledList(this.formData, keyArr, opt, dealOther);
     }
     /**
      * 动态设置校验规则
@@ -266,7 +266,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      */
     addRequiredRules(formData: any, key: any, isAdd: boolean = true) {
         if (formData) {
-            FormUtils.updateRules(formData, [key], {
+            ToolForm.updateRules(formData, [key], {
                 name: 'required',
                 errorMsg: '必填'
             }, isAdd);
@@ -274,7 +274,7 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
     }
 
     addHiddenList(keyArr: any, opt: boolean = true) {
-        FormUtils.addHiddenList(this.formData, keyArr, opt);
+        ToolForm.addHiddenList(this.formData, keyArr, opt);
     }
 
     /** ****************************************需要手动刷新的方法 end************************************/
@@ -287,23 +287,23 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      */
     setNullByKey(key: any) {
         if (this.fform) {
-            FormUtils.setNullByKey(this.fform.getDyFormComp(), key);
+            ToolForm.setNullByKey(this.fform.getDyFormComp(), key);
         }
     }
     addHiddenButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addHiddenButtonList(this.formData, keyArr, opt, dealOther);
+        ToolForm.addHiddenButtonList(this.formData, keyArr, opt, dealOther);
     }
     addDisabledButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addDisabledButtonList(this.formData, keyArr, opt, dealOther);
+        ToolForm.addDisabledButtonList(this.formData, keyArr, opt, dealOther);
     }
     getButtonKeyDisabledStatus(key: any) {
-        return FormUtils.getButtonKeyStatus(this.formData, key);
+        return ToolForm.getButtonKeyStatus(this.formData, key);
     }
     getButtonKeyHiddenStatus(key: any) {
-        return FormUtils.getButtonKeyStatus(this.formData, key, 'hidden');
+        return ToolForm.getButtonKeyStatus(this.formData, key, 'hidden');
     }
     addButtonList(items: any, afterKey: String) {
-        FormUtils.addButtonList(this.formData, items, afterKey);
+        ToolForm.addButtonList(this.formData, items, afterKey);
     }
     /******************************************不需要手动刷新的方法 end************************************/
 
@@ -312,20 +312,20 @@ export abstract class FormBaseComponent extends BaseComponent implements OnInit 
      * item 变动  手动刷新表单
      */
     refreshItem() {
-        FormUtils.refreshItem(this.fform.dy_form, this.formData);
+        ToolForm.refreshItem(this.fform.dy_form, this.formData);
     }
     refreshForm() {
-        FormUtils.refreshForm(this.fform, this.formData);
+        ToolForm.refreshForm(this.fform, this.formData);
     }
     refreshRule() {
         if (this.fform && this.fform.dy_form) {
-            FormUtils.refreshRule(this.fform.dy_form, this.formData);
+            ToolForm.refreshRule(this.fform.dy_form, this.formData);
         }
     }
 
     updateFilterJson(formData: any, key: any, filterJson: any) {
         if (formData) {
-            FormUtils.updateFilterJson(formData, key, filterJson);
+            ToolForm.updateFilterJson(formData, key, filterJson);
         }
     }
 

@@ -2,12 +2,12 @@ import { Router } from '@angular/router';
 import * as _ from 'lodash';
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { Input } from '@angular/core';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { Output, EventEmitter } from '@angular/core';
 import { DoCheck } from '@angular/core';
 
 export class ModalBaseComponent extends BaseComponent implements DoCheck {
-    name_key = IUtils.uuid();
+    name_key = IdTool.uuid();
     protoEntry: any;
     pager: any;
     oldFilterJson: any;
@@ -21,7 +21,7 @@ export class ModalBaseComponent extends BaseComponent implements DoCheck {
   };
   @Input()
   public set config(values: any) {
-    IUtils.mergeAFromB(this._config, values, {});
+    IdTool.mergeAFromB(this._config, values, {});
   }
     @Output()
     public valueOut: EventEmitter<any> = new EventEmitter();

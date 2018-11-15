@@ -1,4 +1,4 @@
-import { IDCONF } from './../config/app.config';
+import { IDCONF } from '../idorp/config/app.config';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 
@@ -10,7 +10,7 @@ import * as _ from 'lodash';
  * @description
  */
 @Injectable()
-export class IUtils {
+export class IdTool {
 
   /**
    * 每次调用sequence加1
@@ -37,7 +37,7 @@ export class IUtils {
    * @param value 对像
    */
   static isNotEmpty(value: any): boolean {
-    return !IUtils.isEmpty(value);
+    return !IdTool.isEmpty(value);
   }
 
   /**
@@ -54,7 +54,7 @@ export class IUtils {
    * @param value 对像
    */
   static isNotEmptyArray(value: any): boolean {
-    return !IUtils.isEmptyArray(value);
+    return !IdTool.isEmptyArray(value);
   }
 
   /**
@@ -75,7 +75,7 @@ export class IUtils {
  * @param object 对像
  */
   static isNotEmptyObject(object: any): boolean {
-    return !IUtils.isEmptyObject(object);
+    return !IdTool.isEmptyObject(object);
   }
 
   /**
@@ -302,10 +302,42 @@ export class IUtils {
   }
   static compareArrayAndString(a: Array<String>, b: String) {
     const bArr = b.split(',');
-    return IUtils.compareArray(a, bArr);
+    return IdTool.compareArray(a, bArr);
+  }
+  /**
+     * 从协议 map 对像中取值
+     * @param protoMap proto map 对像
+     * @param key map key
+     */
+    public static getMapValue(protoMap: any, key: any) {
+      if (!protoMap || !protoMap.length
+          || protoMap.length <= 0 || !key) {
+          return;
+      }
+      const len = protoMap.length;
+      let obj;
+      for (let j = 0; j < len; j++) {
+          obj = protoMap[j];
+          if (obj && obj.key === key) {
+              return obj.value;
+          }
+      }
   }
 
-
+  /**
+     * 生成指定长度随机字符串
+     * @param len 长度
+     */
+    public static randomString (len = 5) {
+      len = len || 32;
+      const $chars = 'ABCDEFGHJKMNPQRSTWXYZabcdefhijkmnprstwxyz2345678';
+      const maxPos = $chars.length;
+      let pwd = '';
+      for (let i = 0; i < len; i++) {
+          pwd += $chars.charAt(Math.floor(Math.random() * maxPos));
+      }
+      return pwd;
+  }
 
   /**
    * 添加查询参数

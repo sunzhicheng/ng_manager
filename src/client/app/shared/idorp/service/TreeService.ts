@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { IUtils } from '../providers/IUtils';
+import { IdTool } from '../../tool/IdTool';
 import { DyBaseService } from './IdBaseService';
 import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';
@@ -66,7 +66,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 let isChecked = false;
-                const uuid = IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -84,9 +84,9 @@ export class TreeService extends DyBaseService {
     proto2Node(proto: any, pId: any, isOpen: boolean = true, isChecked: boolean = false) {
         const subList = _.get(proto, this.sub_key || 'sub_list');
         const node = {
-            id: IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+            id: IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
             pId: pId,
-            name: IUtils.getJson(proto, this.name_key || 'name', ''),
+            name: IdTool.getJson(proto, this.name_key || 'name', ''),
             isParent: subList && subList.length > 0 ? true : false,
             open: isOpen,
             checked: isChecked,
@@ -103,7 +103,7 @@ export class TreeService extends DyBaseService {
             for (const i in superItem[this.sub_key || 'sub_list']) {
                 const proto: any = superItem[this.sub_key || 'sub_list'][i];
                 let isChecked = false;
-                const uuid = IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -112,7 +112,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 const node = this.proto2Node(proto,
-                    IUtils.getJson(superItem, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                    IdTool.getJson(superItem, this.uuid_key || 'dtc.pt_id.open_id', ''),
                     isOpen, isChecked);
                 tree_arr.push(node);
                 this.getSubNode(proto, tree_arr, openIndex, index + 1);
@@ -141,9 +141,9 @@ export class TreeService extends DyBaseService {
         if (proto) {
             this.checkProto(proto);
             const node = {
-                id: IUtils.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
-                pId: IUtils.getJson(proto, this.parent_key || 'parent_id', ''),
-                name: IUtils.getJson(proto, this.name_key || 'name', ''),
+                id: IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                pId: IdTool.getJson(proto, this.parent_key || 'parent_id', ''),
+                name: IdTool.getJson(proto, this.name_key || 'name', ''),
                 isParent: true,
             };
             return node;

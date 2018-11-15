@@ -1,5 +1,5 @@
-import { PromptUtil } from './../../shared/idorp/providers/PromptUtil';
-import { IUtils } from './../../shared/idorp/providers/IUtils';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
+import { IdTool } from '../../shared/tool/IdTool';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
@@ -166,7 +166,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
         }
       }
     } else {
-      PromptUtil.waring('用户没有配置菜单');
+      ToolAlert.waring('用户没有配置菜单');
       history.back();
     }
   }
@@ -193,7 +193,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
    * @param isRefresh
    */
   toPage(menu: any, isRefresh: any = false) {
-    if (IUtils.isNotEmpty(menu.href)) {
+    if (IdTool.isNotEmpty(menu.href)) {
       this.activeMenu = menu;
       if (!isRefresh) {
         this.sessionCache.setActiveMenu(menu.href);
@@ -234,7 +234,7 @@ export class SidebarComponent extends BaseComponent implements OnInit {
     }
   }
   getClass(menu: any) {
-    if (IUtils.isNotEmpty(menu.icon)) {
+    if (IdTool.isNotEmpty(menu.icon)) {
       return menu.icon;
     } else {
       return 'fa fa-angle-right';

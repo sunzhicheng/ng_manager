@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 
 declare let $: any;
@@ -30,7 +30,7 @@ export class NgTableComponent implements OnInit, OnChanges {
   };
   @Input()
   public set config(values: any) {
-    IUtils.mergeAFromB(this._config, values, {});
+    IdTool.mergeAFromB(this._config, values, {});
   }
 
   optConfig: any = {
@@ -61,7 +61,7 @@ export class NgTableComponent implements OnInit, OnChanges {
   };
   @Input()
   public set opt_config(values: any) {
-    IUtils.mergeAFromB(this.optConfig, values, {});
+    IdTool.mergeAFromB(this.optConfig, values, {});
   }
 
 

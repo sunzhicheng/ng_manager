@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 declare function $(filter: string): void;
 
 @Injectable()
-export class PromptUtil {
+export class ToolAlert {
   static showLoad() {
     const load: any = $('.load');
     load.show();

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 
 import { FormTableComponent } from '../f-table/f-table.component';
 import { TreeAlertComponent } from '../tree/tree.alert';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 
 /**
  * This class represents the lazy loaded HomeComponent.
@@ -27,7 +27,7 @@ export class TreeTableComponent implements OnInit {
 
   @Input()
   public set config(values: any) {
-      IUtils.coverAFromB(this._config, values);
+      IdTool.coverAFromB(this._config, values);
   }
 
   @Input()

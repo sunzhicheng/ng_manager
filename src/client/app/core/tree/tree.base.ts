@@ -1,12 +1,12 @@
 import {
   EventEmitter, Input, Output, OnChanges, SimpleChanges,
-  ViewChild, ElementRef, ChangeDetectionStrategy, Component
+  ViewChild, ElementRef
 } from '@angular/core';
 import { DfFromComponent } from '../df/df.component';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { IdTool } from '../../shared/tool/IdTool';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import * as _ from 'lodash';
-import { FormUtils } from '../../shared/idorp/providers/FormUtils';
+import { ToolForm } from '../../shared/tool/ToolForm';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 import { TreeService } from '../../shared/idorp/service/TreeService';
@@ -21,7 +21,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
   @ViewChild('form')
   public form: DfFromComponent;
 
-  treeId: any = IUtils.uuid();
+  treeId: any = IdTool.uuid();
   @Output()
   public formSubmited: EventEmitter<any> = new EventEmitter();
 
@@ -141,7 +141,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
   @Input()
   public set config(values: any) {
     if (values) {
-      IUtils.mergeAFromB(this._config, values, {});
+      IdTool.mergeAFromB(this._config, values, {});
       this.base_setting.async.enable = this._config.async;
       this.configInit = true;
     }
@@ -149,7 +149,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
 
   @Input()
   public set tree_button_setting(values: any) {
-    IUtils.mergeAFromB(this._tree_button_setting, values, {});
+    IdTool.mergeAFromB(this._tree_button_setting, values, {});
     this.base_setting.check.enable = this._tree_button_setting.check ? true : false;
     this.setInit = true;
   }
@@ -159,7 +159,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
    */
   @Input()
   public set async_config(values: any) {
-    IUtils.mergeAFromB(this._async_config, values, {});
+    IdTool.mergeAFromB(this._async_config, values, {});
     if (this._config.async) {
       this._async_config.enable = true;
       this._async_config.url = IDCONF().api_base + this._async_config.requestUrl;
@@ -431,7 +431,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     const fd = JSON.parse(JSON.stringify(this.oringin_treeFormData));
     //增加自定义item 规则
     this.filterItem.emit({ opt: 'add', node: treeNode, formData: fd });
-    FormUtils.refreshItem(this.form, fd);
+    ToolForm.refreshItem(this.form, fd);
     //清楚之前的表单数据
     this.form.toDefault();
     this.add_parentNode = treeNode;
@@ -442,13 +442,13 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     this.current_edit = treeNode;
     const fd = JSON.parse(JSON.stringify(this.oringin_treeFormData));
     this.filterItem.emit({ opt: 'update', node: this.current_edit, formData: fd });
-    FormUtils.refreshItem(this.form, fd);
+    ToolForm.refreshItem(this.form, fd);
     //查询详情
     this.treeDetailed.emit(treeNode);
   }
 
   public deleteClick(treeNode: any) {
-    PromptUtil.confirm('确认要删除嘛？', () => {
+    ToolAlert.confirm('确认要删除嘛？', () => {
       this.current_del = treeNode;
       this.treeDeleted.emit(treeNode);
     });

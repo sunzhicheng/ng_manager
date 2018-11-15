@@ -1,7 +1,7 @@
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { TreeAlertComponent } from '../tree/tree.alert';
 declare const $: any;
 
@@ -30,7 +30,7 @@ export class ModalTreeComponent extends BaseComponent implements OnInit {
 
     @Input()
     public set modal_config(values: any) {
-      IUtils.mergeAFromB(this._tree_config, values, {});
+      IdTool.mergeAFromB(this._tree_config, values, {});
     }
 
     @Input()
@@ -38,7 +38,7 @@ export class ModalTreeComponent extends BaseComponent implements OnInit {
     @Output()
     public selectOut: EventEmitter<any> = new EventEmitter();
 
-    name_key = IUtils.uuid();
+    name_key = IdTool.uuid();
     constructor(
         protected _router: Router,
         private route: ActivatedRoute,

@@ -3,7 +3,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { LoginService } from '../../idsys/login/login.service';
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 declare const $: any;
 
@@ -63,9 +63,9 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
           this.loginService.loginByTokenInvaild(sysUserEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               if (protoMsg.token && protoMsg.token.ex) {
-                let errorMsg = IUtils.getJson(protoMsg.token, 'ex.ex_short_msg');
+                let errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_short_msg');
                 if (!errorMsg) {
-                     errorMsg = IUtils.getJson(protoMsg.token, 'ex.ex_tips');
+                     errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_tips');
                 }
                 this.errorMessage = errorMsg;
               } else {

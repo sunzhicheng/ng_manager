@@ -1,9 +1,5 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, forwardRef } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from '../../shared/idorp/service/HttpService';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, Input, AfterViewInit, forwardRef } from '@angular/core';
 
 declare let $: any;
 

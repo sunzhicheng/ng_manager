@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { IUtils } from '../providers/IUtils';
-import { DfFromComponent } from '../../../core/df/df.component';
+import { IdTool } from './IdTool';
+import { DfFromComponent } from '../../core/df/df.component';
 import * as _ from 'lodash';
-import { FormFormComponent } from '../../../core/f-table/f-form.component';
+import { FormFormComponent } from '../../core/f-table/f-form.component';
 
 // declare let protobuf: any;
 
@@ -10,7 +10,7 @@ import { FormFormComponent } from '../../../core/f-table/f-form.component';
  * 表单处理service
  */
 @Injectable()
-export class FormUtils {
+export class ToolForm {
     static authDfFrom(form: DfFromComponent) {
         if (!form) {
             console.error('必要参数:form为空   form: ' + form ? JSON.stringify(form) : 'null');
@@ -32,7 +32,7 @@ export class FormUtils {
         if (!this.authFromData(formData)) {
             return;
         }
-        let item_list = IUtils.getJson(formData, 'row_list[0].item_list', null);
+        let item_list = IdTool.getJson(formData, 'row_list[0].item_list', null);
         if (!item_list) {
             item_list = [];
         }
@@ -42,7 +42,7 @@ export class FormUtils {
         if (!this.authFromData(formData)) {
             return;
         }
-        let item_list = IUtils.getJson(formData, 'row_list[1].item_list', null);
+        let item_list = IdTool.getJson(formData, 'row_list[1].item_list', null);
         if (!item_list) {
             item_list = [];
         }
@@ -60,7 +60,7 @@ export class FormUtils {
             return;
         }
         let item_list: any[] = [];
-        item_list = IUtils.getJson(formData, 'row_list[0].item_list', null);
+        item_list = IdTool.getJson(formData, 'row_list[0].item_list', null);
         if (item_list) {
             item_list.forEach(e => {
                 if (e.key === key) {
@@ -244,7 +244,7 @@ export class FormUtils {
             for (let i = 0; i < itemList.length; i++) {
                 const item = itemList[i];
                 if (item.hasOwnProperty('key') && afterKey === item.key) {
-                    formData.row_list[1].item_list = IUtils.addInArray(itemList, items, i);
+                    formData.row_list[1].item_list = IdTool.addInArray(itemList, items, i);
                 }
             }
         }
@@ -264,7 +264,7 @@ export class FormUtils {
             for (let i = 0; i < itemList.length; i++) {
                 const item = itemList[i];
                 if (item.hasOwnProperty('key') && afterKey === item.key) {
-                    formData.row_list[0].item_list = IUtils.addInArray(itemList, items, i);
+                    formData.row_list[0].item_list = IdTool.addInArray(itemList, items, i);
                 }
             }
         }

@@ -4,7 +4,7 @@ import { DemoService } from './demo.service';
 import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
 import { SysEvent } from '../../shared/idorp/event/sys.event';
 import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 
 
 
@@ -68,7 +68,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
    * @param protoEntry 接口返回的协议对象
    */
   afterSave(protoEntry: any) {
-    PromptUtil.success('afterSave: 表单验证通过');
+    ToolAlert.success('afterSave: 表单验证通过');
     return protoEntry;
   }
   /**
@@ -76,7 +76,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
    * @param data
    */
   formCheck(data: any): boolean {
-    PromptUtil.success('formCheck: 表单验证通过');
+    ToolAlert.success('formCheck: 表单验证通过');
     return true;
   }
   /**

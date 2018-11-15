@@ -2,9 +2,9 @@ import { Component, EventEmitter, Input, OnInit, Output, ViewChildren, QueryList
 import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
 import * as _ from 'lodash';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { DFItemComponent } from './df-item.component';
-import { FormUtils } from '../../shared/idorp/providers/FormUtils';
+import { ToolForm } from '../../shared/tool/ToolForm';
 declare let $: any;
 
 
@@ -86,7 +86,7 @@ export class DfFromComponent implements OnInit {
     const item_list = _.get(this.formData, 'row_list[0].item_list', null);
     if (item_list) {
       item_list.forEach((item: any) => {
-        if (!json.hasOwnProperty(item.key) || IUtils.isEmptyArray(json[item.key])) {
+        if (!json.hasOwnProperty(item.key) || IdTool.isEmptyArray(json[item.key])) {
           if (item.type === 'number' || item.type === 'int' || item.type === 'long' ||
             item.type === 'sec' || item.type === 'min' || item.type === 'hour') {
             json[item.key] = 0;
@@ -116,7 +116,7 @@ export class DfFromComponent implements OnInit {
     if (this.form) {
       const values = this.form.getRawValue();
       this.formData = fd;
-      FormUtils.getItemList(this.formData).forEach((item: any) => {
+      ToolForm.getItemList(this.formData).forEach((item: any) => {
         if (item.hidden) {
           this.form.removeControl(item.key);
         } else {
@@ -180,7 +180,7 @@ export class DfFromComponent implements OnInit {
   refreshRules(fd: any) {
     if (this.form) {
       this.formData = fd;
-      FormUtils.getItemList(this.formData).forEach((item: any) => {
+      ToolForm.getItemList(this.formData).forEach((item: any) => {
         if (item.rules) {
           if (this.form.get(item.key)) {
             const gz: any = [];

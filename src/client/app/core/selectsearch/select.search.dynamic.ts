@@ -1,8 +1,5 @@
-import { IUtils } from './../../shared/idorp/providers/IUtils';
-import { HttpService } from './../../shared/idorp/service/HttpService';
-import { Component, OnInit, AfterViewInit, Input, OnChanges, Output, EventEmitter, forwardRef } from '@angular/core';
-import { IDCONF } from '../../shared/idorp/config/app.config';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Component, AfterViewInit, Input, forwardRef } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 declare const $: any;

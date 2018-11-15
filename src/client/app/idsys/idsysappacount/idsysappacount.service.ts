@@ -7,7 +7,7 @@ import { BASE_URL_GEN } from '../../shared/idorp/config/env.config';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 
 /**
  * 系统模块 运营管理人员 服务类
@@ -228,7 +228,7 @@ export class IdSysAppAcountService extends DyBaseService {
        (protoMessage: any) => {
          const optProto = protoMessage.create(this.entryInit);
          if (filterData) {
-             IUtils.bindQueryData(optProto, filterData);
+             IdTool.bindQueryData(optProto, filterData);
          }
          this.log(' userType initOptList query  : ' + JSON.stringify(optProto));
          this.listOpt(optProto, protoMessage).subscribe(
@@ -239,10 +239,10 @@ export class IdSysAppAcountService extends DyBaseService {
                  for ( let i = 0; i < protoMsg.proto_list.length; i++) {
                    proto_list.push({
                      key: {
-                       l_id: IUtils.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
+                       l_id: IdTool.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
                      },
                      value: {
-                       open_id: IUtils.getJson(protoMsg.proto_list[i], 'username', '')
+                       open_id: IdTool.getJson(protoMsg.proto_list[i], 'username', '')
                      }
                    });
                  }

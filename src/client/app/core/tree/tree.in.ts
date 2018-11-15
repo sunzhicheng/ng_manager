@@ -1,5 +1,5 @@
 import { Component, ElementRef } from '@angular/core';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { TreeService } from '../../shared/idorp/service/TreeService';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 import { TreeComponent } from './tree.base';
@@ -32,7 +32,7 @@ export class TreeInComponent extends TreeComponent {
     }
   }
   afterSubmit() {
-    PromptUtil._success();
+    ToolAlert._success();
   }
   public toForm(parentNode: any) {
     this.log('');

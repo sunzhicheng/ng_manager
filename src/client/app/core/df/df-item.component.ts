@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import _ from 'lodash';
 import { Router } from '@angular/router';
 import { SessionStorageCacheService } from '../../shared/idorp/cache/sessionStorage.service';
@@ -75,7 +75,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
   }
 
   isEmpty(v: any) {
-    return IUtils.isEmpty(v) || v === '0' || v === 0;
+    return IdTool.isEmpty(v) || v === '0' || v === 0;
   }
   get isValid() {
     if (this.form.controls[this.item.key] && this.form.controls[this.item.key].touched) {

@@ -1,4 +1,4 @@
-import { IUtils } from '../../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../../shared/tool/IdTool';
 import { Input } from '@angular/core';
 import { UploadService } from '../../../shared/idorp/service/UploadService';
 import * as _ from 'lodash';
@@ -46,7 +46,7 @@ export class ImgDynamicBaseComponent extends UploadDynamicBaseComponent {
    */
   showEnlargeImg(img: any) {
     if (img) {
-      this.enlargeImg = IUtils.getImgUrl(img);
+      this.enlargeImg = IdTool.getImgUrl(img);
       (<any>$('#img_enlarge_' + this.namekey)).modal('show');
     }
   }
@@ -113,7 +113,7 @@ export class ImgDynamicBaseComponent extends UploadDynamicBaseComponent {
     if (imgId.indexOf('loading') !== -1) {
       return 'assets/images/loading_400.gif';
     } else {
-      return IUtils.getImgUrl(imgId);
+      return IdTool.getImgUrl(imgId);
     }
   }
 }

@@ -1,7 +1,7 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { PromptUtil } from '../idorp/providers/PromptUtil';
+import { ToolAlert } from './ToolAlert';
 import { LocalStorageCacheService } from '../idorp/cache/localstorage.service';
 import { PLATFORM } from '../idorp/config/app.config';
 
@@ -40,7 +40,7 @@ export class AuthAvtivate implements CanActivate {
               });
             }
             if (!isHasPermission) {
-                PromptUtil.error('访问的路径没有权限');
+                ToolAlert.error('访问的路径没有权限');
                 this.router.navigateByUrl('/');
             }
             return isHasPermission;

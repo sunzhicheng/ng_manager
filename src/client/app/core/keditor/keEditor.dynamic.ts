@@ -1,4 +1,4 @@
-import { IUtils } from './../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from './../../shared/idorp/service/HttpService';
 import { Component, AfterViewInit, Input, forwardRef, ViewChild } from '@angular/core';
 import { IDCONF } from '../../shared/idorp/config/app.config';
@@ -53,7 +53,7 @@ export class KeEditorDynamicComponent extends DynamicBase implements AfterViewIn
   @Input()
   public set config(values: any) {
     if (values) {
-      IUtils.mergeAFromB(this._config, values, {});
+      IdTool.mergeAFromB(this._config, values, {});
     }
   }
 
@@ -67,7 +67,7 @@ export class KeEditorDynamicComponent extends DynamicBase implements AfterViewIn
   }
   getUploadId(uploadId: any) {
     if (this.dom) {
-      this.dom.insertHtml(`<img  src="` + IUtils.getImgUrl(uploadId) + `" />`);
+      this.dom.insertHtml(`<img  src="` + IdTool.getImgUrl(uploadId) + `" />`);
     }
   }
   ngAfterViewInit() {
@@ -130,7 +130,7 @@ export class KeEditorDynamicComponent extends DynamicBase implements AfterViewIn
       if (this.toolUpload.isNotEx(result)) {
         const att = result.attList[0];
         data = {
-          url: IUtils.getImgUrl(att.pt_id.open_id),
+          url: IdTool.getImgUrl(att.pt_id.open_id),
           error: 0,
           message: '上传成功'
         };
@@ -147,7 +147,7 @@ export class KeEditorDynamicComponent extends DynamicBase implements AfterViewIn
    * @param {*} value
    */
   writeV(value: any) {
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.inV.push(value);
     } else {
       this.inV.push('');

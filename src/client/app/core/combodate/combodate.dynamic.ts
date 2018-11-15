@@ -1,9 +1,6 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, forwardRef, OnChanges } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from '../../shared/idorp/service/HttpService';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, Input, AfterViewInit, forwardRef } from '@angular/core';
+import { IdTool } from '../../shared/tool/IdTool';
 import { DynamicBase } from '../dynamic.base';
 
 declare let $: any;
@@ -69,7 +66,7 @@ export class CombodateDynamicComponent  extends DynamicBase  implements AfterVie
    * @param {*} value
    */
   writeV(value: any) {
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       // this.stringTime = IUtils.dateFormat(new Date(value), this.format);
       // if (this.combodate) {
       //   this.combodate.setValue('06:30');

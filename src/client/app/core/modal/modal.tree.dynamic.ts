@@ -1,13 +1,12 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { Component, OnInit, Input, ViewChild, EventEmitter, Output, forwardRef, DoCheck } from '@angular/core';
+import { Component, OnInit, Input, forwardRef, DoCheck } from '@angular/core';
 import { HttpService } from '../../shared/idorp/service/HttpService';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import { TreeService } from '../../shared/idorp/service/TreeService';
-import { join } from 'path';
 
 declare let $: any;
 
@@ -53,7 +52,7 @@ declare let $: any;
 })
 
 export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, DoCheck {
-  treeId: any = IUtils.uuid();
+  treeId: any = IdTool.uuid();
   public _config: any = {
     title: '树结构标题',
     name_key: 'name',
@@ -63,7 +62,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
   };
   @Input()
   public set config(values: any) {
-    IUtils.mergeAFromB(this._config, values, {});
+    IdTool.mergeAFromB(this._config, values, {});
   }
   @Input()
   chkboxType: any = 'relate';
@@ -141,7 +140,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
 
   addCheckedNode() {
     //初始化选择项
-    if (IUtils.isNotEmptyArray(this.inV)) {
+    if (IdTool.isNotEmptyArray(this.inV)) {
       this.treeData.forEach((node: any) => {
         this.inV.forEach((uuid: any) => {
           if (node.id === uuid) {
@@ -203,7 +202,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
     }
     // console.log('####################################### select     nodeArr : '
     //  + JSON.stringify(nodeArr) + '    inV:  ' + JSON.stringify(this.inV));
-    if (!IUtils.compareArray(nodeArr, this.inV)) {
+    if (!IdTool.compareArray(nodeArr, this.inV)) {
       this.changeOut.emit(_.join(nodeArr, ',') || '');
       this.inV = nodeArr;
       this.propagateChange(_.join(nodeArr, ',') || '');
@@ -232,7 +231,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
         });
       });
       this.selectNames = _.join(selectNamesArr, ',');
-      if (!this.selectNames && !IUtils.isEmptyArray(this.inV)) {
+      if (!this.selectNames && !IdTool.isEmptyArray(this.inV)) {
         console.error('modal tree 初始值错误,没有找到对应的树节点,初始值=' + this.inV.join());
       }
     } else {
@@ -295,7 +294,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
    */
   writeV(value: any) {
     // console.log('####################################### writeV : ' + JSON.stringify(value));
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.getTreeData();
       this.inV = value.split(',');
       this.initSelectName();

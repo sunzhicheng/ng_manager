@@ -2,10 +2,10 @@ import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, forwardRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpService } from '../../shared/idorp/service/HttpService';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { ControlValueAccessor } from '@angular/forms';
 import { DynamicBase } from '../dynamic.base';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { fromEvent } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 
@@ -179,7 +179,7 @@ export class TakePointDynamicComponent extends DynamicBase implements AfterViewI
           this.map.centerAndZoom(pt, 13);
           this.addPoint(this.point);
         } else {
-          PromptUtil.error('请输入正确的搜索条件');
+          ToolAlert.error('请输入正确的搜索条件');
         }
       }
     });
@@ -283,7 +283,7 @@ export class TakePointDynamicComponent extends DynamicBase implements AfterViewI
    * @param {*} value
    */
   writeValue(point: any) {
-    if (IUtils.isNotEmptyArray(point) && point.longitude && point.latitude) {
+    if (IdTool.isNotEmptyArray(point) && point.longitude && point.latitude) {
       this.point = point;
       this.addPoint(this.point);
     } else {

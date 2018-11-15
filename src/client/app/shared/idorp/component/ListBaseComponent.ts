@@ -2,7 +2,7 @@ import { AfterContentChecked, ElementRef, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
-import { PromptUtil } from '../providers/PromptUtil';
+import { ToolAlert } from '../../tool/ToolAlert';
 import { PAGER_INIT, APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类
@@ -104,10 +104,10 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_del)) {
             return;
         }
-        PromptUtil.confirm('确认要删除吗？', () => {
+        ToolAlert.confirm('确认要删除吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.listServ[this.method_list_del](entry, APISOURCE.LIST).subscribe((result: any) => {
-                PromptUtil._success();
+                ToolAlert._success();
                 this.loadData(this.listEntry.pager);
             });
         });
@@ -120,11 +120,11 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
-        PromptUtil.confirm('确认要启用吗？', () => {
+        ToolAlert.confirm('确认要启用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 1 });
             this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {
-                PromptUtil._success();
+                ToolAlert._success();
                 this.loadData(this.listEntry.pager);
             });
         });
@@ -138,11 +138,11 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
         if (!this.hasMethod(this.listServ, this.method_list_enable)) {
             return;
         }
-        PromptUtil.confirm('确认要禁用吗？', () => {
+        ToolAlert.confirm('确认要禁用吗？', () => {
             const entry = { query: { uuid: uuid } };
             this.bindQueryData(entry, { sql_status: 2 });
             this.listServ[this.method_list_enable](entry, APISOURCE.LIST).subscribe((result: any) => {
-                PromptUtil._success();
+                ToolAlert._success();
                 this.loadData(this.listEntry.pager);
             });
         });

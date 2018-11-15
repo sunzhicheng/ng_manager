@@ -1,9 +1,9 @@
-import { Component, OnInit, AfterContentInit, Input, forwardRef } from '@angular/core';
+import { Component, AfterContentInit, forwardRef } from '@angular/core';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from '../../shared/idorp/service/HttpService';
-import { NG_VALUE_ACCESSOR, ControlValueAccessor } from '@angular/forms';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DynamicBase } from '../dynamic.base';
 
 declare let $: any;
@@ -67,43 +67,43 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
      this.toolGpb.getProto('idsys.IdSysAreaEntry').subscribe(
       (protoMessage: any) => {
         const entry = protoMessage.create({});
-        IUtils.bindQueryData(entry, {parentId: parentId});
+        IdTool.bindQueryData(entry, {parentId: parentId});
         this.toolHttp.httpRequest(IDCONF().api_base + '/idsys/idsysarea/getSubList', entry, protoMessage).subscribe(
           (result: any) => {
             if (stype === 2) {
               this.pro_list = result.proto_list;
-              if (IUtils.isNotEmptyArray(this.pro_list)) {
+              if (IdTool.isNotEmptyArray(this.pro_list)) {
                 //省默认为第一个
-                if (IUtils.isEmpty(this.values.province)) {
+                if (IdTool.isEmpty(this.values.province)) {
                   this.values.province = this.pro_list[0].name;
                 }
                 this.byParentId(this.getSelectedId(this.pro_list, this.values.province), 3, {});
               }
             } else if (stype === 3) {
               //省选中 清空市，区
-               if (IUtils.isNotEmptyObject(data.selectPro)) {
+               if (IdTool.isNotEmptyObject(data.selectPro)) {
                 this.values.province = data.selectPro.name;
                 this.values.city = '';
                 this.values.area = '';
               }
               this.city_list = result.proto_list;
-              if (IUtils.isNotEmptyArray(this.city_list)) {
+              if (IdTool.isNotEmptyArray(this.city_list)) {
                 //市默认为第一个
-                if (IUtils.isEmpty(this.values.city)) {
+                if (IdTool.isEmpty(this.values.city)) {
                   this.values.city = this.city_list[0].name;
                 }
                 this.byParentId(this.getSelectedId(this.city_list, this.values.city), 4, {});
               }
             } else if (stype === 4) {
               //市选中　清空区
-              if (IUtils.isNotEmptyObject(data.selectCity)) {
+              if (IdTool.isNotEmptyObject(data.selectCity)) {
                 this.values.city = data.selectCity.name;
                 this.values.area = '';
               }
               this.area_list = result.proto_list;
-              if (IUtils.isNotEmptyArray(this.area_list)) {
+              if (IdTool.isNotEmptyArray(this.area_list)) {
                   //区默认为第一个
-                if (IUtils.isEmpty(this.values.area)) {
+                if (IdTool.isEmpty(this.values.area)) {
                   this.values.area = this.area_list[0].name;
                 }
               } else {
@@ -130,7 +130,7 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
    * @param {*} value
    */
   writeValue(value: any) {
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.values = value;
     } else {
       this.values = {

@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { GpbService } from '../service/gpb.service';
-import { IUtils } from '../providers/IUtils';
+import { IdTool } from '../../tool/IdTool';
 import { PLATFORM } from '../config/app.config';
 
 /**
@@ -91,7 +91,7 @@ export class LocalStorageCacheService {
       localStorage.removeItem('t_ext_1');
     }
     if (token && token.ext && token.ext.t_ext_4) {
-      localStorage.setItem('headpic', IUtils.getImgUrl(token.ext.t_ext_4));
+      localStorage.setItem('headpic', IdTool.getImgUrl(token.ext.t_ext_4));
     } else {
       localStorage.removeItem('headpic');
     }

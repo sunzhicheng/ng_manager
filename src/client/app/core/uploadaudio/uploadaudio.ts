@@ -1,7 +1,7 @@
-import { IUtils } from './../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { IDCONF } from '../../shared/idorp/config/app.config';
 import { UploadService } from '../../shared/idorp/service/UploadService';
 
@@ -74,7 +74,7 @@ export class UploadAudioComponent {
     const parmFile: any = [];
     const file = target.target.files[0];
     parmFile.push(file);
-    PromptUtil.showLoad();
+    ToolAlert.showLoad();
     this.isInloading = true;
     this.toolUpload.filesAjax(parmFile).subscribe((result: any) => {
       if (result) {
@@ -83,7 +83,7 @@ export class UploadAudioComponent {
         if (this.toolUpload.isNotEx(token)) {
           console.log('上传成功!');
           const uploadId = result['attList'][0]['pt_id']['l_id'];
-          PromptUtil.hideLoad();
+          ToolAlert.hideLoad();
           const f: any = $('#' + this.namekey);
           f.val(uploadId);
           this.getId.emit(uploadId);
@@ -99,7 +99,7 @@ export class UploadAudioComponent {
     }
     if (this.img_id) {
       //console.log('!!!!!src:',this.toolHttp.getImgUrl(this.img_id));
-      return IUtils.getImgUrl(this.img_id);
+      return IdTool.getImgUrl(this.img_id);
     } else {
       return 'assets/images/upload-index-bg.png';
     }

@@ -1,7 +1,7 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, OnInit, Input, ViewChild, forwardRef, DoCheck } from '@angular/core';
 import { HttpService } from '../../shared/idorp/service/HttpService';
-import { IUtils } from '../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
@@ -58,7 +58,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
   };
   @Input()
   public set config(values: any) {
-    IUtils.mergeAFromB(this._config, values, {});
+    IdTool.mergeAFromB(this._config, values, {});
   }
   selectNames: any = '';
 
@@ -74,7 +74,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
   }
   valueChange(outV: any) {
     const selectV = outV.value || '';
-    if (!IUtils.compareArrayAndString(this.inV, selectV)) {
+    if (!IdTool.compareArrayAndString(this.inV, selectV)) {
       this.changeOut.emit(selectV);
     }
     this.propagateChange(selectV);
@@ -166,7 +166,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
    * @param {*} value
    */
   writeV(value: any) {
-     if (IUtils.isNotEmpty(value)) {
+     if (IdTool.isNotEmpty(value)) {
       this.inV = value.split(',');
       this.loadTable(this.pager);
       this.initSelectName();

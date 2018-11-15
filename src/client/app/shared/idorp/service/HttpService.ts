@@ -1,8 +1,8 @@
-import { PromptUtil } from './../providers/PromptUtil';
+import { ToolAlert } from '../../tool/ToolAlert';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUtils } from '../providers/IUtils';
+import { IdTool } from '../../tool/IdTool';
 import { API_DEBUG, HTTPREQ } from '../config/app.config';
 import { GpbService } from './gpb.service';
 import { BASE_URL_DEBUG, BASE_URL } from '../config/env.config';
@@ -41,7 +41,7 @@ export class HttpService {
         }
         // 根据状态选择URL请求
         const apiBase = API_DEBUG ? BASE_URL_DEBUG : BASE_URL;
-        url = IUtils.formatUrl(url.startsWith('http') ? url : apiBase + url);
+        url = IdTool.formatUrl(url.startsWith('http') ? url : apiBase + url);
         if (API_DEBUG) {
             console.log('httpRequest url : ' + url);
         }
@@ -119,9 +119,9 @@ export class HttpService {
     isNotEx(token: any) {
         if (token && token.ex) {
             const error_type = token.ex.ex_type;
-            let errorMsg = IUtils.getJson(token, 'ex.ex_short_msg');
+            let errorMsg = IdTool.getJson(token, 'ex.ex_short_msg');
             if (!errorMsg) {
-                errorMsg = IUtils.getJson(token, 'ex.ex_tips');
+                errorMsg = IdTool.getJson(token, 'ex.ex_tips');
             }
             if (error_type === 1 || error_type === 2) {
                 // const ptType = localStorage.getItem('ptType');
@@ -132,7 +132,7 @@ export class HttpService {
                 // }
                 (<any>$('#tokenInvaildDiv')).modal('show');
             } else {
-                PromptUtil.error(errorMsg);
+                ToolAlert.error(errorMsg);
             }
             return false;
         }

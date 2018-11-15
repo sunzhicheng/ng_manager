@@ -1,4 +1,4 @@
-import { IUtils } from '../providers/IUtils';
+import { IdTool } from '../../tool/IdTool';
 import * as _ from 'lodash';
 import { PAGER_INIT } from '../config/app.config';
 import { IdLog } from '../../tool/IdLog';
@@ -38,7 +38,7 @@ export class BaseComponent {
      * @param data
      */
     bindQueryData(entry: any, data: any, isConcat: boolean = false) {
-        IUtils.bindQueryData(entry, data, isConcat);
+        IdTool.bindQueryData(entry, data, isConcat);
     }
 
     /**
@@ -47,7 +47,7 @@ export class BaseComponent {
    * 路由传递的参数和协议关键字合并
    */
     bindAddQueryData(entry: any, data: any) {
-        IUtils.bindQueryData(entry, data, true);
+        IdTool.bindQueryData(entry, data, true);
     }
     /**
      * 打印log
@@ -67,10 +67,10 @@ export class BaseComponent {
         IdLog.error(message, optionalParams);
     }
     getJson(proto: any, name: string, defaultValue = ''): any {
-        return IUtils.getJson(proto, name, defaultValue);
+        return IdTool.getJson(proto, name, defaultValue);
     }
 
     setJson(json: any, name: string, value: any): any {
-        IUtils.setJson(json, name, value);
+        IdTool.setJson(json, name, value);
     }
 }

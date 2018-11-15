@@ -2,7 +2,7 @@ import { TreeService } from '../service/TreeService';
 import { DyBaseService } from '../service/IdBaseService';
 import { ViewChild, OnInit, ElementRef } from '@angular/core';
 import { TreeAlertComponent } from '../../../core/tree/tree.alert';
-import { FormUtils } from '../providers/FormUtils';
+import { ToolForm } from '../../tool/ToolForm';
 import { ListBaseComponent } from './ListBaseComponent';
 import { APISOURCE } from '../config/app.config';
 import { TreeInComponent } from '../../../core/tree/tree.in';
@@ -182,12 +182,12 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
    */
     bindFormDateOptList(optList: any, key: any) {
         if (this.getTreeComp().form) {
-            FormUtils.bindFormDateOptList(this.getTreeComp().form, this.treeFormData, optList, key);
+            ToolForm.bindFormDateOptList(this.getTreeComp().form, this.treeFormData, optList, key);
         }
     }
     setItemValueByJson(json: any) {
         if (this.getTreeComp().form) {
-            FormUtils.setItemValueByJson(this.getTreeComp().form, this.treeFormData, json);
+            ToolForm.setItemValueByJson(this.getTreeComp().form, this.treeFormData, json);
         }
     }
     /**
@@ -197,7 +197,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      * @param isRefresh 是否自动刷新表单  默认不刷新
      */
     addItemList(items: any, afterKey: String) {
-        FormUtils.addItemList(this.treeFormData, items, afterKey);
+        ToolForm.addItemList(this.treeFormData, items, afterKey);
     }
     /**
      * 向表单对象动态删除tiem
@@ -205,13 +205,13 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      * @param isRefresh 是否自动刷新表单 默认不刷新
      */
     delItemList(keyArr: any) {
-        FormUtils.delItemList(this.treeFormData, keyArr);
+        ToolForm.delItemList(this.treeFormData, keyArr);
     }
     updateRules(keyArr: any, rule: any, isAdd: boolean = true) {
-        FormUtils.updateRules(this.treeFormData, keyArr, rule, isAdd);
+        ToolForm.updateRules(this.treeFormData, keyArr, rule, isAdd);
     }
     clearRules(keyArr: any) {
-        FormUtils.clearRules(this.treeFormData, keyArr);
+        ToolForm.clearRules(this.treeFormData, keyArr);
     }
     /**
     * 修改的时候  向动态表单中添加disabled属性
@@ -219,7 +219,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     * @param key
     */
     addDisabledList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addDisabledList(this.treeFormData, keyArr, opt, dealOther);
+        ToolForm.addDisabledList(this.treeFormData, keyArr, opt, dealOther);
     }
     /**
      * 动态设置校验规则
@@ -229,14 +229,14 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      */
     addRequiredRules(formData: any, key: any, isAdd: boolean = true) {
         if (formData) {
-            FormUtils.updateRules(formData, [key], {
+            ToolForm.updateRules(formData, [key], {
                 name: 'required',
                 errorMsg: '必填'
             }, isAdd);
         }
     }
     addHiddenList(keyArr: any, opt: boolean = true) {
-        FormUtils.addHiddenList(this.treeFormData, keyArr, opt);
+        ToolForm.addHiddenList(this.treeFormData, keyArr, opt);
     }
     /** ****************************************需要手动刷新的方法 end************************************/
     /** ****************************************不需要手动刷新的方法 startr************************************/
@@ -246,39 +246,39 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
      */
     setNullByKey(key: any) {
         if (this.getTreeComp().form) {
-            FormUtils.setNullByKey(this.getTreeComp().form, key);
+            ToolForm.setNullByKey(this.getTreeComp().form, key);
         }
     }
     addHiddenButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addHiddenButtonList(this.treeFormData, keyArr, opt, dealOther);
+        ToolForm.addHiddenButtonList(this.treeFormData, keyArr, opt, dealOther);
     }
     addDisabledButtonList(keyArr: any, opt: boolean = true, dealOther: boolean = false) {
-        FormUtils.addDisabledButtonList(this.treeFormData, keyArr, opt, dealOther);
+        ToolForm.addDisabledButtonList(this.treeFormData, keyArr, opt, dealOther);
     }
     getButtonKeyDisabledStatus(key: any) {
-        return FormUtils.getButtonKeyStatus(this.treeFormData, key);
+        return ToolForm.getButtonKeyStatus(this.treeFormData, key);
     }
     getButtonKeyHiddenStatus(key: any) {
-        return FormUtils.getButtonKeyStatus(this.treeFormData, key, 'hidden');
+        return ToolForm.getButtonKeyStatus(this.treeFormData, key, 'hidden');
     }
     addButtonList(items: any, afterKey: String) {
-        FormUtils.addButtonList(this.treeFormData, items, afterKey);
+        ToolForm.addButtonList(this.treeFormData, items, afterKey);
     }
     /******************************************不需要手动刷新的方法 end************************************/
     /**
      * item 变动  手动刷新表单
      */
     refreshItem() {
-        FormUtils.refreshItem(this.getTreeComp().form, this.treeFormData);
+        ToolForm.refreshItem(this.getTreeComp().form, this.treeFormData);
     }
     refreshRule() {
         if (this.getTreeComp().form && this.getTreeComp().form) {
-            FormUtils.refreshRule(this.getTreeComp().form, this.treeFormData);
+            ToolForm.refreshRule(this.getTreeComp().form, this.treeFormData);
         }
     }
     updateFilterJson(formData: any, key: any, filterJson: any) {
         if (formData) {
-            FormUtils.updateFilterJson(formData, key, filterJson);
+            ToolForm.updateFilterJson(formData, key, filterJson);
         }
     }
     /**

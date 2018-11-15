@@ -1,5 +1,5 @@
-import { IUtils } from '../../shared/idorp/providers/IUtils';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { IdTool } from '../../shared/tool/IdTool';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { Input } from '@angular/core';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
@@ -28,7 +28,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
   @Input()
   public set config(values: any) {
     if (values) {
-      IUtils.mergeAFromB(this._config, values, {});
+      IdTool.mergeAFromB(this._config, values, {});
     }
   }
   beforeUpload() {
@@ -50,7 +50,7 @@ export class UploadDynamicBaseComponent extends DynamicBase {
         const fileSize = file.size;
         if (fileSize > fSize * 1024) {
           check = false;
-          PromptUtil.error('上传最大文件大小为' + fSize + 'KB');
+          ToolAlert.error('上传最大文件大小为' + fSize + 'KB');
         }
       });
     } else {
@@ -61,13 +61,13 @@ export class UploadDynamicBaseComponent extends DynamicBase {
 
   upload(parmFile: any) {
     if (!parmFile || parmFile.length === 0) {
-      PromptUtil.error('请选择图片.');
+      ToolAlert.error('请选择图片.');
       return;
     }
     const checked = this.checkSize(parmFile, this._config.fileSize);
     this.beforeUpload();
     if (checked) {
-      PromptUtil.showLoad();
+      ToolAlert.showLoad();
       this.isUploading = true;
       this.toolUpload.filesAjax(parmFile, (evt: any) => {
         if (evt.lengthComputable) { //计算完成百分比
@@ -131,14 +131,14 @@ export class UploadDynamicBaseComponent extends DynamicBase {
     console.log('initValue 采用默认不处理');
   }
   getUrl(uploadId: any) {
-    return IUtils.getFileUrl(uploadId);
+    return IdTool.getFileUrl(uploadId);
   }
   /**
    * 给外部formControl写入数据
    * @param {*} value
    */
   writeValue(value: any) {
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.file_arr = value.split(',');
       this.initValue(this.file_arr);
     }

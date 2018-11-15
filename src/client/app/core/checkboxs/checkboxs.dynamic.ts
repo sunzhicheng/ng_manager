@@ -1,4 +1,4 @@
-import { IUtils } from './../../shared/idorp/providers/IUtils';
+import { IdTool } from '../../shared/tool/IdTool';
 import { Component, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
@@ -65,7 +65,7 @@ export class CheckboxsDynamicComponent extends DynamicBase {
    */
   writeV(v: any) {
     const value = v + '';
-    if (IUtils.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.inV = value.split(',');
     }
   }

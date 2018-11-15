@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { IUtils } from '../providers/IUtils';
+import { IdTool } from '../../tool/IdTool';
 
 /**
  * 缓存服务
@@ -28,7 +28,7 @@ export class SessionStorageCacheService {
     hasPermission(permission: any) {
         let isHas = false;
         const permissions = sessionStorage.permissions;
-        if (IUtils.isEmpty(permissions)) {
+        if (IdTool.isEmpty(permissions)) {
             isHas = false;
         } else {
             permissions.split(',').forEach((p: any) => {

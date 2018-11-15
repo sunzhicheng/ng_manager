@@ -1,13 +1,13 @@
 import { BaseComponent } from '../shared/idorp/component/BaseComponent';
 import { ControlValueAccessor } from '@angular/forms';
-import { IUtils } from '../shared/idorp/providers/IUtils';
+import { IdTool } from '../shared/tool/IdTool';
 import { Input, Output, EventEmitter } from '@angular/core';
 
 export class DynamicBase extends BaseComponent implements ControlValueAccessor  {
 
   propagateChange: any;
   propagateTouched: any;
-  namekey: any = IUtils.uuid();
+  namekey: any = IdTool.uuid();
 
   protoEntry: any;
   pager: any;

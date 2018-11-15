@@ -1,7 +1,7 @@
 import { Component, ViewEncapsulation, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { TopnavService } from './topnav.service';
-import { PromptUtil } from '../../shared/idorp/providers/PromptUtil';
+import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 
@@ -56,7 +56,7 @@ export class TopNavComponent extends BaseComponent implements OnInit {
   public outLogin() {
     this.localCache.clearLoginInfo();
     this._router.navigateByUrl('/');
-    PromptUtil .hideLoad();
+    ToolAlert .hideLoad();
   }
 
   profileDetail() {
