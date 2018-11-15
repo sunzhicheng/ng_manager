@@ -31,6 +31,11 @@ export enum APISOURCE {
     FORM            //form_api
 }
 
+export enum PLATFORM {
+    OPERATOR,        //运营平台
+    BUSINESS,
+}
+
 
 // 分页请求初始化数据
 export const PAGER_INIT = {

@@ -70,7 +70,7 @@ export class HomeComponent extends BaseComponent implements OnInit, AfterContent
                 this.errorMessage = errorMsg;
               } else {
                 this.setJson(protoMsg, 'token.ext.pt_account', this.pt_account);
-                this.localCache.setSessionStory(protoMsg);
+                this.localCache.setLoginInfo(protoMsg);
                 CustomReuseStrategy.removeAll();
                 (<any>$('#tokenInvaildDiv')).modal('hide');
               }

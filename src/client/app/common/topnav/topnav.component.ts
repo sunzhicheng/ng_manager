@@ -54,22 +54,13 @@ export class TopNavComponent extends BaseComponent implements OnInit {
   }
 
   public outLogin() {
-    this.localCache.clearSessionStory();
-    const ptType = localStorage.getItem('ptType');
-    if (ptType) {
-      this._router.navigateByUrl(ptType + '/login');
-    } else {
-        this._router.navigateByUrl('/');
-    }
+    this.localCache.clearLoginInfo();
+    this._router.navigateByUrl('/');
     PromptUtil .hideLoad();
   }
 
   profileDetail() {
-    if (this.isBusiness()) {
-      this._router.navigateByUrl('home/idsysuser/detail');
-    } else {
-      this._router.navigateByUrl('home/idsysappacount/percenter/detail');
-    }
+    this._router.navigateByUrl('home/idsysappacount/percenter/detail');
   }
 
 }

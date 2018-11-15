@@ -1,9 +1,8 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { LoginService } from './login.service';
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
-import { PAGER_INIT, TOKEN_INIT } from '../../shared/idorp/config/app.config';
+import { TOKEN_INIT, PLATFORM } from '../../shared/idorp/config/app.config';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { Title } from '@angular/platform-browser';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
@@ -100,8 +99,8 @@ export class OperateLoginComponent extends BaseComponent implements OnInit, Afte
                 (protoMsg: any) => {
                   if (this.loginService.isNotEx(protoMsg.token)) {
                     this.setJson(protoMsg, 'token.ext.pt_account', this.token.ext.pt_account);
-                    this.localCache.setSessionStory(protoMsg);
-                    localStorage.setItem('ptType', 'operate');
+                    this.localCache.setLoginInfo(protoMsg);
+                    this.localCache.setPT(PLATFORM.OPERATOR);
                     CustomReuseStrategy.removeAll();
                     this._router.navigateByUrl('/home/index');
                   }

@@ -123,10 +123,6 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       const fd = this.demoService.initFormData();
-      let filterData = {};
-      if (!this.isBusiness()) {
-        filterData = { is_sys: '2' };
-      }
       if (params['uuid']) {
         this.uuid = params['uuid'];
         this.isAdd = false;

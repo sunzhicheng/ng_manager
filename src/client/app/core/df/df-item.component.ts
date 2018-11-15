@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, SimpleChanges, Output, EventEmitter, AfterViewChecked } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { DFControlService } from './df-control.service';
 import { IUtils } from '../../shared/idorp/providers/IUtils';
 import _ from 'lodash';
 import { Router } from '@angular/router';
+import { SessionStorageCacheService } from '../../shared/idorp/cache/sessionStorage.service';
 
 declare let $: any;
 
@@ -32,6 +33,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
   private defaultValue: any;
   private tempValue: any;
   constructor(private qcs: DFControlService,
+    private sessionStorage: SessionStorageCacheService,
     private _router: Router
   ) {
   }
@@ -167,7 +169,7 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
     if (!permissoin) {
       return true;
     } else {
-      const permissions = sessionStorage.permissions;
+      const permissions = this.sessionStorage.getPermissions();
       const permissoinBaseArr = permissoin.split(',');
       if (permissions) {
         const permissoinArr = permissions.split(',');

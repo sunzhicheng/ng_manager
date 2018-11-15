@@ -2,11 +2,15 @@ import { ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, RouterStateSnapshot } from '@angular/router';
 import { PromptUtil } from '../idorp/providers/PromptUtil';
+import { LocalStorageCacheService } from '../idorp/cache/localstorage.service';
+import { PLATFORM } from '../idorp/config/app.config';
 
 @Injectable()
 export class AuthAvtivate implements CanActivate {
 
-    constructor(public router: Router) { }
+    constructor(public router: Router,
+        public localstorage: LocalStorageCacheService,
+        ) { }
 
     canActivate(
         next:  ActivatedRouteSnapshot,
@@ -20,9 +24,9 @@ export class AuthAvtivate implements CanActivate {
             }
             let permissoin = path.replace('/', ':');
             //判断是商户平台 还是  运营平台
-            if (localStorage.ptType === 'operate') {
+            if (this.localstorage.pt() === PLATFORM.OPERATOR) {
                 permissoin = 'operate:' + permissoin;
-            } else if (localStorage.ptType === 'business') {
+            } else if (this.localstorage.pt() === PLATFORM.BUSINESS) {
                 permissoin = 'business:' + permissoin;
             }
             const permissions = sessionStorage.permissions;
@@ -37,12 +41,7 @@ export class AuthAvtivate implements CanActivate {
             }
             if (!isHasPermission) {
                 PromptUtil.error('访问的路径没有权限');
-                const ptType = localStorage.getItem('ptType');
-                if (ptType) {
-                    this.router.navigateByUrl(ptType + '/login');
-                } else {
-                    this.router.navigateByUrl('/');
-                }
+                this.router.navigateByUrl('/');
             }
             return isHasPermission;
         }

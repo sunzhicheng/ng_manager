@@ -14,7 +14,7 @@ import { APP_PROTO_PATH_SYS, APP_PROTO_PATH_MALL } from '../config/app.config';
 export class GpbService {
   PROTO_ROOT: any = {};
 
-  PROTOMAP: {[index: string]: any} = {};
+  PROTOMAP: { [index: string]: any } = {};
 
   constructor() {
     console.log('gpb new init...');
@@ -73,36 +73,40 @@ export class GpbService {
   public initProtoRoot(cName: string, isEnum: boolean = false): Observable<any> {
     console.log('initProtoRoot cName ', cName);
     return Observable.create((observer: any) => {
-      let key = '';
-      let url: any = null;
-      if (cName.indexOf('idsys') !== -1 || cName.indexOf('com2') !== -1) {
-        url = APP_PROTO_PATH_SYS;
-        key = 'sys';
-      } else if (cName.indexOf('idmall') !== -1) {
-        url = APP_PROTO_PATH_MALL;
-        key = 'mall';
-      } else if (cName.indexOf('nlk') !== -1) {
-        url = APP_PROTO_PATH_NLK;
-        key = 'nlk';
-      } else if (cName.indexOf('idwx') !== -1) {
-        url = APP_PROTO_PATH_WX;
-        key = 'wx';
-      } else if (cName.indexOf('idalipay') !== -1) {
-        url = APP_PROTO_PATH_ALIPAY;
-        key = 'alipay';
-      }
-      if (this.PROTO_ROOT[key] === undefined) {
-        protobuf.load(url)
-          .then((root: any) => {
-            this.PROTO_ROOT[key] = root;
-            console.log('initProtoRoot', root);
-            observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
-          }).catch((error: any) => {
-            this.handleError(error);
-            observer.error(error);
-          } );
+      if (!cName) {
+        observer.error('proto 路径为空');
       } else {
-        observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
+        let key = '';
+        let url: any = null;
+        if (cName.indexOf('idsys') !== -1 || cName.indexOf('com2') !== -1) {
+          url = APP_PROTO_PATH_SYS;
+          key = 'sys';
+        } else if (cName.indexOf('idmall') !== -1) {
+          url = APP_PROTO_PATH_MALL;
+          key = 'mall';
+        } else if (cName.indexOf('nlk') !== -1) {
+          url = APP_PROTO_PATH_NLK;
+          key = 'nlk';
+        } else if (cName.indexOf('idwx') !== -1) {
+          url = APP_PROTO_PATH_WX;
+          key = 'wx';
+        } else if (cName.indexOf('idalipay') !== -1) {
+          url = APP_PROTO_PATH_ALIPAY;
+          key = 'alipay';
+        }
+        if (this.PROTO_ROOT[key] === undefined) {
+          protobuf.load(url)
+            .then((root: any) => {
+              this.PROTO_ROOT[key] = root;
+              console.log('initProtoRoot', root);
+              observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
+            }).catch((error: any) => {
+              this.handleError(error);
+              observer.error(error);
+            });
+        } else {
+          observer.next(isEnum ? this.PROTO_ROOT[key].lookupEnum(cName) : this.PROTO_ROOT[key].lookupType(cName));
+        }
       }
     });
   }

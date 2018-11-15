@@ -2,6 +2,7 @@
 import { Injectable } from '@angular/core';
 import { GpbService } from '../service/gpb.service';
 import { IUtils } from '../providers/IUtils';
+import { PLATFORM } from '../config/app.config';
 
 /**
  * 缓存服务
@@ -9,8 +10,18 @@ import { IUtils } from '../providers/IUtils';
 @Injectable({ providedIn: 'root' })
 export class LocalStorageCacheService {
 
+  private platform: PLATFORM = PLATFORM.OPERATOR;
   constructor(
     public toolGpb: GpbService) {
+  }
+  /**
+   * 获取当前的平台类型
+   */
+  pt() {
+    return this.platform;
+  }
+  setPT(pt: PLATFORM) {
+    this.platform = pt;
   }
 
   saveMenu(memus: any) {
@@ -36,10 +47,10 @@ export class LocalStorageCacheService {
     return account_in === account_cache;
   }
   /**
-   * 设置sessionStory
+   * 设置LoginInfo
    * @param params
    */
-  clearSessionStory() {
+  clearLoginInfo() {
     localStorage.removeItem('access_token_base64');
     localStorage.removeItem('access_token_json');
     localStorage.removeItem('acc_source');
@@ -53,7 +64,7 @@ export class LocalStorageCacheService {
    * 设置sessionStory
    * @param params
    */
-  setSessionStory(params: any) {
+  setLoginInfo(params: any) {
     const token = params.token;
     if (token && token.acc_token && token.acc_token.access_token) {
       const access_token = token.acc_token.access_token;

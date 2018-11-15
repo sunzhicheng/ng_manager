@@ -1,6 +1,7 @@
 import { IUtils } from '../providers/IUtils';
 import * as _ from 'lodash';
-import { PAGER_INIT, API_DEBUG } from '../config/app.config';
+import { PAGER_INIT } from '../config/app.config';
+import { IdLog } from '../../tool/IdLog';
 
 export class BaseComponent {
     _: any = _;
@@ -33,18 +34,6 @@ export class BaseComponent {
         return result;
     }
     /**
-     * 是否商户平台方式登陆
-     */
-    isBusiness() {
-        if (localStorage.ptType === 'operate') {
-            return false;
-        } else if (localStorage.ptType === 'business') {
-            return true;
-        } else {
-            return false;
-        }
-    }
-    /**
      * 添加查询参数
      * @param data
      */
@@ -62,16 +51,20 @@ export class BaseComponent {
     }
     /**
      * 打印log
-     * @param msg
+     * @param message
+     * @param optionalParams 对象
      */
-    log(msg: any, obj: any = '') {
-        if (API_DEBUG) {
-            if (obj !== '') {
-                console.log(msg, obj);
-            } else {
-                console.log(msg);
-            }
-        }
+    log(message: any, ...optionalParams: any[]) {
+        IdLog.log(message, optionalParams);
+    }
+    debug(message?: any, ...optionalParams: any[]) {
+        IdLog.debug(message, optionalParams);
+    }
+    warn(message?: any, ...optionalParams: any[]) {
+        IdLog.warn(message, optionalParams);
+    }
+    error(message?: any, ...optionalParams: any[]) {
+        IdLog.error(message, optionalParams);
     }
     getJson(proto: any, name: string, defaultValue = ''): any {
         return IUtils.getJson(proto, name, defaultValue);
@@ -79,19 +72,5 @@ export class BaseComponent {
 
     setJson(json: any, name: string, value: any): any {
         IUtils.setJson(json, name, value);
-    }
-    hasPermission(permission: any) {
-        let isHas = false;
-        const permissions = sessionStorage.permissions;
-        if (IUtils.isEmpty(permissions)) {
-            isHas = false;
-        } else {
-            permissions.split(',').forEach((p: any) => {
-                if (permission === p) {
-                    isHas = true;
-                }
-            });
-        }
-        return isHas;
     }
 }
