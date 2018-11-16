@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angu
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import * as _ from 'lodash';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { NgStaticTableComponent } from '../table/ng-static-table.component';
 import { ModalBaseComponent } from './ModalBaseComponent';
 
@@ -89,7 +88,7 @@ export class ModalTableComponent extends ModalBaseComponent implements OnInit {
             this.bindQueryData(this.protoEntry, this._config.filterJson);
           }
           this.protoEntry.pager.pagePerCount = 1000;
-          this.httpService.httpRequest(IDCONF().api_base + this._config.request_url, this.protoEntry, protoMessage).subscribe(
+          this.httpService.httpRequest(this._config.request_url, this.protoEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               this.pager = protoMsg.pager;
               this.protoEntry = protoMsg;

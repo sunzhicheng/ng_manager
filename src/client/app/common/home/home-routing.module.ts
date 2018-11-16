@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 import { IndexComponent } from './index.component';
 import { IdSysMenuRoutes } from '../../idsys/idsysmenu/idsysmenu-routing';
 import { IdSysAcountRoutes } from '../../idsys/idsysappacount/idsysappacount-routing';
-import { DemoRoutes } from '../../examples/demo/demo-routing';
+import { DemoRoutes } from '../../examples/demo-routing';
 import { MqttAvtivate } from '../../shared/idorp/activate/MqttActivate';
 
 @NgModule({

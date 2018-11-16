@@ -1,8 +1,6 @@
 import { IdTool } from '../../shared/tool/IdTool';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
-import { Router } from '@angular/router';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { UploadService } from '../../shared/idorp/service/UploadService';
 
 // 不建议使用

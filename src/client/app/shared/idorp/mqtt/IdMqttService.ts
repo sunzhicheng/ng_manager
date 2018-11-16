@@ -6,13 +6,16 @@ import { Mqtt } from '../../tool/Mqtt';
 @Injectable()
 export class IdMqttService extends Mqtt implements OnDestroy {
     mqttClient: Paho.MQTT.Client;
-
+    constructor() {
+        super();
+      }
     start(subscribeTopic: any, onMessageArrived?: any, clientId?: string,
         onConnectLost?: any, onMessageDelivered?: any) {
         this.mqttClient = this.getClient(clientId, onMessageArrived, onConnectLost, onMessageDelivered);
         this.connect(this.mqttClient, null, null,
             (event1: any) => {
                 IdLog.log('MQTT 连接成功', event1);
+                Mqtt._clients.push(this.mqttClient);
                 // 订单小程序的近推送数据
                 this.subscribe(subscribeTopic, {
                     qos: 0,

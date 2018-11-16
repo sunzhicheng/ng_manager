@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';
-import { HTTPREQ, API_DEBUG, PAGER_INIT, IDCONF, APISOURCE } from '../config/app.config';
+import { HTTPREQ, API_DEBUG, PAGER_INIT, APISOURCE } from '../config/app.config';
 import * as _ from 'lodash';
 
 export class DyBaseService {
@@ -138,7 +138,7 @@ export class DyBaseService {
                     }
                     const protoEntry = protoMessage.create(entry);
                     this.log('requestApi query params : ' + JSON.stringify(protoEntry));
-                    this.httpService.httpRequest(IDCONF().api_base + url, entry, protoMessage, method).subscribe(
+                    this.httpService.httpRequest(url, entry, protoMessage, method).subscribe(
                         (message: any) => observer.next(message),
                         (error: any) => observer.error(error)
                     );

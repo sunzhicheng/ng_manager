@@ -12,12 +12,13 @@ import {
   HttpUserEvent,
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
-import { mergeMap, catchError } from 'rxjs/operators';
+import { mergeMap, catchError, ignoreElements } from 'rxjs/operators';
 import { IdLog } from '../../tool/IdLog';
 import { IDCONF } from '../config/app.config';
 import { IdTool } from '../../tool/IdTool';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
 import { ToolAlert } from '../../tool/ToolAlert';
+import * as _ from 'lodash';
 declare const $: any;
 /**
  * 默认HTTP拦截器
@@ -28,7 +29,10 @@ export class DefaultInterceptor implements HttpInterceptor {
   request_cache: any = {
     url: null, //上一次请求url
     refresh_time: 2000, //频繁请求间隔时间
-    request_time: null // 上一次请求时间
+    request_time: null, // 上一次请求时间
+    ignoreUrls: [ //忽略验证的
+      '/idsys/idsysarea/getSubList',
+    ]
   };
 
 
@@ -40,16 +44,16 @@ export class DefaultInterceptor implements HttpInterceptor {
     next: HttpHandler,
   ): Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent
   | HttpResponse<any> | HttpUserEvent<any>> {
-    // 统一加上服务端前缀
     let url = req.url;
     //禁止频繁请求
     if (!this.checkRequestTime(url)) {
       return of();
     }
+    // 统一加上服务端前缀
     if (!url.startsWith('https://') && !url.startsWith('http://')) {
-      url = IDCONF.api_base + url;
+      url = IDCONF().api_base + url;
     }
-    // 根据状态选择URL请求
+    // 处理url 双斜杠错误
     url = IdTool.formatUrl(url);
     IdLog.log('httpRequest url : ' + url);
     const newReq = req.clone({
@@ -65,21 +69,29 @@ export class DefaultInterceptor implements HttpInterceptor {
   private goTo(url: string) {
     setTimeout(() => this.injector.get(Router).navigateByUrl(url));
   }
+  /**
+   * 验证请求时间  是否频繁请求
+   * @param url
+   */
   private checkRequestTime(url: any) {
-    let canRequest = false;
-    if (!this.request_cache.url || !this.request_cache.request_time) {
-      canRequest = true;
-    }
     const now = new Date().getTime();
-    if (this.request_cache.url === url) {
-      const ctime = now - this.request_cache.request_time;
-      if (ctime < this.request_cache.refresh_time) {
-        ToolAlert.warningTime('频繁请求,请您休息会');
+    let canRequest = false;
+    if (_.indexOf(this.request_cache.ignoreUrls, url) !== -1) {
+      canRequest = true;
+    } else if (!this.request_cache.url || !this.request_cache.request_time) {
+      canRequest = true;
+    } else {
+      if (this.request_cache.url === url) {
+        const ctime = now - this.request_cache.request_time;
+        if (ctime < this.request_cache.refresh_time) {
+          IdLog.log('频繁请求url : ', url);
+          ToolAlert.warningTime('频繁请求,请您休息会');
+        } else {
+          canRequest = true;
+        }
       } else {
         canRequest = true;
       }
-    } else {
-      canRequest = true;
     }
     if (canRequest) {
       this.request_cache.request_time = now;
@@ -87,7 +99,10 @@ export class DefaultInterceptor implements HttpInterceptor {
     }
     return canRequest;
   }
-
+  /**
+   * 处理请求状态
+   * @param event
+   */
   private handleData(
     event: HttpResponse<any> | HttpErrorResponse,
   ): Observable<any> {
@@ -104,8 +119,9 @@ export class DefaultInterceptor implements HttpInterceptor {
       case 403:
       case 404:
       case 500:
-        //返回不同错误状态的页面
-        this.goTo(`/${event.status}`);
+        //返回不同错误状态的页面  这里暂时统一跳出提示框
+        ToolAlert.animation(`${event.status}`, `服务器异常啦`);
+        // this.goTo(`/${event.status}`);
         break;
       default:
         if (event instanceof HttpErrorResponse) {

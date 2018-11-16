@@ -1,5 +1,4 @@
 import { Component, AfterContentInit, forwardRef } from '@angular/core';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from '../../shared/idorp/service/HttpService';
@@ -68,7 +67,7 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
       (protoMessage: any) => {
         const entry = protoMessage.create({});
         IdTool.bindQueryData(entry, {parentId: parentId});
-        this.toolHttp.httpRequest(IDCONF().api_base + '/idsys/idsysarea/getSubList', entry, protoMessage).subscribe(
+        this.toolHttp.httpRequest('/idsys/idsysarea/getSubList', entry, protoMessage).subscribe(
           (result: any) => {
             if (stype === 2) {
               this.pro_list = result.proto_list;

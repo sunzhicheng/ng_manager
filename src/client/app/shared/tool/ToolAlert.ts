@@ -74,6 +74,20 @@ export class ToolAlert {
       }
     });
   }
+  /**
+   * 抖动提示窗口
+   * @param title
+   * @param htmls
+   */
+  static animation(title: any, htmls: any) {
+    const w: any = window;
+    w.swal({
+      title: title,
+      html: htmls,
+      animation: false,
+      customClass: 'animated tada'
+    });
+  }
 
   static login(show: any = true) {
     if (show) {

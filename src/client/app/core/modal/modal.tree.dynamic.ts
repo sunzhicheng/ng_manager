@@ -5,7 +5,6 @@ import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { TreeService } from '../../shared/idorp/service/TreeService';
 
 declare let $: any;
@@ -267,7 +266,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
           if (this.protoEntry.pager) {
             this.protoEntry.pager = undefined;
           }
-          this.httpService.httpRequest(IDCONF().api_base + this._request_url, this.protoEntry, protoMessage).subscribe(
+          this.httpService.httpRequest(this._request_url, this.protoEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               this.treeData = [];
               if (protoMsg.proto_list) {

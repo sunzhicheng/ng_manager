@@ -1,12 +1,9 @@
-import { ValidatorFn, AbstractControl, FormControl } from '@angular/forms';
-import { IDCONF } from './../../shared/idorp/config/app.config';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { BASE_URL_GEN } from '../../shared/idorp/config/env.config';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { HTTPREQ, PAGER_INIT } from '../../shared/idorp/config/app.config';
+import { PAGER_INIT } from '../../shared/idorp/config/app.config';
 import { IdTool } from '../../shared/tool/IdTool';
 
 /**
@@ -194,7 +191,7 @@ export class IdSysAppAcountService extends DyBaseService {
    */
   personInfo(entry: any, protoMessage: any): Observable<any> {
     return Observable.create((observer: any) => {
-        this.httpService.httpRequest(this.api.base + this.api.personInfo, entry, protoMessage).subscribe(
+        this.httpService.httpRequest(this.api.personInfo, entry, protoMessage).subscribe(
             (message: any) => observer.next(message),
             (error: any) => observer.error(error)
         );
@@ -209,7 +206,7 @@ export class IdSysAppAcountService extends DyBaseService {
    */
   listOpt(entry: any, protoMessage: any): Observable<any> {
     return Observable.create((observer: any) => {
-        this.httpService.httpRequest(this.api.base + this.api.listOpt, entry, protoMessage).subscribe(
+        this.httpService.httpRequest(this.api.listOpt, entry, protoMessage).subscribe(
             (message: any) => observer.next(message),
             (error: any) => observer.error(error)
         );

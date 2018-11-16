@@ -1,13 +1,8 @@
 import { Observable } from 'rxjs';
-import { BASE_URL_GEN } from '../../shared/idorp/config/env.config';
-import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { IDCONF } from '../../shared/idorp/config/app.config';
-
-
 
 @Injectable()
 export class LoginService extends DyBaseService  {
@@ -17,7 +12,6 @@ export class LoginService extends DyBaseService  {
      * 数据接口定义
      */
     public api: any = {
-      base: IDCONF().api_base,
       session: '/idsys/manager/login/initSession',
       login: '/idsys/manager/login/login',
       tokenInvaild: '/idsys/manager/login/login/ignoreCode',
@@ -42,7 +36,7 @@ export class LoginService extends DyBaseService  {
    */
   login(entry: any, protoMessage: any) {
     return Observable.create((observer: any) => {
-      this.httpService.httpRequest(this.api.base + this.api.login, entry, protoMessage).subscribe(
+      this.httpService.httpRequest(this.api.login, entry, protoMessage).subscribe(
           (message: any) => observer.next(message),
           (error: any) => observer.error(error)
       );
@@ -50,7 +44,7 @@ export class LoginService extends DyBaseService  {
   }
   loginByTokenInvaild(entry: any, protoMessage: any) {
     return Observable.create((observer: any) => {
-      this.httpService.httpRequest(this.api.base + this.api.tokenInvaild, entry, protoMessage).subscribe(
+      this.httpService.httpRequest(this.api.tokenInvaild, entry, protoMessage).subscribe(
           (message: any) => observer.next(message),
           (error: any) => observer.error(error)
       );
@@ -59,7 +53,7 @@ export class LoginService extends DyBaseService  {
 
   initSession(entry: any, protoMessage: any) {
     return Observable.create((observer: any) => {
-      this.httpService.httpRequest(this.api.base + this.api.session, entry, protoMessage).subscribe(
+      this.httpService.httpRequest(this.api.session, entry, protoMessage).subscribe(
           (message: any) => observer.next(message),
           (error: any) => observer.error(error)
       );
@@ -67,7 +61,7 @@ export class LoginService extends DyBaseService  {
   }
 
   getCaptcha() {
-    return this.api.base + this.api.captcha + '/' + this.sessionId + '?' + (this.random++);
+    return this.api.captcha + '/' + this.sessionId + '?' + (this.random++);
   }
   /**
    * 添加会话ID，不允许传空对像

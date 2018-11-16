@@ -5,7 +5,6 @@ import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { NgStaticTableComponent } from '../table/ng-static-table.component';
 
 declare let $: any;
@@ -114,7 +113,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
             this.bindQueryData(this.protoEntry, this.filterJson);
           }
           this.protoEntry.pager.pagePerCount = 1000;
-          this.httpService.httpRequest(IDCONF().api_base + this._request_url, this.protoEntry, protoMessage).subscribe(
+          this.httpService.httpRequest(this._request_url, this.protoEntry, protoMessage).subscribe(
             (protoMsg: any) => {
               this.pager = protoMsg.pager;
               this.protoEntry = protoMsg;

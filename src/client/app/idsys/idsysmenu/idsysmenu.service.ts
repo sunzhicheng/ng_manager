@@ -1,4 +1,3 @@
-import { IDCONF } from './../../shared/idorp/config/app.config';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
@@ -44,7 +43,7 @@ export class IdSysMenuService extends DyBaseService  {
      */
     modalTree(entry: any, protoMessage: any): Observable<any> {
         return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.base + this.api.selectMenu, entry, protoMessage).subscribe(
+            this.httpService.httpRequest(this.api.selectMenu, entry, protoMessage).subscribe(
                 (message: any) => observer.next(message),
                 (error: any) => observer.error(error)
             );
@@ -52,7 +51,7 @@ export class IdSysMenuService extends DyBaseService  {
     }
     bind(entry: any, protoMessage: any): Observable<any> {
       return Observable.create((observer: any) => {
-          this.httpService.httpRequest(this.api.base + this.api.bind, entry, protoMessage).subscribe(
+          this.httpService.httpRequest(this.api.bind, entry, protoMessage).subscribe(
               (message: any) => observer.next(message),
               (error: any) => observer.error(error)
           );

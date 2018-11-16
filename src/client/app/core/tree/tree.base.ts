@@ -7,7 +7,6 @@ import { IdTool } from '../../shared/tool/IdTool';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
 import * as _ from 'lodash';
 import { ToolForm } from '../../shared/tool/ToolForm';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
 import { TreeService } from '../../shared/idorp/service/TreeService';
 import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
@@ -162,7 +161,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     IdTool.mergeAFromB(this._async_config, values, {});
     if (this._config.async) {
       this._async_config.enable = true;
-      this._async_config.url = IDCONF().api_base + this._async_config.requestUrl;
+      this._async_config.url = this._async_config.requestUrl;
       this.base_setting.async = this._async_config;
       this.asyncInit = true;
     }

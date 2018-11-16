@@ -1,7 +1,6 @@
 import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from './../../shared/idorp/service/HttpService';
 import { Component, AfterViewInit, Input, forwardRef, ViewChild } from '@angular/core';
-import { IDCONF } from '../../shared/idorp/config/app.config';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { DynamicBase } from '../dynamic.base';
@@ -28,7 +27,7 @@ declare var $: any;
 
 export class KeEditorDynamicComponent extends DynamicBase implements AfterViewInit {
 
-  uploadUrl = IDCONF().api_file + '/idsys/idfileupload/kindeditor/uploadweb';
+  uploadUrl = '/idsys/idfileupload/kindeditor/uploadweb';
   initChange = false;
   public editor: any;
   //裁剪图片dom

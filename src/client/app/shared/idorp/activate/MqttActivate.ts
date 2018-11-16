@@ -1,16 +1,14 @@
 import { ActivatedRouteSnapshot, CanActivateChild, RouterStateSnapshot, Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Mqtt } from '../../tool/Mqtt';
 
 @Injectable()
 export class MqttAvtivate implements CanActivateChild {
 
-    constructor(public router: Router,
-    ) { }
-
     canActivateChild(childRoute: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean | Observable<boolean> {
-        console.log('MqttAvtivate  将要转向的路由 :' + childRoute.routeConfig.path);
-        const component = childRoute.component;
+        //清空mqtt 连接
+        Mqtt.clear();
         return true;
     }
 }

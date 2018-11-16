@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Paho } from 'ng2-mqtt/mqttws31';
 import { IdMqttService } from '../../shared/idorp/mqtt/IdMqttService';
 import { Router } from '@angular/router';
@@ -10,11 +10,10 @@ import { Router } from '@angular/router';
  */
 @Component({
   moduleId: module.id,
-  selector: 'sd-exam-mqtt',
+  selector: 'demo-mqtt',
   templateUrl: 'mqtt.component.html',
 })
-export class MqttComponent implements OnInit {
-
+export class MqttComponent implements AfterViewInit {
   newName = '';
   errorMessage: string;
   names: any[] = [];
@@ -23,10 +22,7 @@ export class MqttComponent implements OnInit {
   constructor(private mqttService: IdMqttService,
     private _router: Router) { }
 
-  /**
-   * Get the names OnInit
-   */
-  ngOnInit() {
+  ngAfterViewInit(): void {
     this.mqttService.start('/idorpcom/client/3/#', (message: Paho.MQTT.Message) => {
       console.log('Message arrived.', message.payloadString);
       this.addName(message.payloadString);

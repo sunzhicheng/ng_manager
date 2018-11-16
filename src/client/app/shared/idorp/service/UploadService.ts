@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { GpbService } from './gpb.service';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
 import { HttpService } from './HttpService';
-import { IDCONF, HTTPREQ } from '../config/app.config';
+import { HTTPREQ } from '../config/app.config';
 import * as _ from 'lodash';
 import { Observable } from 'rxjs';
 declare let $: any;
@@ -26,7 +26,7 @@ export class UploadService extends HttpService {
    */
     filesAjax(files: any, progress?: any): Observable<any> {
         return Observable.create((observer: any) => {
-            const fileUrl = IDCONF().api_file + '/idsys/idfileupload/uploadweb';
+            const fileUrl = '/idsys/idfileupload/uploadweb';
             this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
                 (protoMessage: any) => {
                     // FormData 对象
@@ -69,7 +69,7 @@ export class UploadService extends HttpService {
             });
             this.toolGpbService.getProto('com2.ComFileEntry').subscribe(
                 (protoMessage: any) => {
-                    this.httpRequest(IDCONF().api_base + '/idsys/idfileupload/detail', { attList: attArr },
+                    this.httpRequest('/idsys/idfileupload/detail', { attList: attArr },
                         protoMessage, HTTPREQ.POST).subscribe(
                             (result: any) => {
                                 observer.next(result);

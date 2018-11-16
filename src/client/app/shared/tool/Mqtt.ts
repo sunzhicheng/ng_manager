@@ -10,9 +10,25 @@ export const PUB_TPOIC_TEST = '/test/pub';
 
 @Injectable()
 export class Mqtt {
-
+    static _clients: Array<Paho.MQTT.Client> = [];
+    //是否使用url 方式连接
     mUrlConnect = true;
-
+    /**
+     * 关闭整个系统所有的mqtt 连接
+     */
+    static clear() {
+        IdLog.log('执行clear方法start  mqtt连接池数量  ： ' + Mqtt._clients.length);
+        if (Mqtt._clients.length > 0) {
+            for (let index = 0; index < Mqtt._clients.length; index++) {
+                const c = Mqtt._clients[index];
+                if (c.isConnected()) {
+                    c.disconnect();
+                }
+            }
+            Mqtt._clients.splice(0, Mqtt._clients.length);
+            IdLog.log('执行clear方法end  mqtt连接池数量  ： ' + Mqtt._clients.length);
+        }
+    }
     // MQTT 服务器配置生成
     protected mqttServer = () => {
         return {
@@ -37,10 +53,10 @@ export class Mqtt {
             keepAliveInterval: 30,
             onSuccess: (event: any) => {
                 IdLog.log('MQTT连接成功', event);
-             },
+            },
             onFailure: (event: any) => {
                 IdLog.log('MQTT连接失败', event);
-             }
+            }
         };
     }
 
@@ -52,10 +68,9 @@ export class Mqtt {
             qos: 1,
             onSuccess: (event: any) => {
                 IdLog.log('MQTT订阅成功', event);
-             }
+            }
         };
     }
-
     /**
      * 生成连接客户端
      * @param clientId 客户端ID，连接唯一标识，保持唯一性
@@ -84,6 +99,7 @@ export class Mqtt {
         if (onMessageDelivered) {
             client.onMessageDelivered = onMessageDelivered;
         }
+
         return client;
     }
 
@@ -173,7 +189,6 @@ export class Mqtt {
         msg.qos = qos;
         client.send(msg);
     }
-
     /**
      * 断开客户端连接
      * @param client MQTT 客户端
