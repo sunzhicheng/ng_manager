@@ -1,9 +1,9 @@
 import { ActivatedRouteSnapshot } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Router, CanActivate, RouterStateSnapshot } from '@angular/router';
-import { ToolAlert } from './ToolAlert';
-import { LocalStorageCacheService } from '../idorp/cache/localstorage.service';
-import { PLATFORM } from '../idorp/config/app.config';
+import { ToolAlert } from '../../tool/ToolAlert';
+import { LocalStorageCacheService } from '../cache/localstorage.service';
+import { PLATFORM } from '../config/app.config';
 
 @Injectable()
 export class AuthAvtivate implements CanActivate {

@@ -34,18 +34,15 @@ export class ToolAlert {
       w.swal('操作成功!', content, 'success');
     }, 200);
   }
- static warningTime(content: any, callback: any) {
+  static warningTime(content: any) {
     const w: any = window;
     w.swal({
-      title: content,
-      text: '',
+      title: '提示',
+      text: content,
+      showConfirmButton: false,
       timer: 2000
-    }).then(
-         () => {
-          callback.call();
-         },
-    );
- }
+    });
+  }
 
   static waring(content: any) {
     const w: any = window;
@@ -76,6 +73,14 @@ export class ToolAlert {
         w.swal('已经取消！', '', 'error');
       }
     });
+  }
+
+  static login(show: any = true) {
+    if (show) {
+      (<any>$('#tokenInvaildDiv')).modal('show');
+    } else {
+      (<any>$('#tokenInvaildDiv')).modal('hide');
+    }
   }
 
 }

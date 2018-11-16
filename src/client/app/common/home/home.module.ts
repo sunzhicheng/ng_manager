@@ -10,16 +10,20 @@ import { IndexComponent } from './index.component';
 import { TreeModule } from '../../core/tree/tree.module';
 import { Ng2TableModule } from '../../core/table/ng-table-module';
 import { DemoModule } from '../../examples/demo/demo.module';
+import { MqttModule } from '../../examples/mqtt/mqtt.module';
+import { MqttRoutingModule } from '../../examples/mqtt/mqtt-routing.module';
 
 @NgModule({
   imports: [HomeRoutingModule, ReactiveFormsModule,
-  //公共
-  CommonModule, SharedModule, SideBarModule,
-  TreeModule, Ng2TableModule, TopNavModule,
-  DemoModule, //dmeo  演示模块
-  //系统
-  IdSysModule,
-   ],
+    //公共
+    CommonModule, SharedModule, SideBarModule,
+    TreeModule, Ng2TableModule, TopNavModule,
+    //系统
+    IdSysModule,
+    //以下是  演示模块  可以删除
+    DemoModule,
+    MqttModule, MqttRoutingModule,
+  ],
   declarations: [HomeComponent, IndexComponent],
   exports: [HomeComponent, IndexComponent]
 })

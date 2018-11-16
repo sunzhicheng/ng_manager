@@ -1,5 +1,7 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Paho } from 'ng2-mqtt/mqttws31';
+import { IdMqttService } from '../../shared/idorp/mqtt/IdMqttService';
+import { Router } from '@angular/router';
 
 
 /**
@@ -11,73 +13,30 @@ import { Paho } from 'ng2-mqtt/mqttws31';
   selector: 'sd-exam-mqtt',
   templateUrl: 'mqtt.component.html',
 })
-export class MqttComponent implements OnInit, OnDestroy {
+export class MqttComponent implements OnInit {
 
   newName = '';
   errorMessage: string;
   names: any[] = [];
 
-  private _client: Paho.MQTT.Client;
 
-  // constructor() {}
+  constructor(private mqttService: IdMqttService,
+    private _router: Router) { }
 
   /**
    * Get the names OnInit
    */
   ngOnInit() {
-    this._client = new Paho.MQTT.Client('139.196.153.191', 8083, '/mqtt', '3');
-
-    this._client.onConnectionLost = (responseObject: Object) => {
-      console.log('Connection lost.', responseObject);
-    };
-
-    const me = this;
-    this._client.onMessageArrived = (message: Paho.MQTT.Message) => {
+    this.mqttService.start('/idorpcom/client/3/#', (message: Paho.MQTT.Message) => {
       console.log('Message arrived.', message.payloadString);
-      me.addName(message.payloadString);
-    };
-
-    // 根据实际项目定义
-    this._client.connect({
-      userName: 'yinhao',
-      password: 'yinhao',
-      cleanSession: false,
-      keepAliveInterval: 30,
-      onSuccess: this.onConnected.bind(this),
-      onFailure: this.onConnectedFail.bind(this)
+      this.addName(message.payloadString);
     });
   }
-
-  onConnected(res: any): void {
-    console.log('Connected to broker.', res);
-    // 根据实际项目定义
-    this._client.subscribe('/idorpcom/client/3/#', {qos: 2, onSuccess: this.onSubSuccess.bind(this)});
-  }
-
-  onConnectedFail(error: any): void {
-    console.log('Connected to broker fail.', error);
-  }
-
-  ngOnDestroy() {
-    this._client.disconnect();
-  }
-
-  onSubSuccess(res: any): void {
-    console.log('onSubSuccess to broker.', res);
-  }
-
   /**
    * 测试MQTT消息推送
    */
   sendToMqtt() {
-    const msg: Paho.MQTT.Message = new Paho.MQTT.Message(this.newName);
-    msg.destinationName = '/idorpcom/client/3/test';
-    msg.retained = true;
-    msg.qos = 2;
-
-    this._client.send(msg);
-
-    this.newName = '';
+    this.mqttService.publish('/idorpcom/client/3/test', this.newName);
   }
 
   /**
@@ -88,6 +47,11 @@ export class MqttComponent implements OnInit, OnDestroy {
     // TODO: implement nameListService.post
     this.names.push(msg);
     return false;
+  }
+
+  toLogin() {
+    const link = ['/'];
+    this._router.navigate(link);
   }
 
 }

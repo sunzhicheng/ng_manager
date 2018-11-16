@@ -36,16 +36,6 @@ export class HttpService {
      */
     public httpRequest(url: string, body: any = null, proto: any = null,
         httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers: this.apiHead }): Observable<any> {
-        if (API_DEBUG) {
-            console.log('httpRequest url : ' + url);
-        }
-        // 根据状态选择URL请求
-        const apiBase = API_DEBUG ? BASE_URL_DEBUG : BASE_URL;
-        url = IdTool.formatUrl(url.startsWith('http') ? url : apiBase + url);
-        if (API_DEBUG) {
-            console.log('httpRequest url : ' + url);
-        }
-
         options.headers = options.headers || new HttpHeaders();
         options.responseType = 'text';
         if (proto) {
@@ -54,19 +44,10 @@ export class HttpService {
                 // TODO: 这边正式开发替换为登陆Token
                 options.headers = options.headers.append('id-token', this.getToken(url));
             }
-            // else {
-            //     options.headers = options.headers.append('Content-Type', 'application/json; charset=utf-8');
-            //     options.headers = options.headers.append('idorp-agent', 'idorp-agent-web');
-            // }
-
         } else {
             // 以普通方式提交
             options.headers = options.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
         }
-        if (API_DEBUG) {
-            console.log('httpRequest : ', options);
-        }
-
         return Observable.create((observer: any) => {
             let reqBody = {};
             if (proto) {
@@ -104,9 +85,6 @@ export class HttpService {
                     observer.next(resText);
                 }
             }, (err: any) => {
-                if (err.status === 401) {
-                    (<any>$('#tokenInvaildDiv')).modal('show');
-                }
                 observer.error(err);
             });
         });

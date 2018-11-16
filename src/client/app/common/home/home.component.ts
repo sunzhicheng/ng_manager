@@ -16,69 +16,15 @@ declare const $: any;
   // directives: [ROUTER_DIRECTIVES, TopNavComponent,FootNavComponent, SidebarComponent]
 })
 
-export class HomeComponent extends BaseComponent implements OnInit, AfterContentInit {
-  errorMessage: any;
-  pt_account: any;
+export class HomeComponent extends BaseComponent implements OnInit {
   @ViewChild(SidebarComponent)
   public sidebar: SidebarComponent;
   ngOnInit() {
     $('home-cmp').addClass('vbox');
   }
 
-  constructor(
-    private localCache: LocalStorageCacheService,
-    private loginService: LoginService) {
-      super();
-  }
-  ngAfterContentInit() {
-    this.pt_account = localStorage.getItem('pt_account');
-  }
-
   searchSidebar(keyword: any) {
     this.sidebar.hasMenu(keyword);
-  }
-
-  check(pt_account: any, pt_pwd: any): boolean {
-    if (!pt_account) {
-      this.errorMessage = '帐号不能为空';
-      return false;
-    }
-    if (!pt_pwd) {
-      this.errorMessage = '密码不能为空';
-      return false;
-    }
-    return true;
-  }
-  /**
-   * 登陆
-   */
-  login(pt_account: any, pt_pwd: any) {
-    if (this.check(pt_account, pt_pwd)) {
-      this.loginService.getProtoEntry().subscribe(
-        (protoMessage: any) => {
-          const ptType = localStorage.getItem('ptType');
-          const sysUserEntry = protoMessage.create({ query: { uuid: ptType ? ptType : 'operate'  },
-          token: {ext: {pt_account: pt_account, pt_pwd: pt_pwd}}, ext: {} });
-          this.log('IdSysUserType query params : ' + sysUserEntry);
-          this.loginService.loginByTokenInvaild(sysUserEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              if (protoMsg.token && protoMsg.token.ex) {
-                let errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_short_msg');
-                if (!errorMsg) {
-                     errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_tips');
-                }
-                this.errorMessage = errorMsg;
-              } else {
-                this.setJson(protoMsg, 'token.ext.pt_account', this.pt_account);
-                this.localCache.setLoginInfo(protoMsg);
-                CustomReuseStrategy.removeAll();
-                (<any>$('#tokenInvaildDiv')).modal('hide');
-              }
-            },
-            (error: any) => console.error(error)
-          );
-        });
-    }
   }
 
 }

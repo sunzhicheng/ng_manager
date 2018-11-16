@@ -2,8 +2,12 @@
 {
   "typescript.tsdk": "node_modules/typescript/lib",
   "search.exclude": {
-    "**/coverage_js": true,
-    "**/coverage": true,
+    "**/dist": true
+  },
+  "search.followSymlinks": false,
+  // 启用后，将在保存文件时剪裁尾随空格。
+  "files.trimTrailingWhitespace": true,
+  "files.watcherExclude": {
     "**/dist": true
   }
 }

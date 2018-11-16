@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MqttComponent } from './mqtt.component';
 import { MqttRoutingModule } from './mqtt-routing.module';
+import { IdMqttService } from '../../shared/idorp/mqtt/IdMqttService';
 
 
 
@@ -10,6 +11,6 @@ import { MqttRoutingModule } from './mqtt-routing.module';
   imports: [FormsModule, CommonModule, MqttRoutingModule ],
   declarations: [MqttComponent],
   exports: [MqttComponent],
-  providers: []
+  providers: [IdMqttService]
 })
 export class MqttModule { }
