@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from '../../shared/idorp/service/HttpService';
 import { GpbService } from '../../shared/idorp/service/gpb.service';
 import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
+import { IDCONF } from '../../shared/idorp/config/app.config';
 
 @Injectable()
 export class LoginService extends DyBaseService  {
@@ -61,7 +62,7 @@ export class LoginService extends DyBaseService  {
   }
 
   getCaptcha() {
-    return this.api.captcha + '/' + this.sessionId + '?' + (this.random++);
+    return IDCONF().api_base + this.api.captcha + '/' + this.sessionId + '?' + (this.random++);
   }
   /**
    * 添加会话ID，不允许传空对像

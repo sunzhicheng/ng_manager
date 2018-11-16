@@ -3,9 +3,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IdTool } from '../../tool/IdTool';
-import { API_DEBUG, HTTPREQ } from '../config/app.config';
+import { HTTPREQ } from '../config/app.config';
 import { GpbService } from './gpb.service';
-import { BASE_URL_DEBUG, BASE_URL } from '../config/env.config';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
 declare let $: any;
 /**
