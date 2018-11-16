@@ -9,6 +9,14 @@ export class IdMqttService extends Mqtt implements OnDestroy {
     constructor() {
         super();
       }
+    /**
+     * 启动mqtt 服务
+     * @param subscribeTopic  监听的topic
+     * @param onMessageArrived  收到信息的处理方法
+     * @param clientId  客户端id
+     * @param onConnectLost 连接丢失方法
+     * @param onMessageDelivered  消息送达方法
+     */
     start(subscribeTopic: any, onMessageArrived?: any, clientId?: string,
         onConnectLost?: any, onMessageDelivered?: any) {
         this.mqttClient = this.getClient(clientId, onMessageArrived, onConnectLost, onMessageDelivered);

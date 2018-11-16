@@ -10,6 +10,7 @@ import {
   HttpProgressEvent,
   HttpResponse,
   HttpUserEvent,
+  HttpHeaders,
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { mergeMap, catchError, ignoreElements } from 'rxjs/operators';
@@ -37,7 +38,7 @@ export class DefaultInterceptor implements HttpInterceptor {
 
 
   constructor(private injector: Injector,
-    private localStorage: LocalStorageCacheService) { }
+    private localstorage: LocalStorageCacheService) { }
 
   intercept(
     req: HttpRequest<any>,
@@ -56,8 +57,13 @@ export class DefaultInterceptor implements HttpInterceptor {
     // 处理url 双斜杠错误
     url = IdTool.formatUrl(url);
     IdLog.log('httpRequest url : ' + url);
-    const newReq = req.clone({
+    // let apiHead = new HttpHeaders();
+    // apiHead = apiHead.append('Content-Type', 'application/json; charset=utf-8');
+    // apiHead = apiHead.append('id-proto', 'base64');
+    // apiHead = apiHead.append('id-token', this.localstorage.getToken()); //设置token
+    let newReq: any = req.clone({
       url: url,
+      // headers: apiHead
     });
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {

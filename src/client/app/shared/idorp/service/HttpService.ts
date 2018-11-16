@@ -101,13 +101,7 @@ export class HttpService {
                 errorMsg = IdTool.getJson(token, 'ex.ex_tips');
             }
             if (error_type === 1 || error_type === 2) {
-                // const ptType = localStorage.getItem('ptType');
-                // if (ptType) {
-                //     this._router.navigateByUrl(ptType + '/login');
-                // } else {
-                //     this._router.navigateByUrl('/');
-                // }
-                (<any>$('#tokenInvaildDiv')).modal('show');
+                ToolAlert.login(true);
             } else {
                 ToolAlert.error(errorMsg);
             }
