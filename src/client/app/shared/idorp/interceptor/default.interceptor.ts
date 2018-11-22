@@ -36,7 +36,6 @@ export class DefaultInterceptor implements HttpInterceptor {
     ]
   };
 
-
   constructor(private injector: Injector,
     private localstorage: LocalStorageCacheService) { }
 
@@ -61,7 +60,7 @@ export class DefaultInterceptor implements HttpInterceptor {
     // apiHead = apiHead.append('Content-Type', 'application/json; charset=utf-8');
     // apiHead = apiHead.append('id-proto', 'base64');
     // apiHead = apiHead.append('id-token', this.localstorage.getToken()); //设置token
-    let newReq: any = req.clone({
+    const newReq: any = req.clone({
       url: url,
       // headers: apiHead
     });
