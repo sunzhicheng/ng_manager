@@ -131,6 +131,7 @@ export class DefaultInterceptor implements HttpInterceptor {
       default:
         if (event instanceof HttpErrorResponse) {
           IdLog.error('服务器错误: ', event);
+          ToolAlert.animation(`网络异常`, `服务器已断开`);
         }
         break;
     }

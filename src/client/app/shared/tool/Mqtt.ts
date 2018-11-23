@@ -2,11 +2,7 @@ import { Injectable } from '@angular/core';
 import { Paho } from 'ng2-mqtt/mqttws31';
 import { IdTool } from './IdTool';
 import { IdLog } from './IdLog';
-
-
-export const SUB_TPOIC_TEST = '/test/sub';
-export const PUB_TPOIC_TEST = '/test/pub';
-
+import { LocalStorageCacheService } from '../idorp/cache/localstorage.service';
 
 @Injectable()
 export class Mqtt {
@@ -29,6 +25,9 @@ export class Mqtt {
             IdLog.log('执行clear方法end  mqtt连接池数量  ： ' + Mqtt._clients.length);
         }
     }
+    constructor(
+        public localStorge: LocalStorageCacheService) {
+    }
     // MQTT 服务器配置生成
     protected mqttServer = () => {
         return {
@@ -37,7 +36,7 @@ export class Mqtt {
             // host: 'emq.naliangkuai.com',
             port: 443,
             path: '/mqtt',
-            clientId: IdTool.randomString(10),
+            clientId: 'manager_h5_' + IdTool.randomString(10),
             url: 'wss://emq.naliangkuai.com/mqtt'
         };
     }
@@ -45,7 +44,7 @@ export class Mqtt {
     // MQTT 连接配置生成
     protected mqttConnect = () => {
         return {
-            userName: IdTool.randomString(5),
+            userName: this.localStorge.getAccount() + '@' + IdTool.randomString(5),
             password: IdTool.randomString(5),
             cleanSession: true,
             // useSSL: false,

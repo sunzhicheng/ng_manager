@@ -46,6 +46,10 @@ export class LocalStorageCacheService {
     const account_cache = localStorage.getItem('pt_account');
     return account_in === account_cache;
   }
+  getAccount() {
+    const account_cache = localStorage.getItem('pt_account');
+    return account_cache;
+  }
   /**
    * 设置LoginInfo
    * @param params

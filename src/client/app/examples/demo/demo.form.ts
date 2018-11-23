@@ -120,7 +120,6 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
   }
 
   myInit() {
-    $('sys-account-form').addClass('vbox');
     this.route.params.subscribe(params => {
       const fd = this.demoService.initFormData();
       if (params['uuid']) {
