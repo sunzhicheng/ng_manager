@@ -1,7 +1,7 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, OnInit, Input, EventEmitter, Output, AfterViewInit, forwardRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { HttpService } from '../../shared/service/HttpService';
 import { IdTool } from '../../shared/tool/IdTool';
 import { ControlValueAccessor } from '@angular/forms';
 import { DynamicBase } from '../dynamic.base';

@@ -16,7 +16,7 @@ import { DemoTreeInComponent } from './tree/demo.tree.in';
 import { TreeTableModule } from '../core/tree-table/tree-table.module';
 import { DemoTreeTableComponent } from './treetable/demo.tree.table';
 import { MqttComponent } from './mqtt/mqtt.component';
-import { IdMqttService } from '../shared/idorp/mqtt/IdMqttService';
+import { IdMqttService } from '../shared/mqtt/IdMqttService';
 
 /**
  * 商城模块 模块

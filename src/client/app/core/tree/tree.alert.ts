@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import * as _ from 'lodash';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
-import { TreeService } from '../../shared/idorp/service/TreeService';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
+import { TreeService } from '../../shared/service/TreeService';
 import { TreeComponent } from './tree.base';
 
 declare const $: any;

@@ -2,9 +2,9 @@ import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
 import { ViewChild, OnInit, ElementRef } from '@angular/core';
-import { FormFormComponent } from '../../../core/f-table/f-form.component';
-import { IdTool } from '../../tool/IdTool';
-import { ToolForm } from '../../tool/ToolForm';
+import { FormFormComponent } from '../../core/f-table/f-form.component';
+import { IdTool } from '../tool/IdTool';
+import { ToolForm } from '../tool/ToolForm';
 declare const $: any;
 /**
  *  表单组件基类

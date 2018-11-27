@@ -1,8 +1,8 @@
-import { ToolAlert } from '../../tool/ToolAlert';
+import { ToolAlert } from '../tool/ToolAlert';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 import { HTTPREQ } from '../config/app.config';
 import { GpbService } from './gpb.service';
 import { LocalStorageCacheService } from '../cache/localstorage.service';

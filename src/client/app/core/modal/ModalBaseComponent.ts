@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import * as _ from 'lodash';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 import { Input } from '@angular/core';
 import { IdTool } from '../../shared/tool/IdTool';
 import { Output, EventEmitter } from '@angular/core';

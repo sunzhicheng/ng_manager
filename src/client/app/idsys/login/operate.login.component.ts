@@ -1,11 +1,11 @@
 import { Component, OnInit, AfterViewInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { LoginService } from './login.service';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
-import { TOKEN_INIT, PLATFORM } from '../../shared/idorp/config/app.config';
+import { BaseComponent } from '../../shared/component/BaseComponent';
+import { TOKEN_INIT, PLATFORM } from '../../shared/config/app.config';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { Title } from '@angular/platform-browser';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 
 declare let $: any;
 /**

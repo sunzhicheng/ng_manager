@@ -1,12 +1,12 @@
 import { TreeService } from '../service/TreeService';
 import { DyBaseService } from '../service/IdBaseService';
 import { ViewChild, OnInit, ElementRef } from '@angular/core';
-import { TreeAlertComponent } from '../../../core/tree/tree.alert';
-import { ToolForm } from '../../tool/ToolForm';
+import { TreeAlertComponent } from '../../core/tree/tree.alert';
+import { ToolForm } from '../tool/ToolForm';
 import { ListBaseComponent } from './ListBaseComponent';
 import { APISOURCE } from '../config/app.config';
-import { TreeInComponent } from '../../../core/tree/tree.in';
-import { TreeComponent } from '../../../core/tree/tree.base';
+import { TreeInComponent } from '../../core/tree/tree.in';
+import { TreeComponent } from '../../core/tree/tree.base';
 /**
  * 列表组件基类
  */

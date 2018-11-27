@@ -1,8 +1,8 @@
 import { Component, ViewEncapsulation, OnInit, Output, EventEmitter, AfterContentInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
+import { BaseComponent } from '../../shared/component/BaseComponent';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 import { LoginService } from './login.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';

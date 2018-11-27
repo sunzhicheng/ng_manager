@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 
-import { GpbService } from '../../shared/idorp/service/gpb.service';
+import { GpbService } from '../../shared/service/gpb.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 

@@ -1,4 +1,4 @@
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 import { Component, OnInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { IdTool } from '../../shared/tool/IdTool';

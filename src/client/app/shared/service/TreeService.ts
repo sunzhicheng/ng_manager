@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 import { DyBaseService } from './IdBaseService';
 import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';

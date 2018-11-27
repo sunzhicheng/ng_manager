@@ -7,9 +7,9 @@ import { IdTool } from '../../shared/tool/IdTool';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
 import * as _ from 'lodash';
 import { ToolForm } from '../../shared/tool/ToolForm';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
-import { TreeService } from '../../shared/idorp/service/TreeService';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
+import { TreeService } from '../../shared/service/TreeService';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 
 declare const $: any;
 /**

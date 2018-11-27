@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
-import { Events } from '../../tool/events';
+import { Events } from '../tool/events';
 
 /**
  * 事件处理

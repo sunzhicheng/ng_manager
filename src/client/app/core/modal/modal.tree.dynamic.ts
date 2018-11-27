@@ -1,11 +1,11 @@
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { Component, OnInit, Input, forwardRef, DoCheck } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { HttpService } from '../../shared/service/HttpService';
 import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { TreeService } from '../../shared/idorp/service/TreeService';
+import { GpbService } from '../../shared/service/gpb.service';
+import { TreeService } from '../../shared/service/TreeService';
 
 declare let $: any;
 

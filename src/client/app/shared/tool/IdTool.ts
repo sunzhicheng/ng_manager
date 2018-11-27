@@ -1,4 +1,4 @@
-import { IDCONF } from '../idorp/config/app.config';
+import { IDCONF } from '../config/app.config';
 import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 

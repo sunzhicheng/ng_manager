@@ -1,7 +1,7 @@
 import { Route } from '@angular/router';
 import { IdSysAppAcountComponent } from './idsysappacount.component';
 import { IdSysAccountFormComponent } from './idsysappacount.form';
-import { AuthAvtivate } from '../../shared/idorp/activate/AuthActivate';
+import { AuthAvtivate } from '../../shared/activate/AuthActivate';
 
 
 

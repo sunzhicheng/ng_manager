@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DemoService } from './demo.service';
 import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 
 
 

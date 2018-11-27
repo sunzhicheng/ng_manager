@@ -1,5 +1,5 @@
 import { Component, forwardRef } from '@angular/core';
-import { UploadService } from '../../../shared/idorp/service/UploadService';
+import { UploadService } from '../../../shared/service/UploadService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { UploadDynamicBaseComponent } from '../upload.dynamic.base.';
 

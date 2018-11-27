@@ -1,7 +1,7 @@
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 import * as _ from 'lodash';
 import { PAGER_INIT } from '../config/app.config';
-import { IdLog } from '../../tool/IdLog';
+import { IdLog } from '../tool/IdLog';
 
 export class BaseComponent {
     _: any = _;

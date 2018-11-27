@@ -14,11 +14,11 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { mergeMap, catchError, ignoreElements } from 'rxjs/operators';
-import { IdLog } from '../../tool/IdLog';
+import { IdLog } from '../tool/IdLog';
 import { IDCONF } from '../config/app.config';
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
-import { ToolAlert } from '../../tool/ToolAlert';
+import { ToolAlert } from '../tool/ToolAlert';
 import * as _ from 'lodash';
 declare const $: any;
 /**

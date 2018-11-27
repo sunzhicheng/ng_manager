@@ -2,8 +2,8 @@ import { Component, ViewEncapsulation, OnInit, Output, EventEmitter } from '@ang
 import { Router } from '@angular/router';
 import { TopnavService } from './topnav.service';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
+import { BaseComponent } from '../../shared/component/BaseComponent';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 
 @Component({
   moduleId: module.id,

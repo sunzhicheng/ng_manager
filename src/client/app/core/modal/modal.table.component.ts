@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { HttpService } from '../../shared/service/HttpService';
 import * as _ from 'lodash';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
+import { GpbService } from '../../shared/service/gpb.service';
 import { NgStaticTableComponent } from '../table/ng-static-table.component';
 import { ModalBaseComponent } from './ModalBaseComponent';
 

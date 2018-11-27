@@ -13,9 +13,9 @@ import { CustomReuseStrategy } from './shared/tool/CustomReuseStrategy';
 // 网页Title控制
 import { Title } from '@angular/platform-browser';
 import { HomeModule } from './common/home/home.module';
-import { AuthAvtivate } from './shared/idorp/activate/AuthActivate';
-import { MqttAvtivate } from './shared/idorp/activate/MqttActivate';
-import { DefaultInterceptor } from './shared/idorp/interceptor/default.interceptor';
+import { AuthAvtivate } from './shared/activate/AuthActivate';
+import { MqttAvtivate } from './shared/activate/MqttActivate';
+import { DefaultInterceptor } from './shared/interceptor/default.interceptor';
 
 
 @NgModule({

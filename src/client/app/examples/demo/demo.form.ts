@@ -2,8 +2,8 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DemoService } from './demo.service';
 import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
-import { SysEvent } from '../../shared/idorp/event/sys.event';
-import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
+import { SysEvent } from '../../shared/event/sys.event';
+import { FormBaseComponent } from '../../shared/component/FormBaseComponent';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
 
 

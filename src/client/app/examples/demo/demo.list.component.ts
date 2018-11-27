@@ -1,11 +1,11 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
-import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
+import { ListBaseComponent } from '../../shared/component/ListBaseComponent';
 import { Router } from '@angular/router';
 import { DemoService } from './demo.service';
 import { ViewChild } from '@angular/core';
 import { ModalFormComponent } from '../../core/modal/modal.form.component';
 import { ModalTableComponent } from '../../core/modal/modal.table.component';
-import { SysEvent } from '../../shared/idorp/event/sys.event';
+import { SysEvent } from '../../shared/event/sys.event';
 import { of, fromEvent, interval, Observable, timer, forkJoin, combineLatest } from 'rxjs';
 import { mergeMap, map, debounceTime, scan, distinctUntilChanged, mapTo, concatMap, concat, pairwise, switchMap } from 'rxjs/operators';
 declare let $: any;

@@ -1,4 +1,4 @@
-import { BaseComponent } from '../shared/idorp/component/BaseComponent';
+import { BaseComponent } from '../shared/component/BaseComponent';
 import { ControlValueAccessor } from '@angular/forms';
 import { IdTool } from '../shared/tool/IdTool';
 import { Input, Output, EventEmitter } from '@angular/core';

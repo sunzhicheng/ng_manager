@@ -2,7 +2,7 @@ import { AfterContentChecked, ElementRef, OnInit } from '@angular/core';
 import * as _ from 'lodash';
 import { DyBaseService } from '../service/IdBaseService';
 import { BaseComponent } from './BaseComponent';
-import { ToolAlert } from '../../tool/ToolAlert';
+import { ToolAlert } from '../tool/ToolAlert';
 import { PAGER_INIT, APISOURCE } from '../config/app.config';
 /**
  * 列表组件基类

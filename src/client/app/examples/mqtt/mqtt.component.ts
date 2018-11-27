@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { Paho } from 'ng2-mqtt/mqttws31';
-import { IdMqttService } from '../../shared/idorp/mqtt/IdMqttService';
+import { IdMqttService } from '../../shared/mqtt/IdMqttService';
 import { Router } from '@angular/router';
 
 

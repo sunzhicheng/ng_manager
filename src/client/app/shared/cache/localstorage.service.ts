@@ -1,7 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { GpbService } from '../service/gpb.service';
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 import { PLATFORM } from '../config/app.config';
 
 /**

@@ -1,6 +1,6 @@
 import { IdTool } from '../../../shared/tool/IdTool';
 import { Input } from '@angular/core';
-import { UploadService } from '../../../shared/idorp/service/UploadService';
+import { UploadService } from '../../../shared/service/UploadService';
 import * as _ from 'lodash';
 import { UploadDynamicBaseComponent } from '../upload.dynamic.base.';
 

@@ -1,9 +1,9 @@
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { HttpService } from '../../shared/idorp/service/HttpService';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { IDCONF } from '../../shared/idorp/config/app.config';
+import { HttpService } from '../../shared/service/HttpService';
+import { GpbService } from '../../shared/service/gpb.service';
+import { DyBaseService } from '../../shared/service/IdBaseService';
+import { IDCONF } from '../../shared/config/app.config';
 
 @Injectable()
 export class LoginService extends DyBaseService  {

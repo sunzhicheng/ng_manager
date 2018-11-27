@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { TreeService } from '../../shared/idorp/service/TreeService';
+import { TreeService } from '../../shared/service/TreeService';
 import { IdSysMenuService } from '../../idsys/idsysmenu/idsysmenu.service';
 import { DemoService } from '../demo/demo.service';
 import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
-import { TreeTableBaseComponent } from '../../shared/idorp/component/TreeTableBaseComponent';
+import { TreeTableBaseComponent } from '../../shared/component/TreeTableBaseComponent';
 declare const $: any;
 
 

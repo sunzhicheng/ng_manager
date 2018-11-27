@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { HttpService } from '../../shared/service/HttpService';
 
 declare let $: any;
 

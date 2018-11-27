@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { IdTool } from '../../tool/IdTool';
+import { IdTool } from '../tool/IdTool';
 
 /**
  * 缓存服务

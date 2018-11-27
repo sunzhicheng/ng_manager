@@ -1,6 +1,6 @@
 import { IdSysAppAcountService } from './idsysappacount.service';
 import { Component, ElementRef } from '@angular/core';
-import { ListBaseComponent } from '../../shared/idorp/component/ListBaseComponent';
+import { ListBaseComponent } from '../../shared/component/ListBaseComponent';
 import { Router } from '@angular/router';
 
 

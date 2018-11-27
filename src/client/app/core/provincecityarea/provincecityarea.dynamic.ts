@@ -1,7 +1,7 @@
 import { Component, AfterContentInit, forwardRef } from '@angular/core';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
+import { GpbService } from '../../shared/service/gpb.service';
 import { IdTool } from '../../shared/tool/IdTool';
-import { HttpService } from '../../shared/idorp/service/HttpService';
+import { HttpService } from '../../shared/service/HttpService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { DynamicBase } from '../dynamic.base';
 

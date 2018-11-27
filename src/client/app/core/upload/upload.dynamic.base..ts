@@ -3,7 +3,7 @@ import { ToolAlert } from '../../shared/tool/ToolAlert';
 import { Input } from '@angular/core';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
-import { UploadService } from '../../shared/idorp/service/UploadService';
+import { UploadService } from '../../shared/service/UploadService';
 
 /**
  * 所有上传的基类  如图片 文件  等

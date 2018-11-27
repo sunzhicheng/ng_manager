@@ -4,7 +4,7 @@ import { DFControlService } from './df-control.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import _ from 'lodash';
 import { Router } from '@angular/router';
-import { SessionStorageCacheService } from '../../shared/idorp/cache/sessionStorage.service';
+import { SessionStorageCacheService } from '../../shared/cache/sessionStorage.service';
 
 declare let $: any;
 

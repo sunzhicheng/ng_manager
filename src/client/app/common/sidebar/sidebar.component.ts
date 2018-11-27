@@ -3,11 +3,11 @@ import { IdTool } from '../../shared/tool/IdTool';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { GpbService } from '../../shared/service/gpb.service';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 import * as _ from 'lodash';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
-import { SessionStorageCacheService } from '../../shared/idorp/cache/sessionStorage.service';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
+import { SessionStorageCacheService } from '../../shared/cache/sessionStorage.service';
 declare const $: any;
 
 @Component({

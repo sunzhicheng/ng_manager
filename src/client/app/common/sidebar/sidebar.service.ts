@@ -1,9 +1,9 @@
-import { HttpService } from './../../shared/idorp/service/HttpService';
+import { HttpService } from './../../shared/service/HttpService';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { SysEvent } from '../../shared/idorp/event/sys.event';
+import { DyBaseService } from '../../shared/service/IdBaseService';
+import { GpbService } from '../../shared/service/gpb.service';
+import { SysEvent } from '../../shared/event/sys.event';
 
 @Injectable()
 export class SidebarService extends DyBaseService {

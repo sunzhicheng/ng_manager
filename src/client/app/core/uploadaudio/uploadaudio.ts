@@ -1,7 +1,7 @@
 import { IdTool } from '../../shared/tool/IdTool';
 import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
-import { UploadService } from '../../shared/idorp/service/UploadService';
+import { UploadService } from '../../shared/service/UploadService';
 
 // 不建议使用
 declare  let $: any;

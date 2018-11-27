@@ -1,7 +1,7 @@
 import { Component, ElementRef } from '@angular/core';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
-import { TreeService } from '../../shared/idorp/service/TreeService';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
+import { TreeService } from '../../shared/service/TreeService';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 import { TreeComponent } from './tree.base';
 /**
  * 新增修改  将在一个页面树右侧显示

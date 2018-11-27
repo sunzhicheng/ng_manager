@@ -1,10 +1,10 @@
 import { Component, ViewEncapsulation, AfterContentInit, OnInit, ViewChild } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { LoginService } from '../../idsys/login/login.service';
-import { BaseComponent } from '../../shared/idorp/component/BaseComponent';
+import { BaseComponent } from '../../shared/component/BaseComponent';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { IdTool } from '../../shared/tool/IdTool';
-import { LocalStorageCacheService } from '../../shared/idorp/cache/localstorage.service';
+import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 declare const $: any;
 
 @Component({

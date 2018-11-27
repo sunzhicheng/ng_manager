@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { HttpService } from '../../shared/idorp/service/HttpService';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
-import { PAGER_INIT } from '../../shared/idorp/config/app.config';
+import { DyBaseService } from '../../shared/service/IdBaseService';
+import { HttpService } from '../../shared/service/HttpService';
+import { GpbService } from '../../shared/service/gpb.service';
+import { PAGER_INIT } from '../../shared/config/app.config';
 import { IdTool } from '../../shared/tool/IdTool';
 
 /**

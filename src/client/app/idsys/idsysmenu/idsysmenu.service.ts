@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { DyBaseService } from '../../shared/idorp/service/IdBaseService';
-import { HttpService } from '../../shared/idorp/service/HttpService';
-import { GpbService } from '../../shared/idorp/service/gpb.service';
+import { DyBaseService } from '../../shared/service/IdBaseService';
+import { HttpService } from '../../shared/service/HttpService';
+import { GpbService } from '../../shared/service/gpb.service';
 
 /**
  * 系统模块 菜单配置 服务类

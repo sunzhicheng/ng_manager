@@ -2,7 +2,7 @@ import { IdSysAppAcountService } from './idsysappacount.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { FormBaseComponent } from '../../shared/idorp/component/FormBaseComponent';
+import { FormBaseComponent } from '../../shared/component/FormBaseComponent';
 
 
 
