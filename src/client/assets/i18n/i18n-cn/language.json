@@ -535,7 +535,7 @@
     "user_update": "员工修改",
     "user_list": "员工列表",
     "user_query": "员工查询",
-    "pt_account": "帐号",
+    "account": "帐号",
     "user_name": "用户名",
     "nick_name": "昵称",
     "password_require": "不可见,可修改",

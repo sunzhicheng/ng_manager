@@ -2,7 +2,6 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { GpbService } from './service/gpb.service';
 import { HttpService } from './service/HttpService';
 import { TreeService } from './service/TreeService';
 import { LocalStorageCacheService } from './cache/localstorage.service';
@@ -23,7 +22,6 @@ export class SharedModule {
       providers: [
         HttpService,
         UploadService,
-        GpbService,
         TreeService,
         LocalStorageCacheService,
         SessionStorageCacheService,

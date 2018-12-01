@@ -12,6 +12,7 @@ import { OperateLoginComponent } from './login/operate.login.component';
 import { IdSysMenuComponent } from './idsysmenu/idsysmenu.component';
 import { IdSysMenuService } from './idsysmenu/idsysmenu.service';
 import { LoginAlterComponent } from './login/login.alter.component';
+import { FormsModule } from '@angular/forms';
 
 /**
  * 系统模块 模块
@@ -21,7 +22,7 @@ import { LoginAlterComponent } from './login/login.alter.component';
  */
 @NgModule({
   imports: [
-    CommonModule, SharedModule, TreeModule, RouterModule,
+    CommonModule, SharedModule, TreeModule, RouterModule, FormsModule,
     FormTableModule
   ],
   exports: [

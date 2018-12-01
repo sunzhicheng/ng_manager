@@ -17,10 +17,10 @@ export class ToolAlert {
     this.success('操作成功');
   }
 
-  static error(tips: any) {
+  static error(tips: any, title: any = '操作异常') {
     const w: any = window;
     setTimeout(() => {
-      w.sweetAlert('操作异常', tips, 'error');
+      w.sweetAlert(title, tips, 'error');
     }, 200);
   }
 

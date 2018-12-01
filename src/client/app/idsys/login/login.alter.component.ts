@@ -18,7 +18,8 @@ import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 export class LoginAlterComponent extends BaseComponent implements AfterContentInit {
 
   errorMessage: any;
-  pt_account: any;
+  account: any;
+  pwd: any;
   constructor(private loginService: LoginService,
     private localCache: LocalStorageCacheService,
     public _router: Router) {
@@ -27,14 +28,14 @@ export class LoginAlterComponent extends BaseComponent implements AfterContentIn
   }
 
   ngAfterContentInit() {
-    this.pt_account = localStorage.getItem('pt_account');
-    if (!this.pt_account) {
+    this.account = this.localCache.getAccount();
+    if (!this.account) {
       this._router.navigateByUrl('/');
     }
   }
 
-  check(pt_account: any, pt_pwd: any): boolean {
-    if (!pt_account) {
+  check(account: any, pt_pwd: any): boolean {
+    if (!account) {
       this.errorMessage = '帐号不能为空';
       return false;
     }
@@ -47,34 +48,28 @@ export class LoginAlterComponent extends BaseComponent implements AfterContentIn
   /**
    * 登陆
    */
-  login(pt_account: any, pt_pwd: any) {
-    if (this.check(pt_account, pt_pwd)) {
-      this.loginService.getProtoEntry().subscribe(
-        (protoMessage: any) => {
-          const ptType = localStorage.getItem('ptType');
-          const sysUserEntry = protoMessage.create({
-            query: { uuid: ptType ? ptType : 'operate' },
-            token: { ext: { pt_account: pt_account, pt_pwd: pt_pwd } }, ext: {}
-          });
-          this.log('IdSysUserType query params : ' + sysUserEntry);
-          this.loginService.loginByTokenInvaild(sysUserEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              if (protoMsg.token && protoMsg.token.ex) {
-                let errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_short_msg');
-                if (!errorMsg) {
-                  errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_tips');
-                }
-                this.errorMessage = errorMsg;
-              } else {
-                this.setJson(protoMsg, 'token.ext.pt_account', pt_account);
-                this.localCache.setLoginInfo(protoMsg);
-                CustomReuseStrategy.removeAll();
-                ToolAlert.login(false);
-              }
-            },
-            (error: any) => console.error(error)
-          );
-        });
+  login() {
+    if (this.check(this.account, this.pwd)) {
+      const ptType = localStorage.getItem('ptType');
+      const sysUserEntry = { user_pt: '1', account: this.account, password: this.pwd };
+      this.log('IdSysUserType query params : ' + sysUserEntry);
+      this.loginService.loginByTokenInvaild(sysUserEntry).subscribe(
+        (protoMsg: any) => {
+          if (protoMsg.token && protoMsg.token.ex) {
+            let errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_short_msg');
+            if (!errorMsg) {
+              errorMsg = IdTool.getJson(protoMsg.token, 'ex.ex_tips');
+            }
+            this.errorMessage = errorMsg;
+          } else {
+            this.setJson(protoMsg, 'token.ext.account', this.account);
+            this.localCache.setUserInfo(protoMsg);
+            CustomReuseStrategy.removeAll();
+            ToolAlert.login(false);
+          }
+        },
+        (error: any) => console.error(error)
+      );
     }
   }
 

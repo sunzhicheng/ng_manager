@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { DyBaseService } from '../../shared/service/IdBaseService';
 import { HttpService } from '../../shared/service/HttpService';
-import { GpbService } from '../../shared/service/gpb.service';
 import { PAGER_INIT } from '../../shared/config/app.config';
 
 /**
@@ -610,8 +609,8 @@ export class DemoService extends DyBaseService {
    * @param httpService 接口请求服务
    */
   constructor(public httpService: HttpService,
-    public toolGpb: GpbService) {
-    super(toolGpb, httpService);
+    ) {
+    super(httpService);
   }
 
 }

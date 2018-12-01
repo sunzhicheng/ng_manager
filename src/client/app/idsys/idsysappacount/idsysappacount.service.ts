@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DyBaseService } from '../../shared/service/IdBaseService';
 import { HttpService } from '../../shared/service/HttpService';
-import { GpbService } from '../../shared/service/gpb.service';
 import { PAGER_INIT } from '../../shared/config/app.config';
 import { IdTool } from '../../shared/tool/IdTool';
 
@@ -189,12 +188,12 @@ export class IdSysAppAcountService extends DyBaseService {
    * @param entry
    * @param protoMessage
    */
-  personInfo(entry: any, protoMessage: any): Observable<any> {
+  personInfo(entry: any): Observable<any> {
     return Observable.create((observer: any) => {
-        this.httpService.httpRequest(this.api.personInfo, entry, protoMessage).subscribe(
-            (message: any) => observer.next(message),
-            (error: any) => observer.error(error)
-        );
+      this.httpService.httpRequest(this.api.personInfo, entry).subscribe(
+        (message: any) => observer.next(message),
+        (error: any) => observer.error(error)
+      );
     });
   }
 
@@ -204,12 +203,12 @@ export class IdSysAppAcountService extends DyBaseService {
    * @param entry
    * @param protoMessage
    */
-  listOpt(entry: any, protoMessage: any): Observable<any> {
+  listOpt(entry: any): Observable<any> {
     return Observable.create((observer: any) => {
-        this.httpService.httpRequest(this.api.listOpt, entry, protoMessage).subscribe(
-            (message: any) => observer.next(message),
-            (error: any) => observer.error(error)
-        );
+      this.httpService.httpRequest(this.api.listOpt, entry).subscribe(
+        (message: any) => observer.next(message),
+        (error: any) => observer.error(error)
+      );
     });
   }
 
@@ -221,35 +220,31 @@ export class IdSysAppAcountService extends DyBaseService {
    */
   initOptList(callback: any, filterData: any) {
     //加载用户类型列表详情
-    this.getProtoEntry().subscribe(
-       (protoMessage: any) => {
-         const optProto = protoMessage.create(this.entryInit);
-         if (filterData) {
-             IdTool.bindQueryData(optProto, filterData);
-         }
-         this.log(' userType initOptList query  : ' + JSON.stringify(optProto));
-         this.listOpt(optProto, protoMessage).subscribe(
-             (protoMsg: any) => {
-               console.log('!!!!!protoMsg:', protoMsg);
-               if (protoMsg && protoMsg.proto_list) {
-                 const proto_list: any[] = [];
-                 for ( let i = 0; i < protoMsg.proto_list.length; i++) {
-                   proto_list.push({
-                     key: {
-                       l_id: IdTool.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
-                     },
-                     value: {
-                       open_id: IdTool.getJson(protoMsg.proto_list[i], 'username', '')
-                     }
-                   });
-                 }
-                 callback(proto_list);
-               }
-             },
-         );
-       }
-     );
-}
+    const optProto = this.entryInit;
+    if (filterData) {
+      IdTool.bindQueryData(optProto, filterData);
+    }
+    this.log(' userType initOptList query  : ' + JSON.stringify(optProto));
+    this.listOpt(optProto).subscribe(
+      (protoMsg: any) => {
+        console.log('!!!!!protoMsg:', protoMsg);
+        if (protoMsg && protoMsg.proto_list) {
+          const proto_list: any[] = [];
+          for (let i = 0; i < protoMsg.proto_list.length; i++) {
+            proto_list.push({
+              key: {
+                l_id: IdTool.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
+              },
+              value: {
+                open_id: IdTool.getJson(protoMsg.proto_list[i], 'username', '')
+              }
+            });
+          }
+          callback(proto_list);
+        }
+      },
+    );
+  }
 
   /**
    * 重写构造方法
@@ -257,8 +252,8 @@ export class IdSysAppAcountService extends DyBaseService {
    * @param httpService 接口请求服务
    */
   constructor(public httpService: HttpService,
-    public toolGpb: GpbService) {
-    super(toolGpb, httpService);
+  ) {
+    super(httpService);
   }
 
 }

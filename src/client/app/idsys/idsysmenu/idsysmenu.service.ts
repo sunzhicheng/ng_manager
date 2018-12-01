@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DyBaseService } from '../../shared/service/IdBaseService';
 import { HttpService } from '../../shared/service/HttpService';
-import { GpbService } from '../../shared/service/gpb.service';
 
 /**
  * 系统模块 菜单配置 服务类
@@ -32,8 +31,8 @@ export class IdSysMenuService extends DyBaseService  {
      * @param httpService 接口请求服务
      */
     constructor(public httpService: HttpService,
-        public toolGpb: GpbService) {
-        super(toolGpb, httpService);
+        ) {
+        super(httpService);
     }
 
     /**
@@ -41,17 +40,17 @@ export class IdSysMenuService extends DyBaseService  {
      * @param entry 协议实例对像
      * @param protoMessage 协议对像
      */
-    modalTree(entry: any, protoMessage: any): Observable<any> {
+    modalTree(entry: any): Observable<any> {
         return Observable.create((observer: any) => {
-            this.httpService.httpRequest(this.api.selectMenu, entry, protoMessage).subscribe(
+            this.httpService.httpRequest(this.api.selectMenu, entry).subscribe(
                 (message: any) => observer.next(message),
                 (error: any) => observer.error(error)
             );
         });
     }
-    bind(entry: any, protoMessage: any): Observable<any> {
+    bind(entry: any): Observable<any> {
       return Observable.create((observer: any) => {
-          this.httpService.httpRequest(this.api.bind, entry, protoMessage).subscribe(
+          this.httpService.httpRequest(this.api.bind, entry).subscribe(
               (message: any) => observer.next(message),
               (error: any) => observer.error(error)
           );

@@ -1,8 +1,8 @@
 (
     function(){
-        var json = 
+        var json =
         {
-            
+
                 "general":"Universal",
                 "sure_disabled": "Are you sure you want to disable it? ",
                 "sure": "OK",
@@ -15,10 +15,10 @@
                 "add": "New",
                 "name": "Name",
                 "save": "Save",
-            
-            
-            
-            
+
+
+
+
                 "ng_table_page":"ng_table_page",
                 "operation":"Operation",
                 "view": "View",
@@ -37,10 +37,10 @@
                 "gong": "Total",
                 "current_page": "Current page",
                 "page": "Page",
-            
-            
-            
-            
+
+
+
+
                 "cabinet_page": "cabinet_page",
                 "cabinet": "Cabinet",
                 "cabinet_mansge":"Cabinet management",
@@ -92,14 +92,14 @@
                 "w": "Width-",
                 "d": "Depth-",
                 "cabinet_detail": "Cabinet detail",
-            
-            
+
+
                 "departmentPage": "departmentPage",
                 "department": "Department",
                 "depart_name": "Department name",
-            
-            
-            
+
+
+
                 "index": "index",
                 "homepage": "Home",
                 "pro_sale_count":"Sales of goods",
@@ -141,8 +141,8 @@
                 "October": "October",
                 "November": "November",
                 "December": "December",
-            
-            
+
+
                 "loginPage": "Login page",
                 "login": "Login",
                 "username": "Username",
@@ -155,8 +155,8 @@
                 "user_name_cannot_null": "Account can not be empty",
                 "password_cannot_null": "Password cannot be empty",
                 "code_cannot_null": "The verifying code cannot be empty",
-            
-            
+
+
                 "merchantPage": "Merchant page",
                 "merchant_name_cn": "Merchant Name",
                 "merchant_type": "Merchant Type",
@@ -218,8 +218,8 @@
                 "malaysia_money":"MYR",
                 "ipay88_code":"Ipay88 Code",
                 "ipay88_key":"Ipay88 Key",
-            
-            
+
+
                 "msgsmsPage": "msgsmsPage",
                 "sms_message": "SMS Message",
                 "system_message": "System messages",
@@ -231,8 +231,8 @@
                 "context": " Content",
                 "time": " Time",
                 "state": " State",
-            
-            
+
+
                 "orderactivityPage": "orderactivityPage",
                 "activity_add": "Active Add",
                 "activity_update": "Activity modification",
@@ -243,9 +243,9 @@
                 "discount_amount": " Concession Amount ",
                 "state_no_limit": " State-No Limit",
                 "sure_del": "Delete it,comform?",
-            
-            
-            
+
+
+
                 "orderParameterPage": "orderParameterPage",
                 "set_order_parameter": " Order parameter settings",
                 "send_message_scene": " Message-Sending scenario",
@@ -286,9 +286,9 @@
                 "print_node_after_handle":"After Handle",
                 "service_charge":"Service Charge(%)",
                 "government_tax":"Government Tax(%)",
-            
-            
-            
+
+
+
                 "orderpersonPage": "orderpersonPage",
                 "order_center": "Order Center",
                 "cook": "Chef",
@@ -313,7 +313,7 @@
                 "order_state7": "Install ark",
                 "order_state5": "For pickup",
                 "order_state6": "Completed",
-            
+
                 "my_order": "My Order",
                 "hang_up_order": "Suspend order",
                 "cancel_order": "Retreat order",
@@ -377,11 +377,11 @@
                 "close": "Close",
                 "no": "No",
                 "in_shop_order":"In Shop Order",
-            
-            
-            
-            
-            
+
+
+
+
+
                 "productPage": "productPage",
                 "packaged_good": "Package",
                 "price": "Price",
@@ -450,21 +450,21 @@
                 "pro_warnning1": "Stock must be large than the sales!",
                 "pro_warnning2": "Enter the number of change!!",
                 "pro_warnning3": "Stock must be large than the sales!",
-            
-            
+
+
                 "productcategoryPage": "productcategoryPage",
                 "pro_cate_name": "Name",
                 "pro_cate_desc": "Description",
                 "pro_cate": "Classification",
                 "pro_cate_warnning1": "Forbidden，comfirm?",
                 "pro_insufficient_list": "List of insufficient stocks",
-            
-            
+
+
                 "productpropertityPage": "productpropertityPage",
                 "pro_property":"Attribute",
                 "pro_property_name": "Attribute name",
-            
-            
+
+
                 "reportPage": "reportPage",
                 "order_report": "Order Statistics Report",
                 "statistics_time": "Statistical time",
@@ -472,9 +472,9 @@
                 "end_time": "End time",
                 "export": " Export",
                 "purchasing_behavior": "Purchasing behavior report",
-            
-            
-            
+
+
+
                 "pro_sell_statistics_report": "Commodity Sales Statistics Report",
                 "statistics_sms": "SMS using report",
                 "statistics_cabinet_usage_report": "Cabinet using report",
@@ -497,15 +497,15 @@
                 "return_scenario6":"Customer timeout",
                 "return_scenario7":"Exist packing goods（Support Single goods unsubscribe）",
                 "return_scenario8":"Exist finish packing goods（Support Single goods unsubscribe）",
-            
-            
+
+
                 "rolePage": "rolePage",
                 "role_add": "Role Add",
                 "role_update": "Role Edit",
                 "role_query": "Role Search",
                 "role_list": "Role list",
-            
-            
+
+
                 "stationrepairPage": "stationrepairPage",
                 "repair_station_add": "Maintenance Application",
                 "repair_station_update": "Maintenance Edit",
@@ -520,8 +520,8 @@
                 "repair_status1": "Pending",
                 "repair_status2": "Handled",
                 "describe": "Description",
-            
-            
+
+
                 "ticketPage": "ticketPage",
                 "consumption_list": "Check list",
                 "serial_number": "No.",
@@ -533,21 +533,21 @@
                 "order_full_cut":"Discount",
                 "total": " Total",
                 "print_time": " Print Time",
-            
-            
-            
+
+
+
                 "userPage": "Page",
                 "user_add": "Add",
                 "user_update": "Edit",
                 "user_list": "List",
                 "user_query": "Search",
-                "pt_account": "Account",
+                "account": "Account",
                 "user_name": "User name",
                 "nick_name": "Nickname",
                 "password_require": "Invisible，but Editable",
                 "pt_phone": " Phone",
-            
-            
+
+
                 "userBindCabinetPage": "userBindCabinetPage",
                 "put_cabinet_list":"Staff List",
                 "cabinet_manager": "Manage the Cabine",
@@ -555,8 +555,8 @@
                 "choose_cabinet": " Choose the cabinet",
                 "sure_unbind": "Unbundling，comfirm?",
                 "please_choose_user": "Select an employee",
-            
-            
+
+
                 "printerPage": "Page",
                 "printer_list": "List",
                 "printer_add": "Add",
@@ -566,8 +566,8 @@
                 "printer_status": "Is it the system printer？",
                 "machine_code": " Terminal number",
                 "msign": " Terminal Key",
-            
-            
+
+
                 "ipadPage": "Page",
                 "ipad_list": "List",
                 "ipad_add": "Add",
@@ -578,8 +578,8 @@
                 "bind_print": "Binding printer",
                 "customer_url":"Customer Url",
                 "admin_url":"Admin Url",
-        
-        
+
+
                 "vipUserPage": "vipUserPage",
                 "vipUserMabage": "Member Manage",
                 "vipUserList": "Member List",
@@ -592,8 +592,8 @@
                 "unknown": "Unknown",
                 "score": "Score",
                 "level": "Level",
-            
-            
+
+
                 "vipUserRankPage": "vipUserRankPage",
                 "vipuserrank":"Vip Rank",
                 "rank_name": "Rank Name",
@@ -605,21 +605,21 @@
                 "end_3":"Unsubscribe Order End",
                 "start_4":"Unsubscribe Order Money Start",
                 "end_4":"Unsubscribe Order Money End",
-            
-            
+
+
                 "topnav.component.html":"topnav.component.html",
                 "you_have":"You Have",
                 "notice":"Notice",
                 "welcome":"Welcome",
                 "quit":"Quit",
                 "look_all_notice":"Look All Notice",
-        
+
                 "RoleListComponent":"RoleListComponent",
                 "No":"No",
-        
+
                 "operation_success":"Operation Success!",
                 "operation_error":"Operation Error!",
-        
+
                 "name_en":"Trade name(English)",
                 "desc_en":"Description(English)",
 
@@ -640,12 +640,12 @@
                 "show_pro_sale":"Is Show Goods Sale Count",
 
                 "please_set_time":"PLEASE Set Time"
-            
-            
-            
-            
-            
-            
+
+
+
+
+
+
             };
 
         window.i18n_en = json;

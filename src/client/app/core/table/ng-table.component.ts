@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Input, Output, OnChanges, SimpleChanges } from '@angular/core';
 
-import { GpbService } from '../../shared/service/gpb.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 
@@ -169,10 +168,6 @@ export class NgTableComponent implements OnInit, OnChanges {
         this._columns.push(value);
       }
     });
-  }
-
-  constructor(private toolGpb: GpbService) {
-
   }
   /**
    * 判断是否已经被选
@@ -545,48 +540,48 @@ export class NgTableComponent implements OnInit, OnChanges {
 
   public initPage(sort_config: any): any {
     const me = this;
-    this.toolGpb.getProto('com2.IPagerExt').subscribe(
-      (protoMessage: any) => {
-      const ISort = protoMessage.ISort;
-      const ISortCol = protoMessage.ISortCol;
+    // this.toolGpb.getProto('com2.IPagerExt').subscribe(
+    //   (protoMessage: any) => {
+    //   const ISort = protoMessage.ISort;
+    //   const ISortCol = protoMessage.ISortCol;
 
-      //初始化分页参数
-      if (sort_config) {
-        console.log('设置排序字段:' + sort_config.title + '| ' + sort_config.sort);
-        const sortCol = sort_config.name;
-        const sortBy = sort_config.sort;
+    //   //初始化分页参数
+    //   if (sort_config) {
+    //     console.log('设置排序字段:' + sort_config.title + '| ' + sort_config.sort);
+    //     const sortCol = sort_config.name;
+    //     const sortBy = sort_config.sort;
 
-        //保存排序
-        me._config.sorting = sort_config;
+    //     //保存排序
+    //     me._config.sorting = sort_config;
 
-        if (!me.pager.ext) {
-          me.pager.ext = {};
-        }
-        if (sortBy === 'asc') {
-          me.pager.ext.sort = ISort.SORT_ASC;
-        } else if (sortBy === 'desc') {
-          me.pager.ext.sort = ISort.SORT_DESC;
-        }
-        if (sortCol) {
-          const col = sortCol.replace('col_', '');
-          if (!me.pager.ext.sort_head) {
-            me.pager.ext.sort_head = {};
-          }
+    //     if (!me.pager.ext) {
+    //       me.pager.ext = {};
+    //     }
+    //     if (sortBy === 'asc') {
+    //       me.pager.ext.sort = ISort.SORT_ASC;
+    //     } else if (sortBy === 'desc') {
+    //       me.pager.ext.sort = ISort.SORT_DESC;
+    //     }
+    //     if (sortCol) {
+    //       const col = sortCol.replace('col_', '');
+    //       if (!me.pager.ext.sort_head) {
+    //         me.pager.ext.sort_head = {};
+    //       }
 
-          me.pager.ext.sortCol = ISortCol.SC_CUSTOM;
-          me.pager.ext.sort_head.h_identity = parseInt(col, 10);
-        }
-      }
-      if (sort_config.itemsPerPage) {
-        me.pager.pagePerCount = sort_config.itemsPerPage;
-      }
-      if (sort_config.page) {
-        me.pager.pageNo = sort_config.page;
-      }
+    //       me.pager.ext.sortCol = ISortCol.SC_CUSTOM;
+    //       me.pager.ext.sort_head.h_identity = parseInt(col, 10);
+    //     }
+    //   }
+    //   if (sort_config.itemsPerPage) {
+    //     me.pager.pagePerCount = sort_config.itemsPerPage;
+    //   }
+    //   if (sort_config.page) {
+    //     me.pager.pageNo = sort_config.page;
+    //   }
 
-      me.tableChanged.emit(me.pager);
+    //   me.tableChanged.emit(me.pager);
 
-    });
+    // });
   }
 
   /**

@@ -3,7 +3,6 @@ import { IdTool } from '../../shared/tool/IdTool';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { SidebarService } from './sidebar.service';
-import { GpbService } from '../../shared/service/gpb.service';
 import { BaseComponent } from '../../shared/component/BaseComponent';
 import * as _ from 'lodash';
 import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
@@ -29,7 +28,6 @@ export class SidebarComponent extends BaseComponent implements OnInit {
   constructor(private sidebarService: SidebarService,
     private localCache: LocalStorageCacheService,
     private sessionCache: SessionStorageCacheService,
-    private toolGpb: GpbService,
     private _router: Router) {
     super();
     this.log('MiddleComponent constructor ');
@@ -54,22 +52,17 @@ export class SidebarComponent extends BaseComponent implements OnInit {
       this.cachePermission();
       this.defaltProject(this._router.url);
     } else {
-      this.sidebarService.getProtoEntry().subscribe(
-        (protoMessage: any) => {
-          this.protoEntry = protoMessage.create(this.entryInit);
-          if (keyword) {
-            this.bindQueryData(this.protoEntry, { name: keyword });
-          }
-          this.log('treeDetail query params : ' + JSON.stringify(this.protoEntry));
-          this.sidebarService.hasMenu(this.protoEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              this.projects = protoMsg.proto_list;
-              this.localCache.saveMenu(this.projects);
-              this.cachePermission();
-              this.defaltProject(this._router.url);
-            },
-          );
-        }
+      this.protoEntry = this.entryInit;
+      if (keyword) {
+        this.bindQueryData(this.protoEntry, { name: keyword });
+      }
+      this.sidebarService.hasMenu(this.protoEntry).subscribe(
+        (protoMsg: any) => {
+          this.projects = protoMsg;
+          this.localCache.saveMenu(this.projects);
+          this.cachePermission();
+          this.defaltProject(this._router.url);
+        },
       );
     }
   }
@@ -78,10 +71,12 @@ export class SidebarComponent extends BaseComponent implements OnInit {
    */
   cachePermission() {
     const permissionArr: any = [];
-    this.projects.forEach((item: any) => {
-      this.getPermission(permissionArr, item);
-    });
-    sessionStorage.permissions = permissionArr;
+    if (this.projects) {
+      this.projects.forEach((item: any) => {
+        this.getPermission(permissionArr, item);
+      });
+      sessionStorage.permissions = permissionArr;
+    }
   }
   getPermission(permissionArr: any, menu: any) {
     if (menu.permission) {

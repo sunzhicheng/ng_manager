@@ -32,10 +32,9 @@ export class DefaultInterceptor implements HttpInterceptor {
     refresh_time: 2000, //频繁请求间隔时间
     request_time: null, // 上一次请求时间
     ignoreUrls: [ //忽略验证的
-      '/idsys/idsysarea/getSubList',
+      '/sys/sysarea/getSubList',
     ]
   };
-
   constructor(private injector: Injector,
     private localstorage: LocalStorageCacheService) { }
 
@@ -56,13 +55,13 @@ export class DefaultInterceptor implements HttpInterceptor {
     // 处理url 双斜杠错误
     url = IdTool.formatUrl(url);
     IdLog.log('httpRequest url : ' + url);
-    // let apiHead = new HttpHeaders();
-    // apiHead = apiHead.append('Content-Type', 'application/json; charset=utf-8');
-    // apiHead = apiHead.append('id-proto', 'base64');
-    // apiHead = apiHead.append('id-token', this.localstorage.getToken()); //设置token
+    let apiHead = new HttpHeaders();
+    apiHead = apiHead.append('Content-Type', 'application/json; charset=utf-8');
+    // apiHead = apiHead.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
     const newReq: any = req.clone({
       url: url,
-      // headers: apiHead
+      withCredentials: true,
+      headers: apiHead
     });
     return next.handle(newReq).pipe(
       mergeMap((event: any) => {
@@ -111,29 +110,36 @@ export class DefaultInterceptor implements HttpInterceptor {
   private handleData(
     event: HttpResponse<any> | HttpErrorResponse,
   ): Observable<any> {
-    //异常统一处理
-    switch (event.status) {
-      case 200:
-        if (event instanceof HttpResponse) {
-          return of(event);
-        }
-        break;
-      case 401: // 未登录状态码
-        ToolAlert.login();
-        break;
-      case 403:
-      case 404:
-      case 500:
-        //返回不同错误状态的页面  这里暂时统一跳出提示框
-        ToolAlert.animation(`${event.status}`, `服务器异常啦`);
-        // this.goTo(`/${event.status}`);
-        break;
-      default:
-        if (event instanceof HttpErrorResponse) {
-          IdLog.error('服务器错误: ', event);
-          ToolAlert.animation(`网络异常`, `服务器已断开`);
-        }
-        break;
+    if (event) {
+      //异常统一处理
+      switch (event.status) {
+        case 200:
+          if (event instanceof HttpResponse) {
+            return of(event);
+          }
+          break;
+        case 401: // 未登录状态码
+          ToolAlert.login();
+          break;
+        case 201: //业务异常
+          if (event instanceof HttpResponse) {
+            IdLog.error('业务异常: ', event);
+            if (event.body && event.body.length > 0) {
+              ToolAlert.error(event.body[0].message);
+            }
+          }
+          break;
+        default:
+          if (event instanceof HttpErrorResponse) {
+            IdLog.error('服务器错误: ', event);
+            if (event.error && event.error.length > 0) {
+              ToolAlert.error(event.error[0].message, `${event.status}`);
+            } else {
+              ToolAlert.animation(`网络异常`, `服务器已断开`);
+            }
+          }
+          break;
+      }
     }
     return of(event);
   }

@@ -1,5 +1,4 @@
 import { Component, AfterContentInit, forwardRef } from '@angular/core';
-import { GpbService } from '../../shared/service/gpb.service';
 import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from '../../shared/service/HttpService';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -37,7 +36,7 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
   //区列表
   area_list: any;
 
-  public constructor(protected toolGpb: GpbService,
+  public constructor(
     protected toolHttp: HttpService) {
     super();
   }
@@ -63,11 +62,9 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
   }
 
   byParentId(parentId: any, stype: any, data: any) {
-     this.toolGpb.getProto('idsys.IdSysAreaEntry').subscribe(
-      (protoMessage: any) => {
-        const entry = protoMessage.create({});
+        const entry = {};
         IdTool.bindQueryData(entry, {parentId: parentId});
-        this.toolHttp.httpRequest('/idsys/idsysarea/getSubList', entry, protoMessage).subscribe(
+        this.toolHttp.httpRequest('/idsys/idsysarea/getSubList', entry).subscribe(
           (result: any) => {
             if (stype === 2) {
               this.pro_list = result.proto_list;
@@ -112,7 +109,6 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
             this.propagateChange(this.values);
             this.propagateTouched();
           });
-      });
   }
 
   getSelectedId(list: any , name: any) {

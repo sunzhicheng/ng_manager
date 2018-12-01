@@ -1,5 +1,4 @@
 import { Observable } from 'rxjs';
-import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';
 import { HTTPREQ, API_DEBUG, PAGER_INIT, APISOURCE } from '../config/app.config';
 import * as _ from 'lodash';
@@ -48,7 +47,7 @@ export class DyBaseService {
         }
         return api[opt];
     }
-    constructor(public toolGpb: GpbService,
+    constructor(
         public httpService: HttpService) {
     }
     /**
@@ -130,43 +129,16 @@ export class DyBaseService {
 
     requestApi(url: string, proto: string, entry: any, source: APISOURCE, method: HTTPREQ = HTTPREQ.POST) {
         return Observable.create((observer: any) => {
-            this.getProtoEntry(source).subscribe(
-                (protoMessage: any) => {
-                    if (url === '') {
-                        observer.error('requestApi错误:  url没有配置');
-                        return;
-                    }
-                    const protoEntry = protoMessage.create(entry);
-                    this.log('requestApi query params : ' + JSON.stringify(protoEntry));
-                    this.httpService.httpRequest(url, entry, protoMessage, method).subscribe(
-                        (message: any) => observer.next(message),
-                        (error: any) => observer.error(error)
-                    );
-                }
-            );
-        });
-    }
-
-    /**
-     * 获取接口协议类
-     */
-    getProtoEntry(source: APISOURCE = APISOURCE.DEFAULT): Observable<any> {
-        const api = this.getApi(source);
-        return Observable.create((observer: any) => {
-            this.toolGpb.getProto(api.proto).subscribe(
+            if (url === '') {
+                observer.error('requestApi错误:  url没有配置');
+                return;
+            }
+            this.log('requestApi query params : ' + JSON.stringify(entry));
+            this.httpService.httpRequest(url, entry, method).subscribe(
                 (message: any) => observer.next(message),
                 (error: any) => observer.error(error)
             );
         });
-    }
-
-    /**
-     * 是否请求正常，正常返回 true, 异常返回 false
-     * @param token 请求标识
-     * @returns {boolean}
-     */
-    isNotEx(token: any) {
-        return this.httpService.isNotEx(token);
     }
 
     private getApi(source: APISOURCE) {

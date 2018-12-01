@@ -105,7 +105,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
   public _async_config: any = {
     requestUrl: '',  //启用异步加载之后,请求的接口url
     // perCount: 10,   //启用异步加载之后 每次调用接口多少行数据
-    headers: this.getHeaders(),
+    // headers: this.getHeaders(),
     dataType: 'json',
     contentType: 'application/json',
     dataFilter: (treeId: any, parentNodeJSON: any, responseDataArray: any) => this.dataFilter(treeId, parentNodeJSON, responseDataArray),
@@ -288,7 +288,6 @@ export class TreeComponent extends BaseComponent implements OnChanges {
    * @param responseDataArray
    */
   dataFilter(treeId: any, parentNodeJSON: any, responseDataArray: any) {
-    if (this.treeService.isNotEx(responseDataArray.token)) {
       const treedata: any = [];
       if (responseDataArray.proto_list && responseDataArray.proto_list.length > 0) {
         if (this._async_config.mappingKey
@@ -309,7 +308,6 @@ export class TreeComponent extends BaseComponent implements OnChanges {
           this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), this.base_setting, treedata);
           this.afterInit();
         }
-      }
       return treedata;
     }
   }
@@ -325,14 +323,14 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     }
     return { proto: parma };
   }
-  getHeaders() {
-    const header: any = {
-      'content-type': 'application/json',
-      'id-token': this.cacheService.getToken('json'),
-      'id-proto': 'json'
-    };
-    return header;
-  }
+  // getHeaders() {
+  //   const header: any = {
+  //     'content-type': 'application/json',
+  //     'id-token': this.cacheService.getToken('json'),
+  //     'id-proto': 'json'
+  //   };
+  //   return header;
+  // }
 
   //此处为异步加载配置方法 ------------------------------- end
 

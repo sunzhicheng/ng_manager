@@ -4,7 +4,6 @@ import { HttpService } from '../../shared/service/HttpService';
 import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
-import { GpbService } from '../../shared/service/gpb.service';
 import { NgStaticTableComponent } from '../table/ng-static-table.component';
 
 declare let $: any;
@@ -64,7 +63,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
   @ViewChild(NgStaticTableComponent)
   public modal_table: NgStaticTableComponent;
 
-  public constructor(protected toolGpb: GpbService,
+  public constructor(
     protected httpService: HttpService) {
     super();
   }
@@ -97,35 +96,28 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
   }
   queryTable() {
     if (this._proto && this._request_url) {
-      this.toolGpb.getProto(this._proto).subscribe(
-        (protoMessage: any) => {
-          if (!this.protoEntry) {
-            this.protoEntry = protoMessage.create(this.entryInit);
-          }
-          if (this.protoEntry.query) {
-            if (!this.protoEntry.query.q_item_list) {
-              this.protoEntry.query.q_item_list = [];
-            } else {
-              this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
-            }
-          }
-          if (this.filterJson) {
-            this.bindQueryData(this.protoEntry, this.filterJson);
-          }
-          this.protoEntry.pager.pagePerCount = 1000;
-          this.httpService.httpRequest(this._request_url, this.protoEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              this.pager = protoMsg.pager;
-              this.protoEntry = protoMsg;
-              this.filterJsonUpdate = false;
-            },
-            (error: any) => {
-              console.error('httpRequest.error: ' + JSON.stringify(error));
-            }
-          );
+      if (!this.protoEntry) {
+        this.protoEntry = this.entryInit;
+      }
+      if (this.protoEntry.query) {
+        if (!this.protoEntry.query.q_item_list) {
+          this.protoEntry.query.q_item_list = [];
+        } else {
+          this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
+        }
+      }
+      if (this.filterJson) {
+        this.bindQueryData(this.protoEntry, this.filterJson);
+      }
+      this.protoEntry.pager.pagePerCount = 1000;
+      this.httpService.httpRequest(this._request_url, this.protoEntry).subscribe(
+        (protoMsg: any) => {
+          this.pager = protoMsg.pager;
+          this.protoEntry = protoMsg;
+          this.filterJsonUpdate = false;
         },
         (error: any) => {
-          console.error('getProto.error: ' + JSON.stringify(error));
+          console.error('httpRequest.error: ' + JSON.stringify(error));
         }
       );
     }
@@ -165,7 +157,7 @@ export class ModalTableDynamicComponent extends DynamicBase implements OnInit, D
    * @param {*} value
    */
   writeV(value: any) {
-     if (IdTool.isNotEmpty(value)) {
+    if (IdTool.isNotEmpty(value)) {
       this.inV = value.split(',');
       this.loadTable(this.pager);
       this.initSelectName();

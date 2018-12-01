@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, ViewChild, EventEmitter, Output } from '@angular/core';
 import { HttpService } from '../../shared/service/HttpService';
 import * as _ from 'lodash';
-import { GpbService } from '../../shared/service/gpb.service';
 import { NgStaticTableComponent } from '../table/ng-static-table.component';
 import { ModalBaseComponent } from './ModalBaseComponent';
 
@@ -42,7 +41,7 @@ declare let $: any;
 
 export class ModalTableComponent extends ModalBaseComponent implements OnInit {
 
-  selectV: any ;
+  selectV: any;
 
   @ViewChild(NgStaticTableComponent)
   public modal_table: NgStaticTableComponent;
@@ -50,7 +49,7 @@ export class ModalTableComponent extends ModalBaseComponent implements OnInit {
   @Output()
   public change: EventEmitter<any> = new EventEmitter();
 
-  public constructor(protected toolGpb: GpbService,
+  public constructor(
     protected httpService: HttpService) {
     super();
   }
@@ -72,50 +71,43 @@ export class ModalTableComponent extends ModalBaseComponent implements OnInit {
   }
   queryTable() {
     if (this._config.proto && this._config.request_url) {
-      this.toolGpb.getProto(this._config.proto).subscribe(
-        (protoMessage: any) => {
-          if (!this.protoEntry) {
-            this.protoEntry = protoMessage.create(this.entryInit);
-          }
-          if (this.protoEntry.query) {
-            if (!this.protoEntry.query.q_item_list) {
-              this.protoEntry.query.q_item_list = [];
-            } else {
-              this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
-            }
-          }
-          if (this._config.filterJson) {
-            this.bindQueryData(this.protoEntry, this._config.filterJson);
-          }
-          this.protoEntry.pager.pagePerCount = 1000;
-          this.httpService.httpRequest(this._config.request_url, this.protoEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              this.pager = protoMsg.pager;
-              this.protoEntry = protoMsg;
-            },
-            (error: any) => {
-              console.log('httpRequest.error: ' + JSON.stringify(error));
-            }
-          );
+      if (!this.protoEntry) {
+        this.protoEntry = this.entryInit;
+      }
+      if (this.protoEntry.query) {
+        if (!this.protoEntry.query.q_item_list) {
+          this.protoEntry.query.q_item_list = [];
+        } else {
+          this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
+        }
+      }
+      if (this._config.filterJson) {
+        this.bindQueryData(this.protoEntry, this._config.filterJson);
+      }
+      this.protoEntry.pager.pagePerCount = 1000;
+      this.httpService.httpRequest(this._config.request_url, this.protoEntry).subscribe(
+        (protoMsg: any) => {
+          this.pager = protoMsg.pager;
+          this.protoEntry = protoMsg;
         },
         (error: any) => {
-          console.log('getProto.error: ' + JSON.stringify(error));
+          console.log('httpRequest.error: ' + JSON.stringify(error));
         }
       );
     }
   }
   run() {
     if (!this._config.request_url || !this._config.proto) {
-        console.error('table modal 没有配置 request_url和proto,请初始化必要参数');
+      console.error('table modal 没有配置 request_url和proto,请初始化必要参数');
     } else {
       this.loadTable();
       this.show();
     }
-}
-stop() {
-  this.valueOut.emit(this.selectV);
-  this.hide();
-}
+  }
+  stop() {
+    this.valueOut.emit(this.selectV);
+    this.hide();
+  }
   hide() {
     (<any>$('#' + this.name_key)).modal('hide');
   }

@@ -162,7 +162,6 @@
     "libphonenumber-js": "^1.4.2",
     "ng2-mqtt": "^0.1.2",
     "ng2-validation": "^4.2.0",
-    "protobufjs": "^6.8.6",
     "rxjs": "^6.1.0",
     "systemjs": "0.21.3",
     "videogular2": "^6.2.0",

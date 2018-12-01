@@ -4,7 +4,6 @@ import { HttpService } from '../../shared/service/HttpService';
 import { IdTool } from '../../shared/tool/IdTool';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
-import { GpbService } from '../../shared/service/gpb.service';
 import { TreeService } from '../../shared/service/TreeService';
 
 declare let $: any;
@@ -112,7 +111,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
 
   selectNames: any = '';
 
-  public constructor(protected toolGpb: GpbService,
+  public constructor(
     protected treeService: TreeService,
     protected httpService: HttpService) {
     super();
@@ -248,41 +247,34 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
       return;
     }
     if (this._proto && this._request_url) {
-      this.toolGpb.getProto(this._proto).subscribe(
-        (protoMessage: any) => {
-          if (!this.protoEntry) {
-            this.protoEntry = protoMessage.create(this.entryInit);
+      if (!this.protoEntry) {
+        this.protoEntry = this.entryInit;
+      }
+      if (this.protoEntry.query) {
+        if (!this.protoEntry.query.q_item_list) {
+          this.protoEntry.query.q_item_list = [];
+        } else {
+          this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
+        }
+      }
+      if (this.filterJson) {
+        this.bindQueryData(this.protoEntry, this.filterJson);
+      }
+      if (this.protoEntry.pager) {
+        this.protoEntry.pager = undefined;
+      }
+      this.httpService.httpRequest(this._request_url, this.protoEntry).subscribe(
+        (protoMsg: any) => {
+          this.treeData = [];
+          if (protoMsg.proto_list) {
+            this.treeData.splice(0, this.treeData.length);
+            this.treeService.setMappingKey(this._config.name_key, this._config.uuid_key, this._config.sub_key);
+            this.treeData = this.treeService.toTreeData(protoMsg.proto_list, openIndex);
+            this.initTree();
           }
-          if (this.protoEntry.query) {
-            if (!this.protoEntry.query.q_item_list) {
-              this.protoEntry.query.q_item_list = [];
-            } else {
-              this.protoEntry.query.q_item_list.splice(0, this.protoEntry.query.q_item_list.length);
-            }
-          }
-          if (this.filterJson) {
-            this.bindQueryData(this.protoEntry, this.filterJson);
-          }
-          if (this.protoEntry.pager) {
-            this.protoEntry.pager = undefined;
-          }
-          this.httpService.httpRequest(this._request_url, this.protoEntry, protoMessage).subscribe(
-            (protoMsg: any) => {
-              this.treeData = [];
-              if (protoMsg.proto_list) {
-                this.treeData.splice(0, this.treeData.length);
-                this.treeService.setMappingKey(this._config.name_key, this._config.uuid_key, this._config.sub_key);
-                this.treeData = this.treeService.toTreeData(protoMsg.proto_list, openIndex);
-                this.initTree();
-              }
-            },
-            (error: any) => {
-              console.error('httpRequest.error: ' + JSON.stringify(error));
-            }
-          );
         },
         (error: any) => {
-          console.error('getProto.error: ' + JSON.stringify(error));
+          console.error('httpRequest.error: ' + JSON.stringify(error));
         }
       );
     }

@@ -1,8 +1,8 @@
 (
     function(){
-        var json = 
+        var json =
         {
-            
+
                 "general":"通用",
                 "sure_disabled": "确认要禁用吗？",
                 "sure": "确定",
@@ -15,10 +15,10 @@
                 "add": "新增",
                 "name": "名称",
                 "save": "保存",
-            
-            
-            
-            
+
+
+
+
                 "ng_table_page":"ng_table_page",
                 "operation":"操作",
                 "view": "查看",
@@ -37,10 +37,10 @@
                 "gong": "共",
                 "current_page": "当前页",
                 "page": "页",
-            
-            
-            
-            
+
+
+
+
                 "cabinet_page": "cabinet_page",
                 "cabinet": "自提柜",
                 "cabinet_mansge":"自提柜管理",
@@ -92,14 +92,14 @@
                 "w": "宽-",
                 "d": "深-",
                 "cabinet_detail": "自提柜详情",
-            
-            
+
+
                 "departmentPage": "departmentPage",
                 "department": "部门",
                 "depart_name": "部门名称",
-            
-            
-            
+
+
+
                 "index": "index",
                 "homepage": "首页",
                 "pro_sale_count":"商品销售量",
@@ -141,8 +141,8 @@
                 "October": "十月",
                 "November": "十一月",
                 "December": "十二月",
-            
-            
+
+
                 "loginPage": "登陆页面",
                 "login": "登陆",
                 "username": "用户名",
@@ -155,8 +155,8 @@
                 "user_name_cannot_null": "帐号不能为空",
                 "password_cannot_null": "密码不能为空",
                 "code_cannot_null": "验证码不能为空",
-            
-            
+
+
                 "merchantPage": "商家页面",
                 "merchant_name_cn": "商家名称",
                 "merchant_type": "商家类别",
@@ -218,8 +218,8 @@
                 "malaysia_money":"马来西亚币",
                 "ipay88_code":"Ipay88商户编号",
                 "ipay88_key":"ipay88商户密钥",
-            
-            
+
+
                 "msgsmsPage": "msgsmsPage",
                 "sms_message": "短信消息",
                 "system_message": "系统消息",
@@ -231,8 +231,8 @@
                 "context": "内容",
                 "time": "时间",
                 "state": "状态",
-            
-            
+
+
                 "orderactivityPage": "orderactivityPage",
                 "activity_add": "活动添加",
                 "activity_update": "活动修改",
@@ -243,9 +243,9 @@
                 "discount_amount": "优惠金额",
                 "state_no_limit": "状态-不限",
                 "sure_del": "确定要删除吗?",
-            
-            
-            
+
+
+
                 "orderParameterPage": "orderParameterPage",
                 "set_order_parameter": "订单参数设置",
                 "send_message_scene": "消息发送场景",
@@ -286,9 +286,9 @@
                 "print_node_after_handle":"处理完成",
                 "service_charge":"服务费比例(%)",
                 "government_tax":"政府抽成税比例(%)",
-            
-            
-            
+
+
+
                 "orderpersonPage": "orderpersonPage",
                 "order_center": "订单中心",
                 "cook": "厨师",
@@ -313,7 +313,7 @@
                 "order_state7": "装柜中",
                 "order_state5": "待取货",
                 "order_state6": "已完成",
-            
+
                 "my_order": "我的订单",
                 "hang_up_order": "挂起订单",
                 "cancel_order": "退订订单",
@@ -377,11 +377,11 @@
                 "close": "关闭",
                 "no": "无",
                 "in_shop_order":"在店点单",
-            
-            
-            
-            
-            
+
+
+
+
+
                 "productPage": "productPage",
                 "packaged_good": "套餐商品",
                 "price": "价格",
@@ -450,21 +450,21 @@
                 "pro_warnning1": "商品库存不能小于售出数量！",
                 "pro_warnning2": "请输入修改量!",
                 "pro_warnning3": "商品库存不能小于售出数量!",
-            
-            
+
+
                 "productcategoryPage": "productcategoryPage",
                 "pro_cate_name": "分类名称",
                 "pro_cate_desc": "分类描述",
                 "pro_cate": "商品分类",
                 "pro_cate_warnning1": "确定要禁用吗?",
                 "pro_insufficient_list": "库存不足商品列表",
-            
-            
+
+
                 "productpropertityPage": "productpropertityPage",
                 "pro_property":"商品属性",
                 "pro_property_name": "属性名称",
-            
-            
+
+
                 "reportPage": "reportPage",
                 "order_report": "订单统计报表",
                 "statistics_time": "统计时间",
@@ -472,9 +472,9 @@
                 "end_time": "结束时间",
                 "export": "导出",
                 "purchasing_behavior": "商品购买行为报表",
-            
-            
-            
+
+
+
                 "pro_sell_statistics_report": "商品销售统计报表",
                 "statistics_sms": "短信使用统计",
                 "statistics_cabinet_usage_report": "自提柜使用报表",
@@ -497,15 +497,15 @@
                 "return_scenario6":"客户预计到店时间未到店",
                 "return_scenario7":"订单中有分装中的商品(支持单品退订时开启)",
                 "return_scenario8":"订单中有分装完成的商品(支持单品退订时开启)",
-            
-            
+
+
                 "rolePage": "rolePage",
                 "role_add": "角色添加",
                 "role_update": "角色修改",
                 "role_query": "角色查询",
                 "role_list": "角色列表",
-            
-            
+
+
                 "stationrepairPage": "stationrepairPage",
                 "repair_station_add": "维修申请",
                 "repair_station_update": "维修修改",
@@ -520,8 +520,8 @@
                 "repair_status1": "待处理",
                 "repair_status2": "已处理",
                 "describe": "描述",
-            
-            
+
+
                 "ticketPage": "ticketPage",
                 "consumption_list": "消费清单",
                 "serial_number": "流水号",
@@ -533,21 +533,21 @@
                 "order_full_cut":"订单满减活动",
                 "total": "总计",
                 "print_time": "打印时间",
-            
-            
-            
+
+
+
                 "userPage": "userPage",
                 "user_add": "员工添加",
                 "user_update": "员工修改",
                 "user_list": "员工列表",
                 "user_query": "员工查询",
-                "pt_account": "帐号",
+                "account": "帐号",
                 "user_name": "用户名",
                 "nick_name": "昵称",
                 "password_require": "不可见,可修改",
                 "pt_phone": "电话",
-            
-            
+
+
                 "userBindCabinetPage": "userBindCabinetPage",
                 "put_cabinet_list":"装柜员列表",
                 "cabinet_manager": "自提柜管理",
@@ -555,8 +555,8 @@
                 "choose_cabinet": "选择自提柜",
                 "sure_unbind": "确认要解除绑定吗?",
                 "please_choose_user": "请选择员工",
-            
-            
+
+
                 "printerPage": "PrinterPage",
                 "printer_list": "打印机列表",
                 "printer_add": "打印机添加",
@@ -566,8 +566,8 @@
                 "printer_status": "是否是系统打印机",
                 "machine_code": "终端号",
                 "msign": "终端密钥",
-            
-            
+
+
                 "ipadPage": "ipadPage",
                 "ipad_list": "ipad列表",
                 "ipad_add": "ipad添加",
@@ -578,8 +578,8 @@
                 "bind_print": "绑定的打印机",
                 "customer_url":"客户点单url",
                 "admin_url":"后台登录url",
-            
-            
+
+
                 "vipUserPage": "vipUserPage",
                 "vipUserMabage": "会员管理",
                 "vipUserList": "会员列表",
@@ -592,8 +592,8 @@
                 "unknown": "未知",
                 "score": "积分",
                 "level": "等级",
-            
-            
+
+
                 "vipUserRankPage": "vipUserRankPage",
                 "vipuserrank":"会员等级机制",
                 "rank_name": "等级名称",
@@ -605,21 +605,21 @@
                 "end_3":"退订订单数量结束，单位：条",
                 "start_4":"退订订单总金额开始",
                 "end_4":"退订订单总金额结束",
-            
-            
+
+
                 "topnav.component.html":"topnav.component.html",
                 "you_have":"您有",
                 "notice":"条通知",
                 "welcome":"欢迎",
                 "quit":"退出",
                 "look_all_notice":"查看所有通知",
-            
+
                 "RoleListComponent":"RoleListComponent",
                 "No":"不是",
-            
+
                 "operation_success":"操作成功!",
                 "operation_error":"操作异常!",
-            
+
                 "name_en":"商品名称(英文)",
                 "desc_en":"商品描述(英文)",
 
@@ -640,9 +640,9 @@
                 "show_pro_sale":"是否显示商品已售",
 
                 "please_set_time":"请设置时间段"
-            
-            
-            
+
+
+
             };
 
         window.i18n_cn = json;

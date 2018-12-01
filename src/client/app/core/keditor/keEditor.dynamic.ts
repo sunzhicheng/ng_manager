@@ -2,7 +2,6 @@ import { IdTool } from '../../shared/tool/IdTool';
 import { HttpService } from './../../shared/service/HttpService';
 import { Component, AfterViewInit, Input, forwardRef, ViewChild } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { GpbService } from '../../shared/service/gpb.service';
 import { DynamicBase } from '../dynamic.base';
 import { ImgCutComponent } from '../upload/img/img.cut';
 import { UploadService } from '../../shared/service/UploadService';
@@ -60,7 +59,7 @@ export class KeEditorDynamicComponent extends DynamicBase implements AfterViewIn
   public imgCut: ImgCutComponent;
 
 
-  public constructor(protected toolGpb: GpbService,
+  public constructor(
     protected toolUpload: UploadService) {
     super();
   }

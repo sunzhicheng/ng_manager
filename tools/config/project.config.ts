@@ -133,23 +133,6 @@ export class ProjectConfig extends SeedConfig {
         main: 'mqttws31'
       }
     }];
-    // Google Protobuf
-    const googleProtobufPackages: ExtendPackages[] = [{
-      name: 'long',
-      path: 'node_modules/long',
-      packageMeta: {
-        main: `dist/long.js`,
-        defaultExtension: 'js'
-      }
-    },
-    {
-      name: 'protobufjs',
-      path: 'node_modules/protobufjs',
-      packageMeta: {
-        main: `dist/protobuf.js`,
-        defaultExtension: 'js'
-      }
-    }];
     // lodash
     const lodashPackages: ExtendPackages[] = [{
       name: 'lodash',
@@ -180,7 +163,7 @@ export class ProjectConfig extends SeedConfig {
       }
     }];
     const additionalPackages: ExtendPackages[] = [ ...videoAngular2Packages, ...highchartsPackages,
-      ...mqttPackages, ...googleProtobufPackages, ...lodashPackages, ...ng2ValidationPackages];
+      ...mqttPackages, ...lodashPackages, ...ng2ValidationPackages];
     this.addPackagesBundles(additionalPackages);
 
     // Add packages (e.g. ng2-translate)

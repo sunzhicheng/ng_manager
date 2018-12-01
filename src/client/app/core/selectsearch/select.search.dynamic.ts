@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Input, forwardRef } from '@angular/core';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import * as _ from 'lodash';
 import { DynamicBase } from '../dynamic.base';
+import { IdTool } from '../../shared/tool/IdTool';
 declare const $: any;
 
 @Component({
@@ -34,6 +35,9 @@ export class SelectSearchDynamicComponent extends DynamicBase implements AfterVi
       // noneSelectedText: '没有选择项',
       width: this.select_width,
     });
+    if (IdTool.isNotEmptyArray(this.inV)) {
+      this.selectpicker.select2('val', this.inV[0]);
+    }
     setTimeout(() => {
       this.propagateChange(this.selectpicker.val());
       this.propagateTouched();
@@ -46,7 +50,7 @@ export class SelectSearchDynamicComponent extends DynamicBase implements AfterVi
   }
   isSelected(value: any) {
     let retn = false;
-    if (this.inV && this.inV.length > 0) {
+    if (IdTool.isNotEmptyArray(this.inV)) {
       this.inV.forEach((v: any) => {
         if (v.toString() === value.toString()) {
           retn = true;

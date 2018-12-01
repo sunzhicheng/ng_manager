@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import * as _ from 'lodash';
 import { IdTool } from '../tool/IdTool';
 import { DyBaseService } from './IdBaseService';
-import { GpbService } from './gpb.service';
 import { HttpService } from './HttpService';
 
 
@@ -21,9 +20,9 @@ export class TreeService extends DyBaseService {
     parent_key: string;
     isAsync = false;
 
-    constructor(public toolGpb: GpbService,
+    constructor(
         public httpService: HttpService) {
-        super(toolGpb, httpService);
+        super(httpService);
     }
     /**
      * 设置node  和 协议路径的映射  从proto 开始

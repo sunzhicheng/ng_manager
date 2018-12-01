@@ -4,7 +4,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IdTool } from '../tool/IdTool';
 import { HTTPREQ } from '../config/app.config';
-import { GpbService } from './gpb.service';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
 declare let $: any;
 /**
@@ -12,15 +11,12 @@ declare let $: any;
  */
 @Injectable({
     providedIn: 'root',
- })
+})
 export class HttpService {
-    public apiHead = new HttpHeaders();
 
     constructor(protected http: HttpClient,
         protected localCache: LocalStorageCacheService,
-        protected toolGpbService: GpbService) {
-        this.apiHead = this.apiHead.append('Content-Type', 'application/json; charset=utf-8');
-        this.apiHead = this.apiHead.append('id-proto', 'base64');
+    ) {
     }
 
 
@@ -29,60 +25,37 @@ export class HttpService {
      * @param url 请求地址，如果不以http开头则自动加上api base路径
      *            可以使用短路径发起请求
      * @param body body 请求参数
-     * @param proto 协议对像，如果为空，则会以默认方式请求
      * @param httpMethod http 请求方式
      * @param options http 请求参数
      */
-    public httpRequest(url: string, body: any = null, proto: any = null,
-        httpMethod: HTTPREQ = HTTPREQ.POST, options: any = { headers: this.apiHead }): Observable<any> {
-        options.headers = options.headers || new HttpHeaders();
-        options.responseType = 'text';
-        if (proto) {
-            // IDORP 协议请求方式
-            if (options.headers.has('id-proto')) {
-                // TODO: 这边正式开发替换为登陆Token
-                options.headers = options.headers.append('id-token', this.getToken(url));
-            }
-        } else {
-            // 以普通方式提交
-            options.headers = options.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-        }
+    public httpRequest(url: string, body: any = null,
+        httpMethod: HTTPREQ = HTTPREQ.POST): Observable<any> {
+        // if (proto) {
+        //     // IDORP 协议请求方式
+        //     if (options.headers.has('id-proto')) {
+        //         // TODO: 这边正式开发替换为登陆Token
+        //         options.headers = options.headers.append('id-token', this.getToken(url));
+        //     }
+        // } else {
+        //     // 以普通方式提交
+        //     options.headers = options.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
+        // }
         return Observable.create((observer: any) => {
-            let reqBody = {};
-            if (proto) {
-                // IDORP 协议请求方式
-                // 转 base64 新方法, 参数不在URL中不再需要EncodeURL
-                if (body) {
-                    if (options.headers.has('id-proto')) {
-                        reqBody = { 'proto': this.toolGpbService.protoToBase64(body, proto) };
-                    } else {
-                        reqBody = { 'base64': this.toolGpbService.protoToBase64(body, proto) };
-                    }
-                }
-            }
             let req;
             if (httpMethod === HTTPREQ.GET) {
                 console.log('httpRequest get request');
-                req = this.http.get(url, options);
+                req = this.http.get(url);
             } else if (httpMethod === HTTPREQ.POST) {
                 console.log('httpRequest post request');
-                req = this.http.post(url, reqBody, options);
+                req = this.http.post(url, body);
             } else {
                 observer.error('Not Support method');
                 return;
             }
             req.subscribe((res: any) => {
-                // console.log('httpRequest res : ', res);
+                console.log('httpRequest res : ', res);
                 const resText = res || '';
-                if (proto) {
-                    // IDORP 协议请求方式
-                    const message = this.toolGpbService.bas64ToProto(resText, proto);
-                    if (this.isNotEx(message.token)) {
-                        observer.next(message);
-                    }
-                } else {
-                    observer.next(resText);
-                }
+                observer.next(resText);
             }, (err: any) => {
                 observer.error(err);
             });
@@ -109,21 +82,4 @@ export class HttpService {
         }
         return true;
     }
-    /**
-     * 获取token
-     * @param obj
-     */
-    getToken(url: any) {
-        if (url.indexOf('manager/login') === -1) {
-            const access_token = this.localCache.getToken();
-            if (!access_token) {
-                return '';
-            } else {
-                return access_token;
-            }
-        } else {
-            return '';
-        }
-    }
-
 }
