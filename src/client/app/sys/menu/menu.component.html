@@ -1,0 +1,13 @@
+
+
+              <aside class="aside-md b-r bg-white" id="subNav">
+                 <ng-tree-alert  *ngIf="treeFormData" [config]="tree_config" [tree_button_setting]="tree_button_setting" [treeFormData]="treeFormData"
+                 [treeData]="tree_data"
+                 [async_config]="async_config"
+                 (formSubmited)="treeSave($event)"
+                 (treeDeleted)="treeDelete($event)"
+                 (treeDetailed)="treeDetail($event)"
+             ></ng-tree-alert>
+
+
+                </aside>

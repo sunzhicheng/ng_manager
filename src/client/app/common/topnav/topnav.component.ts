@@ -60,7 +60,7 @@ export class TopNavComponent extends BaseComponent implements OnInit {
   }
 
   profileDetail() {
-    this._router.navigateByUrl('home/idsysappacount/percenter/detail');
+    this._router.navigateByUrl('home/user/percenter/detail');
   }
 
 }

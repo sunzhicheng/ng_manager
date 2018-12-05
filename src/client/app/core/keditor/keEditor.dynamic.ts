@@ -26,7 +26,7 @@ declare var $: any;
 
 export class KeEditorDynamicComponent extends DynamicBase implements AfterViewInit {
 
-  uploadUrl = '/idsys/idfileupload/kindeditor/uploadweb';
+  uploadUrl = '/sys/idfileupload/kindeditor/uploadweb';
   initChange = false;
   public editor: any;
   //裁剪图片dom

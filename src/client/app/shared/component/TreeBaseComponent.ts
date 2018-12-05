@@ -19,7 +19,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
     //用来获取子集的JSON key
     sub_key: any = 'sub_list';
     //用来获取父UUID 的 JSON key
-    uuid_key: any = 'dtc.pt_id.open_id';
+    uuid_key: any = 'uuid';
     //用来获取名称的  JSON key
     name_key: any = 'name';
     //父id
@@ -102,14 +102,12 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
         if (this.treeEntry.pager) {
             this.treeEntry.pager = undefined;
         }
-        this.log('tree query brefore : ', this.treeEntry);
         this.treeServ[this.method_tree_query](this.treeEntry, APISOURCE.TREE).subscribe((protoMsg: any) => {
-            this.log('tree query result : ', protoMsg);
             this.tree_data = [];
-            if (protoMsg.proto_list) {
+            if (protoMsg) {
                 this.tree_data.splice(0, this.tree_data.length);
                 this.treeUtil.setMappingKey(this.name_key, this.uuid_key, this.sub_key);
-                this.tree_data = this.treeUtil.toTreeData(protoMsg.proto_list, openIndex);
+                this.tree_data = this.treeUtil.toTreeData(protoMsg, openIndex);
             }
         }, (error: any) => console.error(error));
     }
@@ -118,9 +116,7 @@ export abstract class TreeBaseComponent extends ListBaseComponent implements OnI
             return;
         }
         const detailProto = { query: { uuid: node.id } };
-        this.log('treeDetail query brefore : ', detailProto);
         this.treeServ[this.method_tree_detail](detailProto, APISOURCE.TREE).subscribe((protoMsg: any) => {
-            this.log('treeDetail query result : ', protoMsg);
             this.getTreeComp().toEdit(protoMsg.proto);
         });
     }

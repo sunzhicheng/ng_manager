@@ -7,13 +7,7 @@ export class CustomReuseStrategy implements RouteReuseStrategy {
 
   static RouteArr: any = [
       'demo/tree/table',
-      'idsysappacount',
-      'idsysenterprisemsg', 'idsysserviceconfig' , 'idsysuser', 'idsysusertype', 'idwxpayaccount', 'idmallgoods' ,
-      'idwxpublicaccount', 'idmallad' , 'idmallgoodscategory', 'nlksyscoolcoinconfigure', 'idsysblacklist', 'idmallgoods' ,
-      'idsystrconfigure', 'idsysuserup' , 'login', 'idsysbank', 'idsysblacklist', 'idsysinstruction' ,
-      'idmalllogistics', 'idsystrhistory' , 'idsysmenu', 'idsysarea', 'idsysappversion' ,
-      'idmallgoodsattribute', 'idmallgoods' , 'idsysevaluate', 'idmallshopcomment', 'nlktask', 'idsysappversion' ,
-      'idmallstockinout'
+      'user'
   ];
 
 

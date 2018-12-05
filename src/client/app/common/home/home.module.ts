@@ -1,5 +1,5 @@
 import { ReactiveFormsModule } from '@angular/forms';
-import { IdSysModule } from './../../idsys/idsys.module';
+import { IdSysModule } from './../../sys/sys.module';
 import { NgModule } from '@angular/core';
 import { HomeComponent } from './home.component';
 import { HomeRoutingModule } from './home-routing.module';

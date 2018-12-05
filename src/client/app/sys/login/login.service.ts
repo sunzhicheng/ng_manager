@@ -13,8 +13,7 @@ export class LoginService extends DyBaseService {
      */
   public api: any = {
     login: '/sys/sessions',
-    tokenInvaild: '/idsys/manager/login/login/ignoreCode',
-    proto: 'idsys.IdSysAppAcountEntry'
+    tokenInvaild: '/sys/manager/login/login/ignoreCode',
   };
 
   /**

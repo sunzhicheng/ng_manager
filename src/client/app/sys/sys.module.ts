@@ -4,13 +4,13 @@ import { RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { FormTableModule } from '../core/f-table/f-table.module';
 import { TreeModule } from '../core/tree/tree.module';
-import { IdSysAppAcountComponent } from './idsysappacount/idsysappacount.component';
-import { IdSysAccountFormComponent } from './idsysappacount/idsysappacount.form';
-import { IdSysAppAcountService } from './idsysappacount/idsysappacount.service';
+import { UserComponent } from './user/user.component';
+import { UserFormComponent } from './user/user.form';
+import { UserService } from './user/user.service';
 import { LoginService } from './login/login.service';
 import { OperateLoginComponent } from './login/operate.login.component';
-import { IdSysMenuComponent } from './idsysmenu/idsysmenu.component';
-import { IdSysMenuService } from './idsysmenu/idsysmenu.service';
+import { MenuComponent } from './menu/menu.component';
+import { MenuService } from './menu/menu.service';
 import { LoginAlterComponent } from './login/login.alter.component';
 import { FormsModule } from '@angular/forms';
 
@@ -26,20 +26,20 @@ import { FormsModule } from '@angular/forms';
     FormTableModule
   ],
   exports: [
-    OperateLoginComponent, LoginAlterComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent,
+    OperateLoginComponent, LoginAlterComponent, UserFormComponent, UserComponent,
+    MenuComponent,
   ],
   declarations: [
-    OperateLoginComponent, LoginAlterComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent,
+    OperateLoginComponent, LoginAlterComponent, UserFormComponent, UserComponent,
+    MenuComponent,
   ],
   entryComponents: [
-    OperateLoginComponent, LoginAlterComponent, IdSysAccountFormComponent, IdSysAppAcountComponent,
-    IdSysMenuComponent,
+    OperateLoginComponent, LoginAlterComponent, UserFormComponent, UserComponent,
+    MenuComponent,
   ],
   providers: [
-    LoginService, IdSysMenuService,
-    IdSysAppAcountService,
+    LoginService, MenuService,
+    UserService,
   ],
 })
 export class IdSysModule { }

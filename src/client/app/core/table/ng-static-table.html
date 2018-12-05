@@ -5,8 +5,8 @@
                 <th *ngIf="cmpSelect===1" width="20">
                     <input type="checkbox" (click)="all($event)">
                 </th>
-                <th class="th-sortable" data-toggle="class" 
-                *ngFor="let column of columns"  [ngTableSorting]="configTable" 
+                <th class="th-sortable" data-toggle="class"
+                *ngFor="let column of columns"  ngTableSorting
                 [column]="column" (sortChanged)="initPage($event)">{{ column.title }}
 
                 <!--<i *ngIf="column.sort" class="pull-right fa"-->
@@ -97,7 +97,7 @@
                     </a>
                   </td>
             </tr>
-            
+
         </tbody>
     </table>
 </div>

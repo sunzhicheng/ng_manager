@@ -43,13 +43,6 @@ export const PAGER_INIT = {
     pageNo: 1,
     hg: 0,
     pagePerCount: 10,
-    ext: {
-        sort: 0,
-        sortCol: 0,
-        sort_head: {
-            h_identity: 0
-        }
-    }
 };
 
 export const COM_TOKEN_INIT: any = { acc_token: {}, ext: { user_id: {} } };

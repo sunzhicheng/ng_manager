@@ -2,12 +2,12 @@ import { Observable } from 'rxjs';
 import { HttpService } from './HttpService';
 import { HTTPREQ, API_DEBUG, PAGER_INIT, APISOURCE } from '../config/app.config';
 import * as _ from 'lodash';
+import { IdLog } from '../tool/IdLog';
 
 export class DyBaseService {
     _: any = _;
     entryInit: any = {
-        proto: { dtc: { pt_id: {} } },
-        query: { q_item_list: [] },
+        query: { q_item_list: {} },
         pager: PAGER_INIT
     };
     //控制列表刷新
@@ -52,16 +52,20 @@ export class DyBaseService {
     }
     /**
      * 打印log
-     * @param msg
+     * @param message
+     * @param optionalParams 对象
      */
-    log(msg: any, obj: any = '') {
-        if (API_DEBUG) {
-            if (obj !== '') {
-                console.log(msg, obj);
-            } else {
-                console.log(msg);
-            }
-        }
+    log(message: any, ...optionalParams: any[]) {
+        IdLog.log(message, optionalParams);
+    }
+    debug(message?: any, ...optionalParams: any[]) {
+        IdLog.debug(message, optionalParams);
+    }
+    warn(message?: any, ...optionalParams: any[]) {
+        IdLog.warn(message, optionalParams);
+    }
+    error(message?: any, ...optionalParams: any[]) {
+        IdLog.error(message, optionalParams);
     }
     /**
      * 公共删除方法
@@ -133,7 +137,7 @@ export class DyBaseService {
                 observer.error('requestApi错误:  url没有配置');
                 return;
             }
-            this.log('requestApi query params : ' + JSON.stringify(entry));
+            this.log('requestApi  请求URL=' + url + '   JSON:', JSON.stringify(entry));
             this.httpService.httpRequest(url, entry, method).subscribe(
                 (message: any) => observer.next(message),
                 (error: any) => observer.error(error)

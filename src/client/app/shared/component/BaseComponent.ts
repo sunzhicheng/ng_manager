@@ -9,8 +9,7 @@ export class BaseComponent {
      * 初始化协议json
      */
     entryInit: any = {
-        proto: { dtc: { pt_id: {} } },
-        query: { q_item_list: [] },
+        query: { q_item_list: {} },
         pager: PAGER_INIT
     };
     constructor() {

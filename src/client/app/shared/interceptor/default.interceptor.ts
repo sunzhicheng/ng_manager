@@ -29,7 +29,7 @@ export class DefaultInterceptor implements HttpInterceptor {
   //记录上一次请求路径  控制频繁请求
   request_cache: any = {
     url: null, //上一次请求url
-    refresh_time: 2000, //频繁请求间隔时间
+    refresh_time: 1000, //频繁请求间隔时间
     request_time: null, // 上一次请求时间
     ignoreUrls: [ //忽略验证的
       '/sys/sysarea/getSubList',
@@ -54,7 +54,6 @@ export class DefaultInterceptor implements HttpInterceptor {
     }
     // 处理url 双斜杠错误
     url = IdTool.formatUrl(url);
-    IdLog.log('httpRequest url : ' + url);
     let apiHead = new HttpHeaders();
     apiHead = apiHead.append('Content-Type', 'application/json; charset=utf-8');
     // apiHead = apiHead.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');

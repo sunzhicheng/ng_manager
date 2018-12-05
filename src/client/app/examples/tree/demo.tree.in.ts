@@ -1,7 +1,7 @@
 import { TreeBaseComponent } from '../../shared/component/TreeBaseComponent';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { TreeService } from '../../shared/service/TreeService';
-import { IdSysMenuService } from '../../idsys/idsysmenu/idsysmenu.service';
+import { MenuService } from '../../sys/menu/menu.service';
 declare const $: any;
 
 
@@ -31,7 +31,7 @@ export class DemoTreeInComponent extends TreeBaseComponent implements OnInit {
         maxLevel: 5,
     };
     async_config: any = {
-        requestUrl: '/idsys/idsysarea/query/byfid',   //只会传一个pId参数在query 接口通过query.q_item_list中获取
+        requestUrl: '/sys/sysarea/query/byfid',   //只会传一个pId参数在query 接口通过query.q_item_list中获取
         mappingKey: {    //这里设置了空  也可以不设置  采用默认配置
             name_key: null,
             uuid_key: null,
@@ -42,7 +42,7 @@ export class DemoTreeInComponent extends TreeBaseComponent implements OnInit {
     constructor(
         protected treeService: TreeService,
         protected eleRef: ElementRef,
-        protected menuService: IdSysMenuService) {
+        protected menuService: MenuService) {
         super(menuService, treeService, null, eleRef);
     }
     myInit() {

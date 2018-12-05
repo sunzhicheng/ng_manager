@@ -147,19 +147,16 @@ export class NgStaticTableComponent implements OnInit, OnChanges {
     if (!this.pager) {
       return;
     }
-    const ext = this.pager.ext;
-
-    if (ext) {
       const pageNo = this.pager.pageNo;
-      this.totalCount = ext.row.length;
+      this.totalCount = this.pager.row.length;
       this.setTotalPage(this.pagePerCount, this.totalCount);
       // 添加表头
-      const heads = ext.heads;
+      const heads = this.pager.heads;
       if (heads && heads.length > 0) {
         const columnsArr: Array<any> = [];
         for (const j in heads) {
           const head = heads[j];
-          const col = 'col_' + head.h_identity;
+          const col = 'col_' + j;
           const h = { title: head.title, name: col };
           columnsArr.push(h);
         }
@@ -169,7 +166,7 @@ export class NgStaticTableComponent implements OnInit, OnChanges {
         }
       }
       //添加数据
-      const rowlist = ext.row;
+      const rowlist = this.pager.row;
       if (!this.nameMap) {
         this.initName(rowlist);
       }
@@ -181,13 +178,11 @@ export class NgStaticTableComponent implements OnInit, OnChanges {
         for (let i: any = startNo; i < endNo; i++) {
           const row = rowlist[i];
           const rowObj: any = {};
-          const rowData = row.data;
-          rowObj.st = row.st;
           let k = 0;
-          for (const jj in rowData) {
+          for (const jj in row) {
             const rowTitle: string = this.columns_temp[k]['name'];
             k++;
-            const cell = rowData[jj];
+            const cell = row[jj];
             let cellData = '';
             const dt = cell.dt;
             if (dt === 1) {
@@ -199,7 +194,6 @@ export class NgStaticTableComponent implements OnInit, OnChanges {
           }
           this.rows.push(rowObj);
         }
-      }
     }
 
 

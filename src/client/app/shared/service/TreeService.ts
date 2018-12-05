@@ -18,6 +18,7 @@ export class TreeService extends DyBaseService {
     sub_key: string; //用来获取名称的  JSON key
 
     parent_key: string;
+    is_parent_key: string; //用来判断是否为父节点的key
     isAsync = false;
 
     constructor(
@@ -30,11 +31,12 @@ export class TreeService extends DyBaseService {
      * @param uuid_key
      * @param sub_key
      */
-    setMappingKey(name_key: string, uuid_key: string, sub_key: string, parent_key = 'parent_id') {
+    setMappingKey(name_key: string, uuid_key: string, sub_key: string, parent_key = 'parent_id', is_parent_key = 'is_parent') {
         this.name_key = name_key;
         this.uuid_key = uuid_key;
         this.sub_key = sub_key;
         this.parent_key = parent_key;
+        this.is_parent_key = is_parent_key;
     }
     setAsync(isAsync: any, ) {
         this.isAsync = isAsync;
@@ -50,7 +52,7 @@ export class TreeService extends DyBaseService {
             console.warn('ztee.node 和 协议的映射关系为设置，name_key将采用默认设置: name');
         }
         if (!this.uuid_key) {
-            console.warn('ztee.node 和 协议的映射关系为设置，uuid_key将采用默认设置: dtc.pt_id.open_id');
+            console.warn('ztee.node 和 协议的映射关系为设置，uuid_key将采用默认设置: uuid');
         }
         if (!this.sub_key) {
             console.warn('ztee.node 和 协议的映射关系为设置，sub_key将采用默认设置: sub_list');
@@ -65,7 +67,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 let isChecked = false;
-                const uuid = IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IdTool.getJson(proto, this.uuid_key || 'uuid', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -83,7 +85,7 @@ export class TreeService extends DyBaseService {
     proto2Node(proto: any, pId: any, isOpen: boolean = true, isChecked: boolean = false) {
         const subList = _.get(proto, this.sub_key || 'sub_list');
         const node = {
-            id: IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+            id: IdTool.getJson(proto, this.uuid_key || 'uuid', ''),
             pId: pId,
             name: IdTool.getJson(proto, this.name_key || 'name', ''),
             isParent: subList && subList.length > 0 ? true : false,
@@ -102,7 +104,7 @@ export class TreeService extends DyBaseService {
             for (const i in superItem[this.sub_key || 'sub_list']) {
                 const proto: any = superItem[this.sub_key || 'sub_list'][i];
                 let isChecked = false;
-                const uuid = IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', '');
+                const uuid = IdTool.getJson(proto, this.uuid_key || 'uuid', '');
                 if (this.checkeds && this.checkeds.indexOf(uuid) !== -1) {
                     isChecked = true;
                 }
@@ -111,7 +113,7 @@ export class TreeService extends DyBaseService {
                     isOpen = true;
                 }
                 const node = this.proto2Node(proto,
-                    IdTool.getJson(superItem, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                    IdTool.getJson(superItem, this.uuid_key || 'uuid', ''),
                     isOpen, isChecked);
                 tree_arr.push(node);
                 this.getSubNode(proto, tree_arr, openIndex, index + 1);
@@ -140,10 +142,10 @@ export class TreeService extends DyBaseService {
         if (proto) {
             this.checkProto(proto);
             const node = {
-                id: IdTool.getJson(proto, this.uuid_key || 'dtc.pt_id.open_id', ''),
+                id: IdTool.getJson(proto, this.uuid_key || 'uuid', ''),
                 pId: IdTool.getJson(proto, this.parent_key || 'parent_id', ''),
                 name: IdTool.getJson(proto, this.name_key || 'name', ''),
-                isParent: true,
+                isParent: IdTool.getJson(proto, this.is_parent_key || 'is_parent', '') === 1 ? true : false,
             };
             return node;
         } else {

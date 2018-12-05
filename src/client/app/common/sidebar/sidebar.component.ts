@@ -46,25 +46,25 @@ export class SidebarComponent extends BaseComponent implements OnInit {
    * 加载拥有的菜单
    */
   hasMenu(keyword: any) {
-    const menus = this.localCache.getMenu();
-    if (menus) {
-      this.projects = JSON.parse(menus);
-      this.cachePermission();
-      this.defaltProject(this._router.url);
-    } else {
-      this.protoEntry = this.entryInit;
-      if (keyword) {
-        this.bindQueryData(this.protoEntry, { name: keyword });
-      }
-      this.sidebarService.hasMenu(this.protoEntry).subscribe(
-        (protoMsg: any) => {
-          this.projects = protoMsg;
-          this.localCache.saveMenu(this.projects);
-          this.cachePermission();
-          this.defaltProject(this._router.url);
-        },
-      );
-    }
+    // const menus = this.localCache.getMenu();
+    // if (menus) {
+    //   this.projects = JSON.parse(menus);
+    //   this.cachePermission();
+    //   this.defaltProject(this._router.url);
+    // } else {
+    this.protoEntry = { pager: { pm: 1 }, kkk: 1 };
+    // if (keyword) {
+    //   this.bindQueryData(this.protoEntry, { name: keyword });
+    // }
+    this.sidebarService.hasMenu(this.protoEntry).subscribe(
+      (protoMsg: any) => {
+        this.projects = protoMsg;
+        this.localCache.saveMenu(this.projects);
+        this.cachePermission();
+        this.defaltProject(this._router.url);
+      },
+    );
+    // }
   }
   /**
    * 缓存操作权限

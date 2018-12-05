@@ -190,28 +190,6 @@ export class NgTableComponent implements OnInit, OnChanges {
     return this._columns;
   }
 
-  public get configColumns(): any {
-    const sortColumns: Array<any> = [];
-    this.columns.forEach((column: any) => {
-      if (column.sort) {
-        sortColumns.push(column);
-      }
-    });
-    return { columns: sortColumns };
-  }
-
-
-  public onChangeTable(column: any): void {
-    this._columns.forEach((col: any) => {
-      if (col.name !== column.name) {
-        col.sort = '';
-      }
-    });
-
-
-    this.tableChanged.emit({ sorting: this.configColumns });
-  }
-
   public getData(row: any, propertyName: string): string {
     return _.get(row, propertyName);
   }
@@ -422,62 +400,42 @@ export class NgTableComponent implements OnInit, OnChanges {
 
     const pm = this.pager.pm;
     if (pm === 2) {
-      const ext = this.pager.ext;
-      if (ext) {
-        // 添加表头
-        const heads = ext.heads;
-        if (heads && heads.length > 0) {
-          const columnsArr: Array<any> = [];
-          // if (this.cmpSelect) {
-          //   columnsArr.push({title: '', name: 'ck'});
-          // }
-          for (const j in heads) {
-            const head = heads[j];
-            // if(head.title === 'ID') {
-            //   continue;
-            // }
-            const col = 'col_' + head.h_identity;
-            const h = { title: head.title, name: col };
-            columnsArr.push(h);
-          }
-          if (columnsArr && columnsArr.length > 0) {
-            this.columns_temp.splice(0, this.columns_temp.length);
-            this.columns_temp = columnsArr;
-
-          }
-
+      // 添加表头
+      const heads = this.pager.heads;
+      if (heads && heads.length > 0) {
+        const columnsArr: Array<any> = [];
+        for (const j in heads) {
+          const head = heads[j];
+          const col = 'col_' + j;
+          const h = { title: head, name: col };
+          columnsArr.push(h);
         }
-        //添加数据
-        const rowlist = ext.row;
-        //清空原来的数据
-        this.rows.splice(0, this.rows.length);
-        if (rowlist) {
-          for (const i in rowlist) {
-            const row = rowlist[i];
-            const rowObj: any = {};
-            const rowData = row.data;
-            rowObj.st = row.st;
-            let k = 0;
-            for (const jj in rowData) {
-              const rowTitle: string = this.columns_temp[k]['name'];
-              k++;
-              const cell = rowData[jj];
-              let cellData = '';
-              const dt = cell.dt;
-              if (dt === 1) {
-                cellData = cell.s;
-              } else if (dt === 2) {
-                cellData = cell.l;
-              }
-              //处理列表数据太长的问题,用...代替
-              if (rowTitle === 'col_0' ||  rowTitle === 'col_1') {
-                rowObj[rowTitle] = cellData;
-              } else {
-                rowObj[rowTitle] = this.dealLongData(cellData);
-              }
+        if (columnsArr && columnsArr.length > 0) {
+          this.columns_temp.splice(0, this.columns_temp.length);
+          this.columns_temp = columnsArr;
+        }
+      }
+      //添加数据
+      const rowlist = this.pager.row;
+      //清空原来的数据
+      this.rows.splice(0, this.rows.length);
+      if (rowlist) {
+        for (const i in rowlist) {
+          const row = rowlist[i];
+          const rowObj: any = {};
+          let k = 0;
+          for (const jj in row) {
+            const rowTitle: string = this.columns_temp[k]['name'];
+            k++;
+            const cellData = row[jj];
+            //处理列表数据太长的问题,用...代替
+            if (rowTitle === 'col_0' || rowTitle === 'col_1') {
+              rowObj[rowTitle] = cellData;
+            } else {
+              rowObj[rowTitle] = this.dealLongData(cellData);
             }
-            this.rows.push(rowObj);
           }
+          this.rows.push(rowObj);
         }
       }
     }
@@ -496,6 +454,7 @@ export class NgTableComponent implements OnInit, OnChanges {
       if (_columnsArr && _columnsArr.length !== 0) {
         this.columns = _columnsArr;
       }
+      this.pager.hasHead = true;
     }
 
     //每次初始化  清空下 this.checkedV
@@ -503,12 +462,17 @@ export class NgTableComponent implements OnInit, OnChanges {
       this.checkedV.splice(0, this.checkedV.length);
     }
 
-    // //配置config
-    // if (!this.config.sorting || this.config.sorting.length ===0) {
-    //   this.config.sorting = this.columns;
-    // }
     this.numberIndex = this.pageIndex();
     this.numberIndex_all = this.pageIndexAll();
+
+    //清除不需要的参数
+    if (this.columns && this.pager.heads) {
+      this.pager.heads.splice(0, this.pager.heads.length);
+    }
+    if (this.rows && this.rows.length > 0) {
+      this.pager.row.splice(0, this.pager.row.length);
+    }
+
   }
   /**
    * 处理字符串太长   用... 代替  默认长度13
@@ -527,61 +491,56 @@ export class NgTableComponent implements OnInit, OnChanges {
    * 监控
    */
   public ngOnChanges(changes: SimpleChanges): void {
-    if (this.pager && this.pager.ext) {
+    if (this.pager && this.pager.last_sync_time) {
       if (this.pager.last_sync_time !== this.last_sync_time) {
         this.initData();
         this.last_sync_time = this.pager.last_sync_time;
       }
-
+      this.pager.last_sync_time = undefined;
       this.selectPage = this.pager.pageNo;
     }
   }
 
 
   public initPage(sort_config: any): any {
-    const me = this;
-    // this.toolGpb.getProto('com2.IPagerExt').subscribe(
-    //   (protoMessage: any) => {
-    //   const ISort = protoMessage.ISort;
-    //   const ISortCol = protoMessage.ISortCol;
+    //清空其他字段的排序
+    this._columns.forEach((col: any) => {
+      if (col.sort && col.name !== sort_config.name) {
+        col.sort = undefined;
+      }
+    });
+    //初始化分页参数
+    if (sort_config) {
+      console.log('设置排序字段:' + sort_config.title + '| ' + sort_config.sort);
+      const sortCol = sort_config.name;
+      const sortBy = sort_config.sort;
 
-    //   //初始化分页参数
-    //   if (sort_config) {
-    //     console.log('设置排序字段:' + sort_config.title + '| ' + sort_config.sort);
-    //     const sortCol = sort_config.name;
-    //     const sortBy = sort_config.sort;
+      //保存排序
+      this._config.sorting = sort_config;
 
-    //     //保存排序
-    //     me._config.sorting = sort_config;
-
-    //     if (!me.pager.ext) {
-    //       me.pager.ext = {};
-    //     }
-    //     if (sortBy === 'asc') {
-    //       me.pager.ext.sort = ISort.SORT_ASC;
-    //     } else if (sortBy === 'desc') {
-    //       me.pager.ext.sort = ISort.SORT_DESC;
-    //     }
-    //     if (sortCol) {
-    //       const col = sortCol.replace('col_', '');
-    //       if (!me.pager.ext.sort_head) {
-    //         me.pager.ext.sort_head = {};
-    //       }
-
-    //       me.pager.ext.sortCol = ISortCol.SC_CUSTOM;
-    //       me.pager.ext.sort_head.h_identity = parseInt(col, 10);
-    //     }
-    //   }
-    //   if (sort_config.itemsPerPage) {
-    //     me.pager.pagePerCount = sort_config.itemsPerPage;
-    //   }
-    //   if (sort_config.page) {
-    //     me.pager.pageNo = sort_config.page;
-    //   }
-
-    //   me.tableChanged.emit(me.pager);
-
-    // });
+      if (sortBy === 'asc') {
+        this.pager.sort = 1;
+      } else if (sortBy === 'desc') {
+        this.pager.sort = 2;
+      }
+      if (sortCol) {
+        const col = sortCol.replace('col_', '');
+        if (!this.pager.sort_head) {
+          this.pager.sort_head = {};
+        }
+        this.pager.sort_head = col;
+      }
+    }
+    if (sort_config.itemsPerPage) {
+      this.pager.pagePerCount = sort_config.itemsPerPage;
+    }
+    if (sort_config.page) {
+      this.pager.pageNo = sort_config.page;
+    }
+    if (this.columns && this.pager.heads) {
+      this.pager.heads.splice(0, this.pager.heads.length);
+    }
+    this.tableChanged.emit(this.pager);
   }
 
   /**
@@ -594,7 +553,9 @@ export class NgTableComponent implements OnInit, OnChanges {
       return;
     }
     this.pager.pageNo = page;
-
+    if (this.columns && this.pager.heads) {
+      this.pager.heads.splice(0, this.pager.heads.length);
+    }
     this.tableChanged.emit(this.pager);
   }
 
@@ -700,26 +661,26 @@ export class NgTableComponent implements OnInit, OnChanges {
     }
     if (res && this._config.permissoinBase !== '') {
       //判断 permissoin 的权限
-        const permissions = sessionStorage.permissions;
-        res = false;
-        if (permissions) {
-          const permissoinArr = permissions.split(',');
-          const permissoinBaseArr = this._config.permissoinBase.split(',');
-          for (let i = 0; i < permissoinArr.length; i++) {
-            const p = permissoinArr[i];
-            permissoinBaseArr.forEach((pbase: any) => {
-              const permissoin = pbase + ':' + operationName;
-              if (p === permissoin) {
-                res = true;
-              }
-            });
-            if (res) {
-              break;
+      const permissions = sessionStorage.permissions;
+      res = false;
+      if (permissions) {
+        const permissoinArr = permissions.split(',');
+        const permissoinBaseArr = this._config.permissoinBase.split(',');
+        for (let i = 0; i < permissoinArr.length; i++) {
+          const p = permissoinArr[i];
+          permissoinBaseArr.forEach((pbase: any) => {
+            const permissoin = pbase + ':' + operationName;
+            if (p === permissoin) {
+              res = true;
             }
+          });
+          if (res) {
+            break;
           }
         }
-        return res;
-    } else  {
+      }
+      return res;
+    } else {
       return res;
     }
   }

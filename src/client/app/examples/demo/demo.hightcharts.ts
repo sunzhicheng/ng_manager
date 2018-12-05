@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DemoService } from './demo.service';
-import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
+import { UserService } from '../../sys/user/user.service';
 import { BaseComponent } from '../../shared/component/BaseComponent';
 
 
@@ -52,7 +52,7 @@ export class DemoHightchartsComponent extends BaseComponent implements OnInit {
   public constructor(
     private route: ActivatedRoute,
     public demoService: DemoService,
-    public accountService: IdSysAppAcountService,
+    public accountService: UserService,
     public _router: Router) {
       super();
   }

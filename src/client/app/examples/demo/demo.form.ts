@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DemoService } from './demo.service';
-import { IdSysAppAcountService } from '../../idsys/idsysappacount/idsysappacount.service';
+import { UserService } from '../../sys/user/user.service';
 import { SysEvent } from '../../shared/event/sys.event';
 import { FormBaseComponent } from '../../shared/component/FormBaseComponent';
 import { ToolAlert } from '../../shared/tool/ToolAlert';
@@ -16,7 +16,7 @@ declare let $: any;
 @Component({
   moduleId: module.id,
   selector: 'sys-account-form',
-  // templateUrl: 'idsysappacount.form.html',
+  // templateUrl: 'user.form.html',
   template: `<f-form-cmp *ngIf="formData" [formData]="formData"  (customerSubmitOut)="customerSubmit($event)"
    (formSubmited)="formSubmit($event)" (selectchangeout)="selectChange($event)"></f-form-cmp>`,
   viewProviders: []
@@ -28,7 +28,7 @@ export class DemoFormComponent extends FormBaseComponent implements OnInit {
     public demoService: DemoService,
     private sysEvent: SysEvent,
     protected eleRef: ElementRef,
-    public accountService: IdSysAppAcountService,
+    public accountService: UserService,
     public _router: Router) {
     super(demoService, eleRef);
   }

@@ -1,4 +1,4 @@
-import { IdSysAppAcountService } from './idsysappacount.service';
+import { UserService } from './user.service';
 import { Component, ElementRef } from '@angular/core';
 import { ListBaseComponent } from '../../shared/component/ListBaseComponent';
 import { Router } from '@angular/router';
@@ -7,18 +7,18 @@ import { Router } from '@angular/router';
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-idsysappacount',
-    templateUrl: 'idsysappacount.component.html',
+    selector: 'sys-user',
+    templateUrl: 'user.component.html',
 })
 
 /**
  * 系统模块 运营管理人员 组件
  */
-export class IdSysAppAcountComponent extends ListBaseComponent {
+export class UserComponent extends ListBaseComponent {
 
 
 
-    constructor(public idAccountUser: IdSysAppAcountService,
+    constructor(public idAccountUser: UserService,
         protected eleRef: ElementRef,
         private _router: Router
         ) {
@@ -46,7 +46,7 @@ export class IdSysAppAcountComponent extends ListBaseComponent {
 
     update(id: any) {
       this.log('  update id : ' + id);
-      const link = ['home/idsysappacount/update', id.toString()];
+      const link = ['home/user/update', id.toString()];
       this._router.navigate(link);
     }
     //所有列表可以重用的方法  end

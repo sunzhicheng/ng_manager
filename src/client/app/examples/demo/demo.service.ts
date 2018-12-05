@@ -13,22 +13,20 @@ export class DemoService extends DyBaseService {
    * 数据接口定义   当只存在一种情况的时候   可以使用api   demo 这边因为有 treetable 例子
    */
   public list_api: any = {
-    query: '/idsys/idsysappacount/query',
-    add: '/idsys/idsysappacount/add',
-    loadByUUID: '/idsys/idsysappacount/',
-    update: '/idsys/idsysappacount/update',
-    del: '/idsys/idsysappacount/del',
-    proto: 'idsys.IdSysAppAcountEntry',  //右边的列表查询接口需要用到的  协议
+    query: '/sys/user/query',
+    add: '/sys/user/add',
+    loadByUUID: '/sys/user/',
+    update: '/sys/user/update',
+    del: '/sys/user/del',
   };
   public tree_api: any = {
 
-    tree: '/idsys/idsysmenu/tree',
-    query: '/idsys/idsysmenu/query',
-    add: '/idsys/idsysmenu/add',
-    loadByUUID: '/idsys/idsysmenu/',
-    update: '/idsys/idsysmenu/update',
-    del: '/idsys/idsysmenu/del',
-    proto: 'idsys.IdSysMenuEntry',     //左边的树查询接口需要用到的  协议
+    tree: '/sys/menu/tree',
+    query: '/sys/menu/query',
+    add: '/sys/menu/add',
+    loadByUUID: '/sys/menu/',
+    update: '/sys/menu/update',
+    del: '/sys/menu/del',
   };
   /**
    * 初始化列表表单数据
@@ -297,12 +295,12 @@ export class DemoService extends DyBaseService {
               config: {
                 title: '选择',
                 name_key: 'name',
-                uuid_key: 'dtc.pt_id.open_id',
+                uuid_key: 'uuid',
                 sub_key: 'sub_list',
                 last_node: true,
               },
               proto: 'idsys.IdSysMenuEntry',
-              request_url: '/idsys/idsysmenu/tree',
+              request_url: '/sys/menu/tree',
               filterJson: this.getFilterJson(),
               d_value: '4444bd04-a8ee-4274-baad-7b0b79cf8a33',
               desc: 'selectType可以是{radio, checkbox} 两种形式, filterJson的过滤查询条件 格式{key:value} 接口统一从q_item_list中获取',
@@ -318,7 +316,7 @@ export class DemoService extends DyBaseService {
               key: 'demo_table',
               label: '选择列表(fi_select_table)',
               proto: 'idsys.IdSysBankEntry',
-              request_url: '/idsys/web/idsysbank/query',
+              request_url: '/sys/web/sysbank/query',
               d_value: '096f6b80-422a-4b6b-919c-21028cbdb0f9',
               filterJson: {},
               desc: 'filterJson的过滤查询条件 格式{key:value} 接口统一从q_item_list中获取',

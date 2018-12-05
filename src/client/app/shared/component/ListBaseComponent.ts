@@ -73,7 +73,6 @@ export abstract class ListBaseComponent extends BaseComponent implements OnInit,
             (protoMsg: any) => {
                 this.listFormData.pager = protoMsg.pager;
                 this.listEntry = protoMsg;
-                this.log('query result : ', this.listEntry);
             },
             (error: any) => console.error(error)
         );

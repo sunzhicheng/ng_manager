@@ -231,6 +231,9 @@ export class DfFromComponent implements OnInit {
         // if (item.getOldValue() === this.qcs.empty_int || item.getOldValue() === this.qcs.empty_char) {
         const dfItem = this.getItem(key);
         if (dfItem) {
+          if (dfItem.getFiType() === 'fi_button_search') {
+            continue;
+          }
           if (dfItem.getTempValue() && this.isEmpty(dfItem.getTempValue())) {
             //处理有值到 null 的情况
             _.set(formJson, key, dfItem.getTempValue());

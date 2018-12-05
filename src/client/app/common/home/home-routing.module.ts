@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { OperateLoginComponent } from '../../idsys/login/operate.login.component';
+import { OperateLoginComponent } from '../../sys/login/operate.login.component';
 import { HomeComponent } from './home.component';
 import { IndexComponent } from './index.component';
-import { IdSysMenuRoutes } from '../../idsys/idsysmenu/idsysmenu-routing';
-import { IdSysAcountRoutes } from '../../idsys/idsysappacount/idsysappacount-routing';
+import { MenuRoutes } from '../../sys/menu/menu-routing';
+import { UserRoutes } from '../../sys/user/user-routing';
 import { DemoRoutes } from '../../examples/demo-routing';
 import { MqttAvtivate } from '../../shared/activate/MqttActivate';
 
@@ -17,8 +17,8 @@ import { MqttAvtivate } from '../../shared/activate/MqttActivate';
         children: [
           { path: 'index', component: IndexComponent },
           ...DemoRoutes, // demo 演示模块
-          ...IdSysMenuRoutes,
-          ...IdSysAcountRoutes,
+          ...MenuRoutes,
+          ...UserRoutes,
         ]
       },
     ])

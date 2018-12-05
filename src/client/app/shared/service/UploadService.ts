@@ -25,7 +25,7 @@ export class UploadService extends HttpService {
    */
     filesAjax(files: any, progress?: any): Observable<any> {
         return Observable.create((observer: any) => {
-            const fileUrl = '/idsys/idfileupload/uploadweb';
+            const fileUrl = '/sys/idfileupload/uploadweb';
             // FormData 对象
             const form = new FormData();
             for (const i in files) {
@@ -58,13 +58,13 @@ export class UploadService extends HttpService {
             file_arr.forEach((uploadId: any) => {
                 attArr.push({ pt_id: { open_id: uploadId } });
             });
-            this.httpRequest('/idsys/idfileupload/detail', { attList: attArr },
+            this.httpRequest('/sys/idfileupload/detail', { attList: attArr },
                 HTTPREQ.POST).subscribe(
                     (result: any) => {
                         observer.next(result);
                     },
                     (error: any) => {
-                        observer.error('/idsys/idfileupload/detail errro: ', error);
+                        observer.error('/sys/idfileupload/detail errro: ', error);
                     }
                 );
         });

@@ -54,7 +54,7 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
   public _config: any = {
     title: '树结构标题',
     name_key: 'name',
-    uuid_key: 'dtc.pt_id.open_id',
+    uuid_key: 'uuid',
     sub_key: 'sub_list',
     last_node: false   //当按钮为checkbox 的时候 且 last_node=true  只返回最终子节点
   };
@@ -266,10 +266,10 @@ export class ModalTreeDynamicComponent extends DynamicBase implements OnInit, Do
       this.httpService.httpRequest(this._request_url, this.protoEntry).subscribe(
         (protoMsg: any) => {
           this.treeData = [];
-          if (protoMsg.proto_list) {
+          if (protoMsg) {
             this.treeData.splice(0, this.treeData.length);
             this.treeService.setMappingKey(this._config.name_key, this._config.uuid_key, this._config.sub_key);
-            this.treeData = this.treeService.toTreeData(protoMsg.proto_list, openIndex);
+            this.treeData = this.treeService.toTreeData(protoMsg, openIndex);
             this.initTree();
           }
         },

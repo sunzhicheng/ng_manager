@@ -9,20 +9,19 @@ import { IdTool } from '../../shared/tool/IdTool';
  * 系统模块 运营管理人员 服务类
  */
 @Injectable()
-export class IdSysAppAcountService extends DyBaseService {
+export class UserService extends DyBaseService {
 
   /**
    * 数据接口定义
    */
   public api: any = {
-    query: '/idsys/idsysappacount/query',
-    add: '/idsys/idsysappacount/add',
-    detail: '/idsys/idsysappacount/',
-    update: '/idsys/idsysappacount/update',
-    del: '/idsys/idsysappacount/del',
-    personInfo: '/idsys/idsysappacount/personInfo',
-    listOpt: '/idsys/idsysappacount/listOpt',
-    proto: 'idsys.IdSysAppAcountEntry'
+    query: '/sys/user/query',
+    add: '/sys/user/add',
+    detail: '/sys/user/',
+    update: '/sys/user/update',
+    del: '/sys/user/del',
+    personInfo: '/sys/user/personInfo',
+    listOpt: '/sys/user/listOpt',
   };
   /**
    * 初始化列表表单数据
@@ -46,7 +45,7 @@ export class IdSysAppAcountService extends DyBaseService {
             {
               fi_type: 'fi_button_add',
               label: '新增',
-              router_link: '/home/idsysappacount/add',
+              router_link: '/home/user/add',
               permissoin: 'operate:idsysappacount:add'
             },
             {
@@ -81,7 +80,7 @@ export class IdSysAppAcountService extends DyBaseService {
         },
         {
           label: '管理员列表',
-          router_link: '/home/idsysappacount'
+          router_link: '/home/user'
         },
         {
           label: '运营管理员',
@@ -173,7 +172,7 @@ export class IdSysAppAcountService extends DyBaseService {
             {
               fi_type: 'fi_button_cancel',
               label: '取消',
-              // router_link: '/home/idsysappacount'
+              // router_link: '/home/user'
             }
           ]
         }
@@ -233,7 +232,7 @@ export class IdSysAppAcountService extends DyBaseService {
           for (let i = 0; i < protoMsg.proto_list.length; i++) {
             proto_list.push({
               key: {
-                l_id: IdTool.getJson(protoMsg.proto_list[i], 'dtc.pt_id.open_id'),
+                l_id: IdTool.getJson(protoMsg.proto_list[i], 'uuid'),
               },
               value: {
                 open_id: IdTool.getJson(protoMsg.proto_list[i], 'username', '')

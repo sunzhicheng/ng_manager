@@ -4,8 +4,10 @@ export class IdLog {
     private static LOG_ERROR = true;
     public static log(message?: any, ...optionalParams: any[]) {
         if (this.LOG_DEBUG) {
-            if (optionalParams.length > 0) {
+            if (optionalParams.length > 1) {
                 console.log(message, optionalParams);
+            } else if (optionalParams.length === 1) {
+                console.log(message, optionalParams[0]);
             } else {
                 console.log(message);
             }
@@ -14,8 +16,10 @@ export class IdLog {
 
     public static debug(message?: any, ...optionalParams: any[]) {
         if (this.LOG_DEBUG) {
-            if (optionalParams.length > 0) {
+            if (optionalParams.length > 1) {
                 console.log(message, optionalParams);
+            } else if (optionalParams.length === 1) {
+                console.log(message, optionalParams[0]);
             } else {
                 console.log(message);
             }
@@ -24,8 +28,10 @@ export class IdLog {
 
     public static warn(message?: any, ...optionalParams: any[]) {
         if (this.LOG_WARN) {
-            if (optionalParams.length > 0) {
+            if (optionalParams.length > 1) {
                 console.warn(message, optionalParams);
+            } else if (optionalParams.length === 1) {
+                console.log(message, optionalParams[0]);
             } else {
                 console.warn(message);
             }
@@ -39,8 +45,10 @@ export class IdLog {
      */
     public static error(message?: any, ...optionalParams: any[]) {
         if (this.LOG_ERROR) {
-            if (optionalParams.length > 0) {
+            if (optionalParams.length > 1) {
                 console.error(message, optionalParams);
+            } else if (optionalParams.length === 1) {
+                console.log(message, optionalParams[0]);
             } else {
                 console.error(message);
             }

@@ -1,6 +1,6 @@
 import { Component, ViewEncapsulation, AfterContentInit, OnInit, ViewChild } from '@angular/core';
 import { SidebarComponent } from '../sidebar/sidebar.component';
-import { LoginService } from '../../idsys/login/login.service';
+import { LoginService } from '../../sys/login/login.service';
 import { BaseComponent } from '../../shared/component/BaseComponent';
 import { CustomReuseStrategy } from '../../shared/tool/CustomReuseStrategy';
 import { IdTool } from '../../shared/tool/IdTool';

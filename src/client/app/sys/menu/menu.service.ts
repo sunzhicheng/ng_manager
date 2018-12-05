@@ -7,20 +7,20 @@ import { HttpService } from '../../shared/service/HttpService';
  * 系统模块 菜单配置 服务类
  */
 @Injectable()
-export class IdSysMenuService extends DyBaseService  {
+export class MenuService extends DyBaseService  {
 
     /**
      * 数据接口定义
      */
     public api: any = {
-        query: '/idsys/idsysmenu/query',
-        add: '/idsys/idsysmenu/add',
-        detail: '/idsys/idsysmenu/',
-        update: '/idsys/idsysmenu/update',
-        del: '/idsys/idsysmenu/del',
-        tree: '/idsys/idsysmenu/tree',
-        bind: '/idsys/idsysmenu/bindMenu',
-        selectMenu: '/idsys/idsysmenu/selectMenu',
+        query: '/sys/menu/query',
+        add: '/sys/menu/add',
+        detail: '/sys/menu/',
+        update: '/sys/menu/update',
+        del: '/sys/menu/del',
+        tree: '/sys/menu/tree',
+        bind: '/sys/menu/bindMenu',
+        selectMenu: '/sys/menu/selectMenu',
         proto: 'idsys.IdSysMenuEntry'
       };
 

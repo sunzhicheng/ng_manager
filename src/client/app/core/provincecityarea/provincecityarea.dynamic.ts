@@ -48,11 +48,11 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
 
   changeProvince(event: any) {
     const selectPro = this.pro_list[event.currentTarget.selectedIndex];
-    this.byParentId(selectPro.dtc.pt_id.open_id, 3, {selectPro: selectPro});
+    this.byParentId(selectPro.uuid, 3, {selectPro: selectPro});
   }
   changeCity(event: any) {
     const selectCity = this.city_list[event.currentTarget.selectedIndex];
-    this.byParentId(selectCity.dtc.pt_id.open_id, 4, {selectCity: selectCity});
+    this.byParentId(selectCity.uuid, 4, {selectCity: selectCity});
   }
   changeArea(event: any) {
     const selectArea = this.area_list[event.currentTarget.selectedIndex];
@@ -64,7 +64,7 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
   byParentId(parentId: any, stype: any, data: any) {
         const entry = {};
         IdTool.bindQueryData(entry, {parentId: parentId});
-        this.toolHttp.httpRequest('/idsys/idsysarea/getSubList', entry).subscribe(
+        this.toolHttp.httpRequest('/sys/sysarea/getSubList', entry).subscribe(
           (result: any) => {
             if (stype === 2) {
               this.pro_list = result.proto_list;
@@ -112,10 +112,10 @@ export class ProvinceCityAreaDynamicComponent   extends DynamicBase implements A
   }
 
   getSelectedId(list: any , name: any) {
-    let openId: any = list[0].dtc.pt_id.open_id;
+    let openId: any = list[0].uuid;
     list.forEach((item: any) => {
       if (item.name === name) {
-        openId = item.dtc.pt_id.open_id;
+        openId = item.uuid;
       }
     });
     return openId;

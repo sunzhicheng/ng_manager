@@ -292,10 +292,10 @@ export class IdTool {
   }
 
   static getImgUrl(id: any) {
-    return IDCONF().api_file + '/idsys/idfileupload/loadimg/' + id;
+    return IDCONF().api_file + '/sys/idfileupload/loadimg/' + id;
   }
   static getFileUrl(id: any) {
-    return IDCONF().api_file + '/idsys/idfileupload/load/' + id;
+    return IDCONF().api_file + '/sys/idfileupload/load/' + id;
   }
   static compareArray(a: Array<String>, b: Array<String>) {
     return a.sort().toString() === b.sort().toString();
@@ -344,23 +344,12 @@ export class IdTool {
    * @param data
    */
   static bindQueryData(entry: any, data: any, isConcat: boolean = false) {
-    let q_item_list: any = new Array();
+    let q_item_list: any = {};
     if (isConcat) {
-      q_item_list = this.getJson(entry, 'query.q_item_list') || new Array();
+      q_item_list = this.getJson(entry, 'query.q_item_list') || {};
     }
     for (const key in data) {
-      const exist_index = _.findIndex(q_item_list, (o: any) => {
-        return o.col === key;
-      });
-      if (exist_index >= 0) {  //判断是否存在相应的可以  存在更新value
-        q_item_list[exist_index].s_value = data[key] + '';
-      } else {
-        q_item_list.push({
-          col: key,
-          q_item_type: 1,
-          s_value: data[key] + ''
-        });
-      }
+      q_item_list[key] = data[key];
     }
     _.setWith(entry, 'query.q_item_list', q_item_list);
   }

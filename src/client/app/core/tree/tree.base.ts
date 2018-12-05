@@ -10,6 +10,7 @@ import { ToolForm } from '../../shared/tool/ToolForm';
 import { LocalStorageCacheService } from '../../shared/cache/localstorage.service';
 import { TreeService } from '../../shared/service/TreeService';
 import { BaseComponent } from '../../shared/component/BaseComponent';
+import { IDCONF } from '../../shared/config/app.config';
 
 declare const $: any;
 /**
@@ -114,6 +115,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
       uuid_key: null,
       sub_key: null,
       parent_key: null,
+      is_parent_key: null,
     },
     otherParam: (treeId: any, treeNode: any) => { return this.getOtherParam(treeId, treeNode); },
   };
@@ -161,7 +163,8 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     IdTool.mergeAFromB(this._async_config, values, {});
     if (this._config.async) {
       this._async_config.enable = true;
-      this._async_config.url = this._async_config.requestUrl;
+      this._async_config.xhrFields = { withCredentials: true };
+      this._async_config.url = IDCONF().api_base + this._async_config.requestUrl;
       this.base_setting.async = this._async_config;
       this.asyncInit = true;
     }
@@ -272,7 +275,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
    */
   asyncSuccess(event: any, treeId: any, treeNode: any, msg: any) {
     //说明已经没有子集了
-    if (!msg.proto_list || msg.proto_list.length === 0) {
+    if (!msg || msg.length === 0) {
       treeNode.isParent = false;
       this.ztree.updateNode(treeNode);
     }
@@ -288,26 +291,26 @@ export class TreeComponent extends BaseComponent implements OnChanges {
    * @param responseDataArray
    */
   dataFilter(treeId: any, parentNodeJSON: any, responseDataArray: any) {
-      const treedata: any = [];
-      if (responseDataArray.proto_list && responseDataArray.proto_list.length > 0) {
-        if (this._async_config.mappingKey
-          && this._async_config.mappingKey.name_key
-          && this._async_config.mappingKey.uuid_key
-          && this._async_config.mappingKey.sub_key) {
-          this.treeService.setMappingKey(
-            this._async_config.mappingKey.name_key,
-            this._async_config.mappingKey.uuid_key,
-            this._async_config.mappingKey.sub_key);
-        }
-        this.treeService.setAsync(true);
-        responseDataArray.proto_list.forEach((proto: any) => {
-          treedata.push(this.treeService.proto2NodeByAsync(proto));
-        });
-        if (!treeId && treedata.length > 0) {
-          this.ztree.destroy();
-          this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), this.base_setting, treedata);
-          this.afterInit();
-        }
+    const treedata: any = [];
+    if (responseDataArray && responseDataArray.length > 0) {
+      if (this._async_config.mappingKey
+        && this._async_config.mappingKey.name_key
+        && this._async_config.mappingKey.uuid_key
+        && this._async_config.mappingKey.sub_key) {
+        this.treeService.setMappingKey(
+          this._async_config.mappingKey.name_key,
+          this._async_config.mappingKey.uuid_key,
+          this._async_config.mappingKey.sub_key);
+      }
+      this.treeService.setAsync(true);
+      responseDataArray.forEach((proto: any) => {
+        treedata.push(this.treeService.proto2NodeByAsync(proto));
+      });
+      if (!treeId && treedata.length > 0) {
+        this.ztree.destroy();
+        this.ztree = (<any>$).fn.zTree.init($('#' + this.treeId), this.base_setting, treedata);
+        this.afterInit();
+      }
       return treedata;
     }
   }
@@ -321,7 +324,7 @@ export class TreeComponent extends BaseComponent implements OnChanges {
     if (treeNode) {
       this.bindQueryData(parma, { pId: treeNode.id });
     }
-    return { proto: parma };
+    return parma;
   }
   // getHeaders() {
   //   const header: any = {
@@ -455,11 +458,11 @@ export class TreeComponent extends BaseComponent implements OnChanges {
   }
 
   public toEdit(fromValue: any) {
-    if (_.get(fromValue, 'dtc.pt_id.open_id', '') === '') {
+    if (_.get(fromValue, 'uuid', '') === '') {
       console.error('未传修改ID!!!');
       return;
     }
-    this.edit_id = _.get(fromValue, 'dtc.pt_id.open_id', '');
+    this.edit_id = _.get(fromValue, 'uuid', '');
     this.form.reset(fromValue);
     this.toForm(null);
   }

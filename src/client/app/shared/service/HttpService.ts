@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { IdTool } from '../tool/IdTool';
 import { HTTPREQ } from '../config/app.config';
 import { LocalStorageCacheService } from '../cache/localstorage.service';
+import { IdLog } from '../tool/IdLog';
 declare let $: any;
 /**
  * HTTP 请求交互类
@@ -30,30 +31,20 @@ export class HttpService {
      */
     public httpRequest(url: string, body: any = null,
         httpMethod: HTTPREQ = HTTPREQ.POST): Observable<any> {
-        // if (proto) {
-        //     // IDORP 协议请求方式
-        //     if (options.headers.has('id-proto')) {
-        //         // TODO: 这边正式开发替换为登陆Token
-        //         options.headers = options.headers.append('id-token', this.getToken(url));
-        //     }
-        // } else {
-        //     // 以普通方式提交
-        //     options.headers = options.headers.append('Content-Type', 'application/x-www-form-urlencoded; charset=utf-8');
-        // }
         return Observable.create((observer: any) => {
             let req;
             if (httpMethod === HTTPREQ.GET) {
-                console.log('httpRequest get request');
+                IdLog.log('httpRequest get request');
                 req = this.http.get(url);
             } else if (httpMethod === HTTPREQ.POST) {
-                console.log('httpRequest post request');
+                IdLog.log('httpRequest post request');
                 req = this.http.post(url, body);
             } else {
                 observer.error('Not Support method');
                 return;
             }
             req.subscribe((res: any) => {
-                console.log('httpRequest res : ', res);
+                IdLog.log('url=' + url + '   返回数据结果', res);
                 const resText = res || '';
                 observer.next(resText);
             }, (err: any) => {

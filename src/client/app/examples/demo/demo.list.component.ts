@@ -13,7 +13,7 @@ declare let $: any;
 
 @Component({
     moduleId: module.id,
-    selector: 'sd-idsysappacount',
+    selector: 'demo-list',
     template: `
     <f-table-cmp  *ngIf="listFormData" [formData]="listFormData"
     (formSubmited)="formSubmit($event)" (loadDataOut)="loadData($event)" (updateOut)="update($event)"
@@ -28,7 +28,7 @@ declare let $: any;
 
 
     <from-modal [config]="{title:'demo表单弹出框'}"  (valueOut)="modalFormSubmit($event)"></from-modal>
-    <modal-table [config]="{title:'demo表单弹出框',proto: 'idsys.IdSysBankEntry',request_url: '/idsys/web/idsysbank/query'}"
+    <modal-table [config]="{title:'demo表单弹出框',proto: 'idsys.IdSysBankEntry',request_url: '/sys/web/sysbank/query'}"
       (valueOut)="modalTableSubmit($event)"></modal-table>
     `
 })
@@ -70,7 +70,7 @@ export class DemoListComponent extends ListBaseComponent implements OnInit {
 
     update(id: any) {
         this.log('  update id : ' + id);
-        const link = ['home/idsysappacount/update', id.toString()];
+        const link = ['home/user/update', id.toString()];
         this._router.navigate(link);
     }
     btnClick(item: any) {

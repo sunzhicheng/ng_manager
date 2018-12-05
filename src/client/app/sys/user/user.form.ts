@@ -1,4 +1,4 @@
-import { IdSysAppAcountService } from './idsysappacount.service';
+import { UserService } from './user.service';
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -14,14 +14,14 @@ declare let $: any;
 @Component({
   moduleId: module.id,
   selector: 'sys-account-form',
-  // templateUrl: 'idsysappacount.form.html',
+  // templateUrl: 'user.form.html',
   template: `<f-form-cmp *ngIf="formData" [formData]="formData" (formSubmited)="formSubmit($event)"></f-form-cmp>`,
   viewProviders: []
 })
 
-export class IdSysAccountFormComponent extends FormBaseComponent {
+export class UserFormComponent extends FormBaseComponent {
   public constructor(
-    public idAccountUser: IdSysAppAcountService,
+    public idAccountUser: UserService,
     private route: ActivatedRoute,
     protected eleRef: ElementRef,
     public _router: Router) {

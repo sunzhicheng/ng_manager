@@ -73,6 +73,12 @@ export class DFItemComponent implements OnChanges, AfterViewChecked {
   getType() {
     return this.item && this.item.type ? this.item.type : 'text';
   }
+  /**
+   * 获取item的type
+   */
+  getFiType() {
+    return this.item && this.item.fi_type;
+  }
 
   isEmpty(v: any) {
     return IdTool.isEmpty(v) || v === '0' || v === 0;
